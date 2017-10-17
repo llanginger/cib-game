@@ -1,4 +1,4 @@
-package com.simplebus;
+package com.cib;
 
 import android.app.Application;
 

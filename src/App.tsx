@@ -9,7 +9,7 @@ import { Navigation } from "react-native-navigation";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import MapView from "react-native-maps";
-import { ChatBot } from "./ChatBot";
+import { ChatBot } from "./screens/ChatBot";
 
 const instructions = Platform.select({
     ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -27,7 +27,6 @@ const Menu = props => {
                 alignItems: "center"
             }}
         >
-            <Text>Hi</Text>
             <Text>Hi</Text>
             <Text>Hi</Text>
             <Text>Hi</Text>

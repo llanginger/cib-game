@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import shortid from "shortid";
 import { GiftedChat } from "react-native-gifted-chat";
 
-import { Toolbar } from "./components/Toolbar";
+import { Toolbar, IButtonObject } from "../components/Toolbar";
 
 interface IChatBotState {
     minInputToolbarHeight?: number;
@@ -39,7 +39,7 @@ const aiMessage = {
     user: {
         _id: 2,
         name: "React Native",
-        avatar: require("./images/gameAvatar.png")
+        avatar: require("../images/gameAvatar.png")
     }
 };
 
@@ -57,6 +57,7 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         };
 
         this.pushChatbotMessage = this.pushChatbotMessage.bind(this);
+        this.renderToolbar = this.renderToolbar.bind(this);
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
@@ -121,7 +122,17 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         );
     }
 
-    renderToolbar() {}
+    renderToolbar() {
+        const tempButtons: IButtonObject[] = [
+            {
+                text: "Button 1"
+            },
+            {
+                text: "Button 2"
+            }
+        ];
+        return <Toolbar buttons={tempButtons} />;
+    }
 
     componentDidMount() {
         this.pushChatbotMessage([
@@ -142,12 +153,12 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
                 <GiftedChat
                     messages={this.state.messages}
                     minInputToolbarHeight={60}
-                    renderInputToolbar={() => <Toolbar />}
+                    renderInputToolbar={this.renderToolbar}
                     onSend={messages => this.onSend(messages)}
                     showUserAvatar={true}
                     user={{
                         _id: 1,
-                        avatar: require("./images/girlCool.png")
+                        avatar: require("../images/girlCool.png")
                     }}
                 />
             </View>

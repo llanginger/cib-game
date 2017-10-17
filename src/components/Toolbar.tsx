@@ -9,31 +9,38 @@ import {
     Platform
 } from "react-native";
 
-export const Toolbar = (props: any) => {
-    return (
-        <View style={styles.container}>
-            <TouchableOpacity
-                /* disabled={!enabled} */
-                onPress={() => console.log("Pressed")}
-                activeOpacity={0.8}
-                style={styles.singleActiveButton}
-            >
-                <View>
-                    <Text style={styles.singleActiveButtonText}>Click</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-                /* disabled={!enabled} */
-                onPress={() => console.log("Pressed")}
-                activeOpacity={0.8}
-                style={styles.singleActiveButton}
-            >
-                <View>
-                    <Text style={styles.singleActiveButtonText}>Click</Text>
-                </View>
-            </TouchableOpacity>
-        </View>
-    );
+export interface IButtonObject {
+    text: string;
+    onClick?: any;
+    color?: string;
+}
+
+interface IToolbarProps {
+    buttons: IButtonObject[];
+}
+
+export const Toolbar = (props: IToolbarProps) => {
+    const { buttons = [] } = props;
+    const makeButtons = () => {
+        return buttons.map((button, i) => {
+            return (
+                <TouchableOpacity
+                    /* disabled={!enabled} */
+                    onPress={() => console.log(`Pressed button ${i}`)}
+                    key={i}
+                    activeOpacity={0.8}
+                    style={styles.singleActiveButton}
+                >
+                    <View>
+                        <Text style={styles.singleActiveButtonText}>
+                            {button.text}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            );
+        });
+    };
+    return <View style={styles.container}>{makeButtons()}</View>;
 };
 
 const styles = StyleSheet.create({
@@ -43,45 +50,13 @@ const styles = StyleSheet.create({
         padding: 0,
         height: 44
     },
-    leftButton: {
-        backgroundColor: "white",
-        flexGrow: 1,
-        flex: 1,
-        borderRightWidth: 1,
-        borderColor: "white",
-        justifyContent: "center"
-    },
-    rightButton: {
-        backgroundColor: "white",
-        flexGrow: 1,
-        flex: 1,
-        borderColor: "white",
-        borderLeftWidth: 1,
-        justifyContent: "center"
-    },
     singleActiveButton: {
         backgroundColor: "#fff1cc",
         flexGrow: 1,
         flex: 1,
         justifyContent: "center"
     },
-    singleDisabledButton: {
-        backgroundColor: "white",
-        flexGrow: 1,
-        flex: 1,
-        justifyContent: "center"
-    },
-    buttonText: {
-        fontSize: 20,
-        textAlign: "center",
-        color: "black"
-    },
     singleActiveButtonText: {
-        fontSize: 20,
-        textAlign: "center",
-        color: "black"
-    },
-    singleDisabledButtonText: {
         fontSize: 20,
         textAlign: "center",
         color: "black"
