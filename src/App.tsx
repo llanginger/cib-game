@@ -8,8 +8,8 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import { Navigation } from "react-native-navigation";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
-import MapView from "react-native-maps";
 import { ChatBot } from "./screens/ChatBot";
+import { Menu } from "./screens/Menu";
 
 const instructions = Platform.select({
     ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -17,25 +17,6 @@ const instructions = Platform.select({
         "Double tap R on your keyboard to reload,\n" +
         "Shake or press menu button for dev menu"
 });
-
-const Menu = props => {
-    return (
-        <View
-            style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center"
-            }}
-        >
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-        </View>
-    );
-};
 
 // Screen section
 
