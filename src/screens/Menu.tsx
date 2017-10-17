@@ -1,7 +1,30 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+
+const menuColors = [
+    "#cc0066",
+    "#3333cc",
+    "#ffcc33",
+    "#339900",
+    "#ff9933",
+    "#663366"
+];
 
 export const Menu = props => {
+    const makeMenuItems = () => {
+        return menuColors.map((color, i) => {
+            return (
+                <TouchableOpacity
+                    style={[styles.menuItem, { backgroundColor: color }]}
+                    key={i}
+                >
+                    <Text style={styles.menuItemText}>
+                        Menu Options {i + 1}
+                    </Text>
+                </TouchableOpacity>
+            );
+        });
+    };
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
@@ -11,11 +34,7 @@ export const Menu = props => {
                     resizeMode="contain"
                 />
             </View>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
-            <Text>Hi</Text>
+            {makeMenuItems()}
         </View>
     );
 };
@@ -28,6 +47,7 @@ const styles = StyleSheet.create({
     },
     logoContainer: {
         height: 100,
+        marginBottom: 5,
         backgroundColor: "white",
         justifyContent: "center"
     },
@@ -35,5 +55,14 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         height: 50,
         width: undefined
+    },
+    menuItem: {
+        marginVertical: 5,
+        paddingVertical: 20,
+        backgroundColor: "palevioletred"
+    },
+    menuItemText: {
+        textAlign: "center",
+        color: "white"
     }
 });

@@ -4,6 +4,7 @@ import shortid from "shortid";
 import { GiftedChat } from "react-native-gifted-chat";
 
 import { Toolbar, IButtonObject } from "../components/Toolbar";
+import { ImageMessageView } from "../components/ImageMessageView";
 
 interface IChatBotState {
     minInputToolbarHeight?: number;
@@ -47,6 +48,12 @@ interface IChatBotProps {
     navigator: any;
 }
 
+export interface IMessageObject {
+    text?: string;
+    hasImage?: boolean;
+    imagePath?: any;
+}
+
 export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
     constructor(props) {
         super(props);
@@ -57,6 +64,7 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         };
 
         this.pushChatbotMessage = this.pushChatbotMessage.bind(this);
+        this.renderCustomView = this.renderCustomView.bind(this);
         this.renderToolbar = this.renderToolbar.bind(this);
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
@@ -84,7 +92,14 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         }
     }
 
-    pushChatbotMessage(messages: string[], stateOptions: IChatBotState = {}) {
+    renderCustomView(props) {
+        return <ImageMessageView {...props} />;
+    }
+
+    pushChatbotMessage(
+        messages: IMessageObject[],
+        stateOptions: IChatBotState = {}
+    ) {
         // Map over all messages to separate them out
         this.setState(
             {
@@ -98,7 +113,7 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
                     const messageObj = {
                         ...aiMessage,
                         _id: shortid.generate(),
-                        text: message
+                        ...message
                     };
 
                     setTimeout(() => {
@@ -136,8 +151,16 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
 
     componentDidMount() {
         this.pushChatbotMessage([
-            "Hello Pablo!",
-            "Let me know when you're ready to start the game!"
+            {
+                text: "Hello Pablo!",
+                hasImage: true,
+                imagePath: require("../images/gameAvatar.png")
+            },
+            {
+                text: "Let me know when you're ready to start the game!",
+                hasImage: true,
+                imagePath: require("../images/girlCool.png")
+            }
         ]);
     }
 
@@ -154,6 +177,7 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
                     messages={this.state.messages}
                     minInputToolbarHeight={60}
                     renderInputToolbar={this.renderToolbar}
+                    renderCustomView={this.renderCustomView}
                     onSend={messages => this.onSend(messages)}
                     showUserAvatar={true}
                     user={{
