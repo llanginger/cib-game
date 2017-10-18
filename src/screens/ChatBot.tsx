@@ -3,10 +3,16 @@ import { View, Text, StyleSheet } from "react-native";
 import shortid from "shortid";
 import { GiftedChat } from "react-native-gifted-chat";
 
-import { Toolbar, IButtonObject } from "../components/Toolbar";
+import { Toolbar } from "../components/Toolbar";
 import { ImageMessageView } from "../components/ImageMessageView";
+import { createGiftedUserMessage } from "../components/createGiftedUserMessage";
+
+import { IMessageObject, IButtonObject } from "../interfaces/index";
+
+import { levels, IGameLevelObject } from "../levels/levels";
 
 interface IChatBotState {
+    currentLevel?: IGameLevelObject;
     minInputToolbarHeight?: number;
     messages?: any[];
     botTyping?: boolean;
@@ -48,17 +54,12 @@ interface IChatBotProps {
     navigator: any;
 }
 
-export interface IMessageObject {
-    text?: string;
-    hasImage?: boolean;
-    imagePath?: any;
-}
-
 export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
     constructor(props) {
         super(props);
 
         this.state = {
+            currentLevel: { ...levels[0] },
             messages: [],
             chatbotDelay: 1000
         };
@@ -138,28 +139,40 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
     }
 
     renderToolbar() {
+        const { userOptions } = this.state.currentLevel;
+
         const tempButtons: IButtonObject[] = [
             {
-                text: "Button 1"
-            },
-            {
-                text: "Button 2"
+                text: "Ready!",
+                onClick: () => {
+                    this.onUserBinaryChoice("Ready!");
+                }, // Redo this
+                color: "#009ee0"
             }
         ];
-        return <Toolbar buttons={tempButtons} />;
+
+        const makeButtons: () => IButtonObject[] = () => {
+            return userOptions.map((option, i) => {
+                return {
+                    ...option,
+                    onClick: () => this.onUserBinaryChoice(option.onClick)
+                };
+            });
+        };
+        return <Toolbar buttons={makeButtons()} />;
     }
 
     componentDidMount() {
         this.pushChatbotMessage([
             {
-                text: "Hello Pablo!",
                 hasImage: true,
                 imagePath: require("../images/gameAvatar.png")
             },
             {
-                text: "Let me know when you're ready to start the game!",
-                hasImage: true,
-                imagePath: require("../images/girlCool.png")
+                text: "Hello Pablo!"
+            },
+            {
+                text: "Let me know when you're ready to start the game!"
             }
         ]);
     }
@@ -168,6 +181,33 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages)
         }));
+    }
+
+    onUserBinaryChoice(text: string) {
+        const messages = [createGiftedUserMessage(text)];
+        // console.log("Gifted user message: ", messages);
+        this.setState(
+            (previousState: any) => ({
+                messages: GiftedChat.append(previousState.messages, messages)
+            }),
+            () => {
+                switch (text) {
+                    case "start-level":
+                    case "Ready!":
+                        return this.pushChatbotMessage(
+                            this.state.currentLevel.question
+                        );
+                    case "hot":
+                        return this.pushChatbotMessage(
+                            this.state.currentLevel.response.hot
+                        );
+                    case "cool":
+                        return this.pushChatbotMessage(
+                            this.state.currentLevel.response.cool
+                        );
+                }
+            }
+        );
     }
 
     render() {

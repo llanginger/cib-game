@@ -36,7 +36,7 @@ export const ImageMessageView = (props: IImageMessageViewProps) => {
 const styles = StyleSheet.create({
     container: { paddingTop: 10 },
     image: {
-        width: undefined,
+        width: 150,
         height: 100,
         borderRadius: 13,
         margin: 3

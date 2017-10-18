@@ -9,11 +9,7 @@ import {
     Platform
 } from "react-native";
 
-export interface IButtonObject {
-    text: string;
-    onClick?: any;
-    color?: string;
-}
+import { IButtonObject } from "../interfaces/index";
 
 interface IToolbarProps {
     buttons: IButtonObject[];
@@ -26,10 +22,10 @@ export const Toolbar = (props: IToolbarProps) => {
             return (
                 <TouchableOpacity
                     /* disabled={!enabled} */
-                    onPress={() => console.log(`Pressed button ${i}`)}
+                    onPress={button.onClick}
                     key={i}
                     activeOpacity={0.8}
-                    style={styles.singleActiveButton}
+                    style={[styles.singleActiveButton]}
                 >
                     <View>
                         <Text style={styles.singleActiveButtonText}>
@@ -51,7 +47,7 @@ const styles = StyleSheet.create({
         height: 44
     },
     singleActiveButton: {
-        backgroundColor: "#fff1cc",
+        backgroundColor: "#009ee0",
         flexGrow: 1,
         flex: 1,
         justifyContent: "center"
@@ -59,6 +55,6 @@ const styles = StyleSheet.create({
     singleActiveButtonText: {
         fontSize: 20,
         textAlign: "center",
-        color: "black"
+        color: "white"
     }
 });
