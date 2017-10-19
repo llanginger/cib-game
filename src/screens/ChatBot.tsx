@@ -10,7 +10,12 @@ import { createGiftedUserMessage } from "../components/createGiftedUserMessage";
 
 import { IMessageObject, IButtonObject } from "../interfaces/index";
 
-import { levels, gameInit, IGameLevelObject } from "../levels/levels";
+import {
+    levels,
+    gameInit,
+    nextLevel,
+    IGameLevelObject
+} from "../levels/levels";
 
 import { ChatbotFooter } from "../components/ChatBotFooter";
 
@@ -162,21 +167,15 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
     renderToolbar() {
         const { userOptions } = this.state.currentLevel;
 
-        const tempButtons: IButtonObject[] = [
-            {
-                text: "Ready!",
-                onClick: () => {
-                    this.onUserBinaryChoice("Ready!");
-                }, // Redo this
-                color: "#009ee0"
-            }
-        ];
-
         const makeButtons: () => IButtonObject[] = () => {
             return userOptions.map((option, i) => {
                 return {
                     ...option,
-                    onClick: () => this.onUserBinaryChoice(option.onClick)
+                    onClick: () =>
+                        this.onUserBinaryChoice({
+                            text: option.text,
+                            onClick: option.onClick
+                        })
                 };
             });
         };
@@ -199,25 +198,28 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         });
     }
 
-    onUserBinaryChoice(text: string) {
-        const messages = [createGiftedUserMessage(text)];
-        // console.log("Gifted user message: ", messages);
+    onUserBinaryChoice(userOption: { text: string; onClick: string }) {
+        const { currentLevel } = this.state;
+        const messages = [createGiftedUserMessage(userOption.text)];
         this.setState(
             (previousState: any) => ({
                 messages: GiftedChat.append(previousState.messages, messages)
             }),
             () => {
-                switch (text) {
+                switch (userOption.onClick) {
                     case "start-game":
+                    case "next-level":
                     case "Ready!":
                         return this.selectRandomLevel();
                     case "hot":
                         return this.pushChatbotMessage(
-                            this.state.currentLevel.response.hot
+                            currentLevel.response.hot,
+                            { currentLevel: { ...nextLevel } }
                         );
                     case "cool":
                         return this.pushChatbotMessage(
-                            this.state.currentLevel.response.cool
+                            currentLevel.response.cool,
+                            { currentLevel: { ...nextLevel } }
                         );
                 }
             }

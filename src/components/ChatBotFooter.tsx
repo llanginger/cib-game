@@ -14,7 +14,6 @@ interface IChatbotFooterProps {
 }
 
 export const ChatbotFooter = (props: IChatbotFooterProps) => {
-    console.log("Chatbot footer props: ", props);
     if (props.botTyping) {
         return (
             <View style={styles.footerContainer}>

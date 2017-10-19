@@ -32,6 +32,23 @@ export const gameInit: IGameLevelObject = {
         ]
     }
 };
+
+export const nextLevel: IGameLevelObject = {
+    question: [],
+    userOptions: [
+        {
+            text: "Ready!",
+            onClick: "Ready!"
+        }
+    ],
+    response: {
+        cool: [
+            {
+                text: "Great, let's begin!"
+            }
+        ]
+    }
+};
 export const levels: IGameLevelObject[] = [
     {
         question: [
@@ -44,12 +61,12 @@ export const levels: IGameLevelObject[] = [
         ],
         userOptions: [
             {
-                text: "Hit him!",
-                onClick: "hot" // If this is the format we can get rid of this
-            },
-            {
                 text: "Don't hit him!",
                 onClick: "cool" // If this is the format we can get rid of this
+            },
+            {
+                text: "Hit him!",
+                onClick: "hot" // If this is the format we can get rid of this
             }
         ],
         response: {
@@ -60,6 +77,12 @@ export const levels: IGameLevelObject[] = [
                 {
                     hasImage: true,
                     imagePath: require("../images/batmanCool.png")
+                },
+                {
+                    text: "Great job!"
+                },
+                {
+                    text: "Ready for another?"
                 }
             ],
             hot: [
@@ -70,6 +93,71 @@ export const levels: IGameLevelObject[] = [
                 {
                     hasImage: true,
                     imagePath: require("../images/batmanHot.png")
+                },
+                {
+                    text: "I bet you'll get it next time!"
+                },
+                {
+                    text: "Ready for another?"
+                }
+            ]
+        }
+    },
+    {
+        question: [
+            {
+                text: "Lisa lost her balloon!"
+            },
+            {
+                text: "Should I comfort her or let her deal with it on her own?"
+            }
+        ],
+        userOptions: [
+            {
+                text: "Comfort her!",
+                onClick: "cool" // If this is the format we can get rid of this
+            },
+            {
+                text: "Leave her alone",
+                onClick: "hot" // If this is the format we can get rid of this
+            }
+        ],
+        response: {
+            cool: [
+                {
+                    text:
+                        "I told her everything would be ok and she seems to feel better"
+                },
+                {
+                    hasImage: true,
+                    imagePath: require("../images/balloonCool.png")
+                },
+                {
+                    text: "It feels good to be nice to people!"
+                },
+                {
+                    text: "Great job!"
+                },
+                {
+                    text: "Ready for another?"
+                }
+            ],
+            hot: [
+                {
+                    text: "I just watched her get angry at losing her balloon"
+                },
+                {
+                    hasImage: true,
+                    imagePath: require("../images/balloonHot.png")
+                },
+                {
+                    text: "I bet I would have felt better if I had helped!"
+                },
+                {
+                    text: "I bet you'll get it next time!"
+                },
+                {
+                    text: "Ready for another?"
                 }
             ]
         }

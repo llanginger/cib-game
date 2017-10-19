@@ -14,12 +14,9 @@ interface IImageMessageViewProps {
 }
 
 export const ImageMessageView = (props: IImageMessageViewProps) => {
-    console.log("Props from imagemessageview: ", props);
     if (props.currentMessage && props.currentMessage.hasImage) {
-        console.log("Has image");
         const imagePath = props.currentMessage.imagePath;
-        console.log("Image path: ", imagePath);
-        console.log("Image path type: ", typeof imagePath);
+
         return (
             <TouchableOpacity style={[styles.container, props.containerStyle]}>
                 <Image
