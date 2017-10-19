@@ -2,13 +2,36 @@ import { IMessageObject, IButtonObject } from "../interfaces/index";
 
 export interface IGameLevelObject {
     question: IMessageObject[];
-    userOptions: [IButtonObject, IButtonObject];
+    userOptions: IButtonObject[];
     response: {
         cool: IMessageObject[];
-        hot: IMessageObject[];
+        hot?: IMessageObject[];
     };
 }
 
+export const gameInit: IGameLevelObject = {
+    question: [
+        {
+            text: "Hello -insert name-"
+        },
+        {
+            text: "Let me know when you're ready to start the game!"
+        }
+    ],
+    userOptions: [
+        {
+            text: "Ready!",
+            onClick: "Ready!"
+        }
+    ],
+    response: {
+        cool: [
+            {
+                text: "Great, let's begin!"
+            }
+        ]
+    }
+};
 export const levels: IGameLevelObject[] = [
     {
         question: [
@@ -22,7 +45,7 @@ export const levels: IGameLevelObject[] = [
         userOptions: [
             {
                 text: "Hit him!",
-                onClick: "Ready!" // If this is the format we can get rid of this
+                onClick: "hot" // If this is the format we can get rid of this
             },
             {
                 text: "Don't hit him!",

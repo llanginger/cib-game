@@ -1,6 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import shortid from "shortid";
+import * as _ from "lodash";
 import { GiftedChat } from "react-native-gifted-chat";
 
 import { Toolbar } from "../components/Toolbar";
@@ -9,10 +10,13 @@ import { createGiftedUserMessage } from "../components/createGiftedUserMessage";
 
 import { IMessageObject, IButtonObject } from "../interfaces/index";
 
-import { levels, IGameLevelObject } from "../levels/levels";
+import { levels, gameInit, IGameLevelObject } from "../levels/levels";
+
+import { ChatbotFooter } from "../components/ChatBotFooter";
 
 interface IChatBotState {
     currentLevel?: IGameLevelObject;
+    levels?: IGameLevelObject[];
     minInputToolbarHeight?: number;
     messages?: any[];
     botTyping?: boolean;
@@ -55,11 +59,15 @@ interface IChatBotProps {
 }
 
 export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
+    private chat;
     constructor(props) {
         super(props);
 
         this.state = {
-            currentLevel: { ...levels[0] },
+            minInputToolbarHeight: 60,
+            levels: [...levels],
+            botTyping: false,
+            currentLevel: { ...gameInit },
             messages: [],
             chatbotDelay: 1000
         };
@@ -67,6 +75,7 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         this.pushChatbotMessage = this.pushChatbotMessage.bind(this);
         this.renderCustomView = this.renderCustomView.bind(this);
         this.renderToolbar = this.renderToolbar.bind(this);
+        this.renderFooter = this.renderFooter.bind(this);
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
@@ -81,6 +90,14 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
             }
         ]
     };
+
+    componentDidUpdate(prevProps, prevState) {
+        if (
+            prevState.minInputToolbarHeight != this.state.minInputToolbarHeight
+        ) {
+            this.chat.resetInputToolbar();
+        }
+    }
 
     onNavigatorEvent(event) {
         if (event.type === "NavBarButtonPress") {
@@ -97,9 +114,13 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         return <ImageMessageView {...props} />;
     }
 
+    renderFooter(props) {
+        return <ChatbotFooter botTyping={this.state.botTyping} />;
+    }
+
     pushChatbotMessage(
         messages: IMessageObject[],
-        stateOptions: IChatBotState = {}
+        stateOptions: IChatBotState = {} // refactor this
     ) {
         // Map over all messages to separate them out
         this.setState(
@@ -130,7 +151,7 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
                 setTimeout(() => {
                     this.setState((previousState: IChatBotState) => ({
                         botTyping: false,
-                        minInputToolbarHeight: 44,
+                        minInputToolbarHeight: 60,
                         ...stateOptions
                     }));
                 }, this.state.chatbotDelay * (messages.length > 1 ? messages.length : 1));
@@ -163,24 +184,19 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
     }
 
     componentDidMount() {
-        this.pushChatbotMessage([
-            {
-                hasImage: true,
-                imagePath: require("../images/gameAvatar.png")
-            },
-            {
-                text: "Hello Pablo!"
-            },
-            {
-                text: "Let me know when you're ready to start the game!"
-            }
-        ]);
+        this.pushChatbotMessage(this.state.currentLevel.question);
     }
 
     onSend(messages = []) {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages)
         }));
+    }
+
+    selectRandomLevel() {
+        this.setState({ currentLevel: _.sample(this.state.levels) }, () => {
+            this.pushChatbotMessage(this.state.currentLevel.question);
+        });
     }
 
     onUserBinaryChoice(text: string) {
@@ -192,11 +208,9 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
             }),
             () => {
                 switch (text) {
-                    case "start-level":
+                    case "start-game":
                     case "Ready!":
-                        return this.pushChatbotMessage(
-                            this.state.currentLevel.question
-                        );
+                        return this.selectRandomLevel();
                     case "hot":
                         return this.pushChatbotMessage(
                             this.state.currentLevel.response.hot
@@ -215,11 +229,13 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
             <View style={styles.container}>
                 <GiftedChat
                     messages={this.state.messages}
-                    minInputToolbarHeight={60}
+                    minInputToolbarHeight={this.state.minInputToolbarHeight}
                     renderInputToolbar={this.renderToolbar}
                     renderCustomView={this.renderCustomView}
                     onSend={messages => this.onSend(messages)}
+                    renderFooter={this.renderFooter}
                     showUserAvatar={true}
+                    ref={ref => (this.chat = ref)}
                     user={{
                         _id: 1,
                         avatar: require("../images/girlCool.png")
