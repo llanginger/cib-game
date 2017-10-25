@@ -12,6 +12,7 @@ import {
 
 interface IScoreCounterProps {
     imagePath: any;
+    score: number;
 }
 
 export const ScoreCounter = (props: IScoreCounterProps) => {
@@ -22,7 +23,7 @@ export const ScoreCounter = (props: IScoreCounterProps) => {
                 source={props.imagePath}
                 resizeMode="contain"
             />
-            <Text>10</Text>
+            <Text>{props.score}</Text>
         </View>
     );
 };

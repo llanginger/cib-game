@@ -3,6 +3,9 @@ import { View, Text, StyleSheet } from "react-native";
 import shortid from "shortid";
 import * as _ from "lodash";
 import { GiftedChat } from "react-native-gifted-chat";
+import { connect } from "react-redux";
+import { IReducers } from "../redux/store";
+import { updateScore, IUpdateScoreType } from "../redux/actions/index";
 
 import { Toolbar } from "../components/Toolbar";
 import { ImageMessageView } from "../components/ImageMessageView";
@@ -62,9 +65,10 @@ const aiMessage = {
 
 interface IChatBotProps {
     navigator: any;
+    updateScore?: (type: IUpdateScoreType) => any;
 }
 
-export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
+export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
     private chat;
     constructor(props) {
         super(props);
@@ -201,6 +205,7 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
 
     onUserBinaryChoice(userOption: { text: string; onClick: string }) {
         const { currentLevel } = this.state;
+
         const messages = [createGiftedUserMessage(userOption.text)];
         this.setState(
             (previousState: any) => ({
@@ -211,17 +216,20 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
                     case "start-game":
                     case "next-level":
                     case "Ready!":
-                        return this.selectRandomLevel();
+                        this.selectRandomLevel();
+                        return;
                     case "hot":
-                        return this.pushChatbotMessage(
-                            currentLevel.response.hot,
-                            { currentLevel: { ...nextLevel } }
-                        );
+                        this.props.updateScore("hot");
+                        this.pushChatbotMessage(currentLevel.response.hot, {
+                            currentLevel: { ...nextLevel }
+                        });
+                        return;
                     case "cool":
-                        return this.pushChatbotMessage(
-                            currentLevel.response.cool,
-                            { currentLevel: { ...nextLevel } }
-                        );
+                        this.props.updateScore("cool");
+                        this.pushChatbotMessage(currentLevel.response.cool, {
+                            currentLevel: { ...nextLevel }
+                        });
+                        return;
                 }
             }
         );
@@ -249,6 +257,16 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         );
     }
 }
+
+const mapStateToProps = (state: IReducers) => {
+    return {};
+};
+
+const mapDispatchToProps = {
+    updateScore
+};
+
+export const ChatBot = connect(mapStateToProps, mapDispatchToProps)(_ChatBot);
 
 const styles = StyleSheet.create({
     container: {
