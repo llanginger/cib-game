@@ -18,6 +18,7 @@ import {
 } from "../levels/levels";
 
 import { ChatbotFooter } from "../components/ChatBotFooter";
+import { ScoreContainer } from "../components/score/ScoreContainer";
 
 interface IChatBotState {
     currentLevel?: IGameLevelObject;
@@ -229,6 +230,7 @@ export class ChatBot extends React.Component<IChatBotProps, IChatBotState> {
     render() {
         return (
             <View style={styles.container}>
+                <ScoreContainer />
                 <GiftedChat
                     messages={this.state.messages}
                     minInputToolbarHeight={this.state.minInputToolbarHeight}

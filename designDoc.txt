@@ -1,0 +1,43 @@
+Overview:
+
+    Chat-based game framework for the CIB brand. The game will tie into CIB's user database and progress in game will need to be reflected in some way in the user portal section of the website so as to drive traffic bidirectionally between the game and the site. 
+
+Features to implement:
+
+    - Character creation;
+    - Flexible user input section:
+        Make multiple "layouts", perhaps a D-pad, a layout for >2 set answers, others?
+    - Implement more robust/flexible custom image view
+    - Message onPress; Figure out right interaction here
+    - Image onPress; as above
+    - Image onLongPress; as above
+    - Ai avatar onPress; as above
+    - Ai avatar onLongPress; as above
+    - Player avatar onPress; as above - maybe show character creation screen to allow player to alter their   character?
+    - Player avatar onLongPress;
+    - Right drawer?
+    - Game screen header; maybe score goes here?
+    - Score; regardless of the above, implement scoring mechanism
+    - Persist data locally;
+    - Persist data in cloud; at specific intervals perhaps? Look into strategies for this.
+    - Custom message bubbles; consider making chat bubbles take a background image, set to cover, and feed it an image of a cartoon chat bubble
+    - Link to CIB website from menu
+    - Animations for some things?
+    - More customizable messages; Gif support, video support, audio support, all possible.
+    - Themed level packs with their own ui themes; Start thinking now about making every ui element skinnable
+
+
+
+Problems to solve:
+
+    Rewards; determine appropriately enticing rewards for playing the game such that kids keep returning to it.
+    Data collection; determine what data to collect and how to do so.
+
+
+
+
+
+Styled:
+
+babel-plugin-styled-components
+transform [ babelify --plugins [ styled-components ]]

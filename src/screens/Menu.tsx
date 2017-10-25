@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 30,
-        backgroundColor: "#daf6fa"
+        backgroundColor: "papayawhip"
     },
     logoContainer: {
         height: 100,
