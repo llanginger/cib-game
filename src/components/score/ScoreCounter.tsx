@@ -3,22 +3,39 @@ import {
     StyleSheet,
     View,
     Text,
+    Image,
     TouchableHighlight,
     TouchableOpacity,
     StatusBar,
     Platform
 } from "react-native";
 
-export const ScoreCounter = (props: any) => {
+interface IScoreCounterProps {
+    imagePath: any;
+}
+
+export const ScoreCounter = (props: IScoreCounterProps) => {
     return (
         <View style={styles.container}>
-            <Text>Hello</Text>
+            <Image
+                style={styles.image}
+                source={props.imagePath}
+                resizeMode="contain"
+            />
+            <Text>10</Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        marginHorizontal: 10
+        marginHorizontal: 10,
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    image: {
+        marginRight: 5,
+        width: 50,
+        height: 50
     }
 });
