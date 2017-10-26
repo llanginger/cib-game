@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import shortid from "shortid";
 import * as _ from "lodash";
 import { GiftedChat } from "react-native-gifted-chat";
@@ -86,6 +86,7 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         this.renderCustomView = this.renderCustomView.bind(this);
         this.renderToolbar = this.renderToolbar.bind(this);
         this.renderFooter = this.renderFooter.bind(this);
+        this.tempShowModal = this.tempShowModal.bind(this);
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
@@ -169,6 +170,17 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         );
     }
 
+    tempShowModal() {
+        console.log("Modal triggering");
+        return this.props.navigator.showModal({
+            screen: "CharacterSelect", // unique ID registered with Navigation.registerScreen
+            title: "Modal", // title of the screen as appears in the nav bar (optional)
+            passProps: {}, // simple serializable object that will pass as props to the modal (optional)
+            navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+            animationType: "slide-up" // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+        });
+    }
+
     renderToolbar() {
         const { userOptions } = this.state.currentLevel;
 
@@ -239,6 +251,10 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         return (
             <View style={styles.container}>
                 <ScoreContainer />
+                <TouchableOpacity
+                    onPress={this.tempShowModal}
+                    style={{ height: 40, backgroundColor: "orangered" }}
+                />
                 <GiftedChat
                     messages={this.state.messages}
                     minInputToolbarHeight={this.state.minInputToolbarHeight}

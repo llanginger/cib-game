@@ -41,3 +41,4 @@ Styled:
 
 babel-plugin-styled-components
 transform [ babelify --plugins [ styled-components ]]
+

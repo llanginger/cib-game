@@ -9,6 +9,7 @@ import { Navigation } from "react-native-navigation";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ChatBot } from "./screens/ChatBot";
+import { CharacterSelect } from "./screens/CharacterSelect";
 import { Menu } from "./screens/Menu";
 import { Provider } from "react-redux";
 import { store, IReducers } from "./redux/store";
@@ -18,13 +19,19 @@ import { store, IReducers } from "./redux/store";
 const registerScreens = () => {
     Navigation.registerComponent("MainScreen", () => ChatBot, store, Provider);
     Navigation.registerComponent("Menu", () => Menu, store, Provider);
+    Navigation.registerComponent(
+        "CharacterSelect",
+        () => CharacterSelect,
+        store,
+        Provider
+    );
 };
 
 registerScreens();
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "MainScreen",
+        screen: "CharacterSelect",
         navigatorStyle: {
             navBarTextColor: "red",
             drawUnderNavBar: true,
