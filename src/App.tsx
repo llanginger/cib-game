@@ -31,7 +31,7 @@ registerScreens();
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "CharacterSelect",
+        screen: "MainScreen",
         navigatorStyle: {
             navBarTextColor: "red",
             drawUnderNavBar: true,

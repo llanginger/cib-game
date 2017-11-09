@@ -5,7 +5,9 @@ import * as _ from "lodash";
 import { GiftedChat } from "react-native-gifted-chat";
 import { connect } from "react-redux";
 import { IReducers } from "../redux/store";
+import { IUserReducer } from "../redux/reducers/index"
 import { updateScore, IUpdateScoreType } from "../redux/actions/index";
+import { chatBotUserAvatarObject } from "../components/chatbotUserAvatar"
 
 import { Toolbar } from "../components/Toolbar";
 import { ImageMessageView } from "../components/ImageMessageView";
@@ -64,9 +66,22 @@ const aiMessage = {
 };
 
 interface IChatBotProps {
+    user?: IUserReducer;
     navigator: any;
     updateScore?: (type: IUpdateScoreType) => any;
 }
+
+const imagePaths = [
+    {
+        name: "boy",
+        url: require("../images/gameAvatar.png")
+    },
+    {
+        name: "girl",
+        url: require("../images/girlCool.png")
+    }
+]
+
 
 export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
     private chat;
@@ -82,14 +97,15 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
             chatbotDelay: 1000
         };
 
-        this.pushChatbotMessage = this.pushChatbotMessage.bind(this);
-        this.renderCustomView = this.renderCustomView.bind(this);
-        this.renderToolbar = this.renderToolbar.bind(this);
-        this.renderFooter = this.renderFooter.bind(this);
-        this.tempShowModal = this.tempShowModal.bind(this);
+        this._pushChatbotMessage = this._pushChatbotMessage.bind(this);
+        this._renderCustomView = this._renderCustomView.bind(this);
+        this._renderToolbar = this._renderToolbar.bind(this);
+        this._renderFooter = this._renderFooter.bind(this);
+        this._tempShowModal = this._tempShowModal.bind(this);
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
+        this._makeUserAvatar = this._makeUserAvatar.bind(this)
     }
 
     static navigatorButtons = {
@@ -101,6 +117,23 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
             }
         ]
     };
+
+    _makeUserAvatar() {
+        const imagePath = imagePaths.filter(path => {
+            return path.name === this.props.user.currentProfilePicture
+        })[0]
+
+        console.log("image path: ", imagePath)
+
+        const userObj = {
+            _id: 1,
+            avatar: imagePath.url
+        }
+
+        console.log("User obj: ", userObj)
+        return userObj
+
+    }
 
     componentDidUpdate(prevProps, prevState) {
         if (
@@ -121,15 +154,15 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         }
     }
 
-    renderCustomView(props) {
+    _renderCustomView(props) {
         return <ImageMessageView {...props} />;
     }
 
-    renderFooter(props) {
+    _renderFooter(props) {
         return <ChatbotFooter botTyping={this.state.botTyping} />;
     }
 
-    pushChatbotMessage(
+    _pushChatbotMessage(
         messages: IMessageObject[],
         stateOptions: IChatBotState = {} // refactor this
     ) {
@@ -170,7 +203,7 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         );
     }
 
-    tempShowModal() {
+    _tempShowModal() {
         console.log("Modal triggering");
         return this.props.navigator.showModal({
             screen: "CharacterSelect", // unique ID registered with Navigation.registerScreen
@@ -181,7 +214,7 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         });
     }
 
-    renderToolbar() {
+    _renderToolbar() {
         const { userOptions } = this.state.currentLevel;
 
         const makeButtons: () => IButtonObject[] = () => {
@@ -200,7 +233,7 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
     }
 
     componentDidMount() {
-        this.pushChatbotMessage(this.state.currentLevel.question);
+        this._pushChatbotMessage(this.state.currentLevel.question);
     }
 
     onSend(messages = []) {
@@ -211,14 +244,14 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
 
     selectRandomLevel() {
         this.setState({ currentLevel: _.sample(this.state.levels) }, () => {
-            this.pushChatbotMessage(this.state.currentLevel.question);
+            this._pushChatbotMessage(this.state.currentLevel.question);
         });
     }
 
     onUserBinaryChoice(userOption: { text: string; onClick: string }) {
         const { currentLevel } = this.state;
 
-        const messages = [createGiftedUserMessage(userOption.text)];
+        const messages = [createGiftedUserMessage(userOption.text, this._makeUserAvatar())];
         this.setState(
             (previousState: any) => ({
                 messages: GiftedChat.append(previousState.messages, messages)
@@ -232,13 +265,13 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
                         return;
                     case "hot":
                         this.props.updateScore("hot");
-                        this.pushChatbotMessage(currentLevel.response.hot, {
+                        this._pushChatbotMessage(currentLevel.response.hot, {
                             currentLevel: { ...nextLevel }
                         });
                         return;
                     case "cool":
                         this.props.updateScore("cool");
-                        this.pushChatbotMessage(currentLevel.response.cool, {
+                        this._pushChatbotMessage(currentLevel.response.cool, {
                             currentLevel: { ...nextLevel }
                         });
                         return;
@@ -258,16 +291,13 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
                 <GiftedChat
                     messages={this.state.messages}
                     minInputToolbarHeight={this.state.minInputToolbarHeight}
-                    renderInputToolbar={this.renderToolbar}
-                    renderCustomView={this.renderCustomView}
+                    renderInputToolbar={this._renderToolbar}
+                    renderCustomView={this._renderCustomView}
                     onSend={messages => this.onSend(messages)}
-                    renderFooter={this.renderFooter}
+                    renderFooter={this._renderFooter}
                     showUserAvatar={true}
                     ref={ref => (this.chat = ref)}
-                    user={{
-                        _id: 1,
-                        avatar: require("../images/girlCool.png")
-                    }}
+                    user={this._makeUserAvatar()}
                 />
             </View>
         );
@@ -275,7 +305,9 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
 }
 
 const mapStateToProps = (state: IReducers) => {
-    return {};
+    return {
+        user: state.userReducer
+    };
 };
 
 const mapDispatchToProps = {

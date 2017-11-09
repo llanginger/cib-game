@@ -1,13 +1,15 @@
 export interface IUserReducer {
     userName: string;
     currentProfilePicture: string;
-    profilePictures: string[]
+    profilePictures: string[],
+    profileUrls: string[]
 }
 
 const initState: IUserReducer = {
     userName: "placeholder name",
     currentProfilePicture: "boy",
-    profilePictures: ["boy", "girl"]
+    profilePictures: ["boy", "girl"],
+    profileUrls: ["../../images/gameAvatar.png", "../../images/gameAvatar.png"]
 };
 
 export const userReducer = (state: IUserReducer = initState, action) => {
