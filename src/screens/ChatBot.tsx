@@ -251,10 +251,10 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         return (
             <View style={styles.container}>
                 <ScoreContainer />
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     onPress={this.tempShowModal}
                     style={{ height: 40, backgroundColor: "orangered" }}
-                />
+                /> */}
                 <GiftedChat
                     messages={this.state.messages}
                     minInputToolbarHeight={this.state.minInputToolbarHeight}

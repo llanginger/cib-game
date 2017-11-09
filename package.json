@@ -27,6 +27,7 @@
         "react-native-vector-icons": "^4.4.0",
         "react-redux": "^5.0.6",
         "redux": "^3.7.2",
+        "redux-logger": "^3.0.6",
         "shortid": "^2.2.8",
         "typescript": "^2.5.3"
     },

@@ -13,14 +13,26 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { IReducers } from "../redux/store";
+import { makeUserAvatars } from "../components/makeUserAvatars"
 
-export interface ICharacterSelectProps {}
+export interface ICharacterSelectProps { }
 const dimWidth = Dimensions.get("window").width;
 const imageWidth = dimWidth * 0.4;
 const imageRadius = imageWidth * 0.5;
 
 export const CharacterSelect = (props: ICharacterSelectProps) => {
-    const makeCharacterImage = (url: [any, any]) => {
+
+    const makeCharacterImage = (url: any) => {
+        return (
+            <Image
+                source={url}
+                style={styles.characterImage}
+                resizeMode="cover"
+            />
+        )
+    }
+
+    const makeCharacterImageRow = (url: [any, any]) => {
         return (
             <View style={styles.characterRow}>
                 <TouchableOpacity style={styles.characterContainer}>
@@ -43,11 +55,10 @@ export const CharacterSelect = (props: ICharacterSelectProps) => {
 
     return (
         <View style={styles.container}>
-            {makeCharacterImage([
-                require("../images/gameAvatar.png"),
-                require("../images/girlCool.png")
-            ])}
-            {makeCharacterImage([
+            <View style={styles.characterRow}>
+                {makeUserAvatars()}
+            </View>
+            {makeCharacterImageRow([
                 require("../images/gameAvatar.png"),
                 require("../images/girlCool.png")
             ])}

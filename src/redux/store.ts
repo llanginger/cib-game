@@ -1,10 +1,11 @@
-import { combineReducers, createStore } from "redux";
+import { combineReducers, createStore, applyMiddleware } from "redux";
 import {
     scoreReducer,
     IScoreReducer,
     userReducer,
     IUserReducer
 } from "./reducers/index";
+import logger from "redux-logger"
 
 export interface IReducers {
     scoreReducer: IScoreReducer;
@@ -16,4 +17,4 @@ const reducers = combineReducers({
     userReducer
 });
 
-export const store = createStore(reducers);
+export const store = createStore(reducers, applyMiddleware(logger));
