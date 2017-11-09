@@ -15,7 +15,9 @@ import { connect } from "react-redux";
 import { IReducers } from "../redux/store";
 import { makeUserAvatars } from "../components/makeUserAvatars"
 
-export interface ICharacterSelectProps { }
+export interface ICharacterSelectProps {
+    navigator?: any
+}
 const dimWidth = Dimensions.get("window").width;
 const imageWidth = dimWidth * 0.4;
 const imageRadius = imageWidth * 0.5;
@@ -74,7 +76,9 @@ export const CharacterSelect = (props: ICharacterSelectProps) => {
                     placeholderTextColor="white"
                 />
             </View>
-            <TouchableOpacity style={styles.confirmButtonContainer}>
+            <TouchableOpacity style={styles.confirmButtonContainer}
+                onPress={() => props.navigator.dismissModal()}
+            >
                 <Text style={styles.confirmButtonText}>Confirm Selection</Text>
             </TouchableOpacity>
         </View>

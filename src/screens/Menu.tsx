@@ -2,7 +2,6 @@ import * as React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const menuColors = [
-    "#cc0066",
     "#3333cc",
     "#ffcc33",
     "#339900",
@@ -34,6 +33,27 @@ export const Menu = props => {
                     resizeMode="contain"
                 />
             </View>
+            <TouchableOpacity
+                style={[styles.menuItem, { backgroundColor: "#cc0066" }]}
+                onPress={() => {
+                    props.navigator.toggleDrawer({
+                        side: 'left', // the side of the drawer since you can have two, 'left' / 'right'
+                        animated: true, // does the toggle have transition animation or does it happen immediately (optional)
+                        to: 'closed' // optional, 'open' = open the drawer, 'closed' = close it, missing = the opposite of current state
+                    });
+                    props.navigator.showModal({
+                        screen: "CharacterSelect", // unique ID registered with Navigation.registerScreen
+                        title: "Modal", // title of the screen as appears in the nav bar (optional)
+                        passProps: {}, // simple serializable object that will pass as props to the modal (optional)
+                        navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+                        animationType: "slide-up" // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+                    })
+                }}
+            >
+                <Text style={styles.menuItemText}>
+                    Select Character
+                    </Text>
+            </TouchableOpacity>
             {makeMenuItems()}
         </View>
     );
