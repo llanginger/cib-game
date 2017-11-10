@@ -1,6 +1,7 @@
 export interface IUserReducer {
     userName: string;
     currentProfilePicture: string;
+    currentProfilePictureUrl: number;
     profilePictures: string[],
     profileUrls: string[]
 }
@@ -8,6 +9,7 @@ export interface IUserReducer {
 const initState: IUserReducer = {
     userName: "placeholder name",
     currentProfilePicture: "boy",
+    currentProfilePictureUrl: 5,
     profilePictures: ["boy", "girl"],
     profileUrls: ["../../images/gameAvatar.png", "../../images/gameAvatar.png"]
 };
@@ -22,7 +24,8 @@ export const userReducer = (state: IUserReducer = initState, action) => {
         case "SET_PROFILE_PICTURE":
             return {
                 ...state,
-                currentProfilePicture: action.payload.profilePicture
+                currentProfilePicture: action.payload.profilePicture,
+                currentProfilePictureUrl: action.payload.profilePictureUrl,
             }
         default:
             return state;

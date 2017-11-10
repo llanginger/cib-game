@@ -29,10 +29,13 @@ const _UserAvatar = (props: IUserAvatarProps) => {
         <TouchableOpacity
             style={styles.characterContainer}
             onPress={() => {
-                console.log(props)
+                console.log("Avatar press props: ", props)
+                console.log("Avatar url: ", props.url)
+                console.log("Avatar url type: ", typeof props.url)
                 props.dispatch({
                     type: "SET_PROFILE_PICTURE", payload: {
-                        profilePicture: props.imageName
+                        profilePicture: props.imageName,
+                        profilePictureUrl: props.url,
                     }
                 })
 

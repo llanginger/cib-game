@@ -136,6 +136,26 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         return userObj
 
     }
+    componentWillReceiveProps(nextProps) {
+        console.log("Chatbot receiving props", nextProps)
+
+        const messages = this.state.messages
+
+        const newMessages = messages.map(message => {
+            console.log("Message: ", message)
+            if (message.user.name === "player") {
+
+                return {
+                    ...message,
+                    user: {
+                        ...message.user,
+                        avatar: nextProps.user.currentProfilePictureUrl
+                    }
+                }
+            } else return message
+        })
+        this.setState({ messages: newMessages })
+    }
 
     componentDidUpdate(prevProps, prevState) {
         if (
@@ -257,9 +277,12 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         this._pushChatbotMessage(this.state.currentLevel.question);
     }
 
+    // This might be entirely unuses
     onSend(messages = []) {
+        const giftedMessages = GiftedChat.append(this.state.messages, messages)
+        console.log("Gifted messages: ", giftedMessages)
         this.setState(previousState => ({
-            messages: GiftedChat.append(previousState.messages, messages)
+            messages: giftedMessages
         }));
     }
 
@@ -302,7 +325,7 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
     }
 
     render() {
-        console.log("Chatbot state", this.state)
+
         return (
             <View style={styles.container}>
                 <ScoreContainer />
