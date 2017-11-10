@@ -106,6 +106,7 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
             this.onNavigatorEvent.bind(this)
         );
         this._makeUserAvatar = this._makeUserAvatar.bind(this)
+        this._updateUserAvatars = this._updateUserAvatars.bind(this)
     }
 
     static navigatorButtons = {
@@ -127,6 +128,7 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
 
         const userObj = {
             _id: 1,
+            name: "player",
             avatar: imagePath.url
         }
 
@@ -160,6 +162,25 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
 
     _renderFooter(props) {
         return <ChatbotFooter botTyping={this.state.botTyping} />;
+    }
+
+    _updateUserAvatars() {
+        const messages = this.state.messages
+
+        const newMessages = messages.map(message => {
+            console.log("Message: ", message)
+            if (message.user.name === "player") {
+
+                return {
+                    ...message,
+                    user: {
+                        ...message.user,
+                        avatar: 6
+                    }
+                }
+            } else return message
+        })
+        this.setState({ messages: newMessages })
     }
 
     _pushChatbotMessage(
@@ -281,6 +302,7 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
     }
 
     render() {
+        console.log("Chatbot state", this.state)
         return (
             <View style={styles.container}>
                 <ScoreContainer />
@@ -288,6 +310,10 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
                     onPress={this.tempShowModal}
                     style={{ height: 40, backgroundColor: "orangered" }}
                 /> */}
+                <TouchableOpacity
+                    onPress={this._updateUserAvatars}
+                    style={{ height: 40, backgroundColor: "orangered" }}
+                />
                 <GiftedChat
                     messages={this.state.messages}
                     minInputToolbarHeight={this.state.minInputToolbarHeight}
