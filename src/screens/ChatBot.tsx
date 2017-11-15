@@ -101,7 +101,6 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         this._renderCustomView = this._renderCustomView.bind(this);
         this._renderToolbar = this._renderToolbar.bind(this);
         this._renderFooter = this._renderFooter.bind(this);
-        this._tempShowModal = this._tempShowModal.bind(this);
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
@@ -109,15 +108,15 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         this._updateUserAvatars = this._updateUserAvatars.bind(this)
     }
 
-    static navigatorButtons = {
-        leftButtons: [
-            {
-                title: "menu",
-                id: "menu",
-                buttonColor: "orangered"
-            }
-        ]
-    };
+    // static navigatorButtons = {
+    //     leftButtons: [
+    //         {
+    //             title: "menu",
+    //             id: "menu",
+    //             buttonColor: "orangered"
+    //         }
+    //     ]
+    // };
 
     _makeUserAvatar() {
         const imagePath = imagePaths.filter(path => {
@@ -136,6 +135,9 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         return userObj
 
     }
+
+    // This probably needs to be tightened up.
+    // At the moment this is where the retroactive avatar updates happen on character select
     componentWillReceiveProps(nextProps) {
         console.log("Chatbot receiving props", nextProps)
 
@@ -244,17 +246,6 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         );
     }
 
-    _tempShowModal() {
-        console.log("Modal triggering");
-        return this.props.navigator.showModal({
-            screen: "CharacterSelect", // unique ID registered with Navigation.registerScreen
-            title: "Modal", // title of the screen as appears in the nav bar (optional)
-            passProps: {}, // simple serializable object that will pass as props to the modal (optional)
-            navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-            animationType: "slide-up" // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
-        });
-    }
-
     _renderToolbar() {
         const { userOptions } = this.state.currentLevel;
 
@@ -329,14 +320,6 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
         return (
             <View style={styles.container}>
                 <ScoreContainer />
-                {/* <TouchableOpacity
-                    onPress={this.tempShowModal}
-                    style={{ height: 40, backgroundColor: "orangered" }}
-                /> */}
-                <TouchableOpacity
-                    onPress={this._updateUserAvatars}
-                    style={{ height: 40, backgroundColor: "orangered" }}
-                />
                 <GiftedChat
                     messages={this.state.messages}
                     minInputToolbarHeight={this.state.minInputToolbarHeight}

@@ -88,7 +88,7 @@ export const levels: IGameLevelObject[] = [
             hot: [
                 {
                     text:
-                        "I hit him but now he is sad and I don't feel good either"
+                    "I hit him but now he is sad and I don't feel good either"
                 },
                 {
                     hasImage: true,
@@ -126,7 +126,7 @@ export const levels: IGameLevelObject[] = [
             cool: [
                 {
                     text:
-                        "I told her everything would be ok and she seems to feel better"
+                    "I told her everything would be ok and she seems to feel better"
                 },
                 {
                     hasImage: true,
@@ -163,3 +163,12 @@ export const levels: IGameLevelObject[] = [
         }
     }
 ];
+
+
+// My friend won't play with me and I'm feeling angry
+// What should I do to not be angry?
+// A: Change the way he is thinking
+// B: Demand friend plays with him
+
+// Thinking cool is about truth and facts.
+// Hot thoughts are about prejudices and opinions
