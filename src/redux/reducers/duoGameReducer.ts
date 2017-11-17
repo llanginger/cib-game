@@ -12,13 +12,27 @@ export interface IDuoGameReducer {
 const dummyCards: IDuoGameCard[] = [
     {
         correctAnswer: false,
+        image: require("../../images/balloonCool.png"),
         selected: false,
         id: 0
     },
     {
         correctAnswer: true,
         selected: false,
+        image: require("../../images/balloonHot.png"),
         id: 1
+    },
+    {
+        correctAnswer: false,
+        selected: false,
+        image: require("../../images/batmanHot.png"),
+        id: 2
+    },
+    {
+        correctAnswer: false,
+        selected: false,
+        image: require("../../images/batmanCool.png"),
+        id: 3
     }
 ]
 

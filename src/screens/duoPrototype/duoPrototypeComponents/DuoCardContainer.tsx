@@ -24,7 +24,10 @@ interface IDuoGameCardProps {
 
 const _DuoCardContainer = (props: IDuoGameCardProps) => {
     const { cards, dispatch } = props
+
+    // Create rows of 2 cards per row
     const mapDuoCards = () => {
+        const cardsPerRow: number = 2
         return cards.map((card, i) => {
             return (
                 <DuoCard
@@ -36,10 +39,22 @@ const _DuoCardContainer = (props: IDuoGameCardProps) => {
                     onPress={() => dispatch({ type: "_DUO_SELECT_CARD", payload: { id: card.id } })}
                 />
             )
+        }).reduce((prevValue: any[], element, index) => {
+            if (index % cardsPerRow === 0) {
+                prevValue.push([])
+            }
+            prevValue[prevValue.length - 1].push(element)
+            return prevValue
+        }, []).map((row, i) => {
+            return <View style={styles.subContainer} key={i}>{row}</View>
         })
     }
+
     return (
         <View style={styles.container}>
+            <View style={styles.textContainer}>
+                <Text style={styles.text}>Choose the picture of a "HOT" thought</Text>
+            </View>
             {mapDuoCards()}
         </View>
     )
@@ -58,10 +73,26 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "column"
+        flexDirection: "column",
+        backgroundColor: "#daf6fa"
     },
     subContainer: {
         flexDirection: "row",
         marginVertical: 5
+    },
+    textContainer: {
+        marginVertical: 10,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 10,
+        width: "85%",
+        borderRadius: 15,
+        backgroundColor: "white",
+        shadowColor: "#888",
+        shadowOpacity: 0.5,
+        shadowOffset: { width: 5, height: 5 }
+    },
+    text: {
+        fontSize: 16,
     }
 })
