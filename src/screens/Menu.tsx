@@ -2,7 +2,6 @@ import * as React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const menuColors = [
-    "#ffcc33",
     "#339900",
     "#ff9933",
     "#663366"
@@ -88,6 +87,29 @@ export class Menu extends React.Component<any, any> {
                 >
                     <Text style={styles.menuItemText}>
                         Skill Recap
+                        </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.menuItem, { backgroundColor: "#ffcc33" }]}
+                    onPress={() => {
+                        this.props.navigator.showModal({
+                            screen: "MainScreen", // unique ID registered with Navigation.registerScreen
+                            title: "MainScreen", // title of the screen as appears in the nav bar (optional)
+
+                            navigatorButtons: {
+                                leftButtons: [
+                                    {
+                                        title: "menu",
+                                        id: "menu",
+                                        buttonColor: "orangered"
+                                    }
+                                ]
+                            }
+                        })
+                    }}
+                >
+                    <Text style={styles.menuItemText}>
+                        Chatbot Game
                         </Text>
                 </TouchableOpacity>
                 {makeMenuItems()}

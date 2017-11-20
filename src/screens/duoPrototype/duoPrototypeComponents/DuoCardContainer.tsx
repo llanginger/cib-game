@@ -16,14 +16,23 @@ import { connect } from "react-redux";
 import { IReducers } from "../../../redux/store";
 import { IDuoGameCard } from "../../../redux/reducers/index"
 import { DuoCard } from "./DuoCard"
+import { ScoreContainer } from "../../../components/score/ScoreContainer"
+import { DuoCardHeaderText } from "./DuoCardHeaderText"
+import { DuoCardButton } from "./DuoCardButton"
 
 interface IDuoGameCardProps {
-    cards: IDuoGameCard[]
+    level: {
+        headerText: string;
+        cards: IDuoGameCard[]
+    }
     dispatch?: any
 }
 
 const _DuoCardContainer = (props: IDuoGameCardProps) => {
-    const { cards, dispatch } = props
+    console.log("Duo card containe props: ", props)
+    const { level, dispatch } = props
+    const { headerText, cards } = level
+    const arr = [1, 2, 3]
 
     // Create rows of 2 cards per row
     const mapDuoCards = () => {
@@ -36,7 +45,7 @@ const _DuoCardContainer = (props: IDuoGameCardProps) => {
                     id={card.id}
                     image={card.image}
                     key={i}
-                    onPress={() => dispatch({ type: "_DUO_SELECT_CARD", payload: { id: card.id } })}
+                    onPress={() => dispatch({ type: "_DUO_SELECT_CARD", payload: { id: card.id, correctAnswer: card.correctAnswer } })}
                 />
             )
         }).reduce((prevValue: any[], element, index) => {
@@ -52,17 +61,17 @@ const _DuoCardContainer = (props: IDuoGameCardProps) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.textContainer}>
-                <Text style={styles.text}>Choose the picture of a "HOT" thought</Text>
-            </View>
+            <ScoreContainer containerProps={{ alignSelf: "flex-end" }} />
+            <DuoCardHeaderText text={headerText} />
             {mapDuoCards()}
+            <DuoCardButton />
         </View>
     )
 }
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        cards: state.duoGameReducer.cards
+        level: state.duoGameReducer.level
     }
 }
 
@@ -71,7 +80,7 @@ export const DuoCardContainer = connect(mapStateToProps)(_DuoCardContainer)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "column",
         backgroundColor: "#daf6fa"

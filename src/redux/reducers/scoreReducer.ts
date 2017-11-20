@@ -20,6 +20,18 @@ export const scoreReducer = (state: IScoreReducer = initState, action: any) => {
                 ...state,
                 coolScore: (state.coolScore += 1)
             };
+        case "_DUO_CONFIRM_SELECTION":
+            if (action.payload.correctAnswer) {
+                return {
+                    ...state,
+                    coolScore: (state.coolScore += 1)
+                };
+            } else {
+                return {
+                    ...state,
+                    hotScore: (state.hotScore += 1)
+                };
+            }
         default:
             return state;
     }

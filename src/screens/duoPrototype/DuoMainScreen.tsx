@@ -19,6 +19,10 @@ import { DuoCard } from "./duoPrototypeComponents/DuoCard"
 import { DuoCardContainer } from "./duoPrototypeComponents/DuoCardContainer"
 import { PressBounce } from "../../components/PressBounce"
 
+// Text game section
+
+import { DuoTextGameContainer } from "./duoPrototypeComponents/textGameLevel/DuoTextGameContainer"
+
 export class DuoMainScreen extends Component<any, any> {
 
     constructor(props) {
@@ -43,7 +47,8 @@ export class DuoMainScreen extends Component<any, any> {
 
     render() {
         return (
-            <DuoCardContainer />
+            // <DuoCardContainer />
+            <DuoTextGameContainer />
         )
     }
 }

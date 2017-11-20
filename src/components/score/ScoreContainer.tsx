@@ -17,15 +17,17 @@ import { ScoreCounter } from "./ScoreCounter";
 interface IScoreContainerProps {
     score?: IScoreReducer;
     dispatch?: any;
+    containerProps?: {}
 }
 
 export const _ScoreContainer = (props: IScoreContainerProps) => {
     const hotImage = require("../../images/hot.png");
     const coolImage = require("../../images/cool.png");
+    const { containerProps = {} } = props
 
     console.log("Score Container props: ", props);
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, props.containerProps]}>
             <ScoreCounter imagePath={hotImage} score={props.score.hotScore} />
             <ScoreCounter imagePath={coolImage} score={props.score.coolScore} />
         </View>
@@ -52,4 +54,4 @@ const mapStateToProps = (state: IReducers) => {
 
 const mapDispatchToProps = {};
 
-export const ScoreContainer = connect(mapStateToProps)(_ScoreContainer);
+export const ScoreContainer: any = connect(mapStateToProps)(_ScoreContainer); // Why do I need any here?

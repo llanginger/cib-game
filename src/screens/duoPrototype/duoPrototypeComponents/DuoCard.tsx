@@ -9,6 +9,7 @@ import {
     TextInput,
     // ImageBackground,
     TouchableHighlight,
+    ViewProperties,
     TouchableWithoutFeedback,
     TouchableOpacity,
     StatusBar,
@@ -25,12 +26,13 @@ interface IDuoCardProps {
     id: any;
     correctAnswer: boolean;
     image: any;
-    onPress: any
+    onPress: any;
+    containerProps?: any
 }
 
 const circleDiameter: number = 25
 
-export class DuoCard extends Component<any, any> {
+export class DuoCard extends Component<IDuoCardProps, any> {
 
     private springValue: Animated.Value
 
@@ -41,6 +43,9 @@ export class DuoCard extends Component<any, any> {
     }
 
     bounce() {
+        if (this.props.selected) {
+            return
+        }
         this.springValue.setValue(0)
         Animated.spring(
             this.springValue,
@@ -64,11 +69,11 @@ export class DuoCard extends Component<any, any> {
         return (
             <TouchableWithoutFeedback onPress={this.bounce}>
                 <Animated.View
-                    onPress={this.bounce}
                     style={[styles.card, {
                         transform: [{ scale: bounceScale }],
                         borderColor: this.props.correctAnswer && this.props.selected ? "#4CAF50" : "palevioletred",
                         borderWidth: this.props.selected ? 5 : 0,
+                        ...this.props.containerProps
                     }
                     ]}
                 >
@@ -116,7 +121,7 @@ const styles = StyleSheet.create({
         height: circleDiameter,
         width: circleDiameter,
         borderRadius: circleDiameter / 2,
-        backgroundColor: "blue",
+        backgroundColor: "#3F51B5",
         justifyContent: "center",
         alignItems: "center"
     },
