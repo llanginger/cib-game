@@ -14,27 +14,54 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { IReducers } from "../../../../redux/store";
+import { IDuoTextGameWord } from "../../../../redux/reducers/index"
 
-export const WordPuzzleContainer = (props) => {
+interface IWordPuzzleContainerProps {
+    currentSelectedWord: IDuoTextGameWord;
+    bodyText: [string, string]
+}
+
+const _WordPuzzleContainer = (props) => {
+    const { word } = props.currentSelectedWord
+    console.log("Current selected word: ", word)
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>This will be where the ______ goes</Text>
+            <Text style={styles.text}>
+                {props.bodyText[0]} <Text style={styles.underlineText}>{word.length > 0 ? word : "_____"}</Text> {props.bodyText[1]}
+            </Text>
         </View>
     )
 }
 
+const mapStateToProps = (state: IReducers) => {
+    return {
+        bodyText: state.duoTextGameReducer.textGameLevel.bodyText,
+        currentSelectedWord: state.duoTextGameReducer.textGameLevel.currentSelectedWord
+    }
+}
+
+export const WordPuzzleContainer = connect(mapStateToProps)(_WordPuzzleContainer)
+
 const styles = StyleSheet.create({
     container: {
-        width: "60%",
+        width: "80%",
         backgroundColor: "white",
         padding: 15,
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 15,
-        overflow: "hidden",
-        marginBottom: 30
+
+        shadowColor: "#888",
+        shadowOpacity: 0.5,
+        shadowOffset: { width: 5, height: 5 }
+        // marginBottom: 30
     },
     text: {
         fontSize: 16
+    },
+    underlineText: {
+        fontSize: 18,
+        textDecorationLine: "underline",
+        color: "orangered"
     }
 })

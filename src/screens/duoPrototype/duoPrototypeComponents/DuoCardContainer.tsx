@@ -19,6 +19,7 @@ import { DuoCard } from "./DuoCard"
 import { ScoreContainer } from "../../../components/score/ScoreContainer"
 import { DuoCardHeaderText } from "./DuoCardHeaderText"
 import { DuoCardButton } from "./DuoCardButton"
+import { getDuoCards } from "./DuoLevels"
 
 interface IDuoGameCardProps {
     level: {
@@ -26,6 +27,7 @@ interface IDuoGameCardProps {
         cards: IDuoGameCard[]
     }
     dispatch?: any
+    cardSelected: boolean
 }
 
 const _DuoCardContainer = (props: IDuoGameCardProps) => {
@@ -64,14 +66,23 @@ const _DuoCardContainer = (props: IDuoGameCardProps) => {
             <ScoreContainer containerProps={{ alignSelf: "flex-end" }} />
             <DuoCardHeaderText text={headerText} />
             {mapDuoCards()}
-            <DuoCardButton />
+            <DuoCardButton
+                active={props.cardSelected}
+                dispatchAction={{
+                    type: "_DUO_CONFIRM_SELECTION",
+                    payload: {
+                        levels: getDuoCards()
+                    }
+                }}
+            />
         </View>
     )
 }
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        level: state.duoGameReducer.level
+        level: state.duoGameReducer.level,
+        cardSelected: state.duoGameReducer.cardSelected,
     }
 }
 

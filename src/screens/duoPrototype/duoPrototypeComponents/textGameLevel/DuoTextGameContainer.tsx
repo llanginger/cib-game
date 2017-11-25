@@ -14,35 +14,64 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { IReducers } from "../../../../redux/store";
+import { IDuoTextGameLevel } from "../../../../redux/reducers/index";
 
 import { WordContainer } from "./WordContainer"
 import { WordPuzzleContainer } from "./WordPuzzleContainer"
+import { DuoCardButton } from "../DuoCardButton"
 
+import { getTextGameLevel } from "./TextGameLevels"
 import { DuoCard } from "../DuoCard"
+import { HeaderText } from "./HeaderText"
 
-export const DuoTextGameContainer = (props) => {
+interface IDuoTextGameContainerProps {
+    dispatch?: any;
+    textGameLevel: IDuoTextGameLevel;
+    wordSelected: boolean
+}
+
+export const _DuoTextGameContainer = (props: IDuoTextGameContainerProps) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Hello</Text>
+            <HeaderText text={props.textGameLevel.headerText} />
             <DuoCard
-                image={require("../../../../images/girlHot.png")}
+                image={props.textGameLevel.image}
                 id={1}
                 correctAnswer={true}
                 onPress={() => console.log("Pressed")}
                 selected={false}
-                containerProps={{ width: "60%", marginVertical: 30 }}
+                containerProps={{ width: "60%" }}
+                hideRadio
             />
             <WordPuzzleContainer />
             <WordContainer />
+            <DuoCardButton
+                active={props.wordSelected}
+                dispatchAction={{
+                    type: "_DUO_TEXTGAME_SUBMIT_WORD",
+                    payload: {
+                        textGameLevel: getTextGameLevel()
+                    }
+                }}
+            />
         </View>
     )
 }
 
+const mapStateToProps = (state: IReducers) => {
+    return {
+        textGameLevel: state.duoTextGameReducer.textGameLevel,
+        wordSelected: state.duoTextGameReducer.wordSelected
+    }
+}
+
+export const DuoTextGameContainer = connect(mapStateToProps)(_DuoTextGameContainer)
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 60,
-        justifyContent: "flex-start",
+        paddingTop: 80,
+        justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "column",
         backgroundColor: "#daf6fa"

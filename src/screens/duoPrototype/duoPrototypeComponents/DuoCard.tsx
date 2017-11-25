@@ -27,7 +27,10 @@ interface IDuoCardProps {
     correctAnswer: boolean;
     image: any;
     onPress: any;
-    containerProps?: any
+    containerProps?: any;
+    imageProps?: any;
+    resizeMode?: string
+    hideRadio?: boolean
 }
 
 const circleDiameter: number = 25
@@ -40,6 +43,7 @@ export class DuoCard extends Component<IDuoCardProps, any> {
         super(props)
         this.springValue = new Animated.Value(0)
         this.bounce = this.bounce.bind(this)
+        this.renderRadio = this.renderRadio.bind(this)
     }
 
     bounce() {
@@ -56,6 +60,21 @@ export class DuoCard extends Component<IDuoCardProps, any> {
             }
         ).start()
         this.props.onPress()
+    }
+
+    renderRadio() {
+        if (this.props.hideRadio) {
+            return null
+        }
+
+        return (
+            <View style={styles.radioContainer}>
+                <View style={styles.radioOuter}>
+                    <View style={[styles.radioInner, { backgroundColor: this.props.selected ? "blue" : "white" }]}>
+                    </View>
+                </View>
+            </View>
+        )
     }
 
     render() {
@@ -78,17 +97,12 @@ export class DuoCard extends Component<IDuoCardProps, any> {
                     ]}
                 >
                     <ImageBackground
-                        resizeMode="cover"
+                        resizeMode={this.props.resizeMode || "cover"}
                         borderRadius={15}
                         source={this.props.image}
-                        style={[styles.image, { shadowOpacity: this.props.selected ? 0 : 0.5 }]}
+                        style={[styles.image, { shadowOpacity: this.props.selected ? 0 : 0.5 }, this.props.imageProps]}
                     >
-                        <View style={styles.radioContainer}>
-                            <View style={styles.radioOuter}>
-                                <View style={[styles.radioInner, { backgroundColor: this.props.selected ? "blue" : "white" }]}>
-                                </View>
-                            </View>
-                        </View>
+                        {this.renderRadio()}
                     </ImageBackground>
                 </Animated.View>
             </TouchableWithoutFeedback>

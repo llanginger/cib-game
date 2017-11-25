@@ -16,22 +16,18 @@ import {
 
 import { connect } from "react-redux";
 import { IReducers } from "../../../redux/store";
-import { getDuoCards } from "./DuoLevels"
+
 
 interface IDuoCardButtonProps {
     active?: boolean;
-    dispatch?: any
+    dispatch?: any;
+    dispatchAction?: {}
 }
 
 export const _DuoCardButton = (props: IDuoCardButtonProps) => {
     return (
         <TouchableOpacity
-            onPress={() => props.dispatch({
-                type: "_DUO_CONFIRM_SELECTION",
-                payload: {
-                    levels: getDuoCards()
-                }
-            })}
+            onPress={() => props.dispatch(props.dispatchAction)}
             disabled={!props.active}
             style={[styles.container, { backgroundColor: props.active ? "#3F51B5" : "#BDBDBD" }]}
         >
@@ -49,12 +45,10 @@ export const _DuoCardButton = (props: IDuoCardButtonProps) => {
 }
 
 const mapStateToProps = (state: IReducers) => {
-    return {
-        active: state.duoGameReducer.cardSelected,
-    }
+    return {}
 }
 
-export const DuoCardButton = connect(mapStateToProps)(_DuoCardButton)
+export const DuoCardButton: any = connect(mapStateToProps)(_DuoCardButton)
 
 const styles = StyleSheet.create({
     container: {

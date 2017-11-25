@@ -5,23 +5,11 @@ export interface IDuoGameCard {
     id: number
 }
 
-export interface IDuoTextGameWord {
-    word: string, correct: boolean
-}
-export interface IDuoTextGameLevel {
-    headerText: string;
-    level: {
-        image: string;
-        words: IDuoTextGameWord[]
-    }
-}
-
 export interface IDuoGameReducer {
     level: {
         headerText: string;
         cards: IDuoGameCard[]
     };
-    textGameLevel: IDuoTextGameLevel
     cardSelected: boolean
 }
 
@@ -52,52 +40,12 @@ const dummyCards: IDuoGameCard[] = [
     }
 ]
 
-const dummyTextGameLevel: IDuoTextGameLevel = {
-    headerText: "Pick a word",
-    level: {
-        image: require("../../images/balloonCool.png"),
-        words: [
-            {
-                word: "Yes",
-                correct: false
-            },
-            {
-                word: "No",
-                correct: false
-            },
-            {
-                word: "Yes",
-                correct: false
-            },
-            {
-                word: "No",
-                correct: false
-            },
-            {
-                word: "Yes",
-                correct: false
-            },
-            {
-                word: "sentence",
-                correct: true
-            },
-            {
-                word: "Yes",
-                correct: false
-            },
-            {
-                word: "No",
-                correct: false
-            },
-        ]
-    }
-}
+
 const initState: IDuoGameReducer = {
     level: {
         headerText: "Choose the picture of a 'Hot' thought",
         cards: dummyCards
     },
-    textGameLevel: dummyTextGameLevel,
     cardSelected: false
 }
 
