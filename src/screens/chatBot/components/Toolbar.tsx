@@ -9,7 +9,7 @@ import {
     Platform
 } from "react-native";
 
-import { IButtonObject } from "../interfaces/index";
+import { IButtonObject } from "../../../interfaces/index";
 
 interface IToolbarProps {
     buttons: IButtonObject[];

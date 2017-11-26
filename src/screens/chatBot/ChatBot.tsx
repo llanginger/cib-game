@@ -4,26 +4,26 @@ import shortid from "shortid";
 import * as _ from "lodash";
 import { GiftedChat } from "react-native-gifted-chat";
 import { connect } from "react-redux";
-import { IReducers } from "../redux/store";
-import { IUserReducer } from "../redux/reducers/index"
-import { updateScore, IUpdateScoreType } from "../redux/actions/index";
-import { chatBotUserAvatarObject } from "../components/chatbotUserAvatar"
+import { IReducers } from "../../redux/store";
+import { IUserReducer } from "../../redux/reducers/index"
+import { updateScore, IUpdateScoreType } from "../../redux/actions/index";
+import { chatBotUserAvatarObject } from "./components/chatbotUserAvatar"
 
-import { Toolbar } from "../components/Toolbar";
-import { ImageMessageView } from "../components/ImageMessageView";
-import { createGiftedUserMessage } from "../components/createGiftedUserMessage";
+import { Toolbar } from "./components/Toolbar";
+import { ImageMessageView } from "./components/ImageMessageView";
+import { createGiftedUserMessage } from "./components/createGiftedUserMessage";
 
-import { IMessageObject, IButtonObject } from "../interfaces/index";
+import { IMessageObject, IButtonObject } from "../../interfaces/index";
 
 import {
     levels,
     gameInit,
     nextLevel,
     IGameLevelObject
-} from "../levels/levels";
+} from "../../levels/levels";
 
-import { ChatbotFooter } from "../components/ChatBotFooter";
-import { ScoreContainer } from "../components/score/ScoreContainer";
+import { ChatbotFooter } from "./components/ChatBotFooter";
+import { ScoreContainer } from "../../components/score/ScoreContainer";
 
 interface IChatBotState {
     currentLevel?: IGameLevelObject;
@@ -61,7 +61,7 @@ const aiMessage = {
     user: {
         _id: 2,
         name: "React Native",
-        avatar: require("../images/gameAvatar.png")
+        avatar: require("../../images/gameAvatar.png")
     }
 };
 
@@ -74,11 +74,11 @@ interface IChatBotProps {
 const imagePaths = [
     {
         name: "boy",
-        url: require("../images/gameAvatar.png")
+        url: require("../../images/gameAvatar.png")
     },
     {
         name: "girl",
-        url: require("../images/girlCool.png")
+        url: require("../../images/girlCool.png")
     }
 ]
 

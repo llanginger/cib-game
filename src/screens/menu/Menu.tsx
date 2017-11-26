@@ -30,7 +30,7 @@ export class Menu extends React.Component<any, any> {
                 <View style={styles.logoContainer}>
                     <Image
                         style={styles.logo}
-                        source={require("../images/cibLogo.png")}
+                        source={require("../../images/cibLogo.png")}
                         resizeMode="contain"
                     />
                 </View>

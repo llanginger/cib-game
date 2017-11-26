@@ -7,7 +7,9 @@ import {
     duoGameReducer,
     IDuoGameReducer,
     duoTextGameReducer,
-    IDuoTextGameReducer
+    IDuoTextGameReducer,
+    gameTypeReducer,
+    IGameTypeReducer
 
 } from "./reducers/index";
 import logger from "redux-logger"
@@ -17,13 +19,15 @@ export interface IReducers {
     userReducer: IUserReducer;
     duoGameReducer: IDuoGameReducer
     duoTextGameReducer: IDuoTextGameReducer
+    gameTypeReducer: IGameTypeReducer
 }
 
 const reducers = combineReducers({
     scoreReducer,
     userReducer,
     duoGameReducer,
-    duoTextGameReducer
+    duoTextGameReducer,
+    gameTypeReducer
 });
 
 export const store = createStore(reducers, applyMiddleware(logger));

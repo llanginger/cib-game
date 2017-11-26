@@ -8,16 +8,16 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { connect } from "react-redux"
-import { IReducers } from "../redux/store";
+import { IReducers } from "../../../redux/store";
 
 const imagePaths = [
     {
         name: "boy",
-        url: require("../images/gameAvatar.png")
+        url: require("../../../images/gameAvatar.png")
     },
     {
         name: "girl",
-        url: require("../images/girlCool.png")
+        url: require("../../../images/girlCool.png")
     }
 ]
 
@@ -31,7 +31,7 @@ export const chatBotUserAvatarObject = (userAvatar: string) => {
 
     return {
         _id: 1,
-        avatar: imagePath.length > 0 ? imagePath : require("../images/girlCool.png")
+        avatar: imagePath.length > 0 ? imagePath : require("../../../images/girlCool.png")
     }
 
 

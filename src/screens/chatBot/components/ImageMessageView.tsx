@@ -6,7 +6,7 @@ import {
     StyleSheet,
     TouchableOpacity
 } from "react-native";
-import { IMessageObject } from "../interfaces/index";
+import { IMessageObject } from "../../../interfaces/index";
 
 interface IImageMessageViewProps {
     currentMessage?: IMessageObject;

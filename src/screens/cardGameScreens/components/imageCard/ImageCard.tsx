@@ -18,8 +18,8 @@ import {
     Platform
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers } from "../../../redux/store";
-import { ImageBackground } from "./ImageBackground"
+import { IReducers } from "../../../../redux/store";
+import { ImageBackground } from "./ImageCardBackground"
 
 interface IDuoCardProps {
     selected: boolean;
@@ -83,7 +83,7 @@ export class DuoCard extends Component<IDuoCardProps, any> {
             outputRange: [1, 0.99, 1]
         })
 
-        console.log("Duo card props: ", this.props)
+        console.log("Duo imageCard props: ", this.props)
 
         return (
             <TouchableWithoutFeedback onPress={this.bounce}>

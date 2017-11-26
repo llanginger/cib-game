@@ -15,11 +15,11 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../../redux/store";
 import { IDuoGameCard } from "../../../redux/reducers/index"
-import { DuoCard } from "./DuoCard"
+import { DuoCard } from "../components/imageCard/ImageCard"
 import { ScoreContainer } from "../../../components/score/ScoreContainer"
-import { DuoCardHeaderText } from "./DuoCardHeaderText"
-import { DuoCardButton } from "./DuoCardButton"
-import { getDuoCards } from "./DuoLevels"
+import { DuoCardHeaderText } from "./components/CardHeaderText"
+import { DuoCardButton } from "./components/CardButton"
+import { getDuoCards } from "./components/cardLevels"
 
 interface IDuoGameCardProps {
     level: {
@@ -31,7 +31,7 @@ interface IDuoGameCardProps {
 }
 
 const _DuoCardContainer = (props: IDuoGameCardProps) => {
-    console.log("Duo card containe props: ", props)
+    console.log("Duo imageCard containe props: ", props)
     const { level, dispatch } = props
     const { headerText, cards } = level
     const arr = [1, 2, 3]

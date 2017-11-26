@@ -8,16 +8,16 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import { Navigation } from "react-native-navigation";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { ChatBot } from "./screens/ChatBot";
-import { CharacterSelect } from "./screens/CharacterSelect";
-import { SkillRecap } from "./screens/SkillRecap";
-import { Menu } from "./screens/Menu";
+import { ChatBot } from "./screens/chatBot/ChatBot";
+import { CharacterSelect } from "./screens/characterSelect/CharacterSelect";
+import { SkillRecap } from "./screens/skillRecap/SkillRecap";
+import { Menu } from "./screens/menu/Menu";
 import { Provider } from "react-redux";
 import { store, IReducers } from "./redux/store";
 
 // Duo Prototype section
 
-import { DuoMainScreen } from "./screens/duoPrototype/DuoMainScreen"
+import { DuoMainScreen } from "./screens/cardGameScreens/CardGameMainScreen"
 import { AnimationTest } from "./screens/AnimationTest"
 
 // Screen section

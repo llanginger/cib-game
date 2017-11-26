@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers } from "../redux/store";
+import { IReducers } from "../../../redux/store";
 
 import { UserAvatar } from "./UserAvatar"
 
@@ -20,11 +20,11 @@ interface IUserAvatarProps {
 const imagePaths = [
     {
         name: "boy",
-        url: require("../images/gameAvatar.png")
+        url: require("../../../images/gameAvatar.png")
     },
     {
         name: "girl",
-        url: require("../images/girlCool.png")
+        url: require("../../../images/girlCool.png")
     }
 ]
 

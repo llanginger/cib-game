@@ -13,9 +13,9 @@ import {
     Platform
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers } from "../redux/store";
-import { makeUserAvatars } from "../components/makeUserAvatars"
-import { SkillCard } from "../components/SkillCard"
+import { IReducers } from "../../redux/store";
+import { makeUserAvatars } from "../characterSelect/components/makeUserAvatars"
+import { SkillCard } from "./components/SkillCard"
 
 
 const width = Dimensions.get("screen").width

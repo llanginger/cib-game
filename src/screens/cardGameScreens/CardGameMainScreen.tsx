@@ -15,15 +15,20 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
 
-import { DuoCard } from "./duoPrototypeComponents/DuoCard"
-import { DuoCardContainer } from "./duoPrototypeComponents/DuoCardContainer"
+import { DuoCard } from "./components/imageCard/ImageCard"
+import { DuoCardContainer } from "./chooseCards/ChooseCardsGameContainer"
 import { PressBounce } from "../../components/PressBounce"
 
 // Text game section
 
-import { DuoTextGameContainer } from "./duoPrototypeComponents/textGameLevel/DuoTextGameContainer"
+import { DuoTextGameContainer } from "./chooseWords/ChooseWordsGameContainer"
 
-export class DuoMainScreen extends Component<any, any> {
+interface ICardGameMainScreenProps {
+    navigator?: any;
+    gameType: "word" | "card"
+}
+
+class _DuoMainScreen extends Component<ICardGameMainScreenProps, any> {
 
     constructor(props) {
         super(props);
@@ -31,6 +36,7 @@ export class DuoMainScreen extends Component<any, any> {
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
+        this._showGameType = this._showGameType.bind(this)
     }
 
     onNavigatorEvent(event) {
@@ -44,14 +50,31 @@ export class DuoMainScreen extends Component<any, any> {
         }
     }
 
+    _showGameType() {
+        switch (this.props.gameType) {
+            case "word":
+                return <DuoTextGameContainer />
+            case "card":
+                return <DuoCardContainer />
+            default: return <DuoCardContainer />
+        }
+    }
+
 
     render() {
-        return (
-            // <DuoCardContainer />
-            <DuoTextGameContainer />
-        )
+        console.log("duo main screen props: ", this.props)
+        return this._showGameType()
     }
 }
+
+const mapStateToProps = (state: IReducers) => {
+    return {
+        gameType: state.gameTypeReducer.gameType
+    }
+}
+
+export const DuoMainScreen = connect(mapStateToProps)(_DuoMainScreen)
+
 
 const styles = StyleSheet.create({
     container: {

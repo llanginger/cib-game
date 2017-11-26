@@ -13,16 +13,16 @@ import {
     Platform
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers } from "../../../../redux/store";
-import { IDuoTextGameLevel } from "../../../../redux/reducers/index";
+import { IReducers } from "../../../redux/store";
+import { IDuoTextGameLevel } from "../../../redux/reducers/index";
 
-import { WordContainer } from "./WordContainer"
-import { WordPuzzleContainer } from "./WordPuzzleContainer"
-import { DuoCardButton } from "../DuoCardButton"
+import { WordContainer } from "./components/WordContainer"
+import { WordPuzzleContainer } from "./components/WordFillBlank"
+import { DuoCardButton } from "../chooseCards/components/CardButton"
 
-import { getTextGameLevel } from "./TextGameLevels"
-import { DuoCard } from "../DuoCard"
-import { HeaderText } from "./HeaderText"
+import { getTextGameLevel } from "./components/wordLevels"
+import { DuoCard } from "../components/imageCard/ImageCard"
+import { HeaderText } from "./components/WordHeaderText"
 
 interface IDuoTextGameContainerProps {
     dispatch?: any;

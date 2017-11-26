@@ -12,8 +12,8 @@ import {
     Platform
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers } from "../redux/store";
-import { makeUserAvatars } from "../components/makeUserAvatars"
+import { IReducers } from "../../redux/store";
+import { makeUserAvatars } from "./components/makeUserAvatars"
 
 export interface ICharacterSelectProps {
     navigator?: any
@@ -80,8 +80,8 @@ export class CharacterSelect extends React.Component<ICharacterSelectProps, any>
                     {makeUserAvatars()}
                 </View>
                 {makeCharacterImageRow([
-                    require("../images/gameAvatar.png"),
-                    require("../images/girlCool.png")
+                    require("../../images/gameAvatar.png"),
+                    require("../../images/girlCool.png")
                 ])}
                 <View style={styles.textInputContainer}>
                     <TextInput

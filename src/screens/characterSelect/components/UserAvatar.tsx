@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { connect } from "react-redux"
-import { IReducers } from "../redux/store";
+import { IReducers } from "../../../redux/store";
 
 interface IUserAvatarProps {
     imageStyle?: any;

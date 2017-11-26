@@ -1,4 +1,4 @@
-import { IDuoGameCard } from "../../../redux/reducers/index"
+import { IDuoGameCard } from "../../../../redux/reducers/index"
 import * as _ from "lodash"
 
 const dummyCards: {
@@ -11,26 +11,26 @@ const dummyCards: {
             cards: [
                 {
                     correctAnswer: false,
-                    image: require("../../../images/balloonCool.png"),
+                    image: require("../../../../images/balloonCool.png"),
                     selected: false,
                     id: 0
                 },
                 {
                     correctAnswer: true,
                     selected: false,
-                    image: require("../../../images/balloonHot.png"),
+                    image: require("../../../../images/balloonHot.png"),
                     id: 1
                 },
                 {
                     correctAnswer: false,
                     selected: false,
-                    image: require("../../../images/batmanHot.png"),
+                    image: require("../../../../images/batmanHot.png"),
                     id: 2
                 },
                 {
                     correctAnswer: false,
                     selected: false,
-                    image: require("../../../images/batmanCool.png"),
+                    image: require("../../../../images/batmanCool.png"),
                     id: 3
                 }
             ]
@@ -40,26 +40,26 @@ const dummyCards: {
             cards: [
                 {
                     correctAnswer: true,
-                    image: require("../../../images/girlHot.png"),
+                    image: require("../../../../images/girlHot.png"),
                     selected: false,
                     id: 0
                 },
                 {
                     correctAnswer: false,
                     selected: false,
-                    image: require("../../../images/girlCool.png"),
+                    image: require("../../../../images/girlCool.png"),
                     id: 1
                 },
                 {
                     correctAnswer: false,
                     selected: false,
-                    image: require("../../../images/hot.png"),
+                    image: require("../../../../images/hot.png"),
                     id: 2
                 },
                 {
                     correctAnswer: false,
                     selected: false,
-                    image: require("../../../images/cool.png"),
+                    image: require("../../../../images/cool.png"),
                     id: 3
                 }
             ]

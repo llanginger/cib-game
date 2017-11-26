@@ -13,8 +13,8 @@ import {
     Platform
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers } from "../redux/store";
-import { makeUserAvatars } from "../components/makeUserAvatars"
+import { IReducers } from "../../../redux/store";
+import { makeUserAvatars } from "../../characterSelect/components/makeUserAvatars"
 
 interface ICardSeparatorProps {
     color?: string
