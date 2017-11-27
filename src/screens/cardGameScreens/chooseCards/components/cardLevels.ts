@@ -7,59 +7,88 @@ const dummyCards: {
 
 }[] = [
         {
-            headerText: "Choose the Hot thought",
+            headerText: "In which picture is Jane COOL?",
             cards: [
                 {
                     correctAnswer: false,
-                    image: require("../../../../images/balloonCool.png"),
+                    image: require("../../../../images/fieldAnnoyed.png"),
                     selected: false,
                     id: 0
                 },
                 {
                     correctAnswer: true,
                     selected: false,
-                    image: require("../../../../images/balloonHot.png"),
+                    image: require("../../../../images/fieldCool.png"),
                     id: 1
                 },
                 {
                     correctAnswer: false,
                     selected: false,
-                    image: require("../../../../images/batmanHot.png"),
+                    image: require("../../../../images/fieldHot.png"),
                     id: 2
                 },
                 {
                     correctAnswer: false,
                     selected: false,
-                    image: require("../../../../images/batmanCool.png"),
+                    image: require("../../../../images/fieldPre.png"),
                     id: 3
                 }
             ]
         },
         {
-            headerText: "Choose the Sad face",
+            headerText: "Which face is showing a HOT emotion?",
             cards: [
                 {
                     correctAnswer: true,
-                    image: require("../../../../images/girlHot.png"),
+                    image: require("../../../../images/girlPortraitAnger.png"),
                     selected: false,
                     id: 0
                 },
                 {
                     correctAnswer: false,
                     selected: false,
-                    image: require("../../../../images/girlCool.png"),
+                    image: require("../../../../images/girlPortraitSad.png"),
                     id: 1
                 },
                 {
                     correctAnswer: false,
                     selected: false,
-                    image: require("../../../../images/hot.png"),
+                    image: require("../../../../images/girlPortraitDisgust.png"),
                     id: 2
                 },
                 {
                     correctAnswer: false,
                     selected: false,
-                    image: require("../../../../images/cool.png"),
+                    image: require("../../../../images/girlPortraitHappy.png"),
+                    id: 3
+                }
+            ]
+        },
+        {
+            headerText: "Which picture shows Violet listening?",
+            cards: [
+                {
+                    correctAnswer: false,
+                    image: require("../../../../images/benchIgnore.png"),
+                    selected: false,
+                    id: 0
+                },
+                {
+                    correctAnswer: false,
+                    selected: false,
+                    image: require("../../../../images/benchPre.png"),
+                    id: 1
+                },
+                {
+                    correctAnswer: true,
+                    selected: false,
+                    image: require("../../../../images/benchCool.png"),
+                    id: 2
+                },
+                {
+                    correctAnswer: false,
+                    selected: false,
+                    image: require("../../../../images/benchSad.png"),
                     id: 3
                 }
             ]

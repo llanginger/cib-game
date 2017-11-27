@@ -3,67 +3,101 @@ import * as _ from "lodash"
 
 const textGameLevels: IDuoTextGameLevel[] = [
     {
-        headerText: "What kind of thought did the girl just experience?",
-        bodyText: ["first part", "second part"],
+        headerText: "Sally got caught out in the rain",
+        bodyText: ["It's raining, I am wet -", ""],
         currentSelectedWord: { word: "", correct: false },
-        image: require("../../../../images/balloonHot.png"),
-        answerImage: require("../../../../images/balloonCool.png"),
+        image: require("../../../../images/rainPre.png"),
+        answerImage: require("../../../../images/rainCool.png"),
         words: [
             {
-                word: "Hot",
+                word: "this is the worst",
                 correct: false
             },
             {
-                word: "Cool",
+                word: "I hate the rain",
+                correct: false,
+            },
+            {
+                word: "it's ok, it's just water",
+                correct: true
+            }
+        ]
+    },
+    {
+        headerText: "Frank dropped his icecream, how should he respond?",
+        bodyText: ["It is", "that this happened"],
+        currentSelectedWord: { word: "", correct: false },
+        image: require("../../../../images/icecreamHot.png"),
+        answerImage: require("../../../../images/icecreamCool.png"),
+        words: [
+            {
+                word: "awful",
+                correct: false
+            },
+            {
+                word: "bad",
+                correct: false
+            },
+            {
+                word: "fine",
                 correct: true
             },
             {
-                word: "Other",
+                word: "unfair",
                 correct: false
             }
         ]
     },
     {
-        headerText: "Pick a word",
-        bodyText: ["first part", "second part"],
+        headerText: "Juliana is having a COOL thought about doing homeworkd",
+        bodyText: ["I", "homework!"],
         currentSelectedWord: { word: "", correct: false },
-        image: require("../../../../images/balloonHot.png"),
-        answerImage: require("../../../../images/balloonCool.png"),
+        image: require("../../../../images/studyPre.png"),
+        answerImage: require("../../../../images/studyCool.png"),
         words: [
             {
-                word: "Yes",
+                word: "hate",
                 correct: false
             },
             {
-                word: "No",
-                correct: false
-            },
-            {
-                word: "Yes",
-                correct: false
-            },
-            {
-                word: "No",
-                correct: false
-            },
-            {
-                word: "Yes",
-                correct: false
-            },
-            {
-                word: "sentence",
+                word: "love",
                 correct: true
             },
             {
-                word: "Yes",
+                word: "don't care about",
                 correct: false
             },
             {
-                word: "No",
-                correct: false
-            },
+                word: "enjoy",
+                correct: true
+            }
         ]
     },
+    {
+        headerText: "Juliana is having a HOT thought about doing homeworkd",
+        bodyText: ["I", "homework!"],
+        currentSelectedWord: { word: "", correct: false },
+        image: require("../../../../images/studyPre.png"),
+        answerImage: require("../../../../images/studyHot.png"),
+        words: [
+            {
+                word: "hate",
+                correct: true
+            },
+            {
+                word: "love",
+                correct: false
+            },
+            {
+                word: "don't care about",
+                correct: false
+            },
+            {
+                word: "enjoy",
+                correct: false
+            }
+        ]
+    }
 ]
 
 export const getTextGameLevel: () => IDuoTextGameLevel = () => {

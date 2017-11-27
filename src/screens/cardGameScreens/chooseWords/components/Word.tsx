@@ -18,12 +18,25 @@ import { IDuoTextGameWord } from "../../../../redux/reducers/index"
 
 interface IWordProps {
     dispatch?: any;
-    word: IDuoTextGameWord
+    word: IDuoTextGameWord;
+    showAnswer: boolean
 }
 
 const _Word = (props: IWordProps) => {
 
-    const { word, dispatch } = props
+    const { word, dispatch, showAnswer } = props
+
+    const getWordColor = () => {
+        if (showAnswer) {
+            if (word.correct) {
+                return { color: "green" }
+            } else {
+                return { color: "orangered" }
+            }
+        } else {
+            return { color: "black" }
+        }
+    }
     return (
         <TouchableOpacity
             style={styles.container}
@@ -34,14 +47,20 @@ const _Word = (props: IWordProps) => {
                 }
             })}
         >
-            <Text style={[styles.wordStyle]} >
+            <Text style={[styles.wordStyle, getWordColor()]} >
                 {word.word}
             </Text>
         </TouchableOpacity>
     )
 }
 
-export const Word = connect()(_Word)
+const mapStateToProps = (state: IReducers) => {
+    return {
+        showAnswer: state.duoTextGameReducer.showAnswer,
+    }
+}
+
+export const Word = connect(mapStateToProps)(_Word)
 
 const styles = StyleSheet.create({
     container: {
@@ -53,8 +72,8 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     wordStyle: {
-        fontSize: 20,
-        margin: 5,
+        fontSize: 16,
+        margin: 7,
         color: "black",
         overflow: "hidden"
     }

@@ -1,3 +1,5 @@
+
+
 export interface IDuoTextGameWord {
     word: string, correct: boolean
 }
@@ -18,44 +20,28 @@ export interface IDuoTextGameReducer {
 }
 
 const dummyTextGameLevel: IDuoTextGameLevel = {
-    headerText: "Pick a word",
-    bodyText: ["first part", "second part"],
+    headerText: "Juliana is having a COOL thought about doing homeworkd",
+    bodyText: ["I", "homework!"],
     currentSelectedWord: { word: "", correct: false },
-    image: require("../../images/balloonCool.png"),
-    answerImage: require("../../images/balloonHot.png"),
+    image: require("../../images/studyPre.png"),
+    answerImage: require("../../images/studyCool.png"),
     words: [
         {
-            word: "Yes",
+            word: "hate",
             correct: false
         },
         {
-            word: "No",
-            correct: false
-        },
-        {
-            word: "Yes",
-            correct: false
-        },
-        {
-            word: "No",
-            correct: false
-        },
-        {
-            word: "Yes",
-            correct: false
-        },
-        {
-            word: "sentence",
+            word: "love",
             correct: true
         },
         {
-            word: "Yes",
+            word: "don't care about",
             correct: false
         },
         {
-            word: "No",
-            correct: false
-        },
+            word: "enjoy",
+            correct: true
+        }
     ]
 }
 
