@@ -24,20 +24,46 @@ import { getTextGameLevel } from "./components/wordLevels"
 import { DuoCard } from "../components/imageCard/ImageCard"
 import { HeaderText } from "./components/WordHeaderText"
 
-import { textGameSubmitWord } from "../../../redux/actions/index"
+import { textGameNewLevel, textGameSubmitWord } from "../../../redux/actions/index"
 
 interface IDuoTextGameContainerProps {
     dispatch?: any;
     textGameLevel: IDuoTextGameLevel;
-    wordSelected: boolean
+    wordSelected: boolean;
+    showAnswer: boolean
 }
 
 export const _DuoTextGameContainer = (props: IDuoTextGameContainerProps) => {
+
+    const { textGameLevel, wordSelected, showAnswer } = props
+    const { currentSelectedWord } = textGameLevel
+
+
+    const chooseButton = () => {
+        if (!props.showAnswer) {
+            return (
+                <DuoCardButton
+                    active={props.wordSelected}
+                    activeText="Check!"
+                    inactiveText="Pick a word!"
+                    dispatchAction={textGameSubmitWord()}
+                />
+            )
+        } else {
+            return (
+                <DuoCardButton
+                    active={true}
+                    activeText="Next puzzle!"
+                    dispatchAction={textGameNewLevel(getTextGameLevel(), "card")}
+                />
+            )
+        }
+    }
     return (
         <View style={styles.container}>
             <HeaderText text={props.textGameLevel.headerText} />
             <DuoCard
-                image={props.textGameLevel.image}
+                image={props.showAnswer ? props.textGameLevel.answerImage : props.textGameLevel.image}
                 id={1}
                 correctAnswer={true}
                 onPress={() => console.log("Pressed")}
@@ -45,12 +71,12 @@ export const _DuoTextGameContainer = (props: IDuoTextGameContainerProps) => {
                 containerProps={{ width: "60%" }}
                 hideRadio
             />
-            <WordPuzzleContainer />
-            <WordContainer />
-            <DuoCardButton
-                active={props.wordSelected}
-                dispatchAction={textGameSubmitWord(getTextGameLevel(), "card")}
+            <WordPuzzleContainer
+                correct={currentSelectedWord.correct}
+                showAnswer={showAnswer}
             />
+            <WordContainer />
+            {chooseButton()}
         </View>
     )
 }
@@ -58,7 +84,8 @@ export const _DuoTextGameContainer = (props: IDuoTextGameContainerProps) => {
 const mapStateToProps = (state: IReducers) => {
     return {
         textGameLevel: state.duoTextGameReducer.textGameLevel,
-        wordSelected: state.duoTextGameReducer.wordSelected
+        wordSelected: state.duoTextGameReducer.wordSelected,
+        showAnswer: state.duoTextGameReducer.showAnswer,
     }
 }
 

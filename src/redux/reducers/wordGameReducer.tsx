@@ -6,11 +6,13 @@ export interface IDuoTextGameLevel {
     bodyText: [string, string];
     currentSelectedWord: IDuoTextGameWord;
     image: any;
+    answerImage: any;
     words: IDuoTextGameWord[]
 }
 
 export interface IDuoTextGameReducer {
     textGameLevel: IDuoTextGameLevel;
+    showAnswer: boolean;
     score: any;
     wordSelected: boolean
 }
@@ -20,6 +22,7 @@ const dummyTextGameLevel: IDuoTextGameLevel = {
     bodyText: ["first part", "second part"],
     currentSelectedWord: { word: "", correct: false },
     image: require("../../images/balloonCool.png"),
+    answerImage: require("../../images/balloonHot.png"),
     words: [
         {
             word: "Yes",
@@ -59,7 +62,8 @@ const dummyTextGameLevel: IDuoTextGameLevel = {
 const initState: IDuoTextGameReducer = {
     textGameLevel: dummyTextGameLevel,
     score: 0,
-    wordSelected: false
+    wordSelected: false,
+    showAnswer: false
 }
 
 export const duoTextGameReducer = (state: IDuoTextGameReducer = initState, action) => {
@@ -74,6 +78,11 @@ export const duoTextGameReducer = (state: IDuoTextGameReducer = initState, actio
                 }
             }
         case "TEXTGAME_SUBMIT_WORD":
+            return {
+                ...state,
+                showAnswer: true
+            }
+        case "TEXTGAME_NEW_LEVEL":
             return {
                 ...initState,
                 textGameLevel: action.payload.textGameLevel

@@ -20,6 +20,8 @@ import { IReducers } from "../../../../redux/store";
 
 interface IDuoCardButtonProps {
     active?: boolean;
+    activeText?: string;
+    inactiveText?: string;
     dispatch?: any;
     dispatchAction?: {}
 }
@@ -36,8 +38,8 @@ export const _DuoCardButton = (props: IDuoCardButtonProps) => {
             >
                 {
                     props.active ?
-                        "Confirm Selection" :
-                        "Pick a Card!"
+                        props.activeText || "Confirm Selection" :
+                        props.inactiveText || "Pick a Card!"
                 }
             </Text>
         </TouchableOpacity>

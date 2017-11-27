@@ -18,16 +18,30 @@ import { IDuoTextGameWord } from "../../../../redux/reducers/index"
 
 interface IWordPuzzleContainerProps {
     currentSelectedWord: IDuoTextGameWord;
-    bodyText: [string, string]
+    bodyText: [string, string];
+    showAnswer: boolean;
+    correct: boolean
 }
 
-const _WordPuzzleContainer = (props) => {
+const _WordPuzzleContainer = (props: IWordPuzzleContainerProps) => {
     const { word } = props.currentSelectedWord
     console.log("Current selected word: ", word)
+
+    const underlineColor = () => {
+        if (!props.showAnswer) {
+            return { color: "black" }
+        } else {
+            if (props.correct) {
+                return { color: "green" }
+            } else {
+                return { color: "orangered" }
+            }
+        }
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.text}>
-                {props.bodyText[0]} <Text style={styles.underlineText}>{word.length > 0 ? word : "_____"}</Text> {props.bodyText[1]}
+                {props.bodyText[0]} <Text style={[styles.underlineText, underlineColor()]}>{word.length > 0 ? word : "_____"}</Text> {props.bodyText[1]}
             </Text>
         </View>
     )

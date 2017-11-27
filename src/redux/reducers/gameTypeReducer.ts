@@ -9,7 +9,7 @@ const initState: IGameTypeReducer = {
 export const gameTypeReducer = (state: IGameTypeReducer = initState, action) => {
     switch (action.type) {
         case "SET_GAME_TYPE":
-        case "TEXTGAME_SUBMIT_WORD":
+        case "TEXTGAME_NEW_LEVEL":
         case "_DUO_CONFIRM_SELECTION":
             return {
                 gameType: action.payload.gameType

@@ -6,7 +6,8 @@ const textGameLevels: IDuoTextGameLevel[] = [
         headerText: "What kind of thought did the girl just experience?",
         bodyText: ["first part", "second part"],
         currentSelectedWord: { word: "", correct: false },
-        image: require("../../../../images/balloonCool.png"),
+        image: require("../../../../images/balloonHot.png"),
+        answerImage: require("../../../../images/balloonCool.png"),
         words: [
             {
                 word: "Hot",
@@ -27,6 +28,7 @@ const textGameLevels: IDuoTextGameLevel[] = [
         bodyText: ["first part", "second part"],
         currentSelectedWord: { word: "", correct: false },
         image: require("../../../../images/balloonHot.png"),
+        answerImage: require("../../../../images/balloonCool.png"),
         words: [
             {
                 word: "Yes",
