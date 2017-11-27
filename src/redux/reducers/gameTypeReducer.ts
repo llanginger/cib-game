@@ -3,12 +3,14 @@ export interface IGameTypeReducer {
 }
 
 const initState: IGameTypeReducer = {
-    gameType: "card"
+    gameType: "word"
 }
 
 export const gameTypeReducer = (state: IGameTypeReducer = initState, action) => {
     switch (action.type) {
         case "SET_GAME_TYPE":
+        case "TEXTGAME_SUBMIT_WORD":
+        case "_DUO_CONFIRM_SELECTION":
             return {
                 gameType: action.payload.gameType
             }

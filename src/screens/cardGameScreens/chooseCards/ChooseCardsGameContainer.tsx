@@ -21,6 +21,8 @@ import { DuoCardHeaderText } from "./components/CardHeaderText"
 import { DuoCardButton } from "./components/CardButton"
 import { getDuoCards } from "./components/cardLevels"
 
+import { cardGameSubmitWord } from "../../../redux/actions/index"
+
 interface IDuoGameCardProps {
     level: {
         headerText: string;
@@ -68,12 +70,7 @@ const _DuoCardContainer = (props: IDuoGameCardProps) => {
             {mapDuoCards()}
             <DuoCardButton
                 active={props.cardSelected}
-                dispatchAction={{
-                    type: "_DUO_CONFIRM_SELECTION",
-                    payload: {
-                        levels: getDuoCards()
-                    }
-                }}
+                dispatchAction={cardGameSubmitWord(getDuoCards(), "word")}
             />
         </View>
     )

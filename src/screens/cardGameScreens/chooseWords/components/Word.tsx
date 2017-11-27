@@ -28,7 +28,7 @@ const _Word = (props: IWordProps) => {
         <TouchableOpacity
             style={styles.container}
             onPress={() => dispatch({
-                type: "_DUO_TEXTGAME_SELECT_WORD",
+                type: "TEXTGAME_SELECT_WORD",
                 payload: {
                     word
                 }

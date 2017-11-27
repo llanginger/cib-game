@@ -5,11 +5,12 @@ export interface IDuoGameCard {
     id: number
 }
 
+export interface IDuoCardGameLevel {
+    headerText: string;
+    cards: IDuoGameCard[]
+}
 export interface IDuoGameReducer {
-    level: {
-        headerText: string;
-        cards: IDuoGameCard[]
-    };
+    level: IDuoCardGameLevel;
     cardSelected: boolean
 }
 
@@ -79,8 +80,7 @@ export const duoGameReducer = (state: IDuoGameReducer = initState, action: any) 
         case "_DUO_CONFIRM_SELECTION":
             return {
                 ...initState,
-                level: action.payload.levels
-
+                level: action.payload.level
             }
         default: return state
     }

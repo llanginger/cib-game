@@ -64,7 +64,7 @@ const textGameLevels: IDuoTextGameLevel[] = [
     },
 ]
 
-export const getTextGameLevel = () => {
+export const getTextGameLevel: () => IDuoTextGameLevel = () => {
     const random = _.sample(textGameLevels)
     return random
 }

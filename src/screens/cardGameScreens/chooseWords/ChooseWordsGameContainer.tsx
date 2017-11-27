@@ -24,6 +24,8 @@ import { getTextGameLevel } from "./components/wordLevels"
 import { DuoCard } from "../components/imageCard/ImageCard"
 import { HeaderText } from "./components/WordHeaderText"
 
+import { textGameSubmitWord } from "../../../redux/actions/index"
+
 interface IDuoTextGameContainerProps {
     dispatch?: any;
     textGameLevel: IDuoTextGameLevel;
@@ -47,12 +49,7 @@ export const _DuoTextGameContainer = (props: IDuoTextGameContainerProps) => {
             <WordContainer />
             <DuoCardButton
                 active={props.wordSelected}
-                dispatchAction={{
-                    type: "_DUO_TEXTGAME_SUBMIT_WORD",
-                    payload: {
-                        textGameLevel: getTextGameLevel()
-                    }
-                }}
+                dispatchAction={textGameSubmitWord(getTextGameLevel(), "card")}
             />
         </View>
     )

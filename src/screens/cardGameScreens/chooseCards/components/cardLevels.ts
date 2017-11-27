@@ -69,7 +69,7 @@ const dummyCards: {
 export const getDuoCards = () => {
     const sample = _.sample(dummyCards)
     const randomCards = _.shuffle(dummyCards[1])
-    return dummyCards[1]
+    return sample
 }
 
 // It's terrible the balloon has flown away

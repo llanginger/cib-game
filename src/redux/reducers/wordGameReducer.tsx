@@ -64,7 +64,7 @@ const initState: IDuoTextGameReducer = {
 
 export const duoTextGameReducer = (state: IDuoTextGameReducer = initState, action) => {
     switch (action.type) {
-        case "_DUO_TEXTGAME_SELECT_WORD":
+        case "TEXTGAME_SELECT_WORD":
             return {
                 ...state,
                 wordSelected: true,
@@ -73,7 +73,7 @@ export const duoTextGameReducer = (state: IDuoTextGameReducer = initState, actio
                     currentSelectedWord: action.payload.word
                 }
             }
-        case "_DUO_TEXTGAME_SUBMIT_WORD":
+        case "TEXTGAME_SUBMIT_WORD":
             return {
                 ...initState,
                 textGameLevel: action.payload.textGameLevel
