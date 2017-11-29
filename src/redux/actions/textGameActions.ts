@@ -1,11 +1,11 @@
 import { IPayloadAction } from "../../interfaces/IPayloadAction"
-import { IDuoTextGameLevel } from "../reducers/index"
+import { IWordGameLevel } from "../reducers/index"
 interface ITextGameSubmitWordAction {
-    textGameLevel: IDuoTextGameLevel;
+    textGameLevel: IWordGameLevel;
     gameType: "word" | "card"
 }
 
-export const textGameNewLevel: (level: IDuoTextGameLevel, gameType: "word" | "card") => IPayloadAction<ITextGameSubmitWordAction> = (level: IDuoTextGameLevel, gameType: "word" | "card") => {
+export const textGameNewLevel: (level: IWordGameLevel, gameType: "word" | "card") => IPayloadAction<ITextGameSubmitWordAction> = (level: IWordGameLevel, gameType: "word" | "card") => {
     return {
         type: "TEXTGAME_NEW_LEVEL",
         payload: {

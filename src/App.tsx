@@ -8,7 +8,7 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import { Navigation } from "react-native-navigation";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { ChatBot } from "./screens/chatBot/ChatBot";
+import { ChatBot } from "./screens/gameScreens/chatBotGame/ChatBot";
 import { CharacterSelect } from "./screens/characterSelect/CharacterSelect";
 import { SkillRecap } from "./screens/skillRecap/SkillRecap";
 import { Menu } from "./screens/menu/Menu";
@@ -17,7 +17,7 @@ import { store, IReducers } from "./redux/store";
 
 // Duo Prototype section
 
-import { DuoMainScreen } from "./screens/cardGameScreens/CardGameMainScreen"
+import { DuoMainScreen } from "./screens/gameScreens/CardGameMainScreen"
 import { AnimationTest } from "./screens/AnimationTest"
 
 // Screen section

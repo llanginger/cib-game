@@ -1,25 +1,25 @@
 
 
-export interface IDuoTextGameWord {
+export interface IWordGameWord {
     word: string, correct: boolean
 }
-export interface IDuoTextGameLevel {
+export interface IWordGameLevel {
     headerText: string;
     bodyText: [string, string];
-    currentSelectedWord: IDuoTextGameWord;
+    currentSelectedWord: IWordGameWord;
     image: any;
     answerImage: any;
-    words: IDuoTextGameWord[]
+    words: IWordGameWord[]
 }
 
-export interface IDuoTextGameReducer {
-    textGameLevel: IDuoTextGameLevel;
+export interface IWordGameReducer {
+    textGameLevel: IWordGameLevel;
     showAnswer: boolean;
     score: any;
     wordSelected: boolean
 }
 
-const dummyTextGameLevel: IDuoTextGameLevel = {
+const initWordGameLevel: IWordGameLevel = {
     headerText: "Juliana is having a COOL thought about doing homeworkd",
     bodyText: ["I", "homework!"],
     currentSelectedWord: { word: "", correct: false },
@@ -45,14 +45,14 @@ const dummyTextGameLevel: IDuoTextGameLevel = {
     ]
 }
 
-const initState: IDuoTextGameReducer = {
-    textGameLevel: dummyTextGameLevel,
+const initState: IWordGameReducer = {
+    textGameLevel: initWordGameLevel,
     score: 0,
     wordSelected: false,
     showAnswer: false
 }
 
-export const duoTextGameReducer = (state: IDuoTextGameReducer = initState, action) => {
+export const wordGameReducer = (state: IWordGameReducer = initState, action) => {
     switch (action.type) {
         case "TEXTGAME_SELECT_WORD":
             return {

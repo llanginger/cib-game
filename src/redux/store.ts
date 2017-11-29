@@ -4,10 +4,10 @@ import {
     IScoreReducer,
     userReducer,
     IUserReducer,
-    duoGameReducer,
-    IDuoGameReducer,
-    duoTextGameReducer,
-    IDuoTextGameReducer,
+    cardGameReducer,
+    ICardGameReducer,
+    wordGameReducer,
+    IWordGameReducer,
     gameTypeReducer,
     IGameTypeReducer
 
@@ -17,16 +17,16 @@ import logger from "redux-logger"
 export interface IReducers {
     scoreReducer: IScoreReducer;
     userReducer: IUserReducer;
-    duoGameReducer: IDuoGameReducer
-    duoTextGameReducer: IDuoTextGameReducer
+    cardGameReducer: ICardGameReducer
+    wordGameReducer: IWordGameReducer
     gameTypeReducer: IGameTypeReducer
 }
 
 const reducers = combineReducers({
     scoreReducer,
     userReducer,
-    duoGameReducer,
-    duoTextGameReducer,
+    cardGameReducer,
+    wordGameReducer,
     gameTypeReducer
 });
 

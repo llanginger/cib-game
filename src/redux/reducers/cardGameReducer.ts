@@ -1,20 +1,21 @@
-export interface IDuoGameCard {
+export interface ICardGameCard {
     image?: any;
     correctAnswer: boolean;
     selected: boolean;
     id: number
 }
 
-export interface IDuoCardGameLevel {
+export interface ICardGameLevel {
     headerText: string;
-    cards: IDuoGameCard[]
+    cards: ICardGameCard[]
 }
-export interface IDuoGameReducer {
-    level: IDuoCardGameLevel;
-    cardSelected: boolean
+export interface ICardGameReducer {
+    level: ICardGameLevel;
+    cardSelected: boolean;
+    showAnswer: boolean
 }
 
-const dummyCards: IDuoGameCard[] = [
+const initCards: ICardGameCard[] = [
     {
         correctAnswer: false,
         image: require("../../images/balloonCool.png"),
@@ -42,15 +43,16 @@ const dummyCards: IDuoGameCard[] = [
 ]
 
 
-const initState: IDuoGameReducer = {
+const initState: ICardGameReducer = {
     level: {
         headerText: "Choose the picture of a 'Hot' thought",
-        cards: dummyCards
+        cards: initCards
     },
+    showAnswer: false,
     cardSelected: false
 }
 
-const selectCard: (cards: IDuoGameCard[], id: number) => IDuoGameCard[] = (cards: IDuoGameCard[], id: number) => {
+const selectCard: (cards: ICardGameCard[], id: number) => ICardGameCard[] = (cards: ICardGameCard[], id: number) => {
     return cards.map(card => {
         if (card.id === id) {
             return {
@@ -66,7 +68,7 @@ const selectCard: (cards: IDuoGameCard[], id: number) => IDuoGameCard[] = (cards
     })
 }
 
-export const duoGameReducer = (state: IDuoGameReducer = initState, action: any) => {
+export const cardGameReducer = (state: ICardGameReducer = initState, action: any) => {
     switch (action.type) {
         case "_DUO_SELECT_CARD":
             return {
@@ -77,6 +79,13 @@ export const duoGameReducer = (state: IDuoGameReducer = initState, action: any) 
                     cards: selectCard(state.level.cards, action.payload.id)
                 }
             }
+        case "CARDGAME_SHOW_ANSWER":
+            return {
+                ...state,
+                showAnswer: true
+            }
+
+        case "CARDGAME_NEW_LEVEL":
         case "_DUO_CONFIRM_SELECTION":
             return {
                 ...initState,

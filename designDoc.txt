@@ -42,3 +42,44 @@ Styled:
 babel-plugin-styled-components
 transform [ babelify --plugins [ styled-components ]]
 
+Juliana is doing her homework
+
+pic 1: Unhappy
+"Juliana is unhappy about doing homework"
+
+"I ___ Homework"
+--------------------
+
+Juliana is doing her homework
+
+pic: 
+
+Loop: If user selects incorrect option, reset game state "Try again"
+
+----------
+
+Which person is having a "HOT" thought
+
+Try again?
+
+------------
+
+In which picture is Jane thinking "COOL"?
+
+-----------
+
+Sally got caught out in the rain without an umbrella, what is she thinking?
+"It's raining - "
+
+"...It's ok, I'll dry myself when I arrive" Or something to that effect
+"I hate getting wet"
+
+
+// MAKE SELECTED TEXT LARGER FONTSIZE, don't highlight in red the incorrect responses
+// Try out prompting for specifically hot or cool thoughts and coloring all colored text hot red or cool blue
+
+-------------
+
+Bench:
+
+Focus on "George"

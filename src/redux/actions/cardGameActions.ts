@@ -1,16 +1,22 @@
 import { IPayloadAction } from "../../interfaces/IPayloadAction"
-import { IDuoCardGameLevel } from "../reducers/index"
+import { ICardGameLevel } from "../reducers/index"
 interface ICardGameSubmitWordAction {
-    level: IDuoCardGameLevel;
+    level: ICardGameLevel;
     gameType: "word" | "card"
 }
 
-export const cardGameSubmitWord: (level: IDuoCardGameLevel, gameType: "word" | "card") => IPayloadAction<ICardGameSubmitWordAction> = (level: IDuoCardGameLevel, gameType: "word" | "card") => {
+export const cardGameNewLevel: (level: ICardGameLevel, gameType: "word" | "card") => IPayloadAction<ICardGameSubmitWordAction> = (level: ICardGameLevel, gameType: "word" | "card") => {
     return {
-        type: "_DUO_CONFIRM_SELECTION",
+        type: "CARDGAME_NEW_LEVEL",
         payload: {
             level,
             gameType
         }
+    }
+}
+
+export const cardGameSubmitWord = () => {
+    return {
+        type: "CARDGAME_SHOW_ANSWER"
     }
 }
