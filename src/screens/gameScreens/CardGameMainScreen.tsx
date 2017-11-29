@@ -16,12 +16,12 @@ import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
 
 import { DuoCard } from "./components/imageCard/ImageCard"
-import { DuoCardContainer } from "./cardGame/CardGameContainer"
+import { CardGameContainer } from "./cardGame/CardGameContainer"
 import { PressBounce } from "../../components/PressBounce"
 
 // Text game section
 
-import { DuoTextGameContainer } from "./wordGame/WordGameContainer"
+import { WordGameContainer } from "./wordGame/WordGameContainer"
 
 interface ICardGameMainScreenProps {
     navigator?: any;
@@ -53,10 +53,10 @@ class _DuoMainScreen extends Component<ICardGameMainScreenProps, any> {
     _showGameType() {
         switch (this.props.gameType) {
             case "word":
-                return <DuoTextGameContainer />
+                return <WordGameContainer />
             case "card":
-                return <DuoCardContainer />
-            default: return <DuoCardContainer />
+                return <CardGameContainer />
+            default: return <CardGameContainer />
         }
     }
 

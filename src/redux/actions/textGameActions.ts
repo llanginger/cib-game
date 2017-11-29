@@ -5,9 +5,9 @@ interface ITextGameSubmitWordAction {
     gameType: "word" | "card"
 }
 
-export const textGameNewLevel: (level: IWordGameLevel, gameType: "word" | "card") => IPayloadAction<ITextGameSubmitWordAction> = (level: IWordGameLevel, gameType: "word" | "card") => {
+export const wordGameNewLevel: (level: IWordGameLevel, gameType: "word" | "card") => IPayloadAction<ITextGameSubmitWordAction> = (level: IWordGameLevel, gameType: "word" | "card") => {
     return {
-        type: "TEXTGAME_NEW_LEVEL",
+        type: "WORDGAME_NEW_LEVEL",
         payload: {
             textGameLevel: level,
             gameType
@@ -15,8 +15,11 @@ export const textGameNewLevel: (level: IWordGameLevel, gameType: "word" | "card"
     }
 }
 
-export const textGameSubmitWord = () => {
+export const wordGameSubmitWord: (correct: boolean) => IPayloadAction<{ correct: boolean }> = (correct: boolean) => {
     return {
-        type: "TEXTGAME_SUBMIT_WORD"
+        type: "WORDGAME_SUBMIT_WORD",
+        payload: {
+            correct
+        }
     }
 }

@@ -15,7 +15,7 @@ import {
 } from "react-native";
 
 import { connect } from "react-redux";
-import { IReducers } from "../../../../redux/store";
+import { IReducers } from "../../../redux/store";
 
 
 interface IDuoCardButtonProps {
@@ -26,7 +26,7 @@ interface IDuoCardButtonProps {
     dispatchAction?: {}
 }
 
-export const _DuoCardButton = (props: IDuoCardButtonProps) => {
+export const _SubmitButton = (props: IDuoCardButtonProps) => {
     return (
         <TouchableOpacity
             onPress={() => props.dispatch(props.dispatchAction)}
@@ -50,7 +50,7 @@ const mapStateToProps = (state: IReducers) => {
     return {}
 }
 
-export const DuoCardButton: any = connect(mapStateToProps)(_DuoCardButton)
+export const SubmitButton: any = connect(mapStateToProps)(_SubmitButton)
 
 const styles = StyleSheet.create({
     container: {

@@ -5,7 +5,6 @@ const textGameLevels: IWordGameLevel[] = [
     {
         headerText: "Sally got caught out in the rain",
         bodyText: ["It's raining, I am wet -", ""],
-        currentSelectedWord: { word: "", correct: false },
         image: require("../../../../images/rainPre.png"),
         answerImage: require("../../../../images/rainCool.png"),
         words: [
@@ -26,7 +25,6 @@ const textGameLevels: IWordGameLevel[] = [
     {
         headerText: "Frank dropped his icecream, how should he respond?",
         bodyText: ["It is", "that this happened"],
-        currentSelectedWord: { word: "", correct: false },
         image: require("../../../../images/icecreamHot.png"),
         answerImage: require("../../../../images/icecreamCool.png"),
         words: [
@@ -51,7 +49,6 @@ const textGameLevels: IWordGameLevel[] = [
     {
         headerText: "Juliana is having a COOL thought about doing homeworkd",
         bodyText: ["I", "homework!"],
-        currentSelectedWord: { word: "", correct: false },
         image: require("../../../../images/studyPre.png"),
         answerImage: require("../../../../images/studyCool.png"),
         words: [
@@ -76,7 +73,6 @@ const textGameLevels: IWordGameLevel[] = [
     {
         headerText: "Juliana is having a HOT thought about doing homeworkd",
         bodyText: ["I", "homework!"],
-        currentSelectedWord: { word: "", correct: false },
         image: require("../../../../images/studyPre.png"),
         answerImage: require("../../../../images/studyHot.png"),
         words: [

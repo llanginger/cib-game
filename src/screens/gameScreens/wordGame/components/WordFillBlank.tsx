@@ -23,15 +23,15 @@ interface IWordPuzzleContainerProps {
     correct: boolean
 }
 
-const _WordPuzzleContainer = (props: IWordPuzzleContainerProps) => {
-    const { word } = props.currentSelectedWord
+const _WordFillBlank = (props: IWordPuzzleContainerProps) => {
+    const { word, correct } = props.currentSelectedWord
     console.log("Current selected word: ", word)
 
-    const underlineColor = () => {
+    const wordColor = () => {
         if (!props.showAnswer) {
             return { color: "black" }
         } else {
-            if (props.correct) {
+            if (correct) {
                 return { color: "green" }
             } else {
                 return { color: "orangered" }
@@ -41,7 +41,12 @@ const _WordPuzzleContainer = (props: IWordPuzzleContainerProps) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>
-                {props.bodyText[0]} <Text style={[styles.underlineText, underlineColor()]}>{word.length > 0 ? word : "_____"}</Text> {props.bodyText[1]}
+                {props.bodyText[0]} <Text style={
+                    [
+                        styles.underlineText,
+                        wordColor()
+                    ]
+                }>{word.length > 0 ? word : "_____"}</Text> {props.bodyText[1]}
             </Text>
         </View>
     )
@@ -50,28 +55,31 @@ const _WordPuzzleContainer = (props: IWordPuzzleContainerProps) => {
 const mapStateToProps = (state: IReducers) => {
     return {
         bodyText: state.wordGameReducer.textGameLevel.bodyText,
-        currentSelectedWord: state.wordGameReducer.textGameLevel.currentSelectedWord
+        currentSelectedWord: state.wordGameReducer.currentSelectedWord,
+        showAnswer: state.wordGameReducer.showAnswer,
     }
 }
 
-export const WordPuzzleContainer = connect(mapStateToProps)(_WordPuzzleContainer)
+export const WordFillBlank = connect(mapStateToProps)(_WordFillBlank)
 
 const styles = StyleSheet.create({
     container: {
-        width: "80%",
-        backgroundColor: "white",
-        padding: 15,
-        alignItems: "center",
-        justifyContent: "center",
-        borderRadius: 15,
+        marginTop: 10
+        // width: "80%",
+        // backgroundColor: "white",
+        // padding: 15,
+        // alignItems: "center",
+        // justifyContent: "center",
+        // borderRadius: 15,
 
-        shadowColor: "#888",
-        shadowOpacity: 0.5,
-        shadowOffset: { width: 5, height: 5 }
+        // shadowColor: "#888",
+        // shadowOpacity: 0.5,
+        // shadowOffset: { width: 5, height: 5 }
         // marginBottom: 30
     },
     text: {
-        fontSize: 16
+        fontSize: 16,
+        textAlign: "center"
     },
     underlineText: {
         fontSize: 18,

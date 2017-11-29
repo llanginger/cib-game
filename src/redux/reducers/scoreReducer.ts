@@ -32,6 +32,19 @@ export const scoreReducer = (state: IScoreReducer = initState, action: any) => {
                     hotScore: (state.hotScore += 1)
                 };
             }
+        // NEW STUFF, REVISE ABOVE
+        case "WORDGAME_SUBMIT_WORD":
+            if (action.payload.correct) {
+                return {
+                    ...state,
+                    coolScore: state.coolScore += 1
+                }
+            } else {
+                return {
+                    ...state,
+                    hotScore: state.hotScore += 1
+                }
+            }
         default:
             return state;
     }

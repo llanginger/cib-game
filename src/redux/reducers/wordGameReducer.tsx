@@ -6,7 +6,6 @@ export interface IWordGameWord {
 export interface IWordGameLevel {
     headerText: string;
     bodyText: [string, string];
-    currentSelectedWord: IWordGameWord;
     image: any;
     answerImage: any;
     words: IWordGameWord[]
@@ -14,6 +13,7 @@ export interface IWordGameLevel {
 
 export interface IWordGameReducer {
     textGameLevel: IWordGameLevel;
+    currentSelectedWord: IWordGameWord;
     showAnswer: boolean;
     score: any;
     wordSelected: boolean
@@ -22,7 +22,6 @@ export interface IWordGameReducer {
 const initWordGameLevel: IWordGameLevel = {
     headerText: "Juliana is having a COOL thought about doing homeworkd",
     bodyText: ["I", "homework!"],
-    currentSelectedWord: { word: "", correct: false },
     image: require("../../images/studyPre.png"),
     answerImage: require("../../images/studyCool.png"),
     words: [
@@ -47,6 +46,7 @@ const initWordGameLevel: IWordGameLevel = {
 
 const initState: IWordGameReducer = {
     textGameLevel: initWordGameLevel,
+    currentSelectedWord: { word: "", correct: false },
     score: 0,
     wordSelected: false,
     showAnswer: false
@@ -54,21 +54,21 @@ const initState: IWordGameReducer = {
 
 export const wordGameReducer = (state: IWordGameReducer = initState, action) => {
     switch (action.type) {
-        case "TEXTGAME_SELECT_WORD":
+        case "WORDGAME_SELECT_WORD":
             return {
                 ...state,
                 wordSelected: true,
+                currentSelectedWord: action.payload.word,
                 textGameLevel: {
                     ...state.textGameLevel,
-                    currentSelectedWord: action.payload.word
                 }
             }
-        case "TEXTGAME_SUBMIT_WORD":
+        case "WORDGAME_SUBMIT_WORD":
             return {
                 ...state,
                 showAnswer: true
             }
-        case "TEXTGAME_NEW_LEVEL":
+        case "WORDGAME_NEW_LEVEL":
             return {
                 ...initState,
                 textGameLevel: action.payload.textGameLevel

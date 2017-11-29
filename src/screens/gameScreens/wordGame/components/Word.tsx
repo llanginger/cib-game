@@ -56,7 +56,7 @@ const _Word = (props: IWordProps) => {
         <TouchableOpacity
             style={styles.container}
             onPress={() => dispatch({
-                type: "TEXTGAME_SELECT_WORD",
+                type: "WORDGAME_SELECT_WORD",
                 payload: {
                     word
                 }
@@ -75,7 +75,7 @@ const _Word = (props: IWordProps) => {
 const mapStateToProps = (state: IReducers) => {
     return {
         showAnswer: state.wordGameReducer.showAnswer,
-        currentlySelectedWord: state.wordGameReducer.textGameLevel.currentSelectedWord
+        currentlySelectedWord: state.wordGameReducer.currentSelectedWord
     }
 }
 

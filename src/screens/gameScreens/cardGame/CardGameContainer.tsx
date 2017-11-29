@@ -18,7 +18,7 @@ import { ICardGameCard } from "../../../redux/reducers/index"
 import { DuoCard } from "../components/imageCard/ImageCard"
 import { ScoreContainer } from "../../../components/score/ScoreContainer"
 import { DuoCardHeaderText } from "./components/CardHeaderText"
-import { DuoCardButton } from "./components/CardButton"
+import { SubmitButton } from "../components/SubmitButton"
 import { getDuoCards } from "./components/cardLevels"
 
 import { cardGameSubmitWord, cardGameNewLevel } from "../../../redux/actions/index"
@@ -33,7 +33,7 @@ interface IDuoGameCardProps {
     cardSelected: boolean
 }
 
-const _DuoCardContainer = (props: IDuoGameCardProps) => {
+const _CardGameContainer = (props: IDuoGameCardProps) => {
     console.log("Duo imageCard containe props: ", props)
     const { level, dispatch } = props
     const { headerText, cards } = level
@@ -42,7 +42,7 @@ const _DuoCardContainer = (props: IDuoGameCardProps) => {
     const chooseButton = () => {
         if (!props.showAnswer) {
             return (
-                <DuoCardButton
+                <SubmitButton
                     active={props.cardSelected}
                     activeText="Check!"
                     inactiveText="Pick a card"
@@ -51,7 +51,7 @@ const _DuoCardContainer = (props: IDuoGameCardProps) => {
             )
         } else {
             return (
-                <DuoCardButton
+                <SubmitButton
                     active={true}
                     activeText="Next puzzle!"
                     dispatchAction={cardGameNewLevel(getDuoCards(), "card")}
@@ -104,11 +104,12 @@ const mapStateToProps = (state: IReducers) => {
     }
 }
 
-export const DuoCardContainer = connect(mapStateToProps)(_DuoCardContainer)
+export const CardGameContainer = connect(mapStateToProps)(_CardGameContainer)
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: 20,
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "column",

@@ -15,6 +15,8 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../../../redux/store";
 
+import { WordFillBlank } from "./WordFillBlank"
+
 interface IHeaderTextProps {
     text: string
 }
@@ -23,6 +25,7 @@ export const HeaderText = (props: IHeaderTextProps) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{props.text}</Text>
+            <WordFillBlank correct={false} />
         </View>
 
     )
@@ -31,6 +34,7 @@ export const HeaderText = (props: IHeaderTextProps) => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "white",
+        marginHorizontal: 15,
         padding: 15,
         borderRadius: 15,
         shadowColor: "#888",
