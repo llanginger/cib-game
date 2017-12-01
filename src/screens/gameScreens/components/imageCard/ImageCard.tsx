@@ -22,6 +22,7 @@ import { IReducers } from "../../../../redux/store";
 import { ImageBackground } from "./ImageCardBackground"
 
 interface IDuoCardProps {
+    disabled?: boolean;
     selected: boolean;
     id: any;
     correctAnswer: boolean;
@@ -36,7 +37,7 @@ interface IDuoCardProps {
 
 const circleDiameter: number = 25
 
-export class DuoCard extends Component<IDuoCardProps, any> {
+export class ImageCard extends Component<IDuoCardProps, any> {
 
     private springValue: Animated.Value
 
@@ -98,6 +99,8 @@ export class DuoCard extends Component<IDuoCardProps, any> {
     }
 
     render() {
+
+        const { disabled = false } = this.props
         const bounceScale = this.springValue.interpolate({
             inputRange: [0, 0.5, 1],
             outputRange: [1, 0.99, 1]
@@ -117,7 +120,10 @@ export class DuoCard extends Component<IDuoCardProps, any> {
         ]
 
         return (
-            <TouchableWithoutFeedback onPress={this._bounce}>
+            <TouchableWithoutFeedback
+                onPress={this._bounce}
+                disabled={disabled}
+            >
                 <Animated.View
                     style={cardStyles}
                 >

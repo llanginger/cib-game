@@ -1,3 +1,3 @@
 export * from "./scoreActions";
-export * from "./textGameActions";
+export * from "./wordGameActions";
 export * from "./cardGameActions";

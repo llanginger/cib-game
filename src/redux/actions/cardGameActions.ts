@@ -15,8 +15,11 @@ export const cardGameNewLevel: (level: ICardGameLevel, gameType: "word" | "card"
     }
 }
 
-export const cardGameSubmitWord = () => {
+export const cardGameSubmitWord: (correct: boolean) => IPayloadAction<{ correct: boolean }> = (correct: boolean) => {
     return {
-        type: "CARDGAME_SHOW_ANSWER"
+        type: "CARDGAME_SHOW_ANSWER",
+        payload: {
+            correct
+        }
     }
 }

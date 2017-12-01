@@ -45,6 +45,18 @@ export const scoreReducer = (state: IScoreReducer = initState, action: any) => {
                     hotScore: state.hotScore += 1
                 }
             }
+        case "CARDGAME_SHOW_ANSWER":
+            if (action.payload.correct) {
+                return {
+                    ...state,
+                    coolScore: state.coolScore += 1
+                }
+            } else {
+                return {
+                    ...state,
+                    hotScore: state.hotScore += 1
+                }
+            }
         default:
             return state;
     }

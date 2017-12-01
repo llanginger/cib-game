@@ -21,8 +21,8 @@ import { WordFillBlank } from "./components/WordFillBlank"
 import { SubmitButton } from "../components/SubmitButton"
 
 import { getTextGameLevel } from "./components/wordLevels"
-import { DuoCard } from "../components/imageCard/ImageCard"
-import { HeaderText } from "./components/WordHeaderText"
+import { ImageCard } from "../components/imageCard/ImageCard"
+import { HeaderText } from "./components/WordGameText"
 import { ScoreContainer } from "../../../components/score/ScoreContainer"
 
 import { wordGameNewLevel, wordGameSubmitWord } from "../../../redux/actions/index"
@@ -63,7 +63,7 @@ export const _WordGameContainer = (props: IDuoTextGameContainerProps) => {
     return (
         <View style={styles.container}>
             <ScoreContainer containerProps={{ alignSelf: "flex-end" }} />
-            <DuoCard
+            <ImageCard
                 image={props.showAnswer ? props.textGameLevel.answerImage : props.textGameLevel.image}
                 id={1}
                 correctAnswer={true}

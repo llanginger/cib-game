@@ -41,12 +41,15 @@ const _WordFillBlank = (props: IWordPuzzleContainerProps) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>
+                "
                 {props.bodyText[0]} <Text style={
                     [
                         styles.underlineText,
                         wordColor()
                     ]
-                }>{word.length > 0 ? word : "_____"}</Text> {props.bodyText[1]}
+                }>
+                    {word.length > 0 ? word : "_____"}</Text> {props.bodyText[1]}
+                "
             </Text>
         </View>
     )

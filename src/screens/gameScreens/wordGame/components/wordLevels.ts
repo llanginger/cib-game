@@ -47,7 +47,7 @@ const textGameLevels: IWordGameLevel[] = [
         ]
     },
     {
-        headerText: "Juliana is having a COOL thought about doing homeworkd",
+        headerText: "Juliana is having a COOL thought about doing homework, what is she thinking?",
         bodyText: ["I", "homework!"],
         image: require("../../../../images/studyPre.png"),
         answerImage: require("../../../../images/studyCool.png"),
@@ -71,7 +71,7 @@ const textGameLevels: IWordGameLevel[] = [
         ]
     },
     {
-        headerText: "Juliana is having a HOT thought about doing homeworkd",
+        headerText: "Juliana is having a HOT thought about doing homework, what is she thinking?",
         bodyText: ["I", "homework!"],
         image: require("../../../../images/studyPre.png"),
         answerImage: require("../../../../images/studyHot.png"),

@@ -54,6 +54,7 @@ const _Word = (props: IWordProps) => {
 
     return (
         <TouchableOpacity
+            disabled={props.showAnswer}
             style={styles.container}
             onPress={() => dispatch({
                 type: "WORDGAME_SELECT_WORD",

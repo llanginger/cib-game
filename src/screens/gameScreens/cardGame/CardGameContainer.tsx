@@ -15,7 +15,7 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../../redux/store";
 import { ICardGameCard } from "../../../redux/reducers/index"
-import { DuoCard } from "../components/imageCard/ImageCard"
+import { ImageCard } from "../components/imageCard/ImageCard"
 import { ScoreContainer } from "../../../components/score/ScoreContainer"
 import { DuoCardHeaderText } from "./components/CardHeaderText"
 import { SubmitButton } from "../components/SubmitButton"
@@ -39,6 +39,14 @@ const _CardGameContainer = (props: IDuoGameCardProps) => {
     const { headerText, cards } = level
     const arr = [1, 2, 3]
 
+    const currentSelectedCardCorrect: () => boolean = () => {
+        for (const answer of level.cards) {
+            if (answer.correctAnswer && answer.selected) {
+                return true
+            }
+        }
+        return false
+    }
     const chooseButton = () => {
         if (!props.showAnswer) {
             return (
@@ -46,7 +54,7 @@ const _CardGameContainer = (props: IDuoGameCardProps) => {
                     active={props.cardSelected}
                     activeText="Check!"
                     inactiveText="Pick a card"
-                    dispatchAction={cardGameSubmitWord()}
+                    dispatchAction={cardGameSubmitWord(currentSelectedCardCorrect())}
                 />
             )
         } else {
@@ -65,7 +73,8 @@ const _CardGameContainer = (props: IDuoGameCardProps) => {
         const cardsPerRow: number = 2
         return cards.map((card, i) => {
             return (
-                <DuoCard
+                <ImageCard
+                    disabled={props.showAnswer}
                     selected={card.selected}
                     showAnswer={props.showAnswer}
                     correctAnswer={card.correctAnswer}
@@ -85,7 +94,7 @@ const _CardGameContainer = (props: IDuoGameCardProps) => {
             return <View style={styles.subContainer} key={i}>{row}</View>
         })
     }
-
+    console.log("Card game container props: ", props)
     return (
         <View style={styles.container}>
             <ScoreContainer containerProps={{ alignSelf: "flex-end" }} />
@@ -100,7 +109,7 @@ const mapStateToProps = (state: IReducers) => {
     return {
         level: state.cardGameReducer.level,
         cardSelected: state.cardGameReducer.cardSelected,
-        showAnswer: state.cardGameReducer.showAnswer
+        showAnswer: state.cardGameReducer.showAnswer,
     }
 }
 
