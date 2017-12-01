@@ -18,6 +18,7 @@ import { IReducers } from "../../redux/store";
 import { ImageCard } from "./components/imageCard/ImageCard"
 import { CardGameContainer } from "./cardGame/CardGameContainer"
 import { PressBounce } from "../../components/PressBounce"
+import { ScoreContainer } from "../../components/score/ScoreContainer"
 
 // Text game section
 
@@ -63,7 +64,12 @@ class _DuoMainScreen extends Component<ICardGameMainScreenProps, any> {
 
     render() {
         console.log("duo main screen props: ", this.props)
-        return this._showGameType()
+        return (
+            <View style={styles.container}>
+                <ScoreContainer containerProps={{ alignSelf: "flex-end" }} />
+                {this._showGameType()}
+            </View>
+        )
     }
 }
 
@@ -79,9 +85,7 @@ export const DuoMainScreen = connect(mapStateToProps)(_DuoMainScreen)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
+        backgroundColor: "#daf6fa"
     },
     subContainer: {
         flexDirection: "row",

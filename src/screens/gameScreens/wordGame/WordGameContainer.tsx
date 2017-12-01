@@ -56,14 +56,13 @@ export const _WordGameContainer = (props: IDuoTextGameContainerProps) => {
                 <SubmitButton
                     active={true}
                     activeText="Next puzzle!"
-                    dispatchAction={wordGameNewLevel(getTextGameLevel(seenLevels), "word")}
+                    dispatchAction={wordGameNewLevel(getTextGameLevel(seenLevels), "card")}
                 />
             )
         }
     }
     return (
         <View style={styles.container}>
-            <ScoreContainer containerProps={{ alignSelf: "flex-end" }} />
             <ImageCard
                 image={props.showAnswer ? props.textGameLevel.answerImage : props.textGameLevel.image}
                 id={1}

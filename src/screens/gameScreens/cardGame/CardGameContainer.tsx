@@ -98,7 +98,7 @@ const _CardGameContainer = (props: IDuoGameCardProps) => {
     console.log("Card game container props: ", props)
     return (
         <View style={styles.container}>
-            <ScoreContainer containerProps={{ alignSelf: "flex-end" }} />
+
             <DuoCardHeaderText text={headerText} />
             {mapDuoCards()}
             {chooseButton()}
