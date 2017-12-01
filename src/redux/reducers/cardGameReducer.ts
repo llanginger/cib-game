@@ -7,9 +7,11 @@ export interface ICardGameCard {
 
 export interface ICardGameLevel {
     headerText: string;
+    id: number;
     cards: ICardGameCard[]
 }
 export interface ICardGameReducer {
+    seenLevels: number[]
     level: ICardGameLevel;
     cardSelected: boolean;
     showAnswer: boolean
@@ -44,7 +46,9 @@ const initCards: ICardGameCard[] = [
 
 
 const initState: ICardGameReducer = {
+    seenLevels: [],
     level: {
+        id: 4,
         headerText: "Choose the picture of a 'Hot' thought",
         cards: initCards
     },
@@ -82,14 +86,17 @@ export const cardGameReducer = (state: ICardGameReducer = initState, action: any
         case "CARDGAME_SHOW_ANSWER":
             return {
                 ...state,
-                showAnswer: true
+                seenLevels: [...state.seenLevels, state.level.id],
+                showAnswer: true,
             }
 
         case "CARDGAME_NEW_LEVEL":
         case "_DUO_CONFIRM_SELECTION":
             return {
-                ...initState,
-                level: action.payload.level
+                ...state,
+                level: action.payload.level,
+                showAnswer: false,
+                cardSelected: false
             }
         default: return state
     }

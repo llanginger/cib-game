@@ -3,50 +3,7 @@ import * as _ from "lodash"
 
 const textGameLevels: IWordGameLevel[] = [
     {
-        headerText: "Sally got caught out in the rain",
-        bodyText: ["It's raining, I am wet -", ""],
-        image: require("../../../../images/rainPre.png"),
-        answerImage: require("../../../../images/rainCool.png"),
-        words: [
-            {
-                word: "this is the worst",
-                correct: false
-            },
-            {
-                word: "I hate the rain",
-                correct: false,
-            },
-            {
-                word: "it's ok, it's just water",
-                correct: true
-            }
-        ]
-    },
-    {
-        headerText: "Frank dropped his icecream, how should he respond?",
-        bodyText: ["It is", "that this happened"],
-        image: require("../../../../images/icecreamHot.png"),
-        answerImage: require("../../../../images/icecreamCool.png"),
-        words: [
-            {
-                word: "awful",
-                correct: false
-            },
-            {
-                word: "bad",
-                correct: false
-            },
-            {
-                word: "fine",
-                correct: true
-            },
-            {
-                word: "unfair",
-                correct: false
-            }
-        ]
-    },
-    {
+        id: 0,
         headerText: "Juliana is having a COOL thought about doing homework, what is she thinking?",
         bodyText: ["I", "homework!"],
         image: require("../../../../images/studyPre.png"),
@@ -71,6 +28,53 @@ const textGameLevels: IWordGameLevel[] = [
         ]
     },
     {
+        id: 1,
+        headerText: "Sally got caught out in the rain",
+        bodyText: ["It's raining, I am wet -", ""],
+        image: require("../../../../images/rainPre.png"),
+        answerImage: require("../../../../images/rainCool.png"),
+        words: [
+            {
+                word: "this is the worst",
+                correct: false
+            },
+            {
+                word: "I hate the rain",
+                correct: false,
+            },
+            {
+                word: "it's ok, it's just water",
+                correct: true
+            }
+        ]
+    },
+    {
+        id: 2,
+        headerText: "Frank dropped his icecream, how should he respond?",
+        bodyText: ["It is", "that this happened"],
+        image: require("../../../../images/icecreamHot.png"),
+        answerImage: require("../../../../images/icecreamCool.png"),
+        words: [
+            {
+                word: "awful",
+                correct: false
+            },
+            {
+                word: "bad",
+                correct: false
+            },
+            {
+                word: "fine",
+                correct: true
+            },
+            {
+                word: "unfair",
+                correct: false
+            }
+        ]
+    },
+    {
+        id: 3,
         headerText: "Juliana is having a HOT thought about doing homework, what is she thinking?",
         bodyText: ["I", "homework!"],
         image: require("../../../../images/studyPre.png"),
@@ -96,7 +100,18 @@ const textGameLevels: IWordGameLevel[] = [
     }
 ]
 
-export const getTextGameLevel: () => IWordGameLevel = () => {
-    const random = _.sample(textGameLevels)
-    return random
+export const getTextGameLevel: (seenLevels: number[]) => IWordGameLevel = (seenLevels: number[]) => {
+
+    const filteredLevels = textGameLevels.filter(level => {
+        return seenLevels.indexOf(level.id) === -1
+    })
+    const sample = () => {
+        if (filteredLevels.length > 0) {
+            return _.sample(filteredLevels)
+        } else {
+            return textGameLevels[0]
+        }
+    }
+
+    return sample()
 }

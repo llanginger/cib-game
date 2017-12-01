@@ -19,7 +19,7 @@ import { ImageCard } from "../components/imageCard/ImageCard"
 import { ScoreContainer } from "../../../components/score/ScoreContainer"
 import { DuoCardHeaderText } from "./components/CardHeaderText"
 import { SubmitButton } from "../components/SubmitButton"
-import { getDuoCards } from "./components/cardLevels"
+import { getCardGameLevel } from "./components/cardLevels"
 
 import { cardGameSubmitWord, cardGameNewLevel } from "../../../redux/actions/index"
 
@@ -28,6 +28,7 @@ interface IDuoGameCardProps {
         headerText: string;
         cards: ICardGameCard[]
     }
+    seenLevels: number[]
     showAnswer: boolean;
     dispatch?: any
     cardSelected: boolean
@@ -35,7 +36,7 @@ interface IDuoGameCardProps {
 
 const _CardGameContainer = (props: IDuoGameCardProps) => {
     console.log("Duo imageCard containe props: ", props)
-    const { level, dispatch } = props
+    const { level, dispatch, seenLevels } = props
     const { headerText, cards } = level
     const arr = [1, 2, 3]
 
@@ -62,7 +63,7 @@ const _CardGameContainer = (props: IDuoGameCardProps) => {
                 <SubmitButton
                     active={true}
                     activeText="Next puzzle!"
-                    dispatchAction={cardGameNewLevel(getDuoCards(), "card")}
+                    dispatchAction={cardGameNewLevel(getCardGameLevel(seenLevels), "word")}
                 />
             )
         }
@@ -110,6 +111,7 @@ const mapStateToProps = (state: IReducers) => {
         level: state.cardGameReducer.level,
         cardSelected: state.cardGameReducer.cardSelected,
         showAnswer: state.cardGameReducer.showAnswer,
+        seenLevels: state.cardGameReducer.seenLevels
     }
 }
 

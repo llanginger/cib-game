@@ -4,6 +4,7 @@ export interface IWordGameWord {
     word: string, correct: boolean
 }
 export interface IWordGameLevel {
+    id: number;
     headerText: string;
     bodyText: [string, string];
     image: any;
@@ -12,6 +13,7 @@ export interface IWordGameLevel {
 }
 
 export interface IWordGameReducer {
+    seenLevels: number[]
     textGameLevel: IWordGameLevel;
     currentSelectedWord: IWordGameWord;
     showAnswer: boolean;
@@ -20,6 +22,7 @@ export interface IWordGameReducer {
 }
 
 const initWordGameLevel: IWordGameLevel = {
+    id: 0,
     headerText: "Juliana is having a COOL thought about doing homework, what is she thinking?",
     bodyText: ["I", "homework!"],
     image: require("../../images/studyPre.png"),
@@ -45,6 +48,7 @@ const initWordGameLevel: IWordGameLevel = {
 }
 
 const initState: IWordGameReducer = {
+    seenLevels: [],
     textGameLevel: initWordGameLevel,
     currentSelectedWord: { word: "", correct: false },
     score: 0,
@@ -66,11 +70,16 @@ export const wordGameReducer = (state: IWordGameReducer = initState, action) => 
         case "WORDGAME_SUBMIT_WORD":
             return {
                 ...state,
+                seenLevels: [...state.seenLevels, state.textGameLevel.id],
                 showAnswer: true
             }
         case "WORDGAME_NEW_LEVEL":
             return {
-                ...initState,
+                ...state,
+                currentSelectedWord: { word: "", correct: false },
+                score: 0,
+                wordSelected: false,
+                showAnswer: false,
                 textGameLevel: action.payload.textGameLevel
             }
         default: return state

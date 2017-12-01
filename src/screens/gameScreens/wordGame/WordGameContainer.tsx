@@ -32,12 +32,13 @@ interface IDuoTextGameContainerProps {
     textGameLevel: IWordGameLevel;
     currentSelectedWord: IWordGameWord
     wordSelected: boolean;
+    seenLevels: number[]
     showAnswer: boolean
 }
 
 export const _WordGameContainer = (props: IDuoTextGameContainerProps) => {
 
-    const { textGameLevel, wordSelected, showAnswer, currentSelectedWord } = props
+    const { textGameLevel, wordSelected, showAnswer, currentSelectedWord, seenLevels } = props
 
 
     const chooseButton = () => {
@@ -55,7 +56,7 @@ export const _WordGameContainer = (props: IDuoTextGameContainerProps) => {
                 <SubmitButton
                     active={true}
                     activeText="Next puzzle!"
-                    dispatchAction={wordGameNewLevel(getTextGameLevel(), "card")}
+                    dispatchAction={wordGameNewLevel(getTextGameLevel(seenLevels), "word")}
                 />
             )
         }
@@ -85,6 +86,7 @@ const mapStateToProps = (state: IReducers) => {
         currentSelectedWord: state.wordGameReducer.currentSelectedWord,
         wordSelected: state.wordGameReducer.wordSelected,
         showAnswer: state.wordGameReducer.showAnswer,
+        seenLevels: state.wordGameReducer.seenLevels
     }
 }
 

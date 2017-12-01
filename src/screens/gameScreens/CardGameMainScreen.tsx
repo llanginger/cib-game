@@ -15,7 +15,7 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
 
-import { DuoCard } from "./components/imageCard/ImageCard"
+import { ImageCard } from "./components/imageCard/ImageCard"
 import { CardGameContainer } from "./cardGame/CardGameContainer"
 import { PressBounce } from "../../components/PressBounce"
 
