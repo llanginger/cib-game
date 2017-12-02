@@ -22,7 +22,7 @@ import { SubmitButton } from "../components/SubmitButton"
 
 import { getTextGameLevel } from "./components/wordLevels"
 import { ImageCard } from "../components/imageCard/ImageCard"
-import { HeaderText } from "./components/WordGameText"
+import { WordGameText } from "./components/WordGameText"
 import { ScoreContainer } from "../../../components/score/ScoreContainer"
 
 import { wordGameNewLevel, wordGameSubmitWord } from "../../../redux/actions/index"
@@ -72,7 +72,7 @@ export const _WordGameContainer = (props: IDuoTextGameContainerProps) => {
                 containerProps={{ width: "60%" }}
                 hideRadio
             />
-            <HeaderText text={props.textGameLevel.headerText} />
+            <WordGameText text={props.textGameLevel.headerText} />
             <WordContainer />
             {chooseButton()}
         </View>

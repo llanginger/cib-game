@@ -23,7 +23,7 @@ export interface IWordGameReducer {
 
 const initWordGameLevel: IWordGameLevel = {
     id: 0,
-    headerText: "Juliana is having a COOL thought about doing homework, what is she thinking?",
+    headerText: "Juliana is happy (COOL) that she is doing well with her homework, what is she thinking?, what is she thinking?",
     bodyText: ["I", "homework!"],
     image: require("../../images/studyPre.png"),
     answerImage: require("../../images/studyCool.png"),

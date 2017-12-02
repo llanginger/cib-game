@@ -4,7 +4,7 @@ import * as _ from "lodash"
 const textGameLevels: IWordGameLevel[] = [
     {
         id: 0,
-        headerText: "Juliana is having a COOL thought about doing homework, what is she thinking?",
+        headerText: "Juliana is happy (COOL) that she is doing well with her homework, what is she thinking?",
         bodyText: ["I", "homework!"],
         image: require("../../../../images/studyPre.png"),
         answerImage: require("../../../../images/studyCool.png"),
@@ -75,7 +75,7 @@ const textGameLevels: IWordGameLevel[] = [
     },
     {
         id: 3,
-        headerText: "Juliana is having a HOT thought about doing homework, what is she thinking?",
+        headerText: "Juliana is unhappy (HOT) about doing homework, what is she thinking?",
         bodyText: ["I", "homework!"],
         image: require("../../../../images/studyPre.png"),
         answerImage: require("../../../../images/studyHot.png"),

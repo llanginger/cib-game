@@ -68,17 +68,6 @@ export const WordFillBlank = connect(mapStateToProps)(_WordFillBlank)
 const styles = StyleSheet.create({
     container: {
         marginTop: 10
-        // width: "80%",
-        // backgroundColor: "white",
-        // padding: 15,
-        // alignItems: "center",
-        // justifyContent: "center",
-        // borderRadius: 15,
-
-        // shadowColor: "#888",
-        // shadowOpacity: 0.5,
-        // shadowOffset: { width: 5, height: 5 }
-        // marginBottom: 30
     },
     text: {
         fontSize: 16,

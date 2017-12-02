@@ -54,18 +54,5 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         flexDirection: "row",
         alignItems: "center",
-    },
-    text: {
-        fontSize: 16,
-    },
-    wordStyle: {
-        padding: 5,
-        fontSize: 20,
-        margin: 5,
-        backgroundColor: "purple",
-        color: "white",
-        borderRadius: 5,
-        overflow: "hidden"
     }
-
 })

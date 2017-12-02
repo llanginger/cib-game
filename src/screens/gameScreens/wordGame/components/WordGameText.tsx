@@ -21,7 +21,7 @@ interface IHeaderTextProps {
     text: string
 }
 
-export const HeaderText = (props: IHeaderTextProps) => {
+export const WordGameText = (props: IHeaderTextProps) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{props.text}</Text>
