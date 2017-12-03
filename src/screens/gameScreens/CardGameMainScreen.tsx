@@ -19,7 +19,7 @@ import { ImageCard } from "./components/imageCard/ImageCard"
 import { CardGameContainer } from "./cardGame/CardGameContainer"
 import { PressBounce } from "../../components/PressBounce"
 import { ScoreContainer } from "../../components/score/ScoreContainer"
-
+import DeviceInfo from 'react-native-device-info'
 // Text game section
 
 import { WordGameContainer } from "./wordGame/WordGameContainer"
@@ -27,9 +27,10 @@ import { WordGameContainer } from "./wordGame/WordGameContainer"
 interface ICardGameMainScreenProps {
     navigator?: any;
     gameType: "word" | "card"
+    dispatch?: any
 }
 
-class _DuoMainScreen extends Component<ICardGameMainScreenProps, any> {
+class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
 
     constructor(props) {
         super(props);
@@ -49,6 +50,10 @@ class _DuoMainScreen extends Component<ICardGameMainScreenProps, any> {
                 });
             }
         }
+    }
+
+    componentWillMount() {
+        this.props.dispatch({ type: "SET_DEVICE_TYPE", payload: { deviceType: DeviceInfo.getModel() } })
     }
 
     _showGameType() {
@@ -79,7 +84,7 @@ const mapStateToProps = (state: IReducers) => {
     }
 }
 
-export const DuoMainScreen = connect(mapStateToProps)(_DuoMainScreen)
+export const HomeScreen = connect(mapStateToProps)(_HomeScreen)
 
 
 const styles = StyleSheet.create({

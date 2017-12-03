@@ -14,7 +14,7 @@ const textGameLevels: IWordGameLevel[] = [
                 correct: false
             },
             {
-                word: "love",
+                word: "love doing",
                 correct: true
             },
             {
@@ -29,28 +29,28 @@ const textGameLevels: IWordGameLevel[] = [
     },
     {
         id: 1,
-        headerText: "Sally got caught out in the rain",
-        bodyText: ["It's raining, I am wet -", ""],
+        headerText: "Sally got caught out in the rain without an umbrella, what is she thinking?",
+        bodyText: ["It's raining -", ""],
         image: require("../../../../images/rainPre.png"),
         answerImage: require("../../../../images/rainCool.png"),
         words: [
             {
-                word: "this is the worst",
+                word: "this is the worst day ever",
                 correct: false
             },
             {
-                word: "I hate the rain",
+                word: "I hate the rain, this sucks",
                 correct: false,
             },
             {
-                word: "it's ok, it's just water",
+                word: "it's ok, I'll dry myself when I arrive",
                 correct: true
             }
         ]
     },
     {
         id: 2,
-        headerText: "Frank dropped his icecream, how should he respond?",
+        headerText: "Frank dropped his icecream, how should he respond with a COOL thought?",
         bodyText: ["It is", "that this happened"],
         image: require("../../../../images/icecreamHot.png"),
         answerImage: require("../../../../images/icecreamCool.png"),
@@ -75,7 +75,7 @@ const textGameLevels: IWordGameLevel[] = [
     },
     {
         id: 3,
-        headerText: "Juliana is unhappy (HOT) about doing homework, what is she thinking?",
+        headerText: "Juliana is unhappy (HOT) that she has to do homework, what is she thinking?",
         bodyText: ["I", "homework!"],
         image: require("../../../../images/studyPre.png"),
         answerImage: require("../../../../images/studyHot.png"),

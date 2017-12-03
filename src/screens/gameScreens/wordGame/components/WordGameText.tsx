@@ -19,17 +19,34 @@ import { WordFillBlank } from "./WordFillBlank"
 
 interface IHeaderTextProps {
     text: string
+    deviceType: string
 }
 
-export const WordGameText = (props: IHeaderTextProps) => {
+export const _WordGameText = (props: IHeaderTextProps) => {
+
+    const iPadStyles = () => {
+        return props.deviceType === "iPad" ? {
+            fontSize: 24
+        } : {}
+    }
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{props.text}</Text>
-            <WordFillBlank correct={false} />
+            <Text style={[styles.text, { ...iPadStyles() }]}>{props.text}</Text>
+            <WordFillBlank />
         </View>
 
     )
 }
+
+const mapStateToProps = (state: IReducers) => {
+    return {
+        deviceType: state.deviceTypeReducer.deviceType
+    }
+}
+
+export const WordGameText = connect(mapStateToProps)(_WordGameText)
+
 
 const styles = StyleSheet.create({
     container: {

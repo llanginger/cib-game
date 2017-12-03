@@ -4,7 +4,7 @@ import * as _ from "lodash"
 const dummyCards: ICardGameLevel[] = [
     {
         id: 0,
-        headerText: "In which picture is Jane COOL?",
+        headerText: "In which picture is Jane thinking COOL?",
         cards: [
             {
                 correctAnswer: false,
@@ -34,7 +34,7 @@ const dummyCards: ICardGameLevel[] = [
     },
     {
         id: 1,
-        headerText: "Which face is showing a HOT emotion?",
+        headerText: "Which face is showing a HOT thought?",
         cards: [
             {
                 correctAnswer: true,

@@ -346,7 +346,7 @@ const mapDispatchToProps = {
     updateScore
 };
 
-export const ChatBot = connect(mapStateToProps, mapDispatchToProps)(_ChatBot);
+export const ChatBotGame = connect(mapStateToProps, mapDispatchToProps)(_ChatBot);
 
 const styles = StyleSheet.create({
     container: {

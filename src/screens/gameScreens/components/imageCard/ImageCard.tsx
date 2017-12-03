@@ -20,8 +20,12 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../../../redux/store";
 import { ImageBackground } from "./ImageCardBackground"
+import DeviceInfo from 'react-native-device-info'
 
-interface IDuoCardProps {
+
+
+
+interface IImageCardProps {
     disabled?: boolean;
     selected: boolean;
     id: any;
@@ -32,17 +36,25 @@ interface IDuoCardProps {
     imageProps?: any;
     resizeMode?: string
     hideRadio?: boolean;
-    showAnswer?: boolean
+    showAnswer?: boolean;
+    gameType: "card" | "word"
+}
+
+interface IImageCardState {
+    deviceType: string
 }
 
 const circleDiameter: number = 25
 
-export class ImageCard extends Component<IDuoCardProps, any> {
+export class ImageCard extends Component<IImageCardProps, IImageCardState> {
 
     private springValue: Animated.Value
 
     constructor(props) {
         super(props)
+        this.state = {
+            deviceType: DeviceInfo.getModel()
+        }
         this.springValue = new Animated.Value(0)
         this._bounce = this._bounce.bind(this)
         this._renderRadio = this._renderRadio.bind(this)
@@ -50,7 +62,12 @@ export class ImageCard extends Component<IDuoCardProps, any> {
         this._getShadowOpacity = this._getShadowOpacity.bind(this)
     }
 
+    componentDidMount() {
+        console.log("Image card state: ", this.state)
+    }
+
     _bounce() {
+        console.log("Device: ", DeviceInfo.getModel())
         if (this.props.selected) {
             return
         }
@@ -98,6 +115,7 @@ export class ImageCard extends Component<IDuoCardProps, any> {
         )
     }
 
+
     render() {
 
         const { disabled = false } = this.props
@@ -112,12 +130,43 @@ export class ImageCard extends Component<IDuoCardProps, any> {
             ...this.props.imageProps
         }]
 
-        const cardStyles = [styles.card, {
-            ...this.props.containerProps,
-            ...this._makeBorder(),
-            transform: [{ scale: bounceScale }],
+        const iPhoneStyles = () => {
+            return [
+                styles.card, {
+                    ...this.props.containerProps,
+                    ...this._makeBorder(),
+                    transform: [{ scale: bounceScale }],
+                }
+            ]
         }
-        ]
+
+        const iPadStyles = () => {
+            if (this.props.gameType === "word") {
+                return [
+                    styles.iPadWordCard, {
+                        ...this.props.containerProps,
+                        ...this._makeBorder(),
+                        transform: [{ scale: bounceScale }],
+                    }
+                ]
+            } else {
+                return [
+                    styles.iPadCardCard, {
+                        ...this.props.containerProps,
+                        ...this._makeBorder(),
+                        transform: [{ scale: bounceScale }],
+                    }
+                ]
+            }
+        }
+
+        const cardStyles = () => {
+            if (this.state.deviceType === "iPad") {
+                return iPadStyles()
+            } else {
+                return iPhoneStyles()
+            }
+        }
 
         return (
             <TouchableWithoutFeedback
@@ -125,7 +174,7 @@ export class ImageCard extends Component<IDuoCardProps, any> {
                 disabled={disabled}
             >
                 <Animated.View
-                    style={cardStyles}
+                    style={cardStyles()}
                 >
                     <ImageBackground
                         resizeMode={this.props.resizeMode || "cover"}
@@ -148,6 +197,22 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         marginHorizontal: "2.5%",
         height: 200,
+        borderColor: "white",
+        borderRadius: 15,
+    },
+    iPadWordCard: {
+        width: "40%",
+        borderWidth: 0,
+        marginHorizontal: "2.5%",
+        height: 400,
+        borderColor: "white",
+        borderRadius: 15,
+    },
+    iPadCardCard: {
+        width: "40%",
+        borderWidth: 0,
+        marginHorizontal: "2.5%",
+        height: 350,
         borderColor: "white",
         borderRadius: 15,
     },

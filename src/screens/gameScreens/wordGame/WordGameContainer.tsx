@@ -42,6 +42,7 @@ export const _WordGameContainer = (props: IDuoTextGameContainerProps) => {
 
 
     const chooseButton = () => {
+        console.log("Choose button called")
         if (!props.showAnswer) {
             return (
                 <SubmitButton
@@ -55,7 +56,8 @@ export const _WordGameContainer = (props: IDuoTextGameContainerProps) => {
             return (
                 <SubmitButton
                     active={true}
-                    activeText="Next puzzle!"
+                    activeText="Next Puzzle!"
+                    inactiveText=""
                     dispatchAction={wordGameNewLevel(getTextGameLevel(seenLevels), "card")}
                 />
             )
@@ -64,6 +66,7 @@ export const _WordGameContainer = (props: IDuoTextGameContainerProps) => {
     return (
         <View style={styles.container}>
             <ImageCard
+                gameType="word"
                 image={props.showAnswer ? props.textGameLevel.answerImage : props.textGameLevel.image}
                 id={1}
                 correctAnswer={true}

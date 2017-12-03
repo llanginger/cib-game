@@ -15,17 +15,20 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../../../redux/store";
 import { IWordGameWord } from "../../../../redux/reducers/index"
+import DeviceInfo from 'react-native-device-info'
 
 interface IWordProps {
     dispatch?: any;
     word: IWordGameWord;
     showAnswer: boolean;
+    deviceType: string
     currentlySelectedWord: IWordGameWord
 }
 
 const _Word = (props: IWordProps) => {
 
-    const { word, dispatch, currentlySelectedWord, showAnswer } = props
+
+    const { word, dispatch, currentlySelectedWord, showAnswer, deviceType } = props
 
     const getWordColor = () => {
         if (showAnswer) {
@@ -39,18 +42,21 @@ const _Word = (props: IWordProps) => {
         }
     }
 
-    const selectedStyles: () => {} = () => {
-        if (word.word === currentlySelectedWord.word) {
-            return {
-                fontSize: 20,
-                textDecorationLine: "underline"
-            }
-        } else {
-            return {
-                fontSize: 16
-            }
+
+    const getUnderline: any = () => {
+        return {
+            textDecorationLine: word.word === currentlySelectedWord.word ? "underline" : "none"
         }
     }
+
+    const iPadStyles = () => {
+
+        return props.deviceType === "iPad" ? {
+            margin: 15,
+            fontSize: 24
+        } : {}
+    }
+
 
     return (
         <TouchableOpacity
@@ -64,8 +70,9 @@ const _Word = (props: IWordProps) => {
             })}
         >
             <Text style={[styles.wordStyle, {
-                ...selectedStyles(),
-                ...getWordColor()
+                ...getWordColor(),
+                ...getUnderline(),
+                ...iPadStyles()
             }]} >
                 {word.word}
             </Text>
@@ -76,7 +83,8 @@ const _Word = (props: IWordProps) => {
 const mapStateToProps = (state: IReducers) => {
     return {
         showAnswer: state.wordGameReducer.showAnswer,
-        currentlySelectedWord: state.wordGameReducer.currentSelectedWord
+        currentlySelectedWord: state.wordGameReducer.currentSelectedWord,
+        deviceType: state.deviceTypeReducer.deviceType
     }
 }
 

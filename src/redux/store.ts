@@ -9,7 +9,9 @@ import {
     wordGameReducer,
     IWordGameReducer,
     gameTypeReducer,
-    IGameTypeReducer
+    IGameTypeReducer,
+    deviceTypeReducer,
+    IDeviceTypeReducer
 
 } from "./reducers/index";
 import logger from "redux-logger"
@@ -17,6 +19,7 @@ import logger from "redux-logger"
 export interface IReducers {
     scoreReducer: IScoreReducer;
     userReducer: IUserReducer;
+    deviceTypeReducer: IDeviceTypeReducer;
     cardGameReducer: ICardGameReducer
     wordGameReducer: IWordGameReducer
     gameTypeReducer: IGameTypeReducer
@@ -25,6 +28,7 @@ export interface IReducers {
 const reducers = combineReducers({
     scoreReducer,
     userReducer,
+    deviceTypeReducer,
     cardGameReducer,
     wordGameReducer,
     gameTypeReducer

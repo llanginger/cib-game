@@ -75,6 +75,7 @@ const _CardGameContainer = (props: IDuoGameCardProps) => {
         return cards.map((card, i) => {
             return (
                 <ImageCard
+                    gameType="card"
                     disabled={props.showAnswer}
                     selected={card.selected}
                     showAnswer={props.showAnswer}

@@ -8,7 +8,7 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import { Navigation } from "react-native-navigation";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { ChatBot } from "./screens/gameScreens/chatBotGame/ChatBot";
+import { ChatBotGame } from "./screens/gameScreens/chatBotGame/ChatBot";
 import { CharacterSelect } from "./screens/characterSelect/CharacterSelect";
 import { SkillRecap } from "./screens/skillRecap/SkillRecap";
 import { Menu } from "./screens/menu/Menu";
@@ -17,15 +17,14 @@ import { store, IReducers } from "./redux/store";
 
 // Duo Prototype section
 
-import { DuoMainScreen } from "./screens/gameScreens/CardGameMainScreen"
+import { HomeScreen } from "./screens/gameScreens/CardGameMainScreen"
 import { AnimationTest } from "./screens/AnimationTest"
 
 // Screen section
 
 const registerScreens = () => {
-    Navigation.registerComponent("AnimationTest", () => AnimationTest, store, Provider);
-    Navigation.registerComponent("MainScreen", () => ChatBot, store, Provider);
-    Navigation.registerComponent("DuoMainScreen", () => DuoMainScreen, store, Provider);
+    Navigation.registerComponent("ChatBotScreen", () => ChatBotGame, store, Provider);
+    Navigation.registerComponent("HomeScreen", () => HomeScreen, store, Provider);
     Navigation.registerComponent("Menu", () => Menu, store, Provider);
     Navigation.registerComponent("SkillRecap", () => SkillRecap, store, Provider);
     Navigation.registerComponent(
@@ -40,7 +39,7 @@ registerScreens();
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "DuoMainScreen",
+        screen: "HomeScreen",
         navigatorStyle: {
             navBarTextColor: "red",
             drawUnderNavBar: true,

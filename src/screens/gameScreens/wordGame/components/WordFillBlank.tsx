@@ -20,7 +20,7 @@ interface IWordPuzzleContainerProps {
     currentSelectedWord: IWordGameWord;
     bodyText: [string, string];
     showAnswer: boolean;
-    correct: boolean
+    deviceType: string;
 }
 
 const _WordFillBlank = (props: IWordPuzzleContainerProps) => {
@@ -38,14 +38,29 @@ const _WordFillBlank = (props: IWordPuzzleContainerProps) => {
             }
         }
     }
+
+    const iPadMainTextStyles = () => {
+        return props.deviceType === "iPad" ? {
+            fontSize: 24
+        } : {}
+    }
+
+    const iPadSpanStyles = () => {
+        return props.deviceType === "iPad" ? {
+            fontSize: 30
+        } : {}
+    }
+
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>
+            <Text style={[styles.text, { ...iPadMainTextStyles() }]}>
                 "
                 {props.bodyText[0]} <Text style={
                     [
                         styles.underlineText,
-                        wordColor()
+                        wordColor(),
+                        iPadSpanStyles()
                     ]
                 }>
                     {word.length > 0 ? word : "_____"}</Text> {props.bodyText[1]}
@@ -60,6 +75,7 @@ const mapStateToProps = (state: IReducers) => {
         bodyText: state.wordGameReducer.textGameLevel.bodyText,
         currentSelectedWord: state.wordGameReducer.currentSelectedWord,
         showAnswer: state.wordGameReducer.showAnswer,
+        deviceType: state.deviceTypeReducer.deviceType
     }
 }
 
