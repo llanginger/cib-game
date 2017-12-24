@@ -17,7 +17,7 @@ import { store, IReducers } from "./redux/store";
 
 // Duo Prototype section
 
-import { HomeScreen } from "./screens/gameScreens/CardGameMainScreen"
+import { HomeScreen } from "./screens/gameScreens/GameContainer"
 import { AnimationTest } from "./screens/AnimationTest"
 
 // Screen section

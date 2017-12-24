@@ -1,4 +1,4 @@
-
+import { initWordGameLevel } from "./initLevels"
 
 export interface IWordGameWord {
     word: string, correct: boolean
@@ -21,31 +21,7 @@ export interface IWordGameReducer {
     wordSelected: boolean
 }
 
-const initWordGameLevel: IWordGameLevel = {
-    id: 0,
-    headerText: "Juliana is happy (COOL) that she is doing well with her homework, what is she thinking?",
-    bodyText: ["I", "homework!"],
-    image: require("../../images/studyPre.png"),
-    answerImage: require("../../images/studyCool.png"),
-    words: [
-        {
-            word: "hate",
-            correct: false
-        },
-        {
-            word: "love doing",
-            correct: true
-        },
-        {
-            word: "don't care about",
-            correct: false
-        },
-        {
-            word: "enjoy",
-            correct: true
-        }
-    ]
-}
+
 
 const initState: IWordGameReducer = {
     seenLevels: [],
@@ -74,6 +50,7 @@ export const wordGameReducer = (state: IWordGameReducer = initState, action) => 
                 showAnswer: true
             }
         case "WORDGAME_NEW_LEVEL":
+        case "INIT_APP":
             return {
                 ...state,
                 currentSelectedWord: { word: "", correct: false },

@@ -7,6 +7,7 @@ export const deviceTypeReducer = (state: IDeviceTypeReducer = initState, action:
     switch (action.type) {
 
         case "SET_DEVICE_TYPE":
+        case "INIT_APP":
             return {
                 ...state,
                 deviceType: action.payload.deviceType

@@ -13,11 +13,12 @@ import {
     Platform
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers } from "../../../../redux/store";
+import { IReducers, IColorsReducer } from "../../../../redux/store";
 import { IWordGameWord } from "../../../../redux/reducers/index"
 import DeviceInfo from 'react-native-device-info'
 
 interface IWordProps {
+    colors: IColorsReducer
     dispatch?: any;
     word: IWordGameWord;
     showAnswer: boolean;
@@ -28,14 +29,14 @@ interface IWordProps {
 const _Word = (props: IWordProps) => {
 
 
-    const { word, dispatch, currentlySelectedWord, showAnswer, deviceType } = props
+    const { word, dispatch, currentlySelectedWord, showAnswer, deviceType, colors } = props
 
     const getWordColor = () => {
         if (showAnswer) {
             if (word.correct) {
-                return { color: "green" }
+                return { color: colors.COOL }
             } else {
-                return { color: "orangered" }
+                return { color: colors.HOT }
             }
         } else {
             return { color: "black" }
@@ -84,7 +85,8 @@ const mapStateToProps = (state: IReducers) => {
     return {
         showAnswer: state.wordGameReducer.showAnswer,
         currentlySelectedWord: state.wordGameReducer.currentSelectedWord,
-        deviceType: state.deviceTypeReducer.deviceType
+        deviceType: state.deviceTypeReducer.deviceType,
+        colors: state.colorsReducer
     }
 }
 

@@ -13,17 +13,19 @@ import {
     Platform
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers } from "../../../../redux/store";
+import { IReducers, IColorsReducer } from "../../../../redux/store";
 import { IWordGameWord } from "../../../../redux/reducers/index"
 
 interface IWordPuzzleContainerProps {
     currentSelectedWord: IWordGameWord;
+    colors: IColorsReducer;
     bodyText: [string, string];
     showAnswer: boolean;
     deviceType: string;
 }
 
 const _WordFillBlank = (props: IWordPuzzleContainerProps) => {
+    const { colors } = props
     const { word, correct } = props.currentSelectedWord
     console.log("Current selected word: ", word)
 
@@ -32,9 +34,9 @@ const _WordFillBlank = (props: IWordPuzzleContainerProps) => {
             return { color: "black" }
         } else {
             if (correct) {
-                return { color: "green" }
+                return { color: colors.COOL }
             } else {
-                return { color: "orangered" }
+                return { color: colors.HOT }
             }
         }
     }
@@ -75,7 +77,8 @@ const mapStateToProps = (state: IReducers) => {
         bodyText: state.wordGameReducer.textGameLevel.bodyText,
         currentSelectedWord: state.wordGameReducer.currentSelectedWord,
         showAnswer: state.wordGameReducer.showAnswer,
-        deviceType: state.deviceTypeReducer.deviceType
+        deviceType: state.deviceTypeReducer.deviceType,
+        colors: state.colorsReducer
     }
 }
 

@@ -24,15 +24,21 @@ interface IHeaderTextProps {
 
 export const _WordGameText = (props: IHeaderTextProps) => {
 
-    const iPadStyles = () => {
+    const iPadTextStyles = () => {
         return props.deviceType === "iPad" ? {
             fontSize: 24
         } : {}
     }
+    const iPadContainerStyles = () => {
+        console.log("Device type in word game text: ", props.deviceType)
+        return props.deviceType === "iPad" ? {
+            marginHorizontal: 30
+        } : {}
+    }
 
     return (
-        <View style={styles.container}>
-            <Text style={[styles.text, { ...iPadStyles() }]}>{props.text}</Text>
+        <View style={[styles.container, { ...iPadContainerStyles() }]}>
+            <Text style={[styles.text, { ...iPadTextStyles() }]}>{props.text}</Text>
             <WordFillBlank />
         </View>
 

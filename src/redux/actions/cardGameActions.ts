@@ -1,15 +1,15 @@
 import { IPayloadAction } from "../../interfaces/IPayloadAction"
 import { ICardGameLevel } from "../reducers/index"
 interface ICardGameSubmitWordAction {
-    level: ICardGameLevel;
+    cardGameLevel: ICardGameLevel;
     gameType: "word" | "card"
 }
 
-export const cardGameNewLevel: (level: ICardGameLevel, gameType: "word" | "card") => IPayloadAction<ICardGameSubmitWordAction> = (level: ICardGameLevel, gameType: "word" | "card") => {
+export const cardGameNewLevel: (cardGameLevel: ICardGameLevel, gameType: "word" | "card") => IPayloadAction<ICardGameSubmitWordAction> = (cardGameLevel: ICardGameLevel, gameType: "word" | "card") => {
     return {
         type: "CARDGAME_NEW_LEVEL",
         payload: {
-            level,
+            cardGameLevel,
             gameType
         }
     }

@@ -18,7 +18,7 @@ import {
     Platform
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers } from "../../../../redux/store";
+import { IReducers, IColorsReducer } from "../../../../redux/store";
 import { ImageBackground } from "./ImageCardBackground"
 import DeviceInfo from 'react-native-device-info'
 
@@ -26,6 +26,7 @@ import DeviceInfo from 'react-native-device-info'
 
 
 interface IImageCardProps {
+    colors?: IColorsReducer;
     disabled?: boolean;
     selected: boolean;
     id: any;
@@ -44,9 +45,15 @@ interface IImageCardState {
     deviceType: string
 }
 
+interface IImageCardStateProps {
+    colors: IColorsReducer;
+}
+
+interface IImageCardDispatchProps { }
+
 const circleDiameter: number = 25
 
-export class ImageCard extends Component<IImageCardProps, IImageCardState> {
+class _ImageCard extends Component<IImageCardProps, IImageCardState> {
 
     private springValue: Animated.Value
 
@@ -62,12 +69,7 @@ export class ImageCard extends Component<IImageCardProps, IImageCardState> {
         this._getShadowOpacity = this._getShadowOpacity.bind(this)
     }
 
-    componentDidMount() {
-        console.log("Image card state: ", this.state)
-    }
-
     _bounce() {
-        console.log("Device: ", DeviceInfo.getModel())
         if (this.props.selected) {
             return
         }
@@ -84,16 +86,20 @@ export class ImageCard extends Component<IImageCardProps, IImageCardState> {
     }
 
     _makeBorder() {
-        if (this.props.showAnswer) {
+        const { colors, correctAnswer, selected, showAnswer } = this.props
+
+        if (showAnswer) {
             return {
-                borderColor: this.props.correctAnswer && this.props.selected ? "#4CAF50" : "palevioletred",
+                borderColor: correctAnswer && selected ? colors.COOL : colors.HOT,
                 borderWidth: this.props.selected ? 5 : 0,
             }
         } else return {}
     }
 
     _getShadowOpacity() {
-        if (this.props.showAnswer && this.props.selected) {
+        const { showAnswer, selected } = this.props
+
+        if (showAnswer && selected) {
             return 0
         } else {
             return 0.5
@@ -101,14 +107,16 @@ export class ImageCard extends Component<IImageCardProps, IImageCardState> {
     }
 
     _renderRadio() {
-        if (this.props.hideRadio) {
+        const { hideRadio, selected } = this.props
+
+        if (hideRadio) {
             return null
         }
 
         return (
             <View style={styles.radioContainer}>
                 <View style={styles.radioOuter}>
-                    <View style={[styles.radioInner, { backgroundColor: this.props.selected ? "blue" : "white" }]}>
+                    <View style={[styles.radioInner, { backgroundColor: selected ? "blue" : "white" }]}>
                     </View>
                 </View>
             </View>
@@ -118,7 +126,7 @@ export class ImageCard extends Component<IImageCardProps, IImageCardState> {
 
     render() {
 
-        const { disabled = false } = this.props
+        const { disabled = false, containerProps, imageProps, resizeMode } = this.props
         const bounceScale = this.springValue.interpolate({
             inputRange: [0, 0.5, 1],
             outputRange: [1, 0.99, 1]
@@ -127,13 +135,13 @@ export class ImageCard extends Component<IImageCardProps, IImageCardState> {
         // Extracted merged styles
         const imageStyles = [styles.image, {
             shadowOpacity: this._getShadowOpacity(),
-            ...this.props.imageProps
+            ...imageProps
         }]
 
         const iPhoneStyles = () => {
             return [
                 styles.card, {
-                    ...this.props.containerProps,
+                    ...containerProps,
                     ...this._makeBorder(),
                     transform: [{ scale: bounceScale }],
                 }
@@ -144,7 +152,7 @@ export class ImageCard extends Component<IImageCardProps, IImageCardState> {
             if (this.props.gameType === "word") {
                 return [
                     styles.iPadWordCard, {
-                        ...this.props.containerProps,
+                        ...containerProps,
                         ...this._makeBorder(),
                         transform: [{ scale: bounceScale }],
                     }
@@ -152,7 +160,7 @@ export class ImageCard extends Component<IImageCardProps, IImageCardState> {
             } else {
                 return [
                     styles.iPadCardCard, {
-                        ...this.props.containerProps,
+                        ...containerProps,
                         ...this._makeBorder(),
                         transform: [{ scale: bounceScale }],
                     }
@@ -177,7 +185,7 @@ export class ImageCard extends Component<IImageCardProps, IImageCardState> {
                     style={cardStyles()}
                 >
                     <ImageBackground
-                        resizeMode={this.props.resizeMode || "cover"}
+                        resizeMode={resizeMode || "cover"}
                         borderRadius={15}
                         source={this.props.image}
                         style={imageStyles}
@@ -189,6 +197,16 @@ export class ImageCard extends Component<IImageCardProps, IImageCardState> {
         )
     }
 }
+
+
+
+const mapStateToProps = (state: IReducers) => {
+    return {
+        colors: state.colorsReducer
+    }
+}
+
+export const ImageCard = connect<IImageCardStateProps, IImageCardDispatchProps, IImageCardProps>(mapStateToProps)(_ImageCard)
 
 
 const styles = StyleSheet.create({

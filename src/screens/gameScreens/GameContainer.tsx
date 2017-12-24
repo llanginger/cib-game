@@ -20,9 +20,14 @@ import { CardGameContainer } from "./cardGame/CardGameContainer"
 import { PressBounce } from "../../components/PressBounce"
 import { ScoreContainer } from "../../components/score/ScoreContainer"
 import DeviceInfo from 'react-native-device-info'
+import { initAction } from "../../redux/actions/index"
+import { getCardGameLevel } from "../gameScreens/cardGame/components/cardLevels"
+import { getTextGameLevel } from "../gameScreens/wordGame/components/wordLevels"
 // Text game section
 
 import { WordGameContainer } from "./wordGame/WordGameContainer"
+
+import { Popup } from "./components/popup/Popup"
 
 interface ICardGameMainScreenProps {
     navigator?: any;
@@ -53,7 +58,12 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
     }
 
     componentWillMount() {
-        this.props.dispatch({ type: "SET_DEVICE_TYPE", payload: { deviceType: DeviceInfo.getModel() } })
+        // this.props.dispatch({type: "SET_DEVICE_TYPE", payload: { deviceType: DeviceInfo.getModel() } })
+        this.props.dispatch(initAction({
+            deviceType: DeviceInfo.getModel(),
+            textGameLevel: getTextGameLevel([]),
+            cardGameLevel: getCardGameLevel([])
+        }))
     }
 
     _showGameType() {
@@ -66,13 +76,13 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
         }
     }
 
-
     render() {
         console.log("duo main screen props: ", this.props)
         return (
             <View style={styles.container}>
                 <ScoreContainer containerProps={{ alignSelf: "flex-end" }} />
                 {this._showGameType()}
+                <Popup />
             </View>
         )
     }
@@ -92,8 +102,4 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#daf6fa"
     },
-    subContainer: {
-        flexDirection: "row",
-        marginVertical: 5
-    }
 })

@@ -38,21 +38,19 @@ export class PulsingText extends React.Component<IPulsingTextProps, IPulsingText
             this.pulseValue,
             {
                 toValue: 1,
-                duration: 4000,
-                easing: Easing.linear
+                delay: 2500,
+                duration: 2000,
+                easing: Easing.bounce
             }
         ).start(() => this._pulse())
     }
 
     render() {
-        console.log("Pulsing text rendered")
 
         const pulseScale = this.pulseValue.interpolate({
             inputRange: [0, 0.5, 1],
             outputRange: [1, 1.2, 1]
         })
-
-        console.log("Pulse scale: ", pulseScale)
 
         return (
             <Animated.Text style={[this.props.textStyles, { transform: [{ scale: pulseScale }] }]}>

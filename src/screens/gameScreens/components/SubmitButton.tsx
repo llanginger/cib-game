@@ -22,6 +22,7 @@ import { PulsingText } from "./PulsingText"
 
 interface IDuoCardButtonProps {
     active?: boolean;
+    animate: boolean
     activeText?: string;
     inactiveText?: string;
     dispatch?: any;
@@ -38,7 +39,7 @@ export const _SubmitButton = (props: IDuoCardButtonProps) => {
         >
             <PulsingText
                 textStyles={[styles.text, { color: props.active ? "white" : "black" }]}
-                animate={props.active}
+                animate={props.animate}
                 text={
                     props.active ?
                         props.activeText || "Confirm Selection" :
@@ -54,13 +55,13 @@ const mapStateToProps = (state: IReducers) => {
     return {}
 }
 
-export const SubmitButton: any = connect(mapStateToProps)(_SubmitButton)
+export const SubmitButton = connect(mapStateToProps)(_SubmitButton)
 
 const styles = StyleSheet.create({
     container: {
         width: "100%",
         backgroundColor: "#3F51B5",
-        paddingVertical: 25,
+        paddingVertical: 20,
         justifyContent: "center",
         alignItems: "center"
     },

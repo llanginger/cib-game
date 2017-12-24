@@ -47,6 +47,7 @@ export const _WordGameContainer = (props: IDuoTextGameContainerProps) => {
             return (
                 <SubmitButton
                     active={props.wordSelected}
+                    animate={false}
                     activeText="Check!"
                     inactiveText="Pick a word!"
                     dispatchAction={wordGameSubmitWord(currentSelectedWord.correct)}
@@ -56,6 +57,7 @@ export const _WordGameContainer = (props: IDuoTextGameContainerProps) => {
             return (
                 <SubmitButton
                     active={true}
+                    animate={true}
                     activeText="Next Puzzle!"
                     inactiveText=""
                     dispatchAction={wordGameNewLevel(getTextGameLevel(seenLevels), "card")}
@@ -97,7 +99,7 @@ export const WordGameContainer = connect(mapStateToProps)(_WordGameContainer)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 20,
+        paddingTop: 10,
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "column",

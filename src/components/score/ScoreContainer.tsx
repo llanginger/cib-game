@@ -37,7 +37,7 @@ export const _ScoreContainer = (props: IScoreContainerProps) => {
 const styles = StyleSheet.create({
     container: {
         height: 70,
-        marginTop: 10,
+        marginTop: 25,
         backgroundColor: "transparent",
         flexDirection: "row",
         alignItems: "center",

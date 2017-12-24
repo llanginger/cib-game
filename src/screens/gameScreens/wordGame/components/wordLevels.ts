@@ -29,7 +29,7 @@ const textGameLevels: IWordGameLevel[] = [
     },
     {
         id: 1,
-        headerText: "Sally got caught out in the rain without an umbrella, what is she thinking?",
+        headerText: "Sally got caught out in the rain without an umbrella, what should she think in order to remain COOL?",
         bodyText: ["It's raining -", ""],
         image: require("../../../../images/rainPre.png"),
         answerImage: require("../../../../images/rainCool.png"),

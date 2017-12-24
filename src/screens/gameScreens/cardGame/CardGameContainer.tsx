@@ -54,6 +54,7 @@ const _CardGameContainer = (props: IDuoGameCardProps) => {
                 <SubmitButton
                     active={props.cardSelected}
                     activeText="Check!"
+                    animate={false}
                     inactiveText="Pick a card"
                     dispatchAction={cardGameSubmitWord(currentSelectedCardCorrect())}
                 />
@@ -62,6 +63,7 @@ const _CardGameContainer = (props: IDuoGameCardProps) => {
             return (
                 <SubmitButton
                     active={true}
+                    animate={true}
                     activeText="Next puzzle!"
                     dispatchAction={cardGameNewLevel(getCardGameLevel(seenLevels), "word")}
                 />
@@ -99,7 +101,6 @@ const _CardGameContainer = (props: IDuoGameCardProps) => {
     console.log("Card game container props: ", props)
     return (
         <View style={styles.container}>
-
             <DuoCardHeaderText text={headerText} />
             {mapDuoCards()}
             {chooseButton()}
@@ -121,7 +122,7 @@ export const CardGameContainer = connect(mapStateToProps)(_CardGameContainer)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 20,
+        paddingTop: 10,
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "column",

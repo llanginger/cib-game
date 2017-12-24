@@ -1,3 +1,5 @@
+import { initCardGameLevel } from "./initLevels"
+
 export interface ICardGameCard {
     image?: any;
     correctAnswer: boolean;
@@ -17,41 +19,10 @@ export interface ICardGameReducer {
     showAnswer: boolean
 }
 
-const initCards: ICardGameCard[] = [
-    {
-        correctAnswer: false,
-        image: require("../../images/balloonCool.png"),
-        selected: false,
-        id: 0
-    },
-    {
-        correctAnswer: true,
-        selected: false,
-        image: require("../../images/balloonHot.png"),
-        id: 1
-    },
-    {
-        correctAnswer: false,
-        selected: false,
-        image: require("../../images/batmanHot.png"),
-        id: 2
-    },
-    {
-        correctAnswer: false,
-        selected: false,
-        image: require("../../images/batmanCool.png"),
-        id: 3
-    }
-]
-
 
 const initState: ICardGameReducer = {
     seenLevels: [],
-    level: {
-        id: 4,
-        headerText: "Choose the picture of a 'Hot' thought",
-        cards: initCards
-    },
+    level: initCardGameLevel,
     showAnswer: false,
     cardSelected: false
 }
@@ -91,10 +62,11 @@ export const cardGameReducer = (state: ICardGameReducer = initState, action: any
             }
 
         case "CARDGAME_NEW_LEVEL":
+        case "INIT_APP":
         case "_DUO_CONFIRM_SELECTION":
             return {
                 ...state,
-                level: action.payload.level,
+                level: action.payload.cardGameLevel,
                 showAnswer: false,
                 cardSelected: false
             }
