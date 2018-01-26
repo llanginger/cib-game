@@ -30,7 +30,7 @@ export const DuoCardHeaderText = (props: IDuoCardHeaderTextProps) => {
 
 const styles = StyleSheet.create({
     textContainer: {
-        marginVertical: 10,
+        marginBottom: 10,
         justifyContent: "center",
         alignItems: "center",
         padding: 10,
@@ -42,6 +42,6 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 5, height: 5 }
     },
     text: {
-        fontSize: 16,
+        fontSize: 14,
     }
 })

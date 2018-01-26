@@ -23,6 +23,8 @@ import { getCardGameLevel } from "./components/cardLevels"
 
 import { cardGameSubmitWord, cardGameNewLevel } from "../../../redux/actions/index"
 
+import { GameContainerView } from "../../shared/GameContainerView"
+
 interface IDuoGameCardProps {
     level: {
         headerText: string;
@@ -100,9 +102,11 @@ const _CardGameContainer = (props: IDuoGameCardProps) => {
     }
     console.log("Card game container props: ", props)
     return (
-        <View style={styles.container}>
-            <DuoCardHeaderText text={headerText} />
-            {mapDuoCards()}
+        <View style={{ flex: 1 }}>
+            <GameContainerView>
+                <DuoCardHeaderText text={headerText} />
+                {mapDuoCards()}
+            </GameContainerView>
             {chooseButton()}
         </View>
     )

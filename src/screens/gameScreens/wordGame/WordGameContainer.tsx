@@ -27,6 +27,8 @@ import { ScoreContainer } from "../../../components/score/ScoreContainer"
 
 import { wordGameNewLevel, wordGameSubmitWord } from "../../../redux/actions/index"
 
+import { GameContainerView } from "../../shared/GameContainerView"
+
 interface IDuoTextGameContainerProps {
     dispatch?: any;
     textGameLevel: IWordGameLevel;
@@ -66,19 +68,21 @@ export const _WordGameContainer = (props: IDuoTextGameContainerProps) => {
         }
     }
     return (
-        <View style={styles.container}>
-            <ImageCard
-                gameType="word"
-                image={props.showAnswer ? props.textGameLevel.answerImage : props.textGameLevel.image}
-                id={1}
-                correctAnswer={true}
-                onPress={() => console.log("Pressed")}
-                selected={false}
-                containerProps={{ width: "60%" }}
-                hideRadio
-            />
-            <WordGameText text={props.textGameLevel.headerText} />
-            <WordContainer />
+        <View style={{ flex: 1 }} >
+            <GameContainerView>
+                <ImageCard
+                    gameType="word"
+                    image={props.showAnswer ? props.textGameLevel.answerImage : props.textGameLevel.image}
+                    id={1}
+                    correctAnswer={true}
+                    onPress={() => console.log("Pressed")}
+                    selected={false}
+                    containerProps={{ width: "60%" }}
+                    hideRadio
+                />
+                <WordGameText text={props.textGameLevel.headerText} />
+                <WordContainer />
+            </GameContainerView>
             {chooseButton()}
         </View>
     )

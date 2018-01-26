@@ -59,9 +59,12 @@ export const SubmitButton = connect(mapStateToProps)(_SubmitButton)
 
 const styles = StyleSheet.create({
     container: {
+        position: "absolute",
+        bottom: 0,
+        left: 0,
         width: "100%",
+        height: 60,
         backgroundColor: "#3F51B5",
-        paddingVertical: 20,
         justifyContent: "center",
         alignItems: "center"
     },
