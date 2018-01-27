@@ -22,24 +22,14 @@ import { AnimationTest } from "./screens/AnimationTest"
 
 // Screen section
 
-const registerScreens = () => {
-    Navigation.registerComponent("ChatBotScreen", () => ChatBotGame, store, Provider);
-    Navigation.registerComponent("HomeScreen", () => HomeScreen, store, Provider);
-    Navigation.registerComponent("Menu", () => Menu, store, Provider);
-    Navigation.registerComponent("SkillRecap", () => SkillRecap, store, Provider);
-    Navigation.registerComponent(
-        "CharacterSelect",
-        () => CharacterSelect,
-        store,
-        Provider
-    );
-};
+import { registerScreens } from "./router/registerScreens"
 
-registerScreens();
+
+registerScreens(store, Provider);
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "HomeScreen",
+        screen: "LoginScreen",
         navigatorStyle: {
             navBarTextColor: "red",
             drawUnderNavBar: true,
