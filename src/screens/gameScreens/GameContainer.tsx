@@ -29,6 +29,8 @@ import { WordGameContainer } from "./wordGame/WordGameContainer"
 
 import { Popup } from "./components/popup/Popup"
 
+import { UserAvatar } from "../../components/UserAvatar"
+
 interface ICardGameMainScreenProps {
     navigator?: any;
     gameType: "word" | "card"
@@ -36,6 +38,13 @@ interface ICardGameMainScreenProps {
 }
 
 class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
+
+    static navigatorStyle = {
+        navBarTextColor: "red",
+        drawUnderNavBar: true,
+        navBarTranslucent: true,
+        navBarTransparent: true
+    };
 
     constructor(props) {
         super(props);
@@ -64,6 +73,10 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
             textGameLevel: getTextGameLevel([]),
             cardGameLevel: getCardGameLevel([])
         }))
+        // this.props.navigator.showModal({
+        //     screen: "CharacterSelect",
+        //     animationType: "none"
+        // })
     }
 
     _showGameType() {
@@ -80,6 +93,7 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
         console.log("duo main screen props: ", this.props)
         return (
             <View style={styles.container}>
+                <UserAvatar />
                 <ScoreContainer containerProps={{ alignSelf: "flex-end" }} />
                 {this._showGameType()}
                 <Popup />

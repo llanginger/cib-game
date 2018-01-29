@@ -29,22 +29,8 @@ registerScreens(store, Provider);
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "LoginScreen",
-        navigatorStyle: {
-            navBarTextColor: "red",
-            drawUnderNavBar: true,
-            navBarTranslucent: true,
-            navBarTransparent: true
-        },
-        navigatorButtons: {
-            leftButtons: [
-                {
-                    title: "menu",
-                    id: "menu",
-                    buttonColor: "orangered"
-                }
-            ]
-        }
+        screen: "HomeScreen",
+
     },
     drawer: {
         left: {

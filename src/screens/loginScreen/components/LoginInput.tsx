@@ -8,6 +8,7 @@ interface ILoginInputProps {
     placeholder: string;
     inputProps?: TextInputProperties;
     viewProps?: {}
+    onSubmit: any
 }
 
 interface ILoginInputState {
@@ -29,7 +30,7 @@ export class LoginInput extends React.Component<ILoginInputProps, ILoginInputSta
                 <TextInput
                     placeholder={this.props.placeholder}
                     value={this.state.text}
-                    onSubmitEditing={() => console.log("Input state: ", this.state.text)}
+                    onSubmitEditing={this.props.onSubmit}
                     placeholderTextColor="#757575"
                     onChangeText={text => this.setState({ text })}
                     {...this.props.inputProps}

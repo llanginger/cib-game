@@ -20,6 +20,13 @@ interface ILoginScreenState {
 
 export class LoginScreen extends React.Component<ILoginScreenProps, ILoginScreenState> {
 
+    static navigatorStyle = {
+        navBarTextColor: "red",
+        drawUnderNavBar: true,
+        navBarTranslucent: true,
+        navBarTransparent: true
+    }
+
     constructor(props) {
         super(props)
 
@@ -27,6 +34,8 @@ export class LoginScreen extends React.Component<ILoginScreenProps, ILoginScreen
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
+
+        this._login = this._login.bind(this)
     }
 
     onNavigatorEvent(event) {
@@ -40,15 +49,29 @@ export class LoginScreen extends React.Component<ILoginScreenProps, ILoginScreen
         }
     }
 
+    _login() {
+        console.log("Login attempt")
+        this.props.navigator.resetTo({ screen: "HomeScreen" })
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="light-content" />
                 <LoginTitle />
-                <LoginInput placeholder="Nombre Usuario" />
-                <LoginInput placeholder="Contraseña" inputProps={{ secureTextEntry: false }} />
-                <TouchableOpacity onPress={() => this.setState({ showLoginButton: true })}><Text>Show button</Text></TouchableOpacity>
-                <LoginButton show={this.state.showLoginButton} />
+                <LoginInput
+                    placeholder="Nombre Usuario"
+                    onSubmit={() => console.log("Submit username")}
+                />
+                <LoginInput
+                    placeholder="Contraseña"
+                    inputProps={{ secureTextEntry: true }}
+                    onSubmit={() => this.setState({ showLoginButton: true })}
+                />
+                <LoginButton
+                    show={this.state.showLoginButton}
+                    onPress={this._login}
+                />
             </View>
         );
     }

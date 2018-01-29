@@ -24,6 +24,13 @@ const imageRadius = imageWidth * 0.5;
 
 export class CharacterSelect extends React.Component<ICharacterSelectProps, any> {
 
+    static navigatorStyle = {
+        navBarTextColor: "red",
+        drawUnderNavBar: true,
+        navBarTranslucent: true,
+        navBarTransparent: true
+    };
+
     constructor(props) {
         super(props);
 
