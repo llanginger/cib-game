@@ -29,7 +29,7 @@ registerScreens(store, Provider);
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "HomeScreen",
+        screen: "LoginScreen",
 
     },
     drawer: {

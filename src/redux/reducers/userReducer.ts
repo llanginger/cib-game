@@ -1,17 +1,14 @@
 export interface IUserReducer {
     userName: string;
     currentProfilePicture: string;
-    currentProfilePictureUrl: number;
-    profilePictures: string[],
-    profileUrls: string[]
+    currentProfilePictureUrl: number; // Defunct
 }
 
 const initState: IUserReducer = {
     userName: "placeholder name",
-    currentProfilePicture: "boy",
+    currentProfilePicture: "girlCurlyBrownHair",
     currentProfilePictureUrl: 5,
-    profilePictures: ["boy", "girl"],
-    profileUrls: ["../../images/gameAvatar.png", "../../images/gameAvatar.png"]
+
 };
 
 export const userReducer = (state: IUserReducer = initState, action) => {
@@ -26,6 +23,11 @@ export const userReducer = (state: IUserReducer = initState, action) => {
                 ...state,
                 currentProfilePicture: action.payload.profilePicture,
                 currentProfilePictureUrl: action.payload.profilePictureUrl,
+            }
+        case "CHOOSE_AVATAR":
+            return {
+                ...state,
+                currentProfilePicture: action.payload.avatar
             }
         default:
             return state;

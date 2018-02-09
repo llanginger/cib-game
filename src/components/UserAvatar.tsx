@@ -1,31 +1,44 @@
 //import liraries
 import * as React from 'react';
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, ViewStyle } from 'react-native';
 import { connect } from "react-redux"
 import { IReducers } from "../redux/store"
+import { Navigation } from "react-native-navigation";
 
 //Interface
 interface IUserAvatarProps {
-    children: any;
-    character: "boy" | "girl"
+    children?: any;
+    character?: string
+    menuPress?: any
+    viewProps?: ViewStyle
 }
 
+const slopAmount = 20
 
 // create a component
-const _UserAvatar: React.StatelessComponent = (props: IUserAvatarProps) => {
+const _UserAvatar = (props: IUserAvatarProps) => {
 
     const chooseAvatar = () => {
+        console.log("USer avatar image props: ", props.character)
         switch (props.character) {
-            case "boy":
-                return require("../images/gameAvatar.png")
-            case "girl":
-                return require("../images/girlCool.png")
+            case "girlCurlyBrownHair":
+                return require("../images/GirlCurly.png")
+            case "boyShortBrownHair":
+                return require("../images/BoyShortBrownHair.png")
+            case "boyMessyBrownHair":
+                return require("../images/BoyMessyBrownHair.png")
+            case "girlLongBlondeHair":
+                return require("../images/GirlBlonde.png")
             default:
-                return require("../images/girlCool.png")
+                return require("../images/GirlCurly.png")
         }
     }
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={props.menuPress}
+            hitSlop={{ top: slopAmount, left: slopAmount, bottom: slopAmount, right: slopAmount }}
+        >
             <Image source={chooseAvatar()} style={styles.image} />
         </TouchableOpacity>
     );
@@ -34,11 +47,10 @@ const _UserAvatar: React.StatelessComponent = (props: IUserAvatarProps) => {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        position: "absolute",
-        top: 40,
-        left: 20,
         justifyContent: 'center',
         alignItems: 'center',
+        width: 60,
+        height: 40,
     },
     image: {
         width: 40,
@@ -52,4 +64,4 @@ const mapStateToProps = (state: IReducers) => {
     }
 }
 
-export const UserAvatar = connect(mapStateToProps)(_UserAvatar)
+export const UserAvatar = connect<{ character?: string }, any, any>(mapStateToProps)(_UserAvatar)

@@ -6,6 +6,7 @@ import {
     Image,
     Dimensions,
     TextInput,
+    KeyboardAvoidingView,
     TouchableHighlight,
     TouchableOpacity,
     StatusBar,
@@ -14,15 +15,24 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
 import { makeUserAvatars } from "./components/makeUserAvatars"
+import { CharacterSelectTitle } from "./components/CharacterSelectTitle"
 
 export interface ICharacterSelectProps {
-    navigator?: any
+    navigator?: any;
+    dispatch?: any
 }
 const dimWidth = Dimensions.get("window").width;
 const imageWidth = dimWidth * 0.4;
 const imageRadius = imageWidth * 0.5;
 
-export class CharacterSelect extends React.Component<ICharacterSelectProps, any> {
+const NameInput = (props: any) => {
+    return {
+
+    }
+}
+
+
+class _CharacterSelect extends React.Component<ICharacterSelectProps, any> {
 
     static navigatorStyle = {
         navBarTextColor: "red",
@@ -60,63 +70,47 @@ export class CharacterSelect extends React.Component<ICharacterSelectProps, any>
             )
         }
 
-        const makeCharacterImageRow = (url: [any, any]) => {
-            return (
-                <View style={styles.characterRow}>
-                    <TouchableOpacity style={styles.characterContainer}>
-                        <Image
-                            source={url[0]}
-                            style={styles.characterImage}
-                            resizeMode="cover"
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.characterContainer}>
-                        <Image
-                            source={url[1]}
-                            style={styles.characterImage}
-                            resizeMode="cover"
-                        />
-                    </TouchableOpacity>
-                </View>
-            );
-        };
 
         return (
             <View style={styles.container}>
-                <View style={styles.characterRow}>
+                <StatusBar barStyle="dark-content" />
+                <View>
+                    <CharacterSelectTitle />
                     {makeUserAvatars()}
                 </View>
-                {makeCharacterImageRow([
-                    require("../../images/gameAvatar.png"),
-                    require("../../images/girlCool.png")
-                ])}
-                <View style={styles.textInputContainer}>
-                    <TextInput
-                        placeholder="Character Name"
-                        placeholderTextColor="white"
-                    />
-                </View>
-                <View style={styles.textInputContainer}>
-                    <TextInput
-                        placeholder="Character Age"
-                        placeholderTextColor="white"
-                    />
-                </View>
-                <TouchableOpacity style={styles.confirmButtonContainer}
-                    onPress={() => this.props.navigator.dismissModal()}
-                >
-                    <Text style={styles.confirmButtonText}>Confirm Selection</Text>
-                </TouchableOpacity>
+                <KeyboardAvoidingView contentContainerStyle={styles.avoidingView} behavior="position">
+                    <View style={styles.textInputContainer}>
+                        <TextInput
+                            style={{ color: "white", textAlign: "center" }}
+                            selectionColor="white"
+                            placeholder="Nombre"
+                            placeholderTextColor="white"
+                        />
+                    </View>
+                    <TouchableOpacity style={styles.confirmButtonContainer}
+                        onPress={() => this.props.navigator.dismissModal()}
+                    >
+                        <Text style={styles.confirmButtonText}>Lista?</Text>
+                    </TouchableOpacity>
+                </KeyboardAvoidingView>
+
             </View>
         );
     }
 };
 
+export const CharacterSelect = connect()(_CharacterSelect)
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 30,
-        backgroundColor: "#daf6fa"
+        paddingTop: 80,
+        backgroundColor: "#daf6fa",
+        justifyContent: "space-between",
+    },
+    avoidingView: {
+        backgroundColor: "#daf6fa",
+
     },
     characterRow: {
         flexDirection: "row",
@@ -138,22 +132,26 @@ const styles = StyleSheet.create({
     textInputContainer: {
         height: 50,
         marginVertical: 15,
-        width: dimWidth - 40,
+        width: "90%",
         alignSelf: "center",
         justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "rgba(0, 0, 0, 0.25)"
+        backgroundColor: "rgba(0, 0, 0, 0.25)",
+        borderRadius: 10,
     },
     confirmButtonContainer: {
         height: 50,
         marginVertical: 15,
-        width: dimWidth - 40,
+        width: "90%",
         alignSelf: "center",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "mediumvioletred"
+        backgroundColor: "#339900",
+        borderRadius: 10,
+        shadowOffset: { width: 3, height: 3 },
+        shadowOpacity: 0.6
     },
     confirmButtonText: {
-        color: "white"
+        color: "white",
+        fontSize: 20
     }
 });

@@ -29,7 +29,6 @@ import { WordGameContainer } from "./wordGame/WordGameContainer"
 
 import { Popup } from "./components/popup/Popup"
 
-import { UserAvatar } from "../../components/UserAvatar"
 
 interface ICardGameMainScreenProps {
     navigator?: any;
@@ -53,6 +52,7 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
             this.onNavigatorEvent.bind(this)
         );
         this._showGameType = this._showGameType.bind(this)
+        this._menuPress = this._menuPress.bind(this)
     }
 
     onNavigatorEvent(event) {
@@ -73,10 +73,10 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
             textGameLevel: getTextGameLevel([]),
             cardGameLevel: getCardGameLevel([])
         }))
-        // this.props.navigator.showModal({
-        //     screen: "CharacterSelect",
-        //     animationType: "none"
-        // })
+        this.props.navigator.showModal({
+            screen: "CharacterSelect",
+            animationType: "none"
+        })
     }
 
     _showGameType() {
@@ -89,12 +89,18 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
         }
     }
 
+    _menuPress() {
+        this.props.navigator.toggleDrawer({
+            side: "left", // the side of the drawer since you can have two, 'left' / 'right'
+            animated: true // does the toggle have transition animation or does it happen immediately (optional)
+        });
+    }
+
     render() {
         console.log("duo main screen props: ", this.props)
         return (
             <View style={styles.container}>
-                <UserAvatar />
-                <ScoreContainer containerProps={{ alignSelf: "flex-end" }} />
+                <ScoreContainer menuPress={this._menuPress} containerProps={{ alignSelf: "flex-end" }} />
                 {this._showGameType()}
                 <Popup />
             </View>

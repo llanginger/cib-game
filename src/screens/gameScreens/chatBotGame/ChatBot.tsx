@@ -319,7 +319,6 @@ export class _ChatBot extends React.Component<IChatBotProps, IChatBotState> {
 
         return (
             <View style={styles.container}>
-                <ScoreContainer />
                 <GiftedChat
                     messages={this.state.messages}
                     minInputToolbarHeight={this.state.minInputToolbarHeight}

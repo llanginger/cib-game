@@ -14,11 +14,17 @@ import { IScoreReducer } from "../../redux/reducers/index";
 
 import { ScoreCounter } from "./ScoreCounter";
 
+import { UserAvatar } from "../../components/UserAvatar"
+
+
 interface IScoreContainerProps {
+    children?: any;
     score?: IScoreReducer;
     dispatch?: any;
     containerProps?: {}
+    menuPress?: any
 }
+
 
 export const _ScoreContainer = (props: IScoreContainerProps) => {
     const hotImage = require("../../images/hot.png");
@@ -28,8 +34,11 @@ export const _ScoreContainer = (props: IScoreContainerProps) => {
     console.log("Score Container props: ", props);
     return (
         <View style={[styles.container, props.containerProps]}>
-            <ScoreCounter imagePath={hotImage} score={props.score.hotScore} />
-            <ScoreCounter imagePath={coolImage} score={props.score.coolScore} />
+            <UserAvatar menuPress={props.menuPress} />
+            <View style={[styles.scoreContainer, { zIndex: 1 }]}>
+                <ScoreCounter imagePath={hotImage} score={props.score.hotScore} />
+                <ScoreCounter imagePath={coolImage} score={props.score.coolScore} />
+            </View>
         </View>
     );
 };
@@ -38,11 +47,14 @@ const styles = StyleSheet.create({
     container: {
         height: 70,
         marginTop: 25,
-        backgroundColor: "transparent",
+        width: "100%",
+        // backgroundColor: "blue",
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "flex-end",
-        paddingRight: 20
+        justifyContent: "space-between",
+    },
+    scoreContainer: {
+        flexDirection: "row"
     }
 });
 
@@ -52,6 +64,16 @@ const mapStateToProps = (state: IReducers) => {
     };
 };
 
+interface IScoreContainerReduxProps {
+    menuPress?: any;
+    score: any
+}
+
+interface IScoreContainerParentProps {
+    containerProps?: {}
+    menuPress: any
+}
+
 const mapDispatchToProps = {};
 
-export const ScoreContainer: any = connect(mapStateToProps)(_ScoreContainer); // Why do I need any here?
+export const ScoreContainer = connect<IScoreContainerReduxProps, any, IScoreContainerParentProps>(mapStateToProps)(_ScoreContainer); // Why do I need any here?

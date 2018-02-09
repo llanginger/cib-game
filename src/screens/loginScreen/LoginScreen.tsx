@@ -1,6 +1,6 @@
 //import liraries
 import * as React from 'react';
-import { View, Text, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, TouchableOpacity, Linking, Alert } from 'react-native';
 import { NavbuttonBassClass } from "../shared/NavbuttonBaseClass"
 import { LoginInput } from "./components/LoginInput"
 import { LoginTitle } from "./components/LoginTitle"
@@ -17,6 +17,8 @@ interface ILoginScreenState {
 }
 
 // create a component
+
+const cibUrl = "http://www.coolisbest.com"
 
 export class LoginScreen extends React.Component<ILoginScreenProps, ILoginScreenState> {
 
@@ -36,6 +38,17 @@ export class LoginScreen extends React.Component<ILoginScreenProps, ILoginScreen
         );
 
         this._login = this._login.bind(this)
+    }
+
+    _handleLinkPress = () => {
+        console.log("Cliked link")
+        Linking.canOpenURL(cibUrl).then(supported => {
+            if (supported) {
+                Linking.openURL(cibUrl)
+            } else {
+                Alert.alert("Could not open url")
+            }
+        }).catch(err => console.log("Link error: ", err))
     }
 
     onNavigatorEvent(event) {
@@ -72,6 +85,14 @@ export class LoginScreen extends React.Component<ILoginScreenProps, ILoginScreen
                     show={this.state.showLoginButton}
                     onPress={this._login}
                 />
+                <TouchableOpacity
+                    style={styles.linkContainer}
+                    onPress={this._handleLinkPress}
+                >
+                    <Text style={styles.linkText}>
+                        No tiene cuenta?
+                    </Text>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -85,4 +106,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#009ee0',
     },
+    linkContainer: {
+        position: "absolute",
+        bottom: 30
+    },
+    linkText: {
+        color: "white",
+        fontSize: 16
+    }
 });

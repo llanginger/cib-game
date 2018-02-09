@@ -43,7 +43,6 @@ const _UserAvatar = (props: IUserAvatarProps) => {
                 style={styles.characterImage}
                 resizeMode="cover"
             />
-            <Text>{props.imageName}</Text>
         </TouchableOpacity>
     )
 }
@@ -58,7 +57,10 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         borderRadius: imageRadius,
         width: imageWidth,
-        height: imageWidth
+        height: imageWidth,
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 0.6,
+        shadowColor: "#555"
     },
     characterImage: {
         flex: 1,
