@@ -20,6 +20,7 @@ import { CharacterSelectTitle } from "./components/CharacterSelectTitle"
 export interface ICharacterSelectProps {
     navigator?: any;
     dispatch?: any
+    selectedCharacterIndex: number
 }
 const dimWidth = Dimensions.get("window").width;
 const imageWidth = dimWidth * 0.4;
@@ -47,6 +48,7 @@ class _CharacterSelect extends React.Component<ICharacterSelectProps, any> {
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
+
     }
 
     onNavigatorEvent(event) {
@@ -60,6 +62,7 @@ class _CharacterSelect extends React.Component<ICharacterSelectProps, any> {
 
     render() {
 
+        console.log("Character select props: ", this.props)
         const makeCharacterImage = (url: any) => {
             return (
                 <Image
@@ -76,7 +79,7 @@ class _CharacterSelect extends React.Component<ICharacterSelectProps, any> {
                 <StatusBar barStyle="dark-content" />
                 <View>
                     <CharacterSelectTitle />
-                    {makeUserAvatars()}
+                    {makeUserAvatars(this.props.selectedCharacterIndex)}
                 </View>
                 <KeyboardAvoidingView contentContainerStyle={styles.avoidingView} behavior="position">
                     <View style={styles.textInputContainer}>
@@ -99,7 +102,13 @@ class _CharacterSelect extends React.Component<ICharacterSelectProps, any> {
     }
 };
 
-export const CharacterSelect = connect()(_CharacterSelect)
+const mapStateToProps = (state: IReducers) => {
+    return {
+        selectedCharacterIndex: state.userReducer.selectedCharacterIndex
+    }
+}
+
+export const CharacterSelect = connect(mapStateToProps)(_CharacterSelect)
 
 const styles = StyleSheet.create({
     container: {

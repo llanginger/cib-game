@@ -40,10 +40,12 @@ const AvatarRow = (props) => {
     return <View style={styles.avatarRow}>{props.children}</View>
 }
 
-export const makeUserAvatars = () => {
+export const makeUserAvatars = (selectedCharacterIndex: number) => {
     const avatars = imagePaths.map((image, i) => {
-        return <UserAvatar url={image.url} imageName={image.name} key={i} />
+        return <UserAvatar url={image.url} imageName={image.name} key={i} index={i} selectedCharacterIndex={selectedCharacterIndex} />
     })
+
+    console.log("Avatars: ", avatars)
 
     return _.chunk(avatars, 2).map((row, i) => {
         return <AvatarRow key={i}>{row}</AvatarRow>

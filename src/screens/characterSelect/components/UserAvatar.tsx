@@ -11,6 +11,8 @@ import { connect } from "react-redux"
 import { IReducers } from "../../../redux/store";
 
 interface IUserAvatarProps {
+    index: number;
+    selectedCharacterIndex: number
     imageStyle?: any;
     touchableStyle?: any;
     url: any;
@@ -24,14 +26,15 @@ const imageRadius = imageWidth * 0.5;
 
 
 const _UserAvatar = (props: IUserAvatarProps) => {
-
+    const selected = props.index === props.selectedCharacterIndex ? true : false
     return (
         <TouchableOpacity
-            style={styles.characterContainer}
+            style={selected ? [styles.characterContainer, styles.selectedStyles] : styles.characterContainer}
             onPress={() => {
                 props.dispatch({
                     type: "SET_PROFILE_PICTURE", payload: {
                         profilePicture: props.imageName,
+                        selectedCharacterIndex: props.index,
                         profilePictureUrl: props.url,
                     }
                 })
@@ -61,6 +64,10 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.6,
         shadowColor: "#555"
+    },
+    selectedStyles: {
+        borderWidth: 5,
+        borderColor: "white"
     },
     characterImage: {
         flex: 1,
