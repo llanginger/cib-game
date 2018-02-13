@@ -1,5 +1,4 @@
 import { Navigation } from "react-native-navigation";
-import { ChatBotGame } from "../screens/gameScreens/chatBotGame/ChatBot";
 import { CharacterSelect } from "../screens/characterSelect/CharacterSelect";
 import { SkillRecap } from "../screens/skillRecap/SkillRecap";
 import { Menu } from "../screens/menu/Menu";
@@ -8,7 +7,6 @@ import { LoginScreen } from "../screens/loginScreen/LoginScreen"
 
 export const registerScreens = (store, Provider) => {
     Navigation.registerComponent("LoginScreen", () => LoginScreen, store, Provider);
-    Navigation.registerComponent("ChatBotScreen", () => ChatBotGame, store, Provider);
     Navigation.registerComponent("HomeScreen", () => HomeScreen, store, Provider);
     Navigation.registerComponent("Menu", () => Menu, store, Provider);
     Navigation.registerComponent("SkillRecap", () => SkillRecap, store, Provider);

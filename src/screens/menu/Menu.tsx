@@ -89,29 +89,7 @@ export class Menu extends React.Component<any, any> {
                         Skill Recap
                         </Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.menuItem, { backgroundColor: "#ffcc33" }]}
-                    onPress={() => {
-                        this.props.navigator.showModal({
-                            screen: "MainScreen", // unique ID registered with Navigation.registerScreen
-                            title: "MainScreen", // title of the screen as appears in the nav bar (optional)
 
-                            navigatorButtons: {
-                                leftButtons: [
-                                    {
-                                        title: "menu",
-                                        id: "menu",
-                                        buttonColor: "orangered"
-                                    }
-                                ]
-                            }
-                        })
-                    }}
-                >
-                    <Text style={styles.menuItemText}>
-                        Chatbot Game
-                        </Text>
-                </TouchableOpacity>
                 {makeMenuItems()}
             </View>
         );

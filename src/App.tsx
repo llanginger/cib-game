@@ -8,7 +8,6 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import { Navigation } from "react-native-navigation";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { ChatBotGame } from "./screens/gameScreens/chatBotGame/ChatBot";
 import { CharacterSelect } from "./screens/characterSelect/CharacterSelect";
 import { SkillRecap } from "./screens/skillRecap/SkillRecap";
 import { Menu } from "./screens/menu/Menu";
