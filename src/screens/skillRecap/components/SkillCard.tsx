@@ -16,6 +16,8 @@ import { connect } from "react-redux";
 import { IReducers } from "../../../redux/store";
 import { makeUserAvatars } from "../../characterSelect/components/makeUserAvatars"
 
+import { showLightBox } from "../showLightBox"
+
 interface ICardSeparatorProps {
     color?: string
 }
@@ -40,15 +42,20 @@ interface ISkillCardProps {
     headerText: string;
     bodyText: string;
     color: string
+    navigator: any
 }
 export const SkillCard = (props: ISkillCardProps) => {
 
     const { headerText, bodyText, color } = props
+
+    const onSkillPress = () => {
+        return showLightBox(props.navigator, { color, headerText, bodyText })
+    }
     return (
         <View style={[styles.card, { backgroundColor: color }]}>
-            <View style={styles.cardHeader}>
+            <TouchableOpacity onPress={onSkillPress} style={styles.cardHeader}>
                 <Text style={styles.cardHeaderText}>{headerText}</Text>
-            </View>
+            </TouchableOpacity>
             <CardSeparator color={color} />
             <View style={styles.cardBody}>
                 <Text style={styles.cardBodyText}>{bodyText}</Text>

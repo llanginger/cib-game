@@ -69,7 +69,7 @@ const dummyText: {
 
 
 
-const SkillRecapList = (props) => {
+const SkillRecapList = (props: { navigator: any }) => {
     return (
         <FlatList
             data={dummyText}
@@ -80,6 +80,7 @@ const SkillRecapList = (props) => {
                         headerText={item.headerText}
                         bodyText={item.bodyText}
                         color={item.color}
+                        navigator={props.navigator}
                     />
                 )
             }}
@@ -112,7 +113,7 @@ export class SkillRecap extends React.Component<any, any> {
 
         return (
             <View style={styles.container}>
-                <SkillRecapList />
+                <SkillRecapList navigator={this.props.navigator} />
             </View>
         )
     }
