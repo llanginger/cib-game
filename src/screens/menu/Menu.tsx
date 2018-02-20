@@ -2,7 +2,6 @@ import * as React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const menuColors = [
-    "#339900",
     "#ff9933",
     "#663366"
 ];
@@ -61,8 +60,8 @@ export class Menu extends React.Component<any, any> {
                     }}
                 >
                     <Text style={styles.menuItemText}>
-                        Select Character
-                        </Text>
+                        Protagonistas
+                    </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.menuItem, { backgroundColor: "#3333cc" }]}
@@ -86,8 +85,33 @@ export class Menu extends React.Component<any, any> {
                     }}
                 >
                     <Text style={styles.menuItemText}>
-                        Skill Recap
-                        </Text>
+                        Las 6 Habilidades
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.menuItem, { backgroundColor: "#339900" }]}
+                    onPress={() => {
+                        this.props.navigator.showModal({
+                            screen: "AccountScreen", // unique ID registered with Navigation.registerScreen
+                            title: "Modal", // title of the screen as appears in the nav bar (optional)
+                            passProps: {}, // simple serializable object that will pass as props to the modal (optional)
+                            navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
+                            animationType: "slide-up", // 'none' / 'slide-up' , appear animation for the modal (optional, default 'slide-up')
+                            navigatorButtons: {
+                                leftButtons: [
+                                    {
+                                        title: "menu",
+                                        id: "menu",
+                                        buttonColor: "orangered"
+                                    }
+                                ]
+                            }
+                        })
+                    }}
+                >
+                    <Text style={styles.menuItemText}>
+                        Mi Cuenta
+                    </Text>
                 </TouchableOpacity>
 
                 {makeMenuItems()}

@@ -1,7 +1,8 @@
 interface IShowLightBoxProps {
     color: string;
     bodyText: string;
-    headerText: string
+    headerText: string;
+    skillNumber: number;
 }
 
 export const showLightBox = (navigator, props: IShowLightBoxProps) => {

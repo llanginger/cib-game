@@ -43,24 +43,32 @@ interface ISkillCardProps {
     bodyText: string;
     color: string
     navigator: any
+    skillNumber: number
 }
 export const SkillCard = (props: ISkillCardProps) => {
 
-    const { headerText, bodyText, color } = props
+    const { headerText, bodyText, color, skillNumber } = props
 
-    const onSkillPress = () => {
-        return showLightBox(props.navigator, { color, headerText, bodyText })
-    }
     return (
-        <View style={[styles.card, { backgroundColor: color }]}>
-            <TouchableOpacity onPress={onSkillPress} style={styles.cardHeader}>
-                <Text style={styles.cardHeaderText}>{headerText}</Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+            style={[styles.card, { backgroundColor: color }]}
+            onPress={() => showLightBox(props.navigator, { color, headerText, bodyText, skillNumber })}
+        >
+            <View
+                style={styles.cardHeader}
+            >
+                <Text style={styles.cardHeaderText}>
+                    {headerText}
+                </Text>
+            </View>
+
             <CardSeparator color={color} />
             <View style={styles.cardBody}>
-                <Text style={styles.cardBodyText}>{bodyText}</Text>
+                <Text style={styles.cardBodyText}>
+                    {bodyText}
+                </Text>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

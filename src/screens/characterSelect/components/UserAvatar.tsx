@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux"
 import { IReducers } from "../../../redux/store";
 
+// TODO: Get most of this from connect:
 interface IUserAvatarProps {
     index: number;
     selectedCharacterIndex: number

@@ -1,6 +1,6 @@
 //import liraries
 import * as React from 'react';
-import { View, StyleSheet, Image, TouchableOpacity, ViewStyle } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, ViewStyle, ImageStyle } from 'react-native';
 import { connect } from "react-redux"
 import { IReducers } from "../redux/store"
 import { Navigation } from "react-native-navigation";
@@ -10,7 +10,8 @@ interface IUserAvatarProps {
     children?: any;
     character?: string
     menuPress?: any
-    viewProps?: ViewStyle
+    viewStyleProps?: ViewStyle
+    imageStyleProps?: ImageStyle
 }
 
 const slopAmount = 20
@@ -35,11 +36,11 @@ const _UserAvatar = (props: IUserAvatarProps) => {
     }
     return (
         <TouchableOpacity
-            style={styles.container}
+            style={[styles.container, props.viewStyleProps]}
             onPress={props.menuPress}
             hitSlop={{ top: slopAmount, left: slopAmount, bottom: slopAmount, right: slopAmount }}
         >
-            <Image source={chooseAvatar()} style={styles.image} />
+            <Image source={chooseAvatar()} style={[styles.image, props.imageStyleProps]} />
         </TouchableOpacity>
     );
 };
@@ -64,4 +65,5 @@ const mapStateToProps = (state: IReducers) => {
     }
 }
 
+// TODO: Fix typing
 export const UserAvatar = connect<{ character?: string }, any, any>(mapStateToProps)(_UserAvatar)

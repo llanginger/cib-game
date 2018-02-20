@@ -81,21 +81,11 @@ class _CharacterSelect extends React.Component<ICharacterSelectProps, any> {
                     <CharacterSelectTitle />
                     {makeUserAvatars(this.props.selectedCharacterIndex)}
                 </View>
-                <KeyboardAvoidingView contentContainerStyle={styles.avoidingView} behavior="position">
-                    <View style={styles.textInputContainer}>
-                        <TextInput
-                            style={{ color: "white", textAlign: "center" }}
-                            selectionColor="white"
-                            placeholder="Nombre"
-                            placeholderTextColor="white"
-                        />
-                    </View>
-                    <TouchableOpacity style={styles.confirmButtonContainer}
-                        onPress={() => this.props.navigator.dismissModal()}
-                    >
-                        <Text style={styles.confirmButtonText}>Lista?</Text>
-                    </TouchableOpacity>
-                </KeyboardAvoidingView>
+                <TouchableOpacity style={styles.confirmButtonContainer}
+                    onPress={() => this.props.navigator.dismissModal()}
+                >
+                    <Text style={styles.confirmButtonText}>Lista?</Text>
+                </TouchableOpacity>
 
             </View>
         );

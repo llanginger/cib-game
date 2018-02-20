@@ -4,10 +4,8 @@ import {
     View,
     Text,
     Image,
-    FlatList,
+    ScrollView,
     Dimensions,
-    TextInput,
-    TouchableHighlight,
     TouchableOpacity,
     StatusBar,
     Platform
@@ -19,6 +17,9 @@ const window = Dimensions.get("window")
 
 interface ISkillCardLightboxScreen {
     navigator: any;
+    bodyText: string;
+    headerText: string;
+    skillNumber: number;
     color: string
 }
 interface ICardSeparatorProps {
@@ -46,18 +47,21 @@ export const SkillCardLightboxScreen = (props: ISkillCardLightboxScreen) => {
                 resizeMode="cover"
             />
             <View style={[styles.infoContainer, { backgroundColor: props.color }]}>
-                <View style={styles.textContainer} >
-                    <Text style={styles.text}>
-                        The above image is placeholder, we'll use a separate one per "habilidad".
+                <ScrollView contentContainerStyle={styles.textContainer} >
+                    <View style={[styles.skillNumberCircle, { borderColor: props.color }]}>
+                        <Text>{props.skillNumber}</Text>
+                    </View>
+                    <Text style={styles.headerText}>
+                        {props.headerText}
                     </Text>
                     <CardSeparator color={props.color} />
-                    <Text style={styles.text}>
-                        Here are some words that will become whatever text you want to put in here as a more detailed summary of the particular skill this screen represents. There can be images, lists, even video or audio.
+                    <Text style={styles.bodyText}>
+                        {props.bodyText}
                     </Text>
-                    <TouchableOpacity style={styles.dismissButton} onPress={() => props.navigator.dismissLightBox()}>
-                        <Text style={[styles.dismissButtonText, { color: props.color }]}>Dismiss</Text>
-                    </TouchableOpacity>
-                </View>
+                </ScrollView>
+                <TouchableOpacity style={styles.dismissButton} onPress={() => props.navigator.dismissLightBox()}>
+                    <Text style={[styles.dismissButtonText, { color: props.color }]}>Dismiss</Text>
+                </TouchableOpacity>
             </View>
         </View >
     )
@@ -73,20 +77,41 @@ const styles = StyleSheet.create({
         flex: 1
     },
     infoContainer: {
-        alignItems: "center",
         width: "100%",
         flex: 1,
         padding: 20
     },
+    skillNumberCircle: {
+        height: 50,
+        width: 50,
+        borderRadius: 25,
+        borderWidth: 1,
+        position: "relative",
+        top: 0,
+        left: 0,
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 20
+    },
     textContainer: {
         backgroundColor: "white",
-        padding: 20
+        padding: 20,
+        width: "100%"
     },
-    text: {
+    headerText: {
+        fontSize: 18,
+        textAlign: "center"
+    },
+    bodyText: {
         fontSize: 16
     },
     dismissButton: {
-        paddingTop: 10,
+        height: 50,
+        marginBottom: 10,
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "white"
     },
     dismissButtonText: {
         textAlign: "center",
@@ -97,8 +122,8 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
     },
     image: {
-        marginTop: 30,
+        marginTop: 40,
         width: "100%",
-        height: 200,
+        height: 150,
     }
 })

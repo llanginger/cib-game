@@ -23,7 +23,7 @@ const height = Dimensions.get("screen").height
 
 
 
-const dummyText: {
+const skills: {
     headerText: string;
     bodyText: string;
     color: string;
@@ -72,7 +72,7 @@ const dummyText: {
 const SkillRecapList = (props: { navigator: any }) => {
     return (
         <FlatList
-            data={dummyText}
+            data={skills}
             keyExtractor={(item, index) => item.id}
             renderItem={({ item }) => {
                 return (
@@ -81,6 +81,7 @@ const SkillRecapList = (props: { navigator: any }) => {
                         bodyText={item.bodyText}
                         color={item.color}
                         navigator={props.navigator}
+                        skillNumber={item.id}
                     />
                 )
             }}
@@ -122,29 +123,8 @@ export class SkillRecap extends React.Component<any, any> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 30,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#daf6fa",
-    },
-    card: {
-        backgroundColor: "white",
-        width: width * 0.9,
-        justifyContent: "center",
-        padding: 15,
-        marginVertical: 15,
-        alignItems: "center"
-    },
-    cardHeader: {
-
-    },
-    cardBody: {
-
-    },
-    cardHeaderText: {
-        textAlign: "center"
-    },
-    cardBodyText: {
-
     }
 })
