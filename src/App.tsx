@@ -28,7 +28,7 @@ registerScreens(store, Provider);
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "LoginScreen",
+        screen: "SkillRecap",
 
     },
     drawer: {

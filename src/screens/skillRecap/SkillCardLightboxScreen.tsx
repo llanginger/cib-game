@@ -8,64 +8,87 @@ import {
     Dimensions,
     TouchableOpacity,
     StatusBar,
-    Platform
+    Platform,
+    PanResponder
 } from "react-native";
 import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
+import { CardSeparator } from "./lightBoxComponents/CardSeparator"
+import { LightBoxTextSection } from "./lightBoxComponents/LightBoxTextSection"
 
 const window = Dimensions.get("window")
 
-interface ISkillCardLightboxScreen {
+interface ISkillCardLightboxScreenProps {
     navigator: any;
     bodyText: string;
     headerText: string;
     skillNumber: number;
     color: string
 }
-interface ICardSeparatorProps {
-    color?: string
+
+interface ISkillCardLightboxScreenState {
+    dismissButtonDisabled: boolean
+    scrolling: boolean
 }
 
-const CardSeparator = (props: ICardSeparatorProps) => {
-    return (
-        <View style={{
-            borderBottomColor: props.color,
-            borderBottomWidth: 0.5,
-            marginVertical: 15
-        }} />
-    )
-}
 
 
 // TODO: Add touchable and Animated elements to entire screen allowing for lightbox to be "pulled" away
-export const SkillCardLightboxScreen = (props: ISkillCardLightboxScreen) => {
-    return (
-        <View style={styles.container}>
-            <Image
-                style={styles.image}
-                source={require("../../images/dummyBackground.png")}
-                resizeMode="cover"
-            />
-            <View style={[styles.infoContainer, { backgroundColor: props.color }]}>
-                <ScrollView contentContainerStyle={styles.textContainer} >
-                    <View style={[styles.skillNumberCircle, { borderColor: props.color }]}>
-                        <Text>{props.skillNumber}</Text>
-                    </View>
-                    <Text style={styles.headerText}>
-                        {props.headerText}
-                    </Text>
-                    <CardSeparator color={props.color} />
-                    <Text style={styles.bodyText}>
-                        {props.bodyText}
-                    </Text>
-                </ScrollView>
-                <TouchableOpacity style={styles.dismissButton} onPress={() => props.navigator.dismissLightBox()}>
-                    <Text style={[styles.dismissButtonText, { color: props.color }]}>Dismiss</Text>
-                </TouchableOpacity>
-            </View>
-        </View >
-    )
+export class SkillCardLightboxScreen extends React.Component<ISkillCardLightboxScreenProps, ISkillCardLightboxScreenState> {
+
+    private _panResponder
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            dismissButtonDisabled: false,
+            scrolling: false
+        }
+    }
+
+    componentWillMount() {
+        this._panResponder = PanResponder.create({
+            onMoveShouldSetPanResponder: (evt, gestureState) => true,
+            onPanResponderMove: (evt, gestureState) => {
+
+            }
+        })
+    }
+
+    render() {
+        const { props } = this
+        return (
+            <View style={styles.container}>
+                <Image
+                    style={styles.image}
+                    source={require("../../images/dummyBackground.png")}
+                    resizeMode="cover"
+                />
+                <View style={[styles.infoContainer, { backgroundColor: props.color }]}>
+                    <ScrollView contentContainerStyle={styles.textScrollContainer} >
+                        <LightBoxTextSection
+                            skillCircle
+                            skillNumber={props.skillNumber}
+                            color={props.color}
+                            headerText={props.headerText}
+                            bodyText={props.bodyText}
+                        />
+                    </ScrollView>
+                    <TouchableOpacity
+                        disabled={this.state.dismissButtonDisabled}
+                        style={styles.dismissButton}
+                        onPress={() => props.navigator.dismissLightBox()}
+                    >
+                        <Text style={[styles.dismissButtonText, { color: props.color }]}>Dismiss</Text>
+                    </TouchableOpacity>
+                </View>
+            </View >
+        )
+    }
 }
+
+
 
 const styles = StyleSheet.create({
     container: {
@@ -79,7 +102,6 @@ const styles = StyleSheet.create({
     infoContainer: {
         width: "100%",
         flex: 1,
-        padding: 20
     },
     skillNumberCircle: {
         height: 50,
@@ -93,7 +115,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginBottom: 20
     },
-    textContainer: {
+    textScrollContainer: {
         backgroundColor: "white",
         padding: 20,
         width: "100%"
