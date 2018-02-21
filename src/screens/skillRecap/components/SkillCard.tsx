@@ -40,7 +40,7 @@ const CardSeparator = (props: ICardSeparatorProps) => {
 
 interface ISkillCardProps {
     headerText: string;
-    bodyText: string;
+    bodyText: { title: string; body: string[] }[];
     color: string
     navigator: any
     skillNumber: number
@@ -65,7 +65,7 @@ export const SkillCard = (props: ISkillCardProps) => {
             <CardSeparator color={color} />
             <View style={styles.cardBody}>
                 <Text style={styles.cardBodyText}>
-                    {bodyText}
+                    {bodyText[0].body[0]}
                 </Text>
             </View>
         </TouchableOpacity>

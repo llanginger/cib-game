@@ -1,6 +1,6 @@
 interface IShowLightBoxProps {
     color: string;
-    bodyText: string;
+    bodyText: { title: string; body: string[] }[];
     headerText: string;
     skillNumber: number;
 }

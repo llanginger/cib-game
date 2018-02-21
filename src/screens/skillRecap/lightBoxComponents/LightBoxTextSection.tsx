@@ -8,31 +8,54 @@ interface ILightBoxTextSectionProps {
     skillNumber: number;
     color: string;
     headerText: string;
-    bodyText: string;
-    skillCircle?: boolean
+    bodyText: { title: string; body: string[] }[];
 }
 
 // create a component
 export const LightBoxTextSection: React.StatelessComponent<ILightBoxTextSectionProps> = (props: ILightBoxTextSectionProps) => {
 
-    const {
-        skillCircle = false
-    } = props
+    // Create a divider-separated list of text items to display
+
+    const makeSection = () => {
+        return props.bodyText.map((section, i, arr) => {
+            return (
+                <View key={i}>
+                    <Text style={styles.headerText}>
+                        {section.title}
+                    </Text>
+                    {makeItems(section.body)}
+                    <CardSeparator color={props.color} />
+                </View>
+            )
+        })
+    }
+
+
+
+
+    const makeItems = (body: string[]) => {
+        return body.map((item, i, arr) => {
+            return (
+                <View key={i}>
+                    <Text style={styles.bodyText}>
+                        {item}
+                    </Text>
+                </View>
+            )
+        })
+    }
+
+
     return (
         <View>
-            {skillCircle ?
-                <View style={[styles.skillNumberCircle, { borderColor: props.color }]}>
-                    <Text>{props.skillNumber}</Text>
-                </View> :
-                null
-            }
+            <View style={[styles.skillNumberCircle, { borderColor: props.color }]}>
+                <Text>{props.skillNumber}</Text>
+            </View>
             <Text style={styles.headerText}>
                 {props.headerText}
             </Text>
             <CardSeparator color={props.color} />
-            <Text style={styles.bodyText}>
-                {props.bodyText}
-            </Text>
+            {makeSection()}
         </View>
     );
 };
@@ -57,6 +80,6 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     bodyText: {
-        fontSize: 16
+        fontSize: 14
     }
 })

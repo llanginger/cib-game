@@ -20,15 +20,14 @@ const window = Dimensions.get("window")
 
 interface ISkillCardLightboxScreenProps {
     navigator: any;
-    bodyText: string;
+    bodyText: { title: string; body: string[] }[];
     headerText: string;
     skillNumber: number;
     color: string
 }
 
 interface ISkillCardLightboxScreenState {
-    dismissButtonDisabled: boolean
-    scrolling: boolean
+
 }
 
 
@@ -36,25 +35,6 @@ interface ISkillCardLightboxScreenState {
 // TODO: Add touchable and Animated elements to entire screen allowing for lightbox to be "pulled" away
 export class SkillCardLightboxScreen extends React.Component<ISkillCardLightboxScreenProps, ISkillCardLightboxScreenState> {
 
-    private _panResponder
-
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            dismissButtonDisabled: false,
-            scrolling: false
-        }
-    }
-
-    componentWillMount() {
-        this._panResponder = PanResponder.create({
-            onMoveShouldSetPanResponder: (evt, gestureState) => true,
-            onPanResponderMove: (evt, gestureState) => {
-
-            }
-        })
-    }
 
     render() {
         const { props } = this
@@ -68,7 +48,6 @@ export class SkillCardLightboxScreen extends React.Component<ISkillCardLightboxS
                 <View style={[styles.infoContainer, { backgroundColor: props.color }]}>
                     <ScrollView contentContainerStyle={styles.textScrollContainer} >
                         <LightBoxTextSection
-                            skillCircle
                             skillNumber={props.skillNumber}
                             color={props.color}
                             headerText={props.headerText}
@@ -76,7 +55,6 @@ export class SkillCardLightboxScreen extends React.Component<ISkillCardLightboxS
                         />
                     </ScrollView>
                     <TouchableOpacity
-                        disabled={this.state.dismissButtonDisabled}
                         style={styles.dismissButton}
                         onPress={() => props.navigator.dismissLightBox()}
                     >

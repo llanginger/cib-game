@@ -25,43 +25,61 @@ const height = Dimensions.get("screen").height
 
 const skills: {
     headerText: string;
-    bodyText: string;
+    bodyText: { title: string; body: string[] }[];
     color: string;
     id: any
 }[] = [
         {
             headerText: "RECONOCER MIS EMOCIONES",
-            bodyText: "Reconocer mis emociones es el primer paso para poder regularlas.",
+            bodyText: [{
+                title: "Something",
+                body: ["Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas."]
+            }],
             color: "#cc0066",
             id: 1
         },
         {
             headerText: "GESTIONAR MIS EMOCIONES",
-            bodyText: "Saber cómo regular mis emociones me ayuda a sentirme bien, estudiar mejor y conseguir mis metas.",
+            bodyText: [{
+                title: "Something",
+                body: ["Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas."]
+            }],
             color: "#3333cc",
             id: 2
         },
         {
             headerText: "TENER ALTA AUTOESTIMA",
-            bodyText: "Al contrario de lo que pensamos, es más importante lo que pienso de mí de lo que piensan los demás.",
+            bodyText: [{
+                title: "Something",
+                body: ["Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas."]
+            }],
             color: "#ffcc33",
             id: 3
         },
         {
             headerText: "ESCUCHAR CON EMPATíA",
-            bodyText: "Saber escuchar y ser empático es imprescindible para tener buenas relaciones.",
+            bodyText: [{
+                title: "Something",
+                body: ["Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas."]
+            }],
             color: "#339900",
             id: 4
         },
         {
             headerText: "COMUNICAR CON ASERTIVIDAD",
-            bodyText: "Cuando comunico con asertividad tengo en cuenta mis derechos y deseos y también los de los demás.",
+            bodyText: [{
+                title: "Something",
+                body: ["Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas."]
+            }],
             color: "#ff9933",
             id: 5
         },
         {
             headerText: "VIVIR CONSCIENTEMENTE",
-            bodyText: "Vivir conscientemente hace posible ver las cosas como son en vez de verlas a través de un filtro de prejuicios.",
+            bodyText: [{
+                title: "Something",
+                body: ["Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas.", "Reconocer mis emociones es el primer paso para poder regularlas."]
+            }],
             color: "#663366",
             id: 6
         }
