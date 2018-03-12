@@ -21,6 +21,7 @@ export interface ICharacterSelectProps {
     navigator?: any;
     dispatch?: any
     selectedCharacterIndex: number
+    fontSize: number
 }
 const dimWidth = Dimensions.get("window").width;
 const imageWidth = dimWidth * 0.4;
@@ -48,6 +49,8 @@ class _CharacterSelect extends React.Component<ICharacterSelectProps, any> {
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
+        this._fontSizeUp = this._fontSizeUp.bind(this)
+        this._fontSizeDown = this._fontSizeDown.bind(this)
 
     }
 
@@ -58,6 +61,25 @@ class _CharacterSelect extends React.Component<ICharacterSelectProps, any> {
                 this.props.navigator.dismissModal();
             }
         }
+    }
+
+    _fontSizeUp() {
+        const { fontSize } = this.props
+        return this.props.dispatch({
+            type: "USER_PREFERENCE_FONTSIZE",
+            payload: {
+                fontSize: 2 + fontSize
+            }
+        })
+    }
+    _fontSizeDown() {
+        const { fontSize } = this.props
+        return this.props.dispatch({
+            type: "USER_PREFERENCE_FONTSIZE",
+            payload: {
+                fontSize: -2 + fontSize
+            }
+        })
     }
 
     render() {
@@ -78,7 +100,7 @@ class _CharacterSelect extends React.Component<ICharacterSelectProps, any> {
             <View style={styles.container}>
                 <StatusBar barStyle="dark-content" />
                 <View>
-                    <CharacterSelectTitle />
+                    <CharacterSelectTitle fontSize={this.props.fontSize} />
                     {makeUserAvatars(this.props.selectedCharacterIndex)}
                 </View>
                 <TouchableOpacity style={styles.confirmButtonContainer}
@@ -86,6 +108,18 @@ class _CharacterSelect extends React.Component<ICharacterSelectProps, any> {
                 >
                     <Text style={styles.confirmButtonText}>Lista?</Text>
                 </TouchableOpacity>
+                <View style={styles.fontSizeButtonsContainer}>
+                    <TouchableOpacity style={styles.fontSizeButtonContainer}
+                        onPress={() => this._fontSizeDown()}
+                    >
+                        <Text style={styles.confirmButtonText}>Font Size -</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.fontSizeButtonContainer}
+                        onPress={() => this._fontSizeUp()}
+                    >
+                        <Text style={styles.confirmButtonText}>Font Size +</Text>
+                    </TouchableOpacity>
+                </View>
 
             </View>
         );
@@ -94,7 +128,8 @@ class _CharacterSelect extends React.Component<ICharacterSelectProps, any> {
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        selectedCharacterIndex: state.userReducer.selectedCharacterIndex
+        selectedCharacterIndex: state.userReducer.selectedCharacterIndex,
+        fontSize: state.userPreferencesReducer.fontSize
     }
 }
 
@@ -152,5 +187,22 @@ const styles = StyleSheet.create({
     confirmButtonText: {
         color: "white",
         fontSize: 20
+    },
+    fontSizeButtonsContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingHorizontal: "5%"
+
+    },
+    fontSizeButtonContainer: {
+        height: 50,
+        marginVertical: 15,
+        width: "48%",
+        backgroundColor: "palevioletred",
+        borderRadius: 10,
+        shadowOffset: { width: 3, height: 3 },
+        shadowOpacity: 0.6,
+        justifyContent: "center",
+        alignItems: "center"
     }
 });

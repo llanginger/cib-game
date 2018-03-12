@@ -15,15 +15,13 @@ import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
 import { CardSeparator } from "./lightBoxComponents/CardSeparator"
 import { LightBoxTextSection } from "./lightBoxComponents/LightBoxTextSection"
+import { ISkill } from "./skills"
 
 const window = Dimensions.get("window")
 
 interface ISkillCardLightboxScreenProps {
-    navigator: any;
-    bodyText: { title: string; body: string[] }[];
-    headerText: string;
-    skillNumber: number;
-    color: string
+    skill: ISkill
+    navigator: any
 }
 
 interface ISkillCardLightboxScreenState {
@@ -37,7 +35,9 @@ export class SkillCardLightboxScreen extends React.Component<ISkillCardLightboxS
 
 
     render() {
+
         const { props } = this
+        const { skillNumber, headerText, bodyText, color } = props.skill
         return (
             <View style={styles.container}>
                 <Image
@@ -45,20 +45,20 @@ export class SkillCardLightboxScreen extends React.Component<ISkillCardLightboxS
                     source={require("../../images/dummyBackground.png")}
                     resizeMode="cover"
                 />
-                <View style={[styles.infoContainer, { backgroundColor: props.color }]}>
+                <View style={[styles.infoContainer, { backgroundColor: color }]}>
                     <ScrollView contentContainerStyle={styles.textScrollContainer} >
                         <LightBoxTextSection
-                            skillNumber={props.skillNumber}
-                            color={props.color}
-                            headerText={props.headerText}
-                            bodyText={props.bodyText}
+                            skillNumber={skillNumber}
+                            color={color}
+                            headerText={headerText}
+                            bodyText={bodyText}
                         />
                     </ScrollView>
                     <TouchableOpacity
-                        style={styles.dismissButton}
+                        style={[styles.dismissButton, { borderTopColor: color, borderTopWidth: 2 }]}
                         onPress={() => props.navigator.dismissLightBox()}
                     >
-                        <Text style={[styles.dismissButtonText, { color: props.color }]}>Dismiss</Text>
+                        <Text style={[styles.dismissButtonText, { color: color }]}>Dismiss</Text>
                     </TouchableOpacity>
                 </View>
             </View >
@@ -70,7 +70,7 @@ export class SkillCardLightboxScreen extends React.Component<ISkillCardLightboxS
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "white",
+        // backgroundColor: "white",
         height: window.height + 30,
         width: window.width,
         justifyContent: "space-between",
@@ -94,8 +94,7 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     textScrollContainer: {
-        backgroundColor: "white",
-        padding: 20,
+        // backgroundColor: "white",
         width: "100%"
     },
     headerText: {

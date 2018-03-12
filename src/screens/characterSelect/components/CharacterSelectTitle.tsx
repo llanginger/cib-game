@@ -4,14 +4,15 @@ import { View, Text, StyleSheet } from 'react-native';
 
 //Interface
 interface ICharacterSelectTitleProps {
-    children: any
+    children?: any
+    fontSize: number
 }
 
 // create a component
-export const CharacterSelectTitle: React.StatelessComponent = (props: ICharacterSelectTitleProps) => {
+export const CharacterSelectTitle: React.StatelessComponent<ICharacterSelectTitleProps> = (props: ICharacterSelectTitleProps) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Elige un protagonista!</Text>
+            <Text style={[styles.title, { fontSize: props.fontSize }]}>Elige un protagonista!</Text>
         </View>
     );
 };

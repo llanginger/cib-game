@@ -1,14 +1,9 @@
-interface IShowLightBoxProps {
-    color: string;
-    bodyText: { title: string; body: string[] }[];
-    headerText: string;
-    skillNumber: number;
-}
+import { ISkill } from "./skills"
+export const showLightBox = (navigator, props: ISkill) => {
 
-export const showLightBox = (navigator, props: IShowLightBoxProps) => {
     return navigator.showLightBox({
         screen: "SkillCardLightboxScreen",
-        passProps: props,
+        passProps: { skill: props },
         style: {
             backgroundBlur: "none",
 

@@ -15,7 +15,9 @@ import {
     colorsReducer,
     IColorsReducer,
     popupReducer,
-    IPopupReducer
+    IPopupReducer,
+    userPreferencesReducer,
+    IUserPreferencesReducer
 
 } from "./reducers/index";
 import logger from "redux-logger"
@@ -30,6 +32,7 @@ export interface IReducers {
     wordGameReducer: IWordGameReducer
     gameTypeReducer: IGameTypeReducer
     colorsReducer: IColorsReducer
+    userPreferencesReducer: IUserPreferencesReducer
 }
 
 const reducers = combineReducers({
@@ -40,6 +43,7 @@ const reducers = combineReducers({
     cardGameReducer,
     wordGameReducer,
     popupReducer,
+    userPreferencesReducer,
     gameTypeReducer
 });
 

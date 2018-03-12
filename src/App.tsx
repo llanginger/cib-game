@@ -28,7 +28,7 @@ registerScreens(store, Provider);
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "SkillRecap",
+        screen: "HomeScreen",
 
     },
     drawer: {

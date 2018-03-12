@@ -6,3 +6,4 @@ export * from "./gameTypeReducer";
 export * from "./deviceTypeReducer";
 export * from "./colorsReducer";
 export * from "./popupReducer";
+export * from "./userPreferences"

@@ -26,6 +26,7 @@ import { getTextGameLevel } from "../gameScreens/wordGame/components/wordLevels"
 // Text game section
 
 import { WordGameContainer } from "./wordGame/WordGameContainer"
+import { LaiaGameContainer } from "./laiaGames/LaiaGameContainer"
 
 import { Popup } from "./components/popup/Popup"
 
@@ -73,10 +74,10 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
             textGameLevel: getTextGameLevel([]),
             cardGameLevel: getCardGameLevel([])
         }))
-        this.props.navigator.showModal({
-            screen: "CharacterSelect",
-            animationType: "none"
-        })
+        // this.props.navigator.showModal({
+        //     screen: "CharacterSelect",
+        //     animationType: "none"
+        // })
     }
 
     _showGameType() {
@@ -101,7 +102,8 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
         return (
             <View style={styles.container}>
                 <ScoreContainer menuPress={this._menuPress} containerProps={{ alignSelf: "flex-end" }} />
-                {this._showGameType()}
+                {/* {this._showGameType()} */}
+                <LaiaGameContainer />
                 <Popup />
             </View>
         )
