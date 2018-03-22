@@ -17,8 +17,9 @@ import {
     popupReducer,
     IPopupReducer,
     userPreferencesReducer,
-    IUserPreferencesReducer
-
+    IUserPreferencesReducer,
+    laiaScoreReducer,
+    ILaiaScoreReducer
 } from "./reducers/index";
 import logger from "redux-logger"
 export * from "./reducers/index"
@@ -33,6 +34,7 @@ export interface IReducers {
     gameTypeReducer: IGameTypeReducer
     colorsReducer: IColorsReducer
     userPreferencesReducer: IUserPreferencesReducer
+    laiaScoreReducer: ILaiaScoreReducer
 }
 
 const reducers = combineReducers({
@@ -44,7 +46,8 @@ const reducers = combineReducers({
     wordGameReducer,
     popupReducer,
     userPreferencesReducer,
-    gameTypeReducer
+    gameTypeReducer,
+    laiaScoreReducer
 });
 
 export const store = createStore(reducers, applyMiddleware(logger));

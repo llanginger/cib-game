@@ -13,7 +13,8 @@ import {
     StatusBar,
     Animated,
     Easing,
-    Platform
+    Platform,
+    ImageBackground
 } from "react-native";
 import { connect } from "react-redux";
 import { IReducers, IColorsReducer } from "../../../../redux/store";
@@ -55,12 +56,12 @@ class _Popup extends Component<IPopupProps, any> {
 
     _bounce() {
         this.bounceInValue.setValue(0)
-        Animated.spring(
+        Animated.timing(
             this.bounceInValue,
             {
                 toValue: 1,
-                friction: 5,
-                velocity: 6
+                duration: 400,
+                easing: Easing.quad
             }
         ).start(() => {
             this.setState({
@@ -98,12 +99,12 @@ class _Popup extends Component<IPopupProps, any> {
 
         const bounceInScale = this.bounceInValue.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, 520]
+            outputRange: [-500, 0]
         })
 
         const bounceOutScale = this.bounceOutValue.interpolate({
             inputRange: [0, 1],
-            outputRange: [520, -100]
+            outputRange: [0, -500]
         })
 
         const getBounceDirection = () => {
@@ -111,15 +112,22 @@ class _Popup extends Component<IPopupProps, any> {
         }
 
 
-        const getContainerStyles = () => {
+        const getContainerBorderStyles = () => {
             return {
                 borderColor: correctAnswer ? colors.COOL : colors.HOT
             }
         }
 
         return (
-            <Animated.View style={[styles.container, { ...getContainerStyles(), transform: [{ translateY: getBounceDirection() }] }]}>
-                <Text style={styles.text}>{correctAnswer ? "Great Job!!" : "You'll get it next time!"}</Text>
+            <Animated.View style={[
+                styles.container,
+                {
+                    // ...getContainerBorderStyles(),
+                    transform: [{ translateY: getBounceDirection() }]
+                }
+            ]}>
+                <Image style={styles.image} source={require("../../../../images/board-image-small.png")} />
+                <Text style={styles.text}>Result Message</Text>
             </Animated.View>
         )
     }
@@ -137,21 +145,32 @@ export const Popup = connect<IPopupStateProps, {}, IPopupProps>(mapStateToProps)
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 15,
-        overflow: "hidden",
-        height: 100,
-        width: 300,
-        backgroundColor: "white",
-        borderWidth: 5,
-        borderColor: "black",
         display: "flex",
         position: "absolute",
-        left: 20,
-        top: -200,
+        left: 0,
+        right: 0,
+        // top: -200,
+        top: 0,
+        height: 340,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "transparent",
+        shadowColor: 'rgb(24, 23, 22)',
+        shadowOffset: { width: 0, height: 10 },
+        shadowRadius: 5,
+        shadowOpacity: 0.8,
     },
     text: {
-        fontSize: 24
+        fontSize: 24,
+        position: "absolute",
+        left: 0,
+        right: 0,
+        bottom: 100,
+        textAlign: "center"
+    },
+    image: {
+        transform: [
+            { scale: 1.5 }
+        ]
     }
 })

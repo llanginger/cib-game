@@ -15,7 +15,7 @@ interface IScoreCounterProps {
     score: number;
 }
 
-export const ScoreCounter = (props: IScoreCounterProps) => {
+const ScoreCounter = (props: IScoreCounterProps) => {
     return (
         <View style={styles.container}>
             <Image
@@ -28,6 +28,21 @@ export const ScoreCounter = (props: IScoreCounterProps) => {
     );
 };
 
+interface IScoreCountersProps {
+    hotImage: any;
+    coolImage: any;
+    score: { hotScore: number; coolScore: number }
+}
+
+export const ScoreCounters = (props: IScoreCountersProps) => {
+    return (
+        <View style={[styles.scoreContainer, { zIndex: 1 }]}>
+            <ScoreCounter imagePath={props.hotImage} score={props.score.hotScore} />
+            <ScoreCounter imagePath={props.coolImage} score={props.score.coolScore} />
+        </View>
+    )
+}
+
 const styles = StyleSheet.create({
     container: {
         marginHorizontal: 10,
@@ -38,5 +53,8 @@ const styles = StyleSheet.create({
         marginRight: 5,
         width: 50,
         height: 50
+    },
+    scoreContainer: {
+        flexDirection: "row"
     }
 });

@@ -8,7 +8,7 @@
         "watch": "npm run build -- -w",
         "test": "jest",
         "tsc": "tsc",
-        "copy-assets": "copyfiles -f src/images/**.* build/images",
+        "copy-assets": "copyfiles -f src/images/**.* build/images && copyfiles -f src/images/laia/**.* build/images/laia",
         "clean": "rimraf build",
         "build": "npm run clean && npm run copy-assets && npm run tsc --"
     },
@@ -21,6 +21,7 @@
         "lodash": "^4.17.4",
         "react": "16.0.0-beta.5",
         "react-native": "0.49.1",
+        "react-native-animatable": "^1.2.4",
         "react-native-device-info": "^0.13.0",
         "react-native-elements": "^0.17.0",
         "react-native-gifted-chat": "^0.2.9",

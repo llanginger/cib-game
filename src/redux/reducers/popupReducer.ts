@@ -12,6 +12,7 @@ export const popupReducer = (state: IPopupReducer = initState, action) => {
     switch (action.type) {
         case "CARDGAME_SHOW_ANSWER":
         case "WORDGAME_SUBMIT_WORD":
+        case "PARROT_GAME_SUBMIT_ANSWER":
             return {
                 ...state,
                 showPopup: true,

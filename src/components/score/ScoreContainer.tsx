@@ -12,9 +12,10 @@ import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
 import { IScoreReducer } from "../../redux/reducers/index";
 
-import { ScoreCounter } from "./ScoreCounter";
+import { ScoreCounters } from "./ScoreCounter";
 
 import { UserAvatar } from "../../components/UserAvatar"
+import { RobotScoreCounter } from "./RobotScoreCounter"
 
 
 interface IScoreContainerProps {
@@ -29,26 +30,29 @@ interface IScoreContainerProps {
 export const _ScoreContainer = (props: IScoreContainerProps) => {
     const hotImage = require("../../images/hot.png");
     const coolImage = require("../../images/cool.png");
+    const robot = require("../../images/laia/robot.png");
     const { containerProps = {} } = props
 
     console.log("Score Container props: ", props);
     return (
         <View style={[styles.container, props.containerProps]}>
             <UserAvatar menuPress={props.menuPress} />
-            <View style={[styles.scoreContainer, { zIndex: 1 }]}>
-                <ScoreCounter imagePath={hotImage} score={props.score.hotScore} />
-                <ScoreCounter imagePath={coolImage} score={props.score.coolScore} />
-            </View>
+            {/* <ScoreCounters
+                hotImage={hotImage}
+                coolImage={coolImage}
+                score={props.score}
+            /> */}
+            <RobotScoreCounter image={robot} />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        height: 70,
+        // height: 150,
         marginTop: 25,
         width: "100%",
-        // backgroundColor: "blue",
+        // backgroundColor: "palevioletred",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",

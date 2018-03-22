@@ -122,6 +122,6 @@ export const HomeScreen = connect(mapStateToProps)(_HomeScreen)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#daf6fa"
+        backgroundColor: "white"
     },
 })
