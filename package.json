@@ -3,12 +3,16 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "start:ios": "npm run build && concurrently -r 'npm run watch' 'react-native run-ios'",
+        "start:ios":
+            "npm run build && concurrently -r 'npm run watch' 'react-native run-ios'",
         "start": "node node_modules/react-native/local-cli/cli.js start",
+        "start:ios_x":
+            "npm run build && concurrently -r 'npm run watch' 'react-native run-ios --simulator=\"iPhone X\"'",
         "watch": "npm run build -- -w",
         "test": "jest",
         "tsc": "tsc",
-        "copy-assets": "copyfiles -f src/images/**.* build/images && copyfiles -f src/images/laia/**.* build/images/laia",
+        "copy-assets":
+            "copyfiles -f src/images/**.* build/images && copyfiles -f src/images/laia/**.* build/images/laia",
         "clean": "rimraf build",
         "build": "npm run clean && npm run copy-assets && npm run tsc --"
     },
@@ -40,6 +44,7 @@
         "babel-preset-react-native": "4.0.0",
         "concurrently": "^3.5.0",
         "jest": "21.2.1",
+        "prettier": "1.11.1",
         "react-test-renderer": "16.0.0-beta.5"
     },
     "jest": {

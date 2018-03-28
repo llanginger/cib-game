@@ -15,30 +15,28 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
 
-import { ImageCard } from "./components/imageCard/ImageCard"
-import { CardGameContainer } from "./cardGame/CardGameContainer"
-import { PressBounce } from "../../components/PressBounce"
-import { ScoreContainer } from "../../components/score/ScoreContainer"
-import DeviceInfo from 'react-native-device-info'
-import { initAction } from "../../redux/actions/index"
-import { getCardGameLevel } from "../gameScreens/cardGame/components/cardLevels"
-import { getTextGameLevel } from "../gameScreens/wordGame/components/wordLevels"
+import { ImageCard } from "./components/imageCard/ImageCard";
+import { CardGameContainer } from "./cardGame/CardGameContainer";
+import { PressBounce } from "../../components/PressBounce";
+import { ScoreContainer } from "../../components/score/ScoreContainer";
+import DeviceInfo from "react-native-device-info";
+import { initAction } from "../../redux/actions/index";
+import { getCardGameLevel } from "../gameScreens/cardGame/components/cardLevels";
+import { getTextGameLevel } from "../gameScreens/wordGame/components/wordLevels";
 // Text game section
 
-import { WordGameContainer } from "./wordGame/WordGameContainer"
-import { LaiaGameContainer } from "./laiaGames/LaiaGameContainer"
+import { WordGameContainer } from "./wordGame/WordGameContainer";
+import { LaiaGameContainer } from "./laiaGames/LaiaGameContainer";
 
-import { Popup } from "./components/popup/Popup"
-
+import { Popup } from "./components/popup/Popup";
 
 interface ICardGameMainScreenProps {
     navigator?: any;
-    gameType: "word" | "card"
-    dispatch?: any
+    gameType: "word" | "card";
+    dispatch?: any;
 }
 
 class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
-
     static navigatorStyle = {
         navBarTextColor: "red",
         drawUnderNavBar: true,
@@ -52,8 +50,8 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
-        this._showGameType = this._showGameType.bind(this)
-        this._menuPress = this._menuPress.bind(this)
+        this._showGameType = this._showGameType.bind(this);
+        this._menuPress = this._menuPress.bind(this);
     }
 
     onNavigatorEvent(event) {
@@ -69,11 +67,13 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
 
     componentWillMount() {
         // this.props.dispatch({type: "SET_DEVICE_TYPE", payload: { deviceType: DeviceInfo.getModel() } })
-        this.props.dispatch(initAction({
-            deviceType: DeviceInfo.getModel(),
-            textGameLevel: getTextGameLevel([]),
-            cardGameLevel: getCardGameLevel([])
-        }))
+        this.props.dispatch(
+            initAction({
+                deviceType: DeviceInfo.getModel(),
+                textGameLevel: getTextGameLevel([]),
+                cardGameLevel: getCardGameLevel([])
+            })
+        );
         // this.props.navigator.showModal({
         //     screen: "CharacterSelect",
         //     animationType: "none"
@@ -83,10 +83,11 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
     _showGameType() {
         switch (this.props.gameType) {
             case "word":
-                return <WordGameContainer />
+                return <WordGameContainer />;
             case "card":
-                return <CardGameContainer />
-            default: return <CardGameContainer />
+                return <CardGameContainer />;
+            default:
+                return <CardGameContainer />;
         }
     }
 
@@ -98,30 +99,32 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
     }
 
     render() {
-        console.log("duo main screen props: ", this.props)
+        console.log("duo main screen props: ", this.props);
         return (
             <View style={styles.container}>
-                <ScoreContainer menuPress={this._menuPress} containerProps={{ alignSelf: "flex-end" }} />
+                <ScoreContainer
+                    menuPress={this._menuPress}
+                    containerProps={{ alignSelf: "flex-end" }}
+                />
                 {/* {this._showGameType()} */}
-                <LaiaGameContainer />
+                <LaiaGameContainer navigator={this.props.navigator} />
                 <Popup />
             </View>
-        )
+        );
     }
 }
 
 const mapStateToProps = (state: IReducers) => {
     return {
         gameType: state.gameTypeReducer.gameType
-    }
-}
+    };
+};
 
-export const HomeScreen = connect(mapStateToProps)(_HomeScreen)
-
+export const HomeScreen = connect(mapStateToProps)(_HomeScreen);
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "white"
-    },
-})
+    }
+});

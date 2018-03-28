@@ -14,26 +14,23 @@ import { IScoreReducer } from "../../redux/reducers/index";
 
 import { ScoreCounters } from "./ScoreCounter";
 
-import { UserAvatar } from "../../components/UserAvatar"
-import { RobotScoreCounter } from "./RobotScoreCounter"
-
+import { UserAvatar } from "../../components/UserAvatar";
+import { RobotScoreCounter } from "./RobotScoreCounter";
 
 interface IScoreContainerProps {
     children?: any;
     score?: IScoreReducer;
     dispatch?: any;
-    containerProps?: {}
-    menuPress?: any
+    containerProps?: {};
+    menuPress?: any;
 }
-
 
 export const _ScoreContainer = (props: IScoreContainerProps) => {
     const hotImage = require("../../images/hot.png");
     const coolImage = require("../../images/cool.png");
     const robot = require("../../images/laia/robot.png");
-    const { containerProps = {} } = props
+    const { containerProps = {} } = props;
 
-    console.log("Score Container props: ", props);
     return (
         <View style={[styles.container, props.containerProps]}>
             <UserAvatar menuPress={props.menuPress} />
@@ -49,13 +46,11 @@ export const _ScoreContainer = (props: IScoreContainerProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        // height: 150,
         marginTop: 25,
         width: "100%",
-        // backgroundColor: "palevioletred",
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "space-between"
     },
     scoreContainer: {
         flexDirection: "row"
@@ -70,14 +65,18 @@ const mapStateToProps = (state: IReducers) => {
 
 interface IScoreContainerReduxProps {
     menuPress?: any;
-    score: any
+    score: any;
 }
 
 interface IScoreContainerParentProps {
-    containerProps?: {}
-    menuPress: any
+    containerProps?: {};
+    menuPress: any;
 }
 
 const mapDispatchToProps = {};
 
-export const ScoreContainer = connect<IScoreContainerReduxProps, any, IScoreContainerParentProps>(mapStateToProps)(_ScoreContainer); // Why do I need any here?
+export const ScoreContainer = connect<
+    IScoreContainerReduxProps,
+    any,
+    IScoreContainerParentProps
+>(mapStateToProps)(_ScoreContainer);

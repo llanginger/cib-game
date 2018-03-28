@@ -16,20 +16,18 @@ import { store, IReducers } from "./redux/store";
 
 // Duo Prototype section
 
-import { HomeScreen } from "./screens/gameScreens/GameContainer"
-import { AnimationTest } from "./screens/AnimationTest"
+import { HomeScreen } from "./screens/gameScreens/GameContainer";
+import { AnimationTest } from "./screens/AnimationTest";
 
 // Screen section
 
-import { registerScreens } from "./router/registerScreens"
-
+import { registerScreens } from "./router/registerScreens";
 
 registerScreens(store, Provider);
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "HomeScreen",
-
+        screen: "HomeScreen"
     },
     drawer: {
         left: {
