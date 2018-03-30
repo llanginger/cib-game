@@ -16,17 +16,14 @@ import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
 
 import { ImageCard } from "./components/imageCard/ImageCard";
-import { CardGameContainer } from "./cardGame/CardGameContainer";
 import { PressBounce } from "../../components/PressBounce";
 import { ScoreContainer } from "../../components/score/ScoreContainer";
 import DeviceInfo from "react-native-device-info";
 import { initAction } from "../../redux/actions/index";
-import { getCardGameLevel } from "../gameScreens/cardGame/components/cardLevels";
-import { getTextGameLevel } from "../gameScreens/wordGame/components/wordLevels";
 // Text game section
 
-import { WordGameContainer } from "./wordGame/WordGameContainer";
-import { LaiaGameContainer } from "./laiaGames/LaiaGameContainer";
+import { LaiaGameContainer } from "./LaiaGameContainer";
+import { RobotGameContainer } from "./robotGameScreen/RobotGameContainer";
 
 import { Popup } from "./components/popup/Popup";
 
@@ -50,7 +47,6 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
-        this._showGameType = this._showGameType.bind(this);
         this._menuPress = this._menuPress.bind(this);
     }
 
@@ -67,28 +63,16 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
 
     componentWillMount() {
         // this.props.dispatch({type: "SET_DEVICE_TYPE", payload: { deviceType: DeviceInfo.getModel() } })
-        this.props.dispatch(
-            initAction({
-                deviceType: DeviceInfo.getModel(),
-                textGameLevel: getTextGameLevel([]),
-                cardGameLevel: getCardGameLevel([])
-            })
-        );
+        // TODO: Evaluate this for use in Laia game
+        // this.props.dispatch(
+        //     initAction({
+        //         deviceType: DeviceInfo.getModel(),
+        //     })
+        // );
         // this.props.navigator.showModal({
         //     screen: "CharacterSelect",
         //     animationType: "none"
         // })
-    }
-
-    _showGameType() {
-        switch (this.props.gameType) {
-            case "word":
-                return <WordGameContainer />;
-            case "card":
-                return <CardGameContainer />;
-            default:
-                return <CardGameContainer />;
-        }
     }
 
     _menuPress() {
@@ -107,7 +91,7 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
                     containerProps={{ alignSelf: "flex-end" }}
                 />
                 {/* {this._showGameType()} */}
-                <LaiaGameContainer navigator={this.props.navigator} />
+                <RobotGameContainer navigator={this.props.navigator} />
                 <Popup />
             </View>
         );

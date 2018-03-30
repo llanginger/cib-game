@@ -2,7 +2,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { connect } from "react-redux";
-import { IReducers } from "../../../../redux/store";
+import { IReducers } from "../../../redux/store";
 
 interface IStars {
     noStars: number;
@@ -12,10 +12,10 @@ interface IStars {
 }
 
 const stars: IStars = {
-    noStars: require("../../../../images/laia/0-stars.png"),
-    oneStar: require("../../../../images/laia/1-star.png"),
-    twoStars: require("../../../../images/laia/2-stars.png"),
-    threeStars: require("../../../../images/laia/3-stars.png")
+    noStars: require("../../../images/laia/0-stars.png"),
+    oneStar: require("../../../images/laia/1-star.png"),
+    twoStars: require("../../../images/laia/2-stars.png"),
+    threeStars: require("../../../images/laia/3-stars.png")
 };
 
 //Interface

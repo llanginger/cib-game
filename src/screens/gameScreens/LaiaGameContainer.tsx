@@ -1,7 +1,7 @@
 //import liraries
 import * as React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { GameContainerView } from "../../shared/GameContainerView";
+import { GameContainerView } from "../shared/GameContainerView";
 import { ParrotImage } from "./parrotGameComponents/ParrotImage";
 import { ParrotButton } from "./parrotGameComponents/ParrotButton";
 import { connect } from "react-redux";

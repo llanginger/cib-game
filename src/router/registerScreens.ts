@@ -6,7 +6,7 @@ import { HomeScreen } from "../screens/gameScreens/GameContainer";
 import { LoginScreen } from "../screens/loginScreen/LoginScreen";
 import { SkillCardLightboxScreen } from "../screens/skillRecap/SkillCardLightboxScreen";
 import { AccountScreen } from "../screens/AccountScreen/AccountScreen";
-import { LaiaScoreScreen } from "../screens/gameScreens/laiaGames/LaiaScoreScreen";
+import { LaiaScoreScreen } from "../screens/gameScreens/LaiaScoreScreen";
 
 export const registerScreens = (store, Provider) => {
     Navigation.registerComponent(

@@ -19,22 +19,25 @@ import {
     userPreferencesReducer,
     IUserPreferencesReducer,
     laiaScoreReducer,
-    ILaiaScoreReducer
+    ILaiaScoreReducer,
+    robotGameReducer,
+    IRobotGameReducer
 } from "./reducers/index";
-import logger from "redux-logger"
-export * from "./reducers/index"
+import logger from "redux-logger";
+export * from "./reducers/index";
 
 export interface IReducers {
     scoreReducer: IScoreReducer;
     userReducer: IUserReducer;
     deviceTypeReducer: IDeviceTypeReducer;
-    cardGameReducer: ICardGameReducer
-    popupReducer: IPopupReducer
-    wordGameReducer: IWordGameReducer
-    gameTypeReducer: IGameTypeReducer
-    colorsReducer: IColorsReducer
-    userPreferencesReducer: IUserPreferencesReducer
-    laiaScoreReducer: ILaiaScoreReducer
+    cardGameReducer: ICardGameReducer;
+    popupReducer: IPopupReducer;
+    wordGameReducer: IWordGameReducer;
+    gameTypeReducer: IGameTypeReducer;
+    colorsReducer: IColorsReducer;
+    userPreferencesReducer: IUserPreferencesReducer;
+    laiaScoreReducer: ILaiaScoreReducer;
+    robotGameReducer: IRobotGameReducer;
 }
 
 const reducers = combineReducers({
@@ -47,7 +50,8 @@ const reducers = combineReducers({
     popupReducer,
     userPreferencesReducer,
     gameTypeReducer,
-    laiaScoreReducer
+    laiaScoreReducer,
+    robotGameReducer
 });
 
 export const store = createStore(reducers, applyMiddleware(logger));

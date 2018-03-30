@@ -6,5 +6,6 @@ export * from "./gameTypeReducer";
 export * from "./deviceTypeReducer";
 export * from "./colorsReducer";
 export * from "./popupReducer";
-export * from "./userPreferences"
-export * from "./laiaScoreReducer"
+export * from "./userPreferences";
+export * from "./laiaScoreReducer";
+export * from "./robotGameReducer";
