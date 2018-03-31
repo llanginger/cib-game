@@ -5,6 +5,7 @@ import { GameContainerView } from "../../shared/GameContainerView";
 import { connect } from "react-redux";
 import { Robot } from "./components/Robot";
 import { RobotFaces } from "./components/RobotFaces";
+import { SampleAnimation } from "./components/SampleAnimation";
 
 //Interfaces
 interface IRobotGameContainerProps {
@@ -27,6 +28,7 @@ export class RobotGameContainer extends React.Component<any, any> {
     render() {
         return (
             <View style={styles.container}>
+                {/* <SampleAnimation /> */}
                 <Robot />
                 <RobotFaces />
             </View>

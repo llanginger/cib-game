@@ -1,0 +1,42 @@
+components/
+├─── levels/
+
+├─── screens/
+|    |
+|    ├─── sharedComponents/
+|    |    ├─── index.tsx 
+|    |    └─── ...files.tsx
+|    |
+|    ├─── sharedUtilities/
+|    |    └─── index.ts 
+|    |
+|    ├─── [GENERIC SCREEN]/
+|    |    ├─── [ScreenName.tsx]
+|    |    |
+|    |    ├─── [screenNameComponents]/
+|    |    |    └─── ...files.tsx
+|    |    |
+|    |    ├─── [screenNameComponentLogic]/ 
+|    |    |    ├─── ...files.ts
+└─── └─── └─── └─── index.tsx 
+
+redux/
+├─── store.ts
+|
+├─── reducers/
+|    ├─── index.ts
+|    └─── ...reducers.ts
+|
+├─── actions/
+|    ├─── index.ts
+└─── └─── ...actions.ts
+
+interfaces/
+├─── index.ts
+└─── ...interfaces.ts
+
+navigation/
+├─── registerScreens.ts
+└─── screenObjects.ts
+
+images/

@@ -91,7 +91,7 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
                     containerProps={{ alignSelf: "flex-end" }}
                 />
                 {/* {this._showGameType()} */}
-                <RobotGameContainer navigator={this.props.navigator} />
+                <LaiaGameContainer navigator={this.props.navigator} />
                 <Popup />
             </View>
         );

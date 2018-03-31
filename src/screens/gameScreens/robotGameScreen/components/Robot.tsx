@@ -71,6 +71,7 @@ const _Robot: React.StatelessComponent<IRobotProps> = (props: IRobotProps) => {
 
     return (
         <View style={styles.imageContainer}>
+            <Text style={styles.levelTitle}> WORD HERE</Text>
             <Image
                 style={styles.image}
                 source={getRobot()}
@@ -98,6 +99,13 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         paddingVertical: 20
     },
+    levelTitle: {
+        textAlign: "center",
+        padding: 10,
+        backgroundColor: "papayawhip",
+        borderRadius: 5,
+        overflow: "hidden"
+    },
     image: {
         height: "100%",
         width: "100%"
@@ -110,7 +118,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         left: 15,
         right: 0,
-        top: 34,
+        top: 70,
         justifyContent: "center",
         alignItems: "center"
     }
