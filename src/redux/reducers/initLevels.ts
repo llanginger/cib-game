@@ -1,8 +1,9 @@
-import { IWordGameLevel, ICardGameLevel } from "./index"
+import { IWordGameLevel, ICardGameLevel } from "./index";
 
 export const initWordGameLevel: IWordGameLevel = {
     id: 0,
-    headerText: "Juliana is happy (COOL) that she is doing well with her homework, what is she thinking?",
+    headerText:
+        "Juliana is happy (COOL) that she is doing well with her homework, what is she thinking?",
     bodyText: ["I", "homework!"],
     image: require("../../images/studyPre.png"),
     answerImage: require("../../images/studyCool.png"),
@@ -24,8 +25,7 @@ export const initWordGameLevel: IWordGameLevel = {
             correct: true
         }
     ]
-}
-
+};
 
 export const initCardGameLevel: ICardGameLevel = {
     id: 4,
@@ -56,4 +56,4 @@ export const initCardGameLevel: ICardGameLevel = {
             id: 3
         }
     ]
-}
+};

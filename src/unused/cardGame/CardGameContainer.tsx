@@ -23,7 +23,7 @@ import { getCardGameLevel } from "./components/cardLevels"
 
 import { cardGameSubmitWord, cardGameNewLevel } from "../../../redux/actions/index"
 
-import { GameContainerView } from "../../shared/GameContainerView"
+import { GameContainerView } from "../../sharedComponents/GameContainerView"
 
 interface IDuoGameCardProps {
     level: {

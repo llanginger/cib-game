@@ -13,12 +13,13 @@ components/
 |    ├─── [GENERIC SCREEN]/
 |    |    ├─── [ScreenName.tsx]
 |    |    |
-|    |    ├─── [screenNameComponents]/
+|    |    ├─── [components]/
+|    |    |    ├─── index.tsx
 |    |    |    └─── ...files.tsx
 |    |    |
-|    |    ├─── [screenNameComponentLogic]/ 
+|    |    ├─── [logic]/ 
 |    |    |    ├─── ...files.ts
-└─── └─── └─── └─── index.tsx 
+└─── └─── └─── └─── index.ts 
 
 redux/
 ├─── store.ts

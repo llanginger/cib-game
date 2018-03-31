@@ -8,20 +8,20 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import { Navigation } from "react-native-navigation";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { CharacterSelect } from "./screens/characterSelect/CharacterSelect";
-import { SkillRecap } from "./screens/skillRecap/SkillRecap";
-import { Menu } from "./screens/menu/Menu";
+import { CharacterSelect } from "./components/screens/CharacterSelect/CharacterSelect";
+import { SkillRecapScreen } from "./components/screens/SkillRecapScreen/SkillRecapScreen";
+import { DrawerScreen } from "./components/screens/DrawerScreen/DrawerScreen";
 import { Provider } from "react-redux";
 import { store, IReducers } from "./redux/store";
 
 // Duo Prototype section
 
-import { HomeScreen } from "./screens/gameScreens/GameContainer";
-import { AnimationTest } from "./screens/AnimationTest";
+import { HomeScreen } from "./components/screens/GameScreen/GameContainerScreen";
+import { AnimationTest } from "./components/screens/AnimationTest";
 
 // Screen section
 
-import { registerScreens } from "./router/registerScreens";
+import { registerScreens } from "./navigation/registerScreens";
 
 registerScreens(store, Provider);
 
@@ -31,7 +31,7 @@ Navigation.startSingleScreenApp({
     },
     drawer: {
         left: {
-            screen: "Menu"
+            screen: "DrawerScreen"
         },
         style: {
             drawerShadow: true,

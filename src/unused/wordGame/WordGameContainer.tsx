@@ -27,7 +27,7 @@ import { ScoreContainer } from "../../../components/score/ScoreContainer"
 
 import { wordGameNewLevel, wordGameSubmitWord } from "../../../redux/actions/index"
 
-import { GameContainerView } from "../../shared/GameContainerView"
+import { GameContainerView } from "../../sharedComponents/GameContainerView"
 
 interface IDuoTextGameContainerProps {
     dispatch?: any;

@@ -1,3 +1,6 @@
 game one: Tutorial
 Game two: "6 basic emotions"
-Game 3: "Robot Game"
+Game three: "12 new words"
+game four: "12 words advanced" / robot
+
+Board comes in as instructions
