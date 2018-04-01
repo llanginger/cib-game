@@ -37,37 +37,37 @@ export const scoreReducer = (state: IScoreReducer = initState, action: any) => {
             if (action.payload.correct) {
                 return {
                     ...state,
-                    coolScore: state.coolScore += 1
-                }
+                    coolScore: (state.coolScore += 1)
+                };
             } else {
                 return {
                     ...state,
-                    hotScore: state.hotScore += 1
-                }
+                    hotScore: (state.hotScore += 1)
+                };
             }
-        case "PARROT_GAME_SUBMIT_ANSWER":
+        case "GAME-ONE_SUBMIT_ANSWER":
             if (action.payload.correct) {
                 return {
                     ...state,
-                    coolScore: state.coolScore += 1
-                }
+                    coolScore: (state.coolScore += 1)
+                };
             } else {
                 return {
                     ...state,
-                    hotScore: state.hotScore += 1
-                }
+                    hotScore: (state.hotScore += 1)
+                };
             }
         case "CARDGAME_SHOW_ANSWER":
             if (action.payload.correct) {
                 return {
                     ...state,
-                    coolScore: state.coolScore += 1
-                }
+                    coolScore: (state.coolScore += 1)
+                };
             } else {
                 return {
                     ...state,
-                    hotScore: state.hotScore += 1
-                }
+                    hotScore: (state.hotScore += 1)
+                };
             }
         default:
             return state;

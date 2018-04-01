@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import { IReducers } from "../../../redux/store";
 import { ICardGameCard } from "../../../redux/reducers/index"
 import { ImageCard } from "../components/imageCard/ImageCard"
-import { ScoreContainer } from "../../../components/score/ScoreContainer"
+import { ScoreContainer } from "../../../components/scoreCounter/ScoreContainer"
 import { DuoCardHeaderText } from "./components/CardHeaderText"
 import { SubmitButton } from "../components/SubmitButton"
 import { getCardGameLevel } from "./components/cardLevels"

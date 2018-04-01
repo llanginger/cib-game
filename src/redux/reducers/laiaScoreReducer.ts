@@ -13,7 +13,7 @@ export const laiaScoreReducer = (
     action
 ) => {
     switch (action.type) {
-        case "PARROT_GAME_SUBMIT_ANSWER":
+        case "GAME-ONE_SUBMIT_ANSWER":
             if (action.payload.correct) {
                 return {
                     score: (state.score += 10),

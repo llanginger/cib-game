@@ -3,11 +3,11 @@ import { Navigation } from "react-native-navigation";
 import { CharacterSelect } from "../components/screens/CharacterSelect/CharacterSelect";
 import { SkillRecapScreen } from "../components/screens/SkillRecapScreen/SkillRecapScreen";
 import { DrawerScreen } from "../components/screens/DrawerScreen/DrawerScreen";
-import { HomeScreen } from "../components/screens/GameScreen/GameContainerScreen";
+import { GameContainerScreen } from "../components/screens/GameScreen/GameContainerScreen";
 import { LoginScreen } from "../components/screens/LoginScreen/LoginScreen";
 import { SkillCardLightboxScreen } from "../components/screens/SkillRecapScreen/components/SkillCardLightboxScreen";
 import { AccountScreen } from "../components/screens/AccountScreen/AccountScreen";
-import { LaiaScoreScreen } from "../components/screens/GameScreen/GameLevels/GameOne/LaiaScoreScreen";
+import { LaiaScoreScreen } from "../components/screens/GameScreen/components/scoreScreen/LaiaScoreScreen";
 
 export const registerScreens = (store, Provider) => {
     Navigation.registerComponent(
@@ -18,7 +18,7 @@ export const registerScreens = (store, Provider) => {
     );
     Navigation.registerComponent(
         "HomeScreen",
-        () => HomeScreen,
+        () => GameContainerScreen,
         store,
         Provider
     );

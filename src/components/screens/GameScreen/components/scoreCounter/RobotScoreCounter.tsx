@@ -1,7 +1,7 @@
 //import liraries
 import * as React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { IReducers } from "../../../redux/store"
+import { IReducers } from "../../../../../redux/store"
 import { connect } from "react-redux"
 
 //Interface

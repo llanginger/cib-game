@@ -17,7 +17,7 @@ import {
     ImageBackground
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers, IColorsReducer } from "../../../redux/store";
+import { IReducers, IColorsReducer } from "../../../../../redux/store";
 
 interface IPopupProps {
     colors?: IColorsReducer;
@@ -131,7 +131,7 @@ class _Popup extends Component<IPopupProps, any> {
             >
                 <Image
                     style={styles.image}
-                    source={require("../../../images/laia/board-long.png")}
+                    source={require("../../../../../images/laia/board-long.png")}
                 />
                 <View style={styles.textContainer}>
                     <Text numberOfLines={3} style={styles.text}>

@@ -9,12 +9,12 @@ import {
     Platform
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers } from "../../../redux/store";
-import { IScoreReducer } from "../../../redux/reducers/index";
+import { IReducers } from "../../../../../redux/store";
+import { IScoreReducer } from "../../../../../redux/reducers/index";
 
 import { ScoreCounters } from "./ScoreCounter";
 
-import { UserAvatar } from "../UserAvatar";
+import { UserAvatar } from "../../../../sharedComponents/UserAvatar";
 import { RobotScoreCounter } from "./RobotScoreCounter";
 
 interface IScoreContainerProps {
@@ -26,9 +26,9 @@ interface IScoreContainerProps {
 }
 
 export const _ScoreContainer = (props: IScoreContainerProps) => {
-    const hotImage = require("../../../images/hot.png");
-    const coolImage = require("../../../images/cool.png");
-    const robot = require("../../../images/laia/robot.png");
+    const hotImage = require("../../../../../images/hot.png");
+    const coolImage = require("../../../../../images/cool.png");
+    const robot = require("../../../../../images/laia/robot.png");
     const { containerProps = {} } = props;
 
     return (

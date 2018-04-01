@@ -12,7 +12,7 @@ interface IParrotImageProps {
 }
 
 // create a component
-export const ParrotImage: React.StatelessComponent<IParrotImageProps> = (
+export const GameOneImage: React.StatelessComponent<IParrotImageProps> = (
     props: IParrotImageProps
 ) => {
     return (

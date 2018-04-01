@@ -15,17 +15,17 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../../redux/store";
 
-import { ImageCard } from "../../sharedComponents/imageCard/ImageCard";
+// import { ImageCard } from "../../sharedComponents/imageCard/ImageCard";
 import { PressBounce } from "../../sharedComponents/PressBounce";
-import { ScoreContainer } from "../../sharedComponents/score/ScoreContainer";
+import { ScoreContainer } from "./components/scoreCounter/ScoreContainer";
 import DeviceInfo from "react-native-device-info";
 import { initAction } from "../../../redux/actions/index";
 // Text game section
 
-import { LaiaGameContainer } from "./GameLevels/GameOne/LaiaGameContainer";
-import { RobotGameContainer } from "./GameLevels/GameFour/RobotGameContainer";
+import { GameOneContainer } from "./GameLevels/GameOne/GameOneContainer";
+import { GameFourContainer } from "./GameLevels/GameFour/GameFourContainer";
 
-import { Popup } from "../../sharedComponents/popup/Popup";
+import { Popup } from "./components/popup/Popup";
 
 interface ICardGameMainScreenProps {
     navigator?: any;
@@ -33,7 +33,7 @@ interface ICardGameMainScreenProps {
     dispatch?: any;
 }
 
-class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
+class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
     static navigatorStyle = {
         navBarTextColor: "red",
         drawUnderNavBar: true,
@@ -91,7 +91,7 @@ class _HomeScreen extends Component<ICardGameMainScreenProps, any> {
                     containerProps={{ alignSelf: "flex-end" }}
                 />
                 {/* {this._showGameType()} */}
-                <LaiaGameContainer navigator={this.props.navigator} />
+                <GameOneContainer navigator={this.props.navigator} />
                 <Popup />
             </View>
         );
@@ -104,7 +104,9 @@ const mapStateToProps = (state: IReducers) => {
     };
 };
 
-export const HomeScreen = connect(mapStateToProps)(_HomeScreen);
+export const GameContainerScreen = connect(mapStateToProps)(
+    _GameContainerScreen
+);
 
 const styles = StyleSheet.create({
     container: {

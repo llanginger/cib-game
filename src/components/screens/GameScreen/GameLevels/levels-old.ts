@@ -49,7 +49,7 @@ export const nextLevel: IGameLevelObject = {
         ]
     }
 };
-export const levels: IGameLevelObject[] = [
+export const levelsOld: IGameLevelObject[] = [
     {
         question: [
             {

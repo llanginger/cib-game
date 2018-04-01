@@ -23,7 +23,7 @@ import { SubmitButton } from "../components/SubmitButton"
 import { getTextGameLevel } from "./components/wordLevels"
 import { ImageCard } from "../components/imageCard/ImageCard"
 import { WordGameText } from "./components/WordGameText"
-import { ScoreContainer } from "../../../components/score/ScoreContainer"
+import { ScoreContainer } from "../../../components/scoreCounter/ScoreContainer"
 
 import { wordGameNewLevel, wordGameSubmitWord } from "../../../redux/actions/index"
 

@@ -2,10 +2,10 @@
 import * as React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { GameContainerView } from "../../../../sharedComponents/GameContainerView";
-import { ParrotImage } from "./ParrotImage";
-import { ParrotButton } from "./ParrotButton";
+import { GameOneImage } from "./components/GameOneImage";
+import { Button } from "./components/Button";
 import { connect } from "react-redux";
-import { levels, ILaiaGameLevel } from "./levels";
+import { levels, ILaiaGameLevel, getImage } from "./logic/index";
 
 //Interfaces
 interface ILaiaGameContainerProps {
@@ -26,7 +26,7 @@ const initState: ILaiaGameContainerState = {
     levels: levels,
     currentLevel: 0
 };
-export class LaiaGameContainer extends React.Component<
+export class GameOneContainer extends React.Component<
     ILaiaGameContainerProps,
     ILaiaGameContainerState
 > {
@@ -38,11 +38,12 @@ export class LaiaGameContainer extends React.Component<
         };
         this._buttonOnPress = this._buttonOnPress.bind(this);
         this._makeButtons = this._makeButtons.bind(this);
-        this._getImage = this._getImage.bind(this);
     }
 
     _buttonOnPress(callBack) {
-        if (this.state.currentLevel < this.state.levels.length - 1) {
+        const { currentLevel, levels } = this.state;
+
+        if (currentLevel < levels.length - 1) {
             this.setState({ revealAnswers: true }, () => {
                 setTimeout(() => this.setState({ reset: true }), 2000);
             });
@@ -66,7 +67,7 @@ export class LaiaGameContainer extends React.Component<
         return this.state.levels[this.state.currentLevel].answers.map(
             (answer, i) => {
                 return (
-                    <ParrotButton
+                    <Button
                         text={answer.text}
                         revealed={this.state.revealAnswers}
                         correct={answer.correct}
@@ -83,19 +84,14 @@ export class LaiaGameContainer extends React.Component<
         );
     }
 
-    _getImage() {
-        if (!this.state.revealAnswers) {
-            return this.state.levels[this.state.currentLevel].image_before;
-        } else {
-            return this.state.levels[this.state.currentLevel].image_after;
-        }
-    }
     render() {
+        const { revealAnswers, levels, currentLevel } = this.state;
+
         return (
             <View style={styles.container}>
-                <ParrotImage
+                <GameOneImage
                     color={this.state.revealAnswers}
-                    source={this._getImage()}
+                    source={getImage(revealAnswers, levels[currentLevel])}
                     reveal={this.state.revealAnswers}
                     reset={this.state.reset}
                 />

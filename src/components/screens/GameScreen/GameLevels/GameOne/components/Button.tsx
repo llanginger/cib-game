@@ -2,10 +2,11 @@
 import * as React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
+import { gamOneSubmitAnswer } from "../../../../../../redux/actions/index";
 
 import { connect } from "react-redux";
 //Interface
-interface IParrotButtonProps {
+interface IButtonProps {
     text: string;
     correct: boolean;
     reset: boolean;
@@ -14,13 +15,13 @@ interface IParrotButtonProps {
     delay: number;
     revealed: boolean;
     onPress: any;
-    dispatch?: any;
     animated: boolean;
+    submitAnswer: any;
 }
 
 // create a component
-export const _ParrotButton: React.StatelessComponent<IParrotButtonProps> = (
-    props: IParrotButtonProps
+export const _Button: React.StatelessComponent<IButtonProps> = (
+    props: IButtonProps
 ) => {
     const buttonColor = () => {
         if (!props.revealed) {
@@ -35,10 +36,7 @@ export const _ParrotButton: React.StatelessComponent<IParrotButtonProps> = (
         props.onPress();
 
         if (!props.revealed) {
-            props.dispatch({
-                type: "PARROT_GAME_SUBMIT_ANSWER",
-                payload: { correct: props.correct }
-            });
+            props.submitAnswer(props.correct);
         }
     };
 
@@ -46,11 +44,7 @@ export const _ParrotButton: React.StatelessComponent<IParrotButtonProps> = (
         <TouchableOpacity
             onPress={buttonOnPress}
             disabled={props.revealed}
-            style={{
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "center"
-            }}
+            style={styles.container}
         >
             <Animatable.View
                 animation={
@@ -70,10 +64,23 @@ export const _ParrotButton: React.StatelessComponent<IParrotButtonProps> = (
     );
 };
 
-export const ParrotButton = connect()(_ParrotButton);
+const mapStateToProps = () => {
+    return {};
+};
+
+const mapDispatchToProps = {
+    submitAnswer: gamOneSubmitAnswer
+};
+
+export const Button = connect(mapStateToProps, mapDispatchToProps)(_Button);
 
 // define your styles
 const styles = StyleSheet.create({
+    container: {
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center"
+    },
     button: {
         width: "100%",
         height: 45,

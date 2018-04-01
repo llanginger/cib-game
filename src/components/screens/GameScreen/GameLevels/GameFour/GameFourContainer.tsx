@@ -16,7 +16,7 @@ interface IRobotGameContainerProps {
 interface IRobotGameContainerState {}
 
 const initState: IRobotGameContainerState = {};
-export class RobotGameContainer extends React.Component<any, any> {
+export class GameFourContainer extends React.Component<any, any> {
     constructor(props) {
         super(props);
 
