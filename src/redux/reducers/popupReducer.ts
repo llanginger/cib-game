@@ -16,7 +16,7 @@ export const popupReducer = (state: IPopupReducer = initState, action) => {
             return {
                 ...state,
                 showPopup: true,
-                correct: action.payload.correct ? true : false
+                correct: action.payload
             };
         case "RESET_POPUP": {
             return {

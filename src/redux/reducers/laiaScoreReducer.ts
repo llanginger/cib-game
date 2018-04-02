@@ -14,7 +14,7 @@ export const laiaScoreReducer = (
 ) => {
     switch (action.type) {
         case "GAME-ONE_SUBMIT_ANSWER":
-            if (action.payload.correct) {
+            if (action.payload) {
                 return {
                     score: (state.score += 10),
                     resultMessage: "Great job!"

@@ -7,16 +7,16 @@ import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import { Navigation } from "react-native-navigation";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { CharacterSelect } from "./components/screens/CharacterSelect/CharacterSelect";
-import { SkillRecapScreen } from "./components/screens/SkillRecapScreen/SkillRecapScreen";
-import { DrawerScreen } from "./components/screens/DrawerScreen/DrawerScreen";
+import { CharacterSelectScreen } from "./components/CharacterSelectScreen/CharacterSelectScreen";
+import { SkillRecapScreen } from "./components/SkillRecapScreen/SkillRecapScreen";
+import { DrawerScreen } from "./components/DrawerScreen/DrawerScreen";
 import { Provider } from "react-redux";
 import { store, IReducers } from "./redux/store";
 
 // Duo Prototype section
 
-import { GameContainerScreen } from "./components/screens/GameScreen/GameContainerScreen";
-import { AnimationTest } from "./components/screens/AnimationTest";
+import { GameContainerScreen } from "./components/GameContainerScreen/GameContainerScreen";
+import { AnimationTest } from "./components/AnimationTest";
 
 // Screen section
 

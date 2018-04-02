@@ -1,13 +1,13 @@
 import { Navigation } from "react-native-navigation";
 
-import { CharacterSelect } from "../components/screens/CharacterSelect/CharacterSelect";
-import { SkillRecapScreen } from "../components/screens/SkillRecapScreen/SkillRecapScreen";
-import { DrawerScreen } from "../components/screens/DrawerScreen/DrawerScreen";
-import { GameContainerScreen } from "../components/screens/GameScreen/GameContainerScreen";
-import { LoginScreen } from "../components/screens/LoginScreen/LoginScreen";
-import { SkillCardLightboxScreen } from "../components/screens/SkillRecapScreen/components/SkillCardLightboxScreen";
-import { AccountScreen } from "../components/screens/AccountScreen/AccountScreen";
-import { LaiaScoreScreen } from "../components/screens/GameScreen/components/scoreScreen/LaiaScoreScreen";
+import { CharacterSelectScreen } from "../components/CharacterSelectScreen/CharacterSelectScreen";
+import { SkillRecapScreen } from "../components/SkillRecapScreen/SkillRecapScreen";
+import { DrawerScreen } from "../components/DrawerScreen/DrawerScreen";
+import { GameContainerScreen } from "../components/GameContainerScreen/GameContainerScreen";
+import { LoginScreen } from "../components/LoginScreen/LoginScreen";
+import { SkillCardModalScreen } from "../components/SkillCardModalScreen/SkillCardModalScreen";
+import { AccountScreen } from "../components/AccountScreen/AccountScreen";
+import { ScoreScreen } from "../components/ScoreScreen/ScoreScreen";
 
 export const registerScreens = (store, Provider) => {
     Navigation.registerComponent(
@@ -35,8 +35,8 @@ export const registerScreens = (store, Provider) => {
         Provider
     );
     Navigation.registerComponent(
-        "LaiaScoreScreen",
-        () => LaiaScoreScreen,
+        "ScoreScreen",
+        () => ScoreScreen,
         store,
         Provider
     );
@@ -47,14 +47,14 @@ export const registerScreens = (store, Provider) => {
         Provider
     );
     Navigation.registerComponent(
-        "SkillCardLightboxScreen",
-        () => SkillCardLightboxScreen,
+        "SkillCardModalScreen",
+        () => SkillCardModalScreen,
         store,
         Provider
     );
     Navigation.registerComponent(
-        "CharacterSelect",
-        () => CharacterSelect,
+        "CharacterSelectScreen",
+        () => CharacterSelectScreen,
         store,
         Provider
     );
