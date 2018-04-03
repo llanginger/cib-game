@@ -3,6 +3,8 @@ import * as React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 
 import { StarBoard } from "../StarBoard/StarBoard";
+import { StaticButton } from "../StaticButton/StaticButton";
+import { ScoreScreenTitle } from "./ScoreScreenTitle";
 
 //Interfaces
 interface ILaiaScoreScreenProps {
@@ -46,7 +48,9 @@ export class ScoreScreen extends React.Component<
     render() {
         return (
             <View style={styles.container}>
+                <ScoreScreenTitle text="Great Job!" />
                 <StarBoard />
+                <StaticButton text="Continue" />
             </View>
         );
     }
@@ -56,7 +60,8 @@ export class ScoreScreen extends React.Component<
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        justifyContent: "space-around",
+        alignItems: "center",
+        paddingVertical: 60
     }
 });

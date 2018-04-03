@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { gamOneSubmitAnswer } from "../../redux/actions/index";
-import { styles_colors } from "../../styles/styles";
+import { appStyles } from "../../styles/styles";
 
 import { connect } from "react-redux";
 //Interface
@@ -48,11 +48,11 @@ export const _Button: React.StatelessComponent<IButtonProps> = (
 
     const buttonColor = () => {
         if (!revealed) {
-            return styles_colors.blue;
+            return appStyles.colors.blue;
         } else if (correct) {
-            return styles_colors.green;
+            return appStyles.colors.green;
         } else {
-            return styles_colors.grey;
+            return appStyles.colors.grey;
         }
     };
 

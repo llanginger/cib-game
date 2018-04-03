@@ -16,7 +16,7 @@ import {
     Platform,
     ImageBackground
 } from "react-native";
-import { styles_colors } from "../../styles/styles";
+import { appStyles } from "../../styles/styles";
 import { connect } from "react-redux";
 import { IReducers, IColorsReducer } from "../../redux/store";
 import { PopupStar } from "./PopupStar";
@@ -26,7 +26,7 @@ interface ISandwichBoardProps {
     dispatch?: any;
     correctAnswer?: boolean;
     popupText?: string;
-    showPopup?: boolean;
+    showSandwichBoard?: boolean;
 }
 
 interface ISandwichBoardStateProps {
@@ -60,17 +60,18 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 
     _showSandwichBoard() {
         this.bounceInValue.setValue(0);
-        Animated.spring(this.bounceInValue, {
+        Animated.timing(this.bounceInValue, {
             toValue: 1,
-            friction: 5,
-            damping: 0
+            duration: 400
         }).start(() => {
             this.setState(
                 {
                     bounceDirection: "out",
                     beginAnimation: true
                 },
-                () => this._hideSandwichBoard()
+                () => {
+                    this._hideSandwichBoard();
+                }
             );
         });
     }
@@ -80,7 +81,7 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
         Animated.timing(this.bounceOutValue, {
             toValue: 1,
             duration: 400,
-            delay: 1000,
+            delay: 2000,
             easing: Easing.linear
         }).start(() =>
             this.setState(
@@ -97,7 +98,7 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
     }
 
     componentWillReceiveProps(nextProps: ISandwichBoardProps) {
-        if (nextProps.showPopup) {
+        if (nextProps.showSandwichBoard) {
             console.log("Next props Popup: ", nextProps);
             this._showSandwichBoard();
         }
@@ -124,15 +125,15 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 
         const getBackgroundColor = () => {
             return {
-                backgroundColor: correctAnswer
-                    ? styles_colors.green
-                    : styles_colors.red
+                borderColor: correctAnswer
+                    ? appStyles.colors.green
+                    : appStyles.colors.red
             };
         };
 
         const animatedStyle = [
             styles.container,
-            // { opacity: getBounceDirection() }, // <-- Comment out this line for development
+            { opacity: getBounceDirection() }, // <-- Comment out this line for development
             getBackgroundColor()
         ];
         return (
@@ -142,7 +143,7 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
                         {popupText}
                     </Text> */}
                     <PopupStar
-                        correct={true}
+                        correct={this.props.correctAnswer}
                         beginAnimation={this.state.beginAnimation}
                     />
                 </View>
@@ -169,20 +170,21 @@ const styles = StyleSheet.create({
     container: {
         display: "flex",
         position: "absolute",
-        right: 0,
-        top: 300,
+        right: 5,
+        top: 280,
         height: circleDiameter,
         width: circleDiameter,
         borderRadius: circleDiameter / 2,
         justifyContent: "center",
         alignItems: "center",
-        // backgroundColor: "red",
-        shadowColor: "rgb(24, 23, 22)",
-        shadowOffset: { width: 0, height: 10 },
-        shadowRadius: 5,
-        shadowOpacity: 0.8
+        backgroundColor: "transparent",
+        overflow: "hidden",
+        // shadowColor: "rgb(24, 23, 22)",
+        // shadowOffset: { width: 0, height: 10 },
+        // shadowRadius: 5,
+        // shadowOpacity: 0.8
         // borderColor: "red",
-        // borderWidth: 1
+        borderWidth: 3
     },
     textContainer: {},
     text: {

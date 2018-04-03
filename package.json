@@ -5,27 +5,25 @@
     "scripts": {
         "start:ios": "npm run watch && concurrently -r  'react-native run-ios'",
         "start": "node node_modules/react-native/local-cli/cli.js start",
-        "start:ios_x":
-            "npm run build && concurrently -r 'npm run watch' 'react-native run-ios --simulator=\"iPhone X\"'",
+        "start:ios_x": "npm run build && concurrently -r 'npm run watch' 'react-native run-ios --simulator=\"iPhone X\"'",
         "watch": "npm run build -- -w",
         "test": "jest",
         "tsc": "tsc",
-        "copy-assets":
-            "copyfiles -f src/images/**.* build/images && copyfiles -f src/images/laia/**.* build/images/laia && copyfiles -f src/images/laia/robot-game/**.* build/images/laia/robot-game && copyfiles -f src/images/laia/robot-game/robot/**.* build/images/laia/robot-game/robot && copyfiles -f src/images/laia/robot-game/robot/faces/**.* build/images/laia/robot-game/robot/faces && copyfiles -f src/images/laia/icons/**.* build/images/laia/icons && copyfiles -f src/images/lottie/**.* build/images/lottie && copyfiles -f src/images/laia/game-two/**.* build/images/laia/game-two",
+        "copy-assets": "copyfiles -f src/images/**.* build/images && copyfiles -f src/images/laia/**.* build/images/laia && copyfiles -f src/images/laia/robot-game/**.* build/images/laia/robot-game && copyfiles -f src/images/laia/robot-game/robot/**.* build/images/laia/robot-game/robot && copyfiles -f src/images/laia/robot-game/robot/faces/**.* build/images/laia/robot-game/robot/faces && copyfiles -f src/images/laia/icons/**.* build/images/laia/icons && copyfiles -f src/images/lottie/**.* build/images/lottie && copyfiles -f src/images/laia/game-two/**.* build/images/laia/game-two",
         "clean": "rimraf build",
         "build": "npm run clean && npm run copy-assets && npm run tsc --"
     },
     "dependencies": {
         "@blueprintjs/core": "^2.0.1",
         "@types/lodash": "^4.14.85",
-        "@types/react": "^16.0.12",
+        "@types/react": "^16.3.2",
         "@types/react-native": "^0.52.8",
         "@types/react-redux": "^5.0.11",
         "babel-plugin-root-import": "^5.1.0",
         "global": "^4.3.2",
         "lodash": "^4.17.4",
         "lottie-react-native": "^2.3.2",
-        "react": "16.0.0-beta.5",
+        "react": "^16.3.0",
         "react-native": "0.49.1",
         "react-native-animatable": "^1.2.4",
         "react-native-device-info": "^0.13.0",
