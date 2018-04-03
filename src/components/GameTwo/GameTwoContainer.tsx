@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { GameOneImage } from "../GameOneImage/GameOneImage";
 import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
-import { levels, ILaiaGameLevel, getImage } from "./logic/index";
+import { gameTowLevels, IGameTwoLevel, getImage } from "./logic/index";
 
 //Interfaces
 interface IGameTwoContainerProps {
@@ -15,14 +15,14 @@ interface IGameTwoContainerProps {
 interface IGameTwoContainerState {
     revealAnswers: boolean;
     reset: boolean;
-    levels: ILaiaGameLevel[];
+    levels: IGameTwoLevel[];
     currentLevel: number;
 }
 
 const initState: IGameTwoContainerState = {
     revealAnswers: false,
     reset: false,
-    levels: levels,
+    levels: gameTowLevels,
     currentLevel: 0
 };
 export class GameTwoContainer extends React.Component<
@@ -37,28 +37,39 @@ export class GameTwoContainer extends React.Component<
         };
         this._buttonOnPress = this._buttonOnPress.bind(this);
         this._makeButtons = this._makeButtons.bind(this);
+        this._endGame = this._endGame.bind(this);
+        this._nextLevel = this._nextLevel.bind(this);
+    }
+
+    _nextLevel(reset?: boolean) {
+        this.setState({ revealAnswers: true }, () => {
+            setTimeout(() => this.setState({ reset: true }), 2000);
+        });
+        setTimeout(
+            () =>
+                this.setState({
+                    revealAnswers: false,
+                    reset: false,
+                    currentLevel: reset ? 0 : 1 + this.state.currentLevel
+                }),
+            4000
+        );
+    }
+
+    _endGame() {
+        this.setState({ ...initState }, () => {
+            this.props.navigator.showModal({ screen: "ScoreScreen" });
+        });
     }
 
     _buttonOnPress(callBack) {
         const { currentLevel, levels } = this.state;
 
         if (currentLevel < levels.length - 1) {
-            this.setState({ revealAnswers: true }, () => {
-                setTimeout(() => this.setState({ reset: true }), 2000);
-            });
-            setTimeout(
-                () =>
-                    this.setState({
-                        revealAnswers: false,
-                        reset: false,
-                        currentLevel: 1 + this.state.currentLevel
-                    }),
-                4000
-            );
+            this._nextLevel();
         } else {
-            this.setState({ ...initState }, () => {
-                this.props.navigator.showModal({ screen: "ScoreScreen" });
-            });
+            // this._endGame();
+            this._nextLevel(true);
         }
     }
 

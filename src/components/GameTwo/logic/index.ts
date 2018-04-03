@@ -1,2 +1,2 @@
-export * from "./levels";
+export * from "./gameTwoLevels";
 export * from "./getImage";

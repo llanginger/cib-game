@@ -1,7 +1,7 @@
-import { ILaiaGameLevel } from "./levels";
+import { IGameTwoLevel } from "./index";
 export const getImage: (
     revealAnswer: boolean,
-    level: ILaiaGameLevel
-) => number = (revealAnswer: boolean, level: ILaiaGameLevel) => {
+    level: IGameTwoLevel
+) => number = (revealAnswer: boolean, level: IGameTwoLevel) => {
     return revealAnswer ? level.image_after : level.image_before;
 };

@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import * as Animatable from "react-native-animatable";
 
 //Interface
-interface IParrotImageProps {
+interface IGameImageProps {
     color: boolean;
     source: number;
     reveal: boolean;
@@ -12,8 +12,8 @@ interface IParrotImageProps {
 }
 
 // create a component
-export const GameOneImage: React.StatelessComponent<IParrotImageProps> = (
-    props: IParrotImageProps
+export const GameOneImage: React.StatelessComponent<IGameImageProps> = (
+    props: IGameImageProps
 ) => {
     return (
         <Animatable.View
@@ -33,7 +33,7 @@ export const GameOneImage: React.StatelessComponent<IParrotImageProps> = (
 // define your styles
 const styles = StyleSheet.create({
     imageContainer: {
-        height: 250,
+        height: 300,
         width: "100%",
         backgroundColor: "white",
         paddingVertical: 10

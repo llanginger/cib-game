@@ -16,8 +16,10 @@ import {
     Platform,
     ImageBackground
 } from "react-native";
+import { styles_colors } from "../../styles/styles";
 import { connect } from "react-redux";
 import { IReducers, IColorsReducer } from "../../redux/store";
+import { PopupStar } from "./PopupStar";
 
 interface ISandwichBoardProps {
     colors?: IColorsReducer;
@@ -30,12 +32,13 @@ interface ISandwichBoardProps {
 interface ISandwichBoardStateProps {
     colors?: IColorsReducer;
     correctAnswer: boolean;
-    showPopup: boolean;
+    showSandwichBoard: boolean;
 }
 
 interface ISandwichBoardState {
     animate: boolean;
     bounceDirection: "in" | "out";
+    beginAnimation: boolean;
 }
 
 class _SandwichBoard extends Component<ISandwichBoardProps, any> {
@@ -46,7 +49,8 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
         super(props);
         this.state = {
             animate: false,
-            bounceDirection: "in"
+            bounceDirection: "in",
+            beginAnimation: false
         };
         this.bounceInValue = new Animated.Value(0);
         this.bounceOutValue = new Animated.Value(0);
@@ -63,7 +67,8 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
         }).start(() => {
             this.setState(
                 {
-                    bounceDirection: "out"
+                    bounceDirection: "out",
+                    beginAnimation: true
                 },
                 () => this._hideSandwichBoard()
             );
@@ -78,10 +83,16 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
             delay: 1000,
             easing: Easing.linear
         }).start(() =>
-            this.setState({ bounceDirection: "in" }, () => {
-                this.bounceInValue.setValue(0);
-                this.props.dispatch({ type: "RESET_POPUP" });
-            })
+            this.setState(
+                {
+                    bounceDirection: "in",
+                    beginAnimation: false
+                },
+                () => {
+                    this.bounceInValue.setValue(0);
+                    this.props.dispatch({ type: "RESET_POPUP" });
+                }
+            )
         );
     }
 
@@ -111,16 +122,18 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
                 : bounceOutScale;
         };
 
-        const getContainerBorderStyles = () => {
+        const getBackgroundColor = () => {
             return {
-                backgroundColor: correctAnswer ? "green" : "red"
+                backgroundColor: correctAnswer
+                    ? styles_colors.green
+                    : styles_colors.red
             };
         };
 
         const animatedStyle = [
             styles.container,
-            { opacity: getBounceDirection() },
-            getContainerBorderStyles()
+            // { opacity: getBounceDirection() }, // <-- Comment out this line for development
+            getBackgroundColor()
         ];
         return (
             <Animated.View style={animatedStyle}>
@@ -128,6 +141,10 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
                     {/* <Text numberOfLines={3} style={styles.text}>
                         {popupText}
                     </Text> */}
+                    <PopupStar
+                        correct={true}
+                        beginAnimation={this.state.beginAnimation}
+                    />
                 </View>
             </Animated.View>
         );
@@ -137,7 +154,7 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 const mapStateToProps = (state: IReducers) => {
     return {
         colors: state.colorsReducer,
-        showPopup: state.popupReducer.showPopup,
+        showSandwichBoard: state.popupReducer.showPopup,
         correctAnswer: state.popupReducer.correct,
         popupText: state.laiaScoreReducer.resultMessage
     };
@@ -167,16 +184,7 @@ const styles = StyleSheet.create({
         // borderColor: "red",
         // borderWidth: 1
     },
-    textContainer: {
-        position: "absolute",
-        justifyContent: "center",
-        alignItems: "center",
-        left: 0,
-        right: 0,
-        bottom: 65,
-        height: 90,
-        paddingHorizontal: 100
-    },
+    textContainer: {},
     text: {
         fontSize: 24,
         fontFamily: "Rockwell",
