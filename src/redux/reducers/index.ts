@@ -9,3 +9,4 @@ export * from "./popupReducer";
 export * from "./userPreferences";
 export * from "./laiaScoreReducer";
 export * from "./robotGameReducer";
+export * from "./gameLevelTypeReducer";

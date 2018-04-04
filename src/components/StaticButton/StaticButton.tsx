@@ -13,6 +13,7 @@ import { appStyles } from "../../styles/styles";
 interface IStaticButtonProps {
     text: string;
     viewStyles?: ViewStyle;
+    onPress: any;
 }
 
 // create a component
@@ -20,7 +21,7 @@ export const StaticButton: React.StatelessComponent<IStaticButtonProps> = (
     props: IStaticButtonProps
 ) => {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={props.onPress}>
             <Text style={styles.text}>{props.text}</Text>
         </TouchableOpacity>
     );

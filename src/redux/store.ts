@@ -21,7 +21,9 @@ import {
     laiaScoreReducer,
     ILaiaScoreReducer,
     robotGameReducer,
-    IRobotGameReducer
+    IRobotGameReducer,
+    gameLevelTypeReducer,
+    IGameLevelTypeReducer
 } from "./reducers/index";
 import logger from "redux-logger";
 export * from "./reducers/index";
@@ -38,6 +40,7 @@ export interface IReducers {
     userPreferencesReducer: IUserPreferencesReducer;
     laiaScoreReducer: ILaiaScoreReducer;
     robotGameReducer: IRobotGameReducer;
+    gameLevelTypeReducer: IGameLevelTypeReducer;
 }
 
 const reducers = combineReducers({
@@ -51,7 +54,8 @@ const reducers = combineReducers({
     userPreferencesReducer,
     gameTypeReducer,
     laiaScoreReducer,
-    robotGameReducer
+    robotGameReducer,
+    gameLevelTypeReducer
 });
 
 export const store = createStore(reducers, applyMiddleware(logger));

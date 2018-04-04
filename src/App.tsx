@@ -13,6 +13,8 @@ import { DrawerScreen } from "./components/DrawerScreen/DrawerScreen";
 import { Provider } from "react-redux";
 import { store, IReducers } from "./redux/store";
 
+import { screenObjects } from "./navigation/screenObjects";
+
 // Duo Prototype section
 
 import { GameContainerScreen } from "./components/GameContainerScreen/GameContainerScreen";
@@ -26,11 +28,11 @@ registerScreens(store, Provider);
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "HomeScreen"
+        screen: screenObjects.HOME_SCREEN.screen
     },
     drawer: {
         left: {
-            screen: "DrawerScreen"
+            screen: screenObjects.DRAWER_SCREEN.screen
         },
         style: {
             drawerShadow: true,

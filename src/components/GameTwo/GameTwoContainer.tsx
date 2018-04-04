@@ -5,6 +5,7 @@ import { GameOneImage } from "../GameOneImage/GameOneImage";
 import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
 import { gameTowLevels, IGameTwoLevel, getImage } from "./logic/index";
+import { screenObjects } from "../../navigation/screenObjects";
 
 //Interfaces
 interface IGameTwoContainerProps {
@@ -23,7 +24,7 @@ const initState: IGameTwoContainerState = {
     revealAnswers: false,
     reset: false,
     levels: gameTowLevels,
-    currentLevel: 0
+    currentLevel: 1
 };
 export class GameTwoContainer extends React.Component<
     IGameTwoContainerProps,
@@ -57,9 +58,17 @@ export class GameTwoContainer extends React.Component<
     }
 
     _endGame() {
-        this.setState({ ...initState }, () => {
-            this.props.navigator.showModal({ screen: "ScoreScreen" });
+        this.setState({ revealAnswers: true }, () => {
+            setTimeout(() => this.setState({ reset: true }), 2000);
         });
+
+        setTimeout(() => {
+            this.setState({ ...initState }, () => {
+                this.props.navigator.showModal({
+                    screen: screenObjects.SCORE_SCREEN.screen
+                });
+            });
+        }, 3000);
     }
 
     _buttonOnPress(callBack) {
@@ -68,8 +77,8 @@ export class GameTwoContainer extends React.Component<
         if (currentLevel < levels.length - 1) {
             this._nextLevel();
         } else {
-            // this._endGame();
-            this._nextLevel(true);
+            this._endGame();
+            // this._nextLevel(false);
         }
     }
 

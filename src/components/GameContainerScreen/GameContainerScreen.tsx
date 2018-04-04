@@ -25,13 +25,14 @@ import { GameOneContainer } from "../GameOne/GameOneContainer";
 
 import { GameTwoContainer } from "../GameTwo/GameTwoContainer";
 import { GameFourContainer } from "../GameFour/GameFourContainer";
+import { screenObjects } from "../../navigation/screenObjects";
 
 import { SandwichBoard } from "../SandwichBoard/SandwichBoard";
 import { Popup } from "../Popup/Popup";
 
 interface ICardGameMainScreenProps {
     navigator?: any;
-    gameType: "word" | "card";
+    gameType: 0 | 1 | 2 | 3 | 4 | 5;
     dispatch?: any;
 }
 
@@ -50,6 +51,7 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
             this.onNavigatorEvent.bind(this)
         );
         this._menuPress = this._menuPress.bind(this);
+        this._getGameContainer = this._getGameContainer.bind(this);
     }
 
     onNavigatorEvent(event) {
@@ -63,25 +65,43 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
         }
     }
 
-    componentWillMount() {
-        // this.props.dispatch({type: "SET_DEVICE_TYPE", payload: { deviceType: DeviceInfo.getModel() } })
-        // TODO: Evaluate this for use in Laia game
-        // this.props.dispatch(
-        //     initAction({
-        //         deviceType: DeviceInfo.getModel(),
-        //     })
-        // );
-        // this.props.navigator.showModal({
-        //     screen: "CharacterSelectScreen",
-        //     animationType: "none"
-        // })
-    }
+    // componentWillMount() {
+    //     this.props.dispatch({
+    //         type: "SET_DEVICE_TYPE",
+    //         payload: { deviceType: DeviceInfo.getModel() }
+    //     });
+    //     // TODO: Evaluate this for use in Laia game
+    //     // this.props.dispatch(
+    //     //     initAction({
+    //     //         deviceType: DeviceInfo.getModel(),
+    //     //     })
+    //     // );
+    //     this.props.navigator.showModal({
+    //         screen: screenObjects.CHARACTER_SELECT_SCREEN.screen,
+    //         animationType: "none"
+    //     });
+    // }
 
     _menuPress() {
         this.props.navigator.toggleDrawer({
             side: "left", // the side of the drawer since you can have two, 'left' / 'right'
             animated: true // does the toggle have transition animation or does it happen immediately (optional)
         });
+    }
+
+    _getGameContainer() {
+        console.log("Get game container, ", this.props.gameType);
+        const { gameType } = this.props;
+
+        if (gameType === 0) {
+            console.log("Game type 0 inside if statement");
+            return <GameOneContainer navigator={this.props.navigator} />;
+        } else if (gameType === 1) {
+            console.log("Game type 1 inside if statement");
+            return <GameTwoContainer navigator={this.props.navigator} />;
+        } else {
+            return <GameOneContainer navigator={this.props.navigator} />;
+        }
     }
 
     render() {
@@ -92,8 +112,7 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
                     menuPress={this._menuPress}
                     containerProps={{ alignSelf: "flex-end" }}
                 />
-                {/* {this._showGameType()} */}
-                <GameTwoContainer navigator={this.props.navigator} />
+                {this._getGameContainer()}
                 {/* <SandwichBoard /> */}
                 <Popup />
             </View>
@@ -103,7 +122,7 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        gameType: state.gameTypeReducer.gameType
+        gameType: state.gameLevelTypeReducer.gameLevelType
     };
 };
 

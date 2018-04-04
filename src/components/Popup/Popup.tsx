@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
         borderRadius: circleDiameter / 2,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "transparent",
+        backgroundColor: "white",
         overflow: "hidden",
         // shadowColor: "rgb(24, 23, 22)",
         // shadowOffset: { width: 0, height: 10 },

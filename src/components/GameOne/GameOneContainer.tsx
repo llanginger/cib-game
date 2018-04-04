@@ -5,6 +5,7 @@ import { GameOneImage } from "../GameOneImage/GameOneImage";
 import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
 import { gameOneLevels, ILaiaGameLevel, getImage } from "./logic/index";
+import { screenObjects } from "../../navigation/screenObjects";
 
 //Interfaces
 interface ILaiaGameContainerProps {
@@ -23,7 +24,7 @@ const initState: ILaiaGameContainerState = {
     revealAnswers: false,
     reset: false,
     levels: gameOneLevels,
-    currentLevel: 0
+    currentLevel: 4
 };
 export class GameOneContainer extends React.Component<
     ILaiaGameContainerProps,
@@ -57,7 +58,9 @@ export class GameOneContainer extends React.Component<
             );
         } else {
             this.setState({ ...initState }, () => {
-                this.props.navigator.showModal({ screen: "ScoreScreen" });
+                this.props.navigator.showModal({
+                    screen: screenObjects.SCORE_SCREEN.screen
+                });
             });
         }
     }

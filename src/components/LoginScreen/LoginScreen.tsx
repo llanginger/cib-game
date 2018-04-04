@@ -1,55 +1,68 @@
 //import liraries
-import * as React from 'react';
-import { View, Text, StyleSheet, StatusBar, TouchableOpacity, Linking, Alert } from 'react-native';
-import { NavbuttonBassClass } from "../sharedComponents/NavbuttonBaseClass"
-import { LoginInput } from "../LoginComponents/LoginInput"
-import { LoginTitle } from "../LoginComponents/LoginTitle"
-import { LoginButton } from "../LoginComponents/LoginButton"
+import * as React from "react";
+import {
+    View,
+    Text,
+    StyleSheet,
+    StatusBar,
+    TouchableOpacity,
+    Linking,
+    Alert
+} from "react-native";
+import { NavbuttonBassClass } from "../sharedComponents/NavbuttonBaseClass";
+import { LoginInput } from "../LoginComponents/LoginInput";
+import { LoginTitle } from "../LoginComponents/LoginTitle";
+import { LoginButton } from "../LoginComponents/LoginButton";
+import { screenObjects } from "../../navigation/screenObjects";
 
 //Interfaces
 interface ILoginScreenProps {
     children: any;
-    navigator?: any
+    navigator?: any;
 }
 
 interface ILoginScreenState {
-    showLoginButton: boolean
+    showLoginButton: boolean;
 }
 
 // create a component
 
-const cibUrl = "http://www.coolisbest.com"
+const cibUrl = "http://www.coolisbest.com";
 
-export class LoginScreen extends React.Component<ILoginScreenProps, ILoginScreenState> {
-
+export class LoginScreen extends React.Component<
+    ILoginScreenProps,
+    ILoginScreenState
+> {
     static navigatorStyle = {
         navBarTextColor: "red",
         drawUnderNavBar: true,
         navBarTranslucent: true,
         navBarTransparent: true
-    }
+    };
 
     constructor(props) {
-        super(props)
+        super(props);
 
-        this.state = { showLoginButton: false }
+        this.state = { showLoginButton: false };
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
 
-        this._login = this._login.bind(this)
+        this._login = this._login.bind(this);
     }
 
     _handleLinkPress = () => {
-        console.log("Cliked link")
-        Linking.canOpenURL(cibUrl).then(supported => {
-            if (supported) {
-                Linking.openURL(cibUrl)
-            } else {
-                Alert.alert("Could not open url")
-            }
-        }).catch(err => console.log("Link error: ", err))
-    }
+        console.log("Cliked link");
+        Linking.canOpenURL(cibUrl)
+            .then(supported => {
+                if (supported) {
+                    Linking.openURL(cibUrl);
+                } else {
+                    Alert.alert("Could not open url");
+                }
+            })
+            .catch(err => console.log("Link error: ", err));
+    };
 
     onNavigatorEvent(event) {
         if (event.type === "NavBarButtonPress") {
@@ -63,8 +76,10 @@ export class LoginScreen extends React.Component<ILoginScreenProps, ILoginScreen
     }
 
     _login() {
-        console.log("Login attempt")
-        this.props.navigator.resetTo({ screen: "HomeScreen" })
+        console.log("Login attempt");
+        this.props.navigator.resetTo({
+            screen: screenObjects.HOME_SCREEN.screen
+        });
     }
 
     render() {
@@ -89,22 +104,20 @@ export class LoginScreen extends React.Component<ILoginScreenProps, ILoginScreen
                     style={styles.linkContainer}
                     onPress={this._handleLinkPress}
                 >
-                    <Text style={styles.linkText}>
-                        No tiene cuenta?
-                    </Text>
+                    <Text style={styles.linkText}>No tiene cuenta?</Text>
                 </TouchableOpacity>
             </View>
         );
     }
-};
+}
 
 // define your styles
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#009ee0',
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#009ee0"
     },
     linkContainer: {
         position: "absolute",

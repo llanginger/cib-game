@@ -5,3 +5,4 @@ export * from "./initAction";
 export * from "./robotGameActions";
 export * from "./gameOneActions";
 export * from "./setProfilePicture";
+export * from "./getNextLevelType";
