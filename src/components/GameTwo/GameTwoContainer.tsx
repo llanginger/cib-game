@@ -24,7 +24,7 @@ const initState: IGameTwoContainerState = {
     revealAnswers: false,
     reset: false,
     levels: gameTowLevels,
-    currentLevel: 1
+    currentLevel: 0
 };
 export class GameTwoContainer extends React.Component<
     IGameTwoContainerProps,

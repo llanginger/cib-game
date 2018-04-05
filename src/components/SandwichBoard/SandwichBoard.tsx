@@ -97,13 +97,13 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 
         const bounceInScale = this.bounceInValue.interpolate({
             inputRange: [0, 1],
-            outputRange: [-630, -130]
-            // outputRange: [-130, 0]
+            outputRange: [-500, 0]
+            // outputRange: [0, 0]
         });
 
         const bounceOutScale = this.bounceOutValue.interpolate({
             inputRange: [0, 1],
-            outputRange: [-130, -630]
+            outputRange: [0, -500]
             // outputRange: [0, 0]
         });
 
@@ -146,8 +146,8 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 const mapStateToProps = (state: IReducers) => {
     return {
         colors: state.colorsReducer,
-        showPopup: state.popupReducer.showPopup,
-        correctAnswer: state.popupReducer.correct,
+        showPopup: state.sandiwchBoardReducer.showPopup,
+        correctAnswer: state.sandiwchBoardReducer.correct,
         popupText: state.laiaScoreReducer.resultMessage
     };
 };
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         // top: -200,
-        top: 0,
+        top: -130,
         height: 539,
         justifyContent: "center",
         alignItems: "center",

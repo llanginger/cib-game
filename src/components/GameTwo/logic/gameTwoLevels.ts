@@ -9,6 +9,15 @@ export const gameTowLevels: IGameTwoLevel[] = [
         image_before: require("../../../images/laia/game-two/marta-sad-grey.png"),
         image_after: require("../../../images/laia/game-two/marta-sad.png"),
         answers: [
+            { text: "Happy", correct: false },
+            { text: "Unhappy", correct: false },
+            { text: "Sad", correct: true }
+        ]
+    },
+    {
+        image_before: require("../../../images/laia/game-two/happy-ogre-grey.png"),
+        image_after: require("../../../images/laia/game-two/happy-ogre.png"),
+        answers: [
             { text: "Happy", correct: true },
             { text: "Unhappy", correct: false },
             { text: "Sad", correct: false }
@@ -19,8 +28,26 @@ export const gameTowLevels: IGameTwoLevel[] = [
         image_after: require("../../../images/laia/game-two/sofia-sad.png"),
         answers: [
             { text: "Joyous", correct: false },
-            { text: "Sad", correct: false },
-            { text: "Terrified", correct: true }
+            { text: "Sad", correct: true },
+            { text: "Terrified", correct: false }
+        ]
+    },
+    {
+        image_before: require("../../../images/laia/game-two/jorge-calm-grey.png"),
+        image_after: require("../../../images/laia/game-two/jorge-calm.png"),
+        answers: [
+            { text: "Joyous", correct: false },
+            { text: "Calm", correct: true },
+            { text: "Terrified", correct: false }
+        ]
+    },
+    {
+        image_before: require("../../../images/laia/game-two/marta-disgust-grey.png"),
+        image_after: require("../../../images/laia/game-two/marta-disgust.png"),
+        answers: [
+            { text: "Joyous", correct: false },
+            { text: "Calm", correct: true },
+            { text: "Disgusted", correct: false }
         ]
     }
 ];

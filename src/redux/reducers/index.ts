@@ -5,7 +5,7 @@ export * from "./wordGameReducer";
 export * from "./gameTypeReducer";
 export * from "./deviceTypeReducer";
 export * from "./colorsReducer";
-export * from "./popupReducer";
+export * from "./sandwichBoardReducer";
 export * from "./userPreferences";
 export * from "./laiaScoreReducer";
 export * from "./robotGameReducer";

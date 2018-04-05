@@ -26,6 +26,7 @@ import { GameOneContainer } from "../GameOne/GameOneContainer";
 import { GameTwoContainer } from "../GameTwo/GameTwoContainer";
 import { GameFourContainer } from "../GameFour/GameFourContainer";
 import { screenObjects } from "../../navigation/screenObjects";
+import { Ready } from "../Ready/Ready";
 
 import { SandwichBoard } from "../SandwichBoard/SandwichBoard";
 import { Popup } from "../Popup/Popup";
@@ -112,9 +113,10 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
                     menuPress={this._menuPress}
                     containerProps={{ alignSelf: "flex-end" }}
                 />
-                {this._getGameContainer()}
+                {/* {this._getGameContainer()} */}
+                <Ready />
                 {/* <SandwichBoard /> */}
-                <Popup />
+                {/* <Popup /> */}
             </View>
         );
     }

@@ -14,8 +14,8 @@ import {
     IDeviceTypeReducer,
     colorsReducer,
     IColorsReducer,
-    popupReducer,
-    IPopupReducer,
+    sandiwchBoardReducer,
+    ISandwichBoardReducer,
     userPreferencesReducer,
     IUserPreferencesReducer,
     laiaScoreReducer,
@@ -33,7 +33,7 @@ export interface IReducers {
     userReducer: IUserReducer;
     deviceTypeReducer: IDeviceTypeReducer;
     cardGameReducer: ICardGameReducer;
-    popupReducer: IPopupReducer;
+    sandiwchBoardReducer: ISandwichBoardReducer;
     wordGameReducer: IWordGameReducer;
     gameTypeReducer: IGameTypeReducer;
     colorsReducer: IColorsReducer;
@@ -50,7 +50,7 @@ const reducers = combineReducers({
     colorsReducer,
     cardGameReducer,
     wordGameReducer,
-    popupReducer,
+    sandiwchBoardReducer,
     userPreferencesReducer,
     gameTypeReducer,
     laiaScoreReducer,

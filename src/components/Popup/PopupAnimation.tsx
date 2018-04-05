@@ -13,7 +13,7 @@ interface IPopupStarState {
     beginAnimation: boolean;
 }
 
-export class PopupStar extends React.Component<
+export class PopupAnimation extends React.Component<
     IPopupStarProps,
     IPopupStarState
 > {

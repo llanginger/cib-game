@@ -1,14 +1,17 @@
-export interface IPopupReducer {
+export interface ISandwichBoardReducer {
     showPopup: boolean;
     correct: boolean;
 }
 
-const initState: IPopupReducer = {
+const initState: ISandwichBoardReducer = {
     showPopup: false,
     correct: true
 };
 
-export const popupReducer = (state: IPopupReducer = initState, action) => {
+export const sandiwchBoardReducer = (
+    state: ISandwichBoardReducer = initState,
+    action
+) => {
     switch (action.type) {
         case "CARDGAME_SHOW_ANSWER":
         case "WORDGAME_SUBMIT_WORD":
@@ -22,6 +25,12 @@ export const popupReducer = (state: IPopupReducer = initState, action) => {
             return {
                 ...state,
                 showPopup: false
+            };
+        }
+        case "SHOW_SWANDWICHBOARD": {
+            return {
+                ...state,
+                showPopup: true
             };
         }
         default:

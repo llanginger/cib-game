@@ -14,17 +14,17 @@ import { appStyles } from "../../styles/styles";
 import { connect } from "react-redux";
 //Interface
 interface IButtonProps {
-    preText?: string;
     text: string;
     correct: boolean;
     reset: boolean;
     animationInType: any;
     animationOutType: any;
-    delay: number;
+    delay?: number;
     revealed: boolean;
     onPress: any;
-    animated: boolean;
+    animated?: boolean;
     submitAnswer: any;
+    preText?: string;
     viewProps?: ViewStyle;
 }
 
@@ -37,11 +37,11 @@ export const _Button: React.StatelessComponent<IButtonProps> = (
         revealed,
         reset,
         correct,
-        animated,
+        animated = true,
         animationOutType,
         animationInType,
         text,
-        delay,
+        delay = 0,
         onPress,
         submitAnswer
     } = props;

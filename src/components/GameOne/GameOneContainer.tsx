@@ -24,7 +24,7 @@ const initState: ILaiaGameContainerState = {
     revealAnswers: false,
     reset: false,
     levels: gameOneLevels,
-    currentLevel: 4
+    currentLevel: 0
 };
 export class GameOneContainer extends React.Component<
     ILaiaGameContainerProps,
@@ -38,30 +38,47 @@ export class GameOneContainer extends React.Component<
         };
         this._buttonOnPress = this._buttonOnPress.bind(this);
         this._makeButtons = this._makeButtons.bind(this);
+        this._endGame = this._endGame.bind(this);
+        this._nextLevel = this._nextLevel.bind(this);
+    }
+
+    _nextLevel(reset?: boolean) {
+        this.setState({ revealAnswers: true }, () => {
+            setTimeout(() => this.setState({ reset: true }), 2000);
+        });
+        setTimeout(
+            () =>
+                this.setState({
+                    revealAnswers: false,
+                    reset: false,
+                    currentLevel: reset ? 0 : 1 + this.state.currentLevel
+                }),
+            4000
+        );
+    }
+
+    _endGame() {
+        this.setState({ revealAnswers: true }, () => {
+            setTimeout(() => this.setState({ reset: true }), 2000);
+        });
+
+        setTimeout(() => {
+            this.setState({ ...initState }, () => {
+                this.props.navigator.showModal({
+                    screen: screenObjects.SCORE_SCREEN.screen
+                });
+            });
+        }, 3000);
     }
 
     _buttonOnPress(callBack) {
         const { currentLevel, levels } = this.state;
 
         if (currentLevel < levels.length - 1) {
-            this.setState({ revealAnswers: true }, () => {
-                setTimeout(() => this.setState({ reset: true }), 2000);
-            });
-            setTimeout(
-                () =>
-                    this.setState({
-                        revealAnswers: false,
-                        reset: false,
-                        currentLevel: 1 + this.state.currentLevel
-                    }),
-                4000
-            );
+            this._nextLevel();
         } else {
-            this.setState({ ...initState }, () => {
-                this.props.navigator.showModal({
-                    screen: screenObjects.SCORE_SCREEN.screen
-                });
-            });
+            this._endGame();
+            // this._nextLevel(false);
         }
     }
 

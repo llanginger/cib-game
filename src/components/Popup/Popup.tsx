@@ -19,7 +19,7 @@ import {
 import { appStyles } from "../../styles/styles";
 import { connect } from "react-redux";
 import { IReducers, IColorsReducer } from "../../redux/store";
-import { PopupStar } from "./PopupStar";
+import { PopupAnimation } from "./PopupAnimation";
 
 interface ISandwichBoardProps {
     colors?: IColorsReducer;
@@ -42,25 +42,25 @@ interface ISandwichBoardState {
 }
 
 class _SandwichBoard extends Component<ISandwichBoardProps, any> {
-    private bounceInValue: Animated.Value;
-    private bounceOutValue: Animated.Value;
+    private fadeInValue: Animated.Value;
+    private fadeOutValue: Animated.Value;
 
     constructor(props) {
         super(props);
         this.state = {
             animate: false,
-            bounceDirection: "in",
+            fadeDirection: "in",
             beginAnimation: false
         };
-        this.bounceInValue = new Animated.Value(0);
-        this.bounceOutValue = new Animated.Value(0);
+        this.fadeInValue = new Animated.Value(0);
+        this.fadeOutValue = new Animated.Value(0);
         this._showSandwichBoard = this._showSandwichBoard.bind(this);
         this._hideSandwichBoard = this._hideSandwichBoard.bind(this);
     }
 
     _showSandwichBoard() {
-        this.bounceInValue.setValue(0);
-        Animated.timing(this.bounceInValue, {
+        this.fadeInValue.setValue(0);
+        Animated.timing(this.fadeInValue, {
             toValue: 1,
             duration: 400
         }).start(() => {
@@ -77,8 +77,8 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
     }
 
     _hideSandwichBoard() {
-        this.bounceOutValue.setValue(0);
-        Animated.timing(this.bounceOutValue, {
+        this.fadeOutValue.setValue(0);
+        Animated.timing(this.fadeOutValue, {
             toValue: 1,
             duration: 400,
             delay: 2000,
@@ -90,7 +90,7 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
                     beginAnimation: false
                 },
                 () => {
-                    this.bounceInValue.setValue(0);
+                    this.fadeInValue.setValue(0);
                     this.props.dispatch({ type: "RESET_POPUP" });
                 }
             )
@@ -99,7 +99,6 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 
     componentWillReceiveProps(nextProps: ISandwichBoardProps) {
         if (nextProps.showSandwichBoard) {
-            console.log("Next props Popup: ", nextProps);
             this._showSandwichBoard();
         }
     }
@@ -107,23 +106,23 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
     render() {
         const { colors, correctAnswer, popupText } = this.props;
 
-        const bounceInScale = this.bounceInValue.interpolate({
+        const fadeInAmount = this.fadeInValue.interpolate({
             inputRange: [0, 1],
             outputRange: [0, 1]
         });
 
-        const bounceOutScale = this.bounceOutValue.interpolate({
+        const fadeOutAmount = this.fadeOutValue.interpolate({
             inputRange: [0, 1],
             outputRange: [1, 0]
         });
 
-        const getBounceDirection = () => {
+        const getFadeDirection = () => {
             return this.state.bounceDirection === "in"
-                ? bounceInScale
-                : bounceOutScale;
+                ? fadeInAmount
+                : fadeOutAmount;
         };
 
-        const getBackgroundColor = () => {
+        const getBorderColor = () => {
             return {
                 borderColor: correctAnswer
                     ? appStyles.colors.green
@@ -133,20 +132,15 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 
         const animatedStyle = [
             styles.container,
-            { opacity: getBounceDirection() }, // <-- Comment out this line for development
-            getBackgroundColor()
+            { opacity: getFadeDirection() }, // <-- Comment out this line for development
+            getBorderColor()
         ];
         return (
             <Animated.View style={animatedStyle}>
-                <View style={styles.textContainer}>
-                    {/* <Text numberOfLines={3} style={styles.text}>
-                        {popupText}
-                    </Text> */}
-                    <PopupStar
-                        correct={this.props.correctAnswer}
-                        beginAnimation={this.state.beginAnimation}
-                    />
-                </View>
+                <PopupAnimation
+                    correct={this.props.correctAnswer}
+                    beginAnimation={this.state.beginAnimation}
+                />
             </Animated.View>
         );
     }
@@ -179,24 +173,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "white",
         overflow: "hidden",
-        // shadowColor: "rgb(24, 23, 22)",
-        // shadowOffset: { width: 0, height: 10 },
-        // shadowRadius: 5,
-        // shadowOpacity: 0.8
-        // borderColor: "red",
         borderWidth: 3
-    },
-    textContainer: {},
-    text: {
-        fontSize: 24,
-        fontFamily: "Rockwell",
-        color: "white",
-        // width: "60%",
-        textAlign: "center",
-        textShadowColor: "black",
-        textShadowOffset: { width: 2, height: 2 },
-        textShadowRadius: 3
-    },
-
-    image: {}
+    }
 });
