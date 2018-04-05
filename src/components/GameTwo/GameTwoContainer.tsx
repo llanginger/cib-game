@@ -5,12 +5,14 @@ import { GameOneImage } from "../GameOneImage/GameOneImage";
 import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
 import { gameTowLevels, IGameTwoLevel, getImage } from "./logic/index";
+import { gamOneSubmitAnswer } from "../../redux/actions/index";
+import { IReducers } from "../../redux/store";
 import { screenObjects } from "../../navigation/screenObjects";
 
 //Interfaces
 interface IGameTwoContainerProps {
-    dispatch?: any;
     navigator: any;
+    submitAnswer: any;
 }
 
 interface IGameTwoContainerState {
@@ -26,7 +28,7 @@ const initState: IGameTwoContainerState = {
     levels: gameTowLevels,
     currentLevel: 0
 };
-export class GameTwoContainer extends React.Component<
+export class _GameTwoContainer extends React.Component<
     IGameTwoContainerProps,
     IGameTwoContainerState
 > {
@@ -42,16 +44,22 @@ export class GameTwoContainer extends React.Component<
         this._nextLevel = this._nextLevel.bind(this);
     }
 
-    _nextLevel(reset?: boolean) {
+    _nextLevel(options: { reset?: boolean; correct: boolean }) {
+        // Show answer and queue up out animation
         this.setState({ revealAnswers: true }, () => {
             setTimeout(() => this.setState({ reset: true }), 2000);
         });
+        this.props.submitAnswer(options.correct);
+
+        // Bring in next level
         setTimeout(
             () =>
                 this.setState({
                     revealAnswers: false,
                     reset: false,
-                    currentLevel: reset ? 0 : 1 + this.state.currentLevel
+                    currentLevel: options.reset
+                        ? 0
+                        : 1 + this.state.currentLevel
                 }),
             4000
         );
@@ -71,11 +79,11 @@ export class GameTwoContainer extends React.Component<
         }, 3000);
     }
 
-    _buttonOnPress(callBack) {
+    _buttonOnPress(correct) {
         const { currentLevel, levels } = this.state;
 
         if (currentLevel < levels.length - 1) {
-            this._nextLevel();
+            this._nextLevel({ correct });
         } else {
             this._endGame();
             // this._nextLevel(false);
@@ -90,9 +98,8 @@ export class GameTwoContainer extends React.Component<
                         text={answer.text}
                         revealed={this.state.revealAnswers}
                         correct={answer.correct}
-                        onPress={this._buttonOnPress}
+                        onPress={() => this._buttonOnPress(answer.correct)}
                         reset={this.state.reset}
-                        animated={true}
                         delay={i * 300}
                         key={this.state.reset ? Math.random() : i}
                         animationInType="fadeInUp"
@@ -105,7 +112,6 @@ export class GameTwoContainer extends React.Component<
 
     render() {
         const { revealAnswers, levels, currentLevel } = this.state;
-
         return (
             <View style={styles.container}>
                 <GameOneImage
@@ -121,6 +127,23 @@ export class GameTwoContainer extends React.Component<
         );
     }
 }
+
+const mapStateToProps = (store: IReducers) => {
+    return {};
+};
+
+interface IGameTwoDispatchProps {
+    submitAnswer: any;
+}
+const mapDispatchToProps = {
+    submitAnswer: gamOneSubmitAnswer
+};
+
+export const GameTwoContainer: any = connect<
+    {},
+    IGameTwoDispatchProps,
+    IGameTwoContainerProps
+>(mapStateToProps, mapDispatchToProps)(_GameTwoContainer);
 
 // define your styles
 const styles = StyleSheet.create({

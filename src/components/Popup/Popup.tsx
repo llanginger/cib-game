@@ -149,8 +149,8 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 const mapStateToProps = (state: IReducers) => {
     return {
         colors: state.colorsReducer,
-        showSandwichBoard: state.popupReducer.showPopup,
-        correctAnswer: state.popupReducer.correct,
+        showSandwichBoard: state.sandiwchBoardReducer.showPopup,
+        correctAnswer: state.sandiwchBoardReducer.correct,
         popupText: state.laiaScoreReducer.resultMessage
     };
 };

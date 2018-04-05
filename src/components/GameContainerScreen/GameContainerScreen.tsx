@@ -114,7 +114,8 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
                     containerProps={{ alignSelf: "flex-end" }}
                 />
                 {/* {this._getGameContainer()} */}
-                <Ready />
+                {/* <Ready /> */}
+                <GameTwoContainer navigator={this.props.navigator} />
                 {/* <SandwichBoard /> */}
                 {/* <Popup /> */}
             </View>

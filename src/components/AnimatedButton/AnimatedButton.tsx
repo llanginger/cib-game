@@ -22,8 +22,6 @@ interface IButtonProps {
     delay?: number;
     revealed: boolean;
     onPress: any;
-    animated?: boolean;
-    submitAnswer: any;
     preText?: string;
     viewProps?: ViewStyle;
 }
@@ -37,13 +35,11 @@ export const _Button: React.StatelessComponent<IButtonProps> = (
         revealed,
         reset,
         correct,
-        animated = true,
         animationOutType,
         animationInType,
         text,
         delay = 0,
-        onPress,
-        submitAnswer
+        onPress
     } = props;
 
     const buttonColor = () => {
@@ -53,14 +49,6 @@ export const _Button: React.StatelessComponent<IButtonProps> = (
             return appStyles.colors.green;
         } else {
             return appStyles.colors.grey;
-        }
-    };
-
-    const buttonOnPress = () => {
-        onPress();
-
-        if (!revealed) {
-            submitAnswer(props.correct);
         }
     };
 
@@ -79,7 +67,7 @@ export const _Button: React.StatelessComponent<IButtonProps> = (
 
     return (
         <TouchableOpacity
-            onPress={buttonOnPress}
+            onPress={onPress}
             disabled={revealed}
             style={styles.container}
         >
@@ -101,9 +89,7 @@ const mapStateToProps = () => {
     return {};
 };
 
-const mapDispatchToProps = {
-    submitAnswer: gamOneSubmitAnswer
-};
+const mapDispatchToProps = {};
 
 export const AnimatedButton = connect(mapStateToProps, mapDispatchToProps)(
     _Button
