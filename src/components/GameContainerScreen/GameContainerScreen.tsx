@@ -31,6 +31,8 @@ import { Ready } from "../Ready/Ready";
 import { SandwichBoard } from "../SandwichBoard/SandwichBoard";
 import { Popup } from "../Popup/Popup";
 
+import { BlurView } from "../BlurView/BlurView";
+
 interface ICardGameMainScreenProps {
     navigator?: any;
     gameType: 0 | 1 | 2 | 3 | 4 | 5;
@@ -114,10 +116,10 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
                     containerProps={{ alignSelf: "flex-end" }}
                 />
                 {/* {this._getGameContainer()} */}
-                {/* <Ready /> */}
-                <GameTwoContainer navigator={this.props.navigator} />
                 {/* <SandwichBoard /> */}
-                {/* <Popup /> */}
+                <GameTwoContainer navigator={this.props.navigator} />
+                <Popup />
+                <Ready />
             </View>
         );
     }

@@ -91,7 +91,7 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
                 },
                 () => {
                     this.fadeInValue.setValue(0);
-                    this.props.dispatch({ type: "RESET_POPUP" });
+                    // this.props.dispatch({ type: "RESET_POPUP" });
                 }
             )
         );

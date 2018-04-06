@@ -1,4 +1,5 @@
 export interface IColors {
+    lightBackground: string;
     blue: string;
     green: string;
     red: string;
@@ -29,6 +30,7 @@ const buttonBorder: IButtonBorder = {
 };
 
 const colors: IColors = {
+    lightBackground: "#e4f5f9",
     blue: "#60b8ff",
     green: "#3eb929",
     red: "#F44336",

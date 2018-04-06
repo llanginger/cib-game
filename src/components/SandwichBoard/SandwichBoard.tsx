@@ -21,15 +21,13 @@ import { IReducers, IColorsReducer } from "../../redux/store";
 
 interface ISandwichBoardProps {
     colors?: IColorsReducer;
+    text: string;
     dispatch?: any;
-    correctAnswer?: boolean;
-    popupText?: string;
     showPopup?: boolean;
 }
 
 interface ISandwichBoardStateProps {
     colors?: IColorsReducer;
-    correctAnswer: boolean;
     showPopup: boolean;
 }
 
@@ -54,46 +52,40 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
         this._hideSandwichBoard = this._hideSandwichBoard.bind(this);
     }
 
+    componentDidMount() {
+        this._showSandwichBoard();
+    }
+
     _showSandwichBoard() {
         this.bounceInValue.setValue(0);
         Animated.spring(this.bounceInValue, {
             toValue: 1,
             friction: 5,
             damping: 0
-        }).start(() => {
-            this.setState(
-                {
-                    bounceDirection: "out"
-                },
-                () => this._hideSandwichBoard()
-            );
-        });
+        }).start(() => this.setState({ bounceDirection: "out" }));
     }
 
     _hideSandwichBoard() {
+        console.log("Sandwich board hide animtion start");
         this.bounceOutValue.setValue(0);
         Animated.timing(this.bounceOutValue, {
             toValue: 1,
             duration: 400,
-            delay: 1000,
+            delay: 700,
             easing: Easing.linear
-        }).start(() =>
-            this.setState({ bounceDirection: "in" }, () => {
-                this.bounceInValue.setValue(0);
-                this.props.dispatch({ type: "RESET_POPUP" });
-            })
-        );
+        }).start(() => this.setState({ bounceDirection: "in" }));
     }
 
     componentWillReceiveProps(nextProps: ISandwichBoardProps) {
-        if (nextProps.showPopup) {
+        if (!nextProps.showPopup) {
             console.log("Next props Popup: ", nextProps);
-            this._showSandwichBoard();
+            this._hideSandwichBoard();
         }
     }
 
     render() {
-        const { colors, correctAnswer, popupText } = this.props;
+        console.log("Sandwichboard props: ", this.props);
+        const { colors, text } = this.props;
 
         const bounceInScale = this.bounceInValue.interpolate({
             inputRange: [0, 1],
@@ -113,12 +105,6 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
                 : bounceOutScale;
         };
 
-        const getContainerBorderStyles = () => {
-            return {
-                borderColor: correctAnswer ? colors.COOL : colors.HOT
-            };
-        };
-
         return (
             <Animated.View
                 style={[
@@ -135,7 +121,7 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
                 />
                 <View style={styles.textContainer}>
                     <Text numberOfLines={3} style={styles.text}>
-                        {popupText}
+                        {text}
                     </Text>
                 </View>
             </Animated.View>
@@ -146,9 +132,7 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 const mapStateToProps = (state: IReducers) => {
     return {
         colors: state.colorsReducer,
-        showPopup: state.sandiwchBoardReducer.showPopup,
-        correctAnswer: state.sandiwchBoardReducer.correct,
-        popupText: state.laiaScoreReducer.resultMessage
+        showPopup: state.sandiwchBoardReducer.showPopup
     };
 };
 

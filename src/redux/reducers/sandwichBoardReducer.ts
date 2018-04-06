@@ -27,7 +27,7 @@ export const sandiwchBoardReducer = (
                 showPopup: false
             };
         }
-        case "SHOW_SWANDWICHBOARD": {
+        case "SHOW_SANDWICHBOARD": {
             return {
                 ...state,
                 showPopup: true

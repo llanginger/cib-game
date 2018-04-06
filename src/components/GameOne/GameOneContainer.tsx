@@ -93,7 +93,6 @@ export class GameOneContainer extends React.Component<
                         correct={answer.correct}
                         onPress={this._buttonOnPress}
                         reset={this.state.reset}
-                        animated={true}
                         delay={i * 300}
                         key={this.state.reset ? Math.random() : i}
                         animationInType="fadeInUp"

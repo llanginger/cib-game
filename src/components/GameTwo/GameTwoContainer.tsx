@@ -9,6 +9,7 @@ import { gamOneSubmitAnswer } from "../../redux/actions/index";
 import { IReducers } from "../../redux/store";
 import { screenObjects } from "../../navigation/screenObjects";
 
+import { Ready } from "../Ready/Ready";
 //Interfaces
 interface IGameTwoContainerProps {
     navigator: any;
@@ -16,6 +17,7 @@ interface IGameTwoContainerProps {
 }
 
 interface IGameTwoContainerState {
+    tutorialShown: boolean;
     revealAnswers: boolean;
     reset: boolean;
     levels: IGameTwoLevel[];
@@ -23,6 +25,7 @@ interface IGameTwoContainerState {
 }
 
 const initState: IGameTwoContainerState = {
+    tutorialShown: false,
     revealAnswers: false,
     reset: false,
     levels: gameTowLevels,

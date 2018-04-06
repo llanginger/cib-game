@@ -3,6 +3,7 @@ package com.cib;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.cmcewen.blurview.BlurViewPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.reactnativenavigation.NavigationReactPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new BlurViewPackage(),
             new RNSoundPackage(),
             new RNDeviceInfo(),
             new NavigationReactPackage(),
