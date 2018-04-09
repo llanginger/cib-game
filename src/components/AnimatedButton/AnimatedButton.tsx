@@ -106,9 +106,9 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 45,
         shadowColor: "rgb(24, 23, 22)",
-        shadowOffset: { width: 0, height: 10 },
+        shadowOffset: { width: 0, height: 5 },
         shadowRadius: 5,
-        shadowOpacity: 0.8,
+        shadowOpacity: 0.3,
         borderColor: "#776c79",
         borderStyle: "solid",
         borderWidth: 2,
@@ -122,8 +122,9 @@ const styles = StyleSheet.create({
         color: "white",
         fontFamily: "Rockwell",
         fontSize: 24,
-        fontWeight: "400",
+        fontWeight: "700",
         lineHeight: 30,
+        textAlignVertical: "center",
         marginTop: 10,
         backgroundColor: "transparent"
     }

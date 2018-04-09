@@ -1,10 +1,10 @@
 //import liraries
 import * as React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { GameOneImage } from "../GameOneImage/GameOneImage";
+import { GameImage } from "../GameOneImage/GameOneImage";
 import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
-import { gameTowLevels, IGameTwoLevel, getImage } from "./logic/index";
+import { gameTwoLevels, IGameTwoLevel, getImage } from "./logic/index";
 import { gamOneSubmitAnswer } from "../../redux/actions/index";
 import { IReducers } from "../../redux/store";
 import { screenObjects } from "../../navigation/screenObjects";
@@ -28,7 +28,7 @@ const initState: IGameTwoContainerState = {
     tutorialShown: false,
     revealAnswers: false,
     reset: false,
-    levels: gameTowLevels,
+    levels: gameTwoLevels,
     currentLevel: 0
 };
 export class _GameTwoContainer extends React.Component<
@@ -117,7 +117,7 @@ export class _GameTwoContainer extends React.Component<
         const { revealAnswers, levels, currentLevel } = this.state;
         return (
             <View style={styles.container}>
-                <GameOneImage
+                <GameImage
                     color={this.state.revealAnswers}
                     source={getImage(revealAnswers, levels[currentLevel])}
                     reveal={this.state.revealAnswers}

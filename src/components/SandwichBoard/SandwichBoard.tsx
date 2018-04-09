@@ -174,12 +174,11 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 24,
         fontFamily: "Rockwell",
-        color: "white",
+        fontWeight: "700",
+        paddingTop: 10,
+        color: "#414244",
         // width: "60%",
-        textAlign: "center",
-        textShadowColor: "black",
-        textShadowOffset: { width: 2, height: 2 },
-        textShadowRadius: 3
+        textAlign: "center"
     },
 
     image: {}

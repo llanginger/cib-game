@@ -52,6 +52,10 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Rockwell.ttf</string>
+		<string>Rockwell-Italic.ttf</string>
+		<string>Rockwell-BoldItalic.ttf</string>
+		<string>Rockwell-Bold.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

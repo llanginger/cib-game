@@ -1,7 +1,7 @@
 //import liraries
 import * as React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { GameOneImage } from "../GameOneImage/GameOneImage";
+import { GameImage } from "../GameOneImage/GameOneImage";
 import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
 import { gameOneLevels, ILaiaGameLevel, getImage } from "./logic/index";
@@ -108,11 +108,12 @@ export class GameOneContainer extends React.Component<
 
         return (
             <View style={styles.container}>
-                <GameOneImage
+                <GameImage
                     color={this.state.revealAnswers}
                     source={getImage(revealAnswers, levels[currentLevel])}
                     reveal={this.state.revealAnswers}
                     reset={this.state.reset}
+                    circlePortrait
                 />
                 <View style={styles.buttonContainer}>
                     {this._makeButtons()}

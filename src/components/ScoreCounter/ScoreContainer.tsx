@@ -16,6 +16,7 @@ import { ScoreCounters } from "./ScoreCounter";
 
 import { MenuButton } from "../MenuButton/MenuButton";
 import { RobotScoreCounter } from "./RobotScoreCounter";
+import { StarScoreCounter } from "./StarScoreCounter";
 
 interface IScoreContainerProps {
     children?: any;
@@ -29,6 +30,7 @@ export const _ScoreContainer = (props: IScoreContainerProps) => {
     const hotImage = require("../../images/hot.png");
     const coolImage = require("../../images/cool.png");
     const robot = require("../../images/laia/robot.png");
+    const star = require("../../images/laia/icons/score-star.png");
     const { containerProps = {} } = props;
 
     return (
@@ -39,7 +41,7 @@ export const _ScoreContainer = (props: IScoreContainerProps) => {
                 coolImage={coolImage}
                 score={props.score}
             /> */}
-            <RobotScoreCounter image={robot} />
+            <StarScoreCounter image={star} />
         </View>
     );
 };
@@ -47,6 +49,7 @@ export const _ScoreContainer = (props: IScoreContainerProps) => {
 const styles = StyleSheet.create({
     container: {
         marginTop: 25,
+        height: 40,
         width: "100%",
         flexDirection: "row",
         alignItems: "center",

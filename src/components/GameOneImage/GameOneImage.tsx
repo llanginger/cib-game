@@ -9,17 +9,21 @@ interface IGameImageProps {
     source: number;
     reveal: boolean;
     reset: boolean;
+    circlePortrait?: boolean;
 }
 
 // create a component
-export const GameOneImage: React.StatelessComponent<IGameImageProps> = (
+export const GameImage: React.StatelessComponent<IGameImageProps> = (
     props: IGameImageProps
 ) => {
     return (
         <Animatable.View
             animation={props.reset ? "fadeOut" : "fadeIn"}
             duration={1000}
-            style={styles.imageContainer}
+            style={[
+                styles.imageContainer,
+                { paddingVertical: props.circlePortrait ? 10 : 0 }
+            ]}
         >
             <Image
                 style={styles.image}
@@ -34,12 +38,13 @@ export const GameOneImage: React.StatelessComponent<IGameImageProps> = (
 const styles = StyleSheet.create({
     imageContainer: {
         height: 300,
-        width: "100%",
-        backgroundColor: "white",
-        paddingVertical: 10
+        width: "100%"
+        // paddingVertical: 10
     },
     image: {
-        height: "100%",
-        width: "100%"
+        flex: 1,
+        // height: "100%",
+        // width: "100%",
+        alignSelf: "center"
     }
 });

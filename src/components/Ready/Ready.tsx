@@ -86,6 +86,7 @@ export const Ready = connect()(_Ready);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        zIndex: 100,
         position: "absolute",
         top: 0,
         bottom: 0,

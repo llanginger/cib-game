@@ -27,13 +27,15 @@ const _MenuButton = (props: IUserAvatarProps) => {
     return (
         <TouchableOpacity
             style={[styles.container, props.viewStyleProps]}
-            onPress={props.menuPress}
-            // hitSlop={{
-            //     top: slopAmount,
-            //     left: slopAmount,
-            //     bottom: slopAmount,
-            //     right: slopAmount
-            // }}
+            // onPress={props.menuPress}
+            onPress={() => console.log("Menu button pressed")}
+            disabled={false}
+            hitSlop={{
+                top: slopAmount,
+                left: slopAmount,
+                bottom: slopAmount,
+                right: slopAmount
+            }}
         >
             <Image
                 source={require("../../images/laia/icons/menu-icon.png")}
@@ -51,8 +53,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: 60,
         height: 40
-        // borderColor: "red",
-        // borderWidth: 1
     },
     image: {
         width: 40,

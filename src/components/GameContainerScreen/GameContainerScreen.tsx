@@ -33,6 +33,8 @@ import { Popup } from "../Popup/Popup";
 
 import { BlurView } from "../BlurView/BlurView";
 
+import { BirdAnimation } from "../BirdAnimation/BirdAnimation";
+
 interface ICardGameMainScreenProps {
     navigator?: any;
     gameType: 0 | 1 | 2 | 3 | 4 | 5;
@@ -86,6 +88,7 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
     // }
 
     _menuPress() {
+        console.log("Something");
         this.props.navigator.toggleDrawer({
             side: "left", // the side of the drawer since you can have two, 'left' / 'right'
             animated: true // does the toggle have transition animation or does it happen immediately (optional)
@@ -111,15 +114,16 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
         console.log("duo main screen props: ", this.props);
         return (
             <View style={styles.container}>
+                {/* <Ready /> */}
                 <ScoreContainer
                     menuPress={this._menuPress}
-                    containerProps={{ alignSelf: "flex-end" }}
+                    containerProps={{ alignSelf: "flex-start" }}
                 />
                 {/* {this._getGameContainer()} */}
                 {/* <SandwichBoard /> */}
-                <GameTwoContainer navigator={this.props.navigator} />
-                <Popup />
-                <Ready />
+                {/* <GameTwoContainer navigator={this.props.navigator} /> */}
+                {/* <Popup /> */}
+                <BirdAnimation />
             </View>
         );
     }

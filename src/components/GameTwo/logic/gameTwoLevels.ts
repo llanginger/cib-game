@@ -4,13 +4,13 @@ export interface IGameTwoLevel {
     answers: { text: string; correct: boolean }[];
 }
 
-export const gameTowLevels: IGameTwoLevel[] = [
+export const gameTwoLevels: IGameTwoLevel[] = [
     {
         image_before: require("../../../images/laia/game-two/marta-sad-grey.png"),
         image_after: require("../../../images/laia/game-two/marta-sad.png"),
         answers: [
             { text: "Happy", correct: false },
-            { text: "Unhappy", correct: false },
+            { text: "Terrified", correct: false },
             { text: "Sad", correct: true }
         ]
     },
