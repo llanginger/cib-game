@@ -24,6 +24,7 @@ import { initAction } from "../../redux/actions/index";
 import { GameOneContainer } from "../GameOne/GameOneContainer";
 
 import { GameTwoContainer } from "../GameTwo/GameTwoContainer";
+import { GameThreeContainer } from "../GameThree/GameThreeContainer";
 import { GameFourContainer } from "../GameFour/GameFourContainer";
 import { screenObjects } from "../../navigation/screenObjects";
 import { Ready } from "../Ready/Ready";
@@ -114,16 +115,15 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
         console.log("duo main screen props: ", this.props);
         return (
             <View style={styles.container}>
-                {/* <Ready /> */}
+                <Ready />
                 <ScoreContainer
                     menuPress={this._menuPress}
                     containerProps={{ alignSelf: "flex-start" }}
                 />
                 {/* {this._getGameContainer()} */}
-                {/* <SandwichBoard /> */}
-                {/* <GameTwoContainer navigator={this.props.navigator} /> */}
+                <GameThreeContainer navigator={this.props.navigator} />
                 {/* <Popup /> */}
-                <BirdAnimation />
+                {/* <BirdAnimation /> */}
             </View>
         );
     }

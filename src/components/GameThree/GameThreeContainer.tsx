@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { GameImage } from "../GameOneImage/GameOneImage";
 import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
-import { gameTwoLevels, IGameTwoLevel } from "./logic/index";
+import { gameThreeLevels, IGameThreeLevel } from "./logic/index";
 import { getImage } from "../utility/getImage";
 import { gamOneSubmitAnswer } from "../../redux/actions/index";
 import { IReducers } from "../../redux/store";
@@ -12,29 +12,29 @@ import { screenObjects } from "../../navigation/screenObjects";
 
 import { Ready } from "../Ready/Ready";
 //Interfaces
-interface IGameTwoContainerProps {
+interface IGameThreeContainerProps {
     navigator: any;
     submitAnswer: any;
 }
 
-interface IGameTwoContainerState {
+interface IGameThreeContainerState {
     tutorialShown: boolean;
     revealAnswers: boolean;
     reset: boolean;
-    levels: IGameTwoLevel[];
+    levels: IGameThreeLevel[];
     currentLevel: number;
 }
 
-const initState: IGameTwoContainerState = {
+const initState: IGameThreeContainerState = {
     tutorialShown: false,
     revealAnswers: false,
     reset: false,
-    levels: gameTwoLevels,
+    levels: gameThreeLevels,
     currentLevel: 0
 };
-export class _GameTwoContainer extends React.Component<
-    IGameTwoContainerProps,
-    IGameTwoContainerState
+export class _GameThreeContainer extends React.Component<
+    IGameThreeContainerProps,
+    IGameThreeContainerState
 > {
     constructor(props) {
         super(props);
@@ -69,10 +69,12 @@ export class _GameTwoContainer extends React.Component<
         );
     }
 
-    _endGame() {
+    _endGame(correct: boolean) {
         this.setState({ revealAnswers: true }, () => {
             setTimeout(() => this.setState({ reset: true }), 2000);
         });
+
+        this.props.submitAnswer(correct);
 
         setTimeout(() => {
             this.setState({ ...initState }, () => {
@@ -89,7 +91,7 @@ export class _GameTwoContainer extends React.Component<
         if (currentLevel < levels.length - 1) {
             this._nextLevel({ correct });
         } else {
-            this._endGame();
+            this._endGame(correct);
             // this._nextLevel(false);
         }
     }
@@ -136,18 +138,18 @@ const mapStateToProps = (store: IReducers) => {
     return {};
 };
 
-interface IGameTwoDispatchProps {
+interface IGameThreeDispatchProps {
     submitAnswer: any;
 }
 const mapDispatchToProps = {
     submitAnswer: gamOneSubmitAnswer
 };
 
-export const GameTwoContainer: any = connect<
+export const GameThreeContainer: any = connect<
     {},
-    IGameTwoDispatchProps,
-    IGameTwoContainerProps
->(mapStateToProps, mapDispatchToProps)(_GameTwoContainer);
+    IGameThreeDispatchProps,
+    IGameThreeContainerProps
+>(mapStateToProps, mapDispatchToProps)(_GameThreeContainer);
 
 // define your styles
 const styles = StyleSheet.create({
