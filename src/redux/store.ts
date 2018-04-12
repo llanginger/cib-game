@@ -4,12 +4,6 @@ import {
     IScoreReducer,
     userReducer,
     IUserReducer,
-    cardGameReducer,
-    ICardGameReducer,
-    wordGameReducer,
-    IWordGameReducer,
-    gameTypeReducer,
-    IGameTypeReducer,
     deviceTypeReducer,
     IDeviceTypeReducer,
     colorsReducer,
@@ -23,7 +17,9 @@ import {
     robotGameReducer,
     IRobotGameReducer,
     gameLevelTypeReducer,
-    IGameLevelTypeReducer
+    IGameLevelTypeReducer,
+    readyScreenReducer,
+    IReadyScreenReducer
 } from "./reducers/index";
 import logger from "redux-logger";
 export * from "./reducers/index";
@@ -32,15 +28,13 @@ export interface IReducers {
     scoreReducer: IScoreReducer;
     userReducer: IUserReducer;
     deviceTypeReducer: IDeviceTypeReducer;
-    cardGameReducer: ICardGameReducer;
     sandiwchBoardReducer: ISandwichBoardReducer;
-    wordGameReducer: IWordGameReducer;
-    gameTypeReducer: IGameTypeReducer;
     colorsReducer: IColorsReducer;
     userPreferencesReducer: IUserPreferencesReducer;
     laiaScoreReducer: ILaiaScoreReducer;
     robotGameReducer: IRobotGameReducer;
     gameLevelTypeReducer: IGameLevelTypeReducer;
+    readyScreenReducer: IReadyScreenReducer;
 }
 
 const reducers = combineReducers({
@@ -48,14 +42,12 @@ const reducers = combineReducers({
     userReducer,
     deviceTypeReducer,
     colorsReducer,
-    cardGameReducer,
-    wordGameReducer,
     sandiwchBoardReducer,
     userPreferencesReducer,
-    gameTypeReducer,
     laiaScoreReducer,
     robotGameReducer,
-    gameLevelTypeReducer
+    gameLevelTypeReducer,
+    readyScreenReducer
 });
 
 export const store = createStore(reducers, applyMiddleware(logger));

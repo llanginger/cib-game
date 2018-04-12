@@ -29,12 +29,9 @@ export const ScoreScreenTitle: React.StatelessComponent<
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        width: "80%",
-        height: 50,
+        width: "100%",
+        height: 70,
         backgroundColor: appStyles.colors.blue,
-        ...appStyles.shadow,
-        ...appStyles.buttonBorder,
-        borderRadius: 0,
         justifyContent: "center",
         alignItems: "center"
     },
@@ -43,8 +40,6 @@ const styles = StyleSheet.create({
         fontFamily: appStyles.font,
         fontSize: 24,
         fontWeight: "400",
-        lineHeight: 30,
-        marginTop: 10,
         backgroundColor: "transparent"
     }
 });

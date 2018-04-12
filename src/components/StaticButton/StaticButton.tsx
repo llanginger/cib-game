@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
         fontFamily: appStyles.font,
         fontSize: 24,
         fontWeight: "400",
-        lineHeight: 30,
-        marginTop: 10,
+        // lineHeight: 30,
+        // marginTop: 10,
         backgroundColor: "transparent"
     }
 });

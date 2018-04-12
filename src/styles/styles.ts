@@ -41,9 +41,9 @@ const colors: IColors = {
 
 const shadow: IShadowStyles = {
     shadowColor: "rgb(24, 23, 22)",
-    shadowOffset: { width: 0, height: 10 },
+    shadowOffset: { width: 0, height: 5 },
     shadowRadius: 5,
-    shadowOpacity: 0.8
+    shadowOpacity: 0.3
 };
 
 export type IFont = string;

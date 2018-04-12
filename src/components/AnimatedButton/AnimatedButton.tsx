@@ -8,7 +8,7 @@ import {
     ViewStyle
 } from "react-native";
 import * as Animatable from "react-native-animatable";
-import { gamOneSubmitAnswer } from "../../redux/actions/index";
+import { gameOneSubmitAnswer } from "../../redux/actions/index";
 import { appStyles } from "../../styles/styles";
 
 import { connect } from "react-redux";
@@ -105,10 +105,7 @@ const styles = StyleSheet.create({
     button: {
         width: "100%",
         height: 45,
-        shadowColor: "rgb(24, 23, 22)",
-        shadowOffset: { width: 0, height: 5 },
-        shadowRadius: 5,
-        shadowOpacity: 0.3,
+        ...appStyles.shadow,
         borderColor: "#776c79",
         borderStyle: "solid",
         borderWidth: 2,

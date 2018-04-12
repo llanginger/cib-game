@@ -6,7 +6,7 @@ import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
 import { gameThreeLevels, IGameThreeLevel } from "./logic/index";
 import { getImage } from "../utility/getImage";
-import { gamOneSubmitAnswer } from "../../redux/actions/index";
+import { gameOneSubmitAnswer } from "../../redux/actions/index";
 import { IReducers } from "../../redux/store";
 import { screenObjects } from "../../navigation/screenObjects";
 
@@ -30,7 +30,7 @@ const initState: IGameThreeContainerState = {
     revealAnswers: false,
     reset: false,
     levels: gameThreeLevels,
-    currentLevel: 0
+    currentLevel: gameThreeLevels.length - 1
 };
 export class _GameThreeContainer extends React.Component<
     IGameThreeContainerProps,
@@ -142,7 +142,7 @@ interface IGameThreeDispatchProps {
     submitAnswer: any;
 }
 const mapDispatchToProps = {
-    submitAnswer: gamOneSubmitAnswer
+    submitAnswer: gameOneSubmitAnswer
 };
 
 export const GameThreeContainer: any = connect<

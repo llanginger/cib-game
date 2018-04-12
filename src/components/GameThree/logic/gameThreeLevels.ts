@@ -75,7 +75,7 @@ export const gameThreeLevels: IGameThreeLevel[] = [
     {
         characterName: "Giraffe",
         image_before: require("../../../images/laia/game-three/repulsion-giraffe-grey.png"),
-        image_after: require("../../../images/laia/game-three/repulsion-giraffe-grey.png"),
+        image_after: require("../../../images/laia/game-three/repulsion-giraffe.png"),
         answers: [
             {
                 text: "Ecstatic",
@@ -87,6 +87,63 @@ export const gameThreeLevels: IGameThreeLevel[] = [
             },
             {
                 text: "Gloomy",
+                correct: false
+            }
+        ]
+    },
+    {
+        characterName: "Chameleon",
+        image_before: require("../../../images/laia/game-three/pena-chameleon-grey.png"),
+        image_after: require("../../../images/laia/game-three/pena-chameleon.png"),
+        answers: [
+            {
+                text: "Gloomy",
+                correct: true
+            },
+            {
+                text: "Repulsed",
+                correct: false
+            },
+            {
+                text: "Terrified",
+                correct: false
+            }
+        ]
+    },
+    {
+        characterName: "Elephant",
+        image_before: require("../../../images/laia/game-three/furia-elephant-grey.png"),
+        image_after: require("../../../images/laia/game-three/furia-elephant.png"),
+        answers: [
+            {
+                text: "Gloomy",
+                correct: false
+            },
+            {
+                text: "Serene",
+                correct: false
+            },
+            {
+                text: "Furious",
+                correct: true
+            }
+        ]
+    },
+    {
+        characterName: "Koala",
+        image_before: require("../../../images/laia/game-three/tranquilidad-koala-grey.png"),
+        image_after: require("../../../images/laia/game-three/tranquilidad-koala.png"),
+        answers: [
+            {
+                text: "Repulsed",
+                correct: false
+            },
+            {
+                text: "Tranquil",
+                correct: true
+            },
+            {
+                text: "Terrified",
                 correct: false
             }
         ]

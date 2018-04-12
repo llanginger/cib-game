@@ -22,10 +22,10 @@ import { initAction } from "../../redux/actions/index";
 // Text game section
 
 import { GameOneContainer } from "../GameOne/GameOneContainer";
-
 import { GameTwoContainer } from "../GameTwo/GameTwoContainer";
 import { GameThreeContainer } from "../GameThree/GameThreeContainer";
 import { GameFourContainer } from "../GameFour/GameFourContainer";
+
 import { screenObjects } from "../../navigation/screenObjects";
 import { Ready } from "../Ready/Ready";
 
@@ -101,12 +101,15 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
         const { gameType } = this.props;
 
         if (gameType === 0) {
-            console.log("Game type 0 inside if statement");
             return <GameOneContainer navigator={this.props.navigator} />;
         } else if (gameType === 1) {
-            console.log("Game type 1 inside if statement");
             return <GameTwoContainer navigator={this.props.navigator} />;
-        } else {
+        } else if (gameType === 2) {
+            return <GameThreeContainer navigator={this.props.navigator} />;
+        } else if (gameType === 3) {
+            return <GameFourContainer navigator={this.props.navigator} />;
+        }
+        {
             return <GameOneContainer navigator={this.props.navigator} />;
         }
     }
@@ -120,8 +123,7 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
                     menuPress={this._menuPress}
                     containerProps={{ alignSelf: "flex-start" }}
                 />
-                {/* {this._getGameContainer()} */}
-                <GameThreeContainer navigator={this.props.navigator} />
+                {this._getGameContainer()}
                 {/* <Popup /> */}
                 {/* <BirdAnimation /> */}
             </View>

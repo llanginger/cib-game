@@ -6,7 +6,7 @@ import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
 import { gameTwoLevels, IGameTwoLevel } from "./logic/index";
 import { getImage } from "../utility/getImage";
-import { gamOneSubmitAnswer } from "../../redux/actions/index";
+import { gameOneSubmitAnswer } from "../../redux/actions/index";
 import { IReducers } from "../../redux/store";
 import { screenObjects } from "../../navigation/screenObjects";
 
@@ -30,7 +30,7 @@ const initState: IGameTwoContainerState = {
     revealAnswers: false,
     reset: false,
     levels: gameTwoLevels,
-    currentLevel: 0
+    currentLevel: gameTwoLevels.length - 1
 };
 export class _GameTwoContainer extends React.Component<
     IGameTwoContainerProps,
@@ -140,7 +140,7 @@ interface IGameTwoDispatchProps {
     submitAnswer: any;
 }
 const mapDispatchToProps = {
-    submitAnswer: gamOneSubmitAnswer
+    submitAnswer: gameOneSubmitAnswer
 };
 
 export const GameTwoContainer: any = connect<

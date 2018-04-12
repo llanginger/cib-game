@@ -13,26 +13,17 @@ export const sandiwchBoardReducer = (
     action
 ) => {
     switch (action.type) {
-        case "CARDGAME_SHOW_ANSWER":
-        case "WORDGAME_SUBMIT_WORD":
-        case "GAME-ONE_SUBMIT_ANSWER":
-            return {
-                ...state,
-                showPopup: true,
-                correct: action.payload
-            };
-        case "RESET_POPUP": {
+        case "HIDE_SANDWICHBOARD":
             return {
                 ...state,
                 showPopup: false
             };
-        }
-        case "SHOW_SANDWICHBOARD": {
+        case "SHOW_SANDWICHBOARD":
+        case "CHANGE_GAME_LEVEL_TYPE":
             return {
                 ...state,
                 showPopup: true
             };
-        }
         default:
             return state;
     }

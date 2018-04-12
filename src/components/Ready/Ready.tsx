@@ -5,16 +5,19 @@ import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
 import { screenObjects } from "../../navigation/screenObjects";
 import { SandwichBoard } from "../SandwichBoard/SandwichBoard";
-import { gamOneSubmitAnswer } from "../../redux/actions/index";
+import { gameOneSubmitAnswer } from "../../redux/actions/index";
 import { appStyles } from "../../styles/styles";
+import { IReducers } from "../../redux/store";
 
 //Interface
 interface IReadyProps {
     dispatch?: any;
+    sandwichText: string;
+    readyScreenReset?: boolean;
 }
 
 interface IReadyState {
-    reset: boolean;
+    buttonReset: boolean;
     show: boolean;
 }
 
@@ -27,13 +30,23 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
 
         this.opacityValue = new Animated.Value(0);
 
-        this.state = { reset: false, show: true };
+        this.state = { buttonReset: false, show: true };
         this._buttonOnPress = this._buttonOnPress.bind(this);
         this._fadeOut = this._fadeOut.bind(this);
     }
 
     componentDidMount() {
         this.props.dispatch({ type: "SHOW_SANDWICHBOARD" });
+    }
+
+    componentWillReceiveProps(nextProps: IReadyProps) {
+        console.log("");
+        if (nextProps.readyScreenReset && !this.state.show) {
+            console.log("Should be showing ready screen");
+            this.setState({ show: true, buttonReset: false }, () =>
+                this.opacityValue.setValue(0)
+            );
+        }
     }
 
     _fadeOut() {
@@ -47,8 +60,8 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
     }
 
     _buttonOnPress() {
-        this.props.dispatch({ type: "RESET_POPUP" });
-        setTimeout(() => this.setState({ reset: true }), 300);
+        this.props.dispatch({ type: "HIDE_SANDWICHBOARD" });
+        setTimeout(() => this.setState({ buttonReset: true }), 300);
         this._fadeOut();
     }
 
@@ -61,7 +74,7 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
             <AnimatedButton
                 text="Ready!"
                 correct={false}
-                reset={this.state.reset}
+                reset={this.state.buttonReset}
                 revealed={false}
                 animationInType="fadeInUp"
                 animationOutType="fadeOutLeft"
@@ -73,14 +86,21 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
             <Animated.View
                 style={[styles.container, { opacity: opacityStyleValue }]}
             >
-                <SandwichBoard text="Level 2, are you ready?" />
+                <SandwichBoard text={this.props.sandwichText} />
                 <ReadyButton />
             </Animated.View>
         ) : null;
     }
 }
 
-export const Ready = connect()(_Ready);
+const mapStateToProps = (state: IReducers) => {
+    return {
+        sandwichText: state.gameLevelTypeReducer.gameTitle,
+        readyScreenReset: state.readyScreenReducer.resetReadyScreen
+    };
+};
+
+export const Ready = connect(mapStateToProps)(_Ready);
 
 // define your styles
 const styles = StyleSheet.create({

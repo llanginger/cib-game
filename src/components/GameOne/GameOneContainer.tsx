@@ -24,7 +24,7 @@ const initState: ILaiaGameContainerState = {
     revealAnswers: false,
     reset: false,
     levels: gameOneLevels,
-    currentLevel: 0
+    currentLevel: gameOneLevels.length - 1
 };
 export class GameOneContainer extends React.Component<
     ILaiaGameContainerProps,
