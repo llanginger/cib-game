@@ -30,7 +30,7 @@ const initState: IGameThreeContainerState = {
     revealAnswers: false,
     reset: false,
     levels: gameThreeLevels,
-    currentLevel: gameThreeLevels.length - 1
+    currentLevel: 0
 };
 export class _GameThreeContainer extends React.Component<
     IGameThreeContainerProps,

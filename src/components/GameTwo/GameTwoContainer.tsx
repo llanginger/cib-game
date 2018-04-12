@@ -30,7 +30,7 @@ const initState: IGameTwoContainerState = {
     revealAnswers: false,
     reset: false,
     levels: gameTwoLevels,
-    currentLevel: gameTwoLevels.length - 1
+    currentLevel: 0
 };
 export class _GameTwoContainer extends React.Component<
     IGameTwoContainerProps,
@@ -69,10 +69,12 @@ export class _GameTwoContainer extends React.Component<
         );
     }
 
-    _endGame() {
+    _endGame(correct: boolean) {
         this.setState({ revealAnswers: true }, () => {
             setTimeout(() => this.setState({ reset: true }), 2000);
         });
+
+        this.props.submitAnswer(correct);
 
         setTimeout(() => {
             this.setState({ ...initState }, () => {
@@ -89,7 +91,7 @@ export class _GameTwoContainer extends React.Component<
         if (currentLevel < levels.length - 1) {
             this._nextLevel({ correct });
         } else {
-            this._endGame();
+            this._endGame(correct);
             // this._nextLevel(false);
         }
     }

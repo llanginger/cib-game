@@ -6,29 +6,32 @@ import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
 import { gameOneLevels, ILaiaGameLevel, getImage } from "./logic/index";
 import { screenObjects } from "../../navigation/screenObjects";
+import { IReducers } from "../../redux/store";
+import { gameOneSubmitAnswer } from "../../redux/actions/index";
 
 //Interfaces
-interface ILaiaGameContainerProps {
+interface IGameOneContainerProps {
     dispatch?: any;
     navigator: any;
+    submitAnswer: any;
 }
 
-interface ILaiaGameContainerState {
+interface IGameOneContainerState {
     revealAnswers: boolean;
     reset: boolean;
     levels: ILaiaGameLevel[];
     currentLevel: number;
 }
 
-const initState: ILaiaGameContainerState = {
+const initState: IGameOneContainerState = {
     revealAnswers: false,
     reset: false,
     levels: gameOneLevels,
-    currentLevel: gameOneLevels.length - 1
+    currentLevel: 0
 };
-export class GameOneContainer extends React.Component<
-    ILaiaGameContainerProps,
-    ILaiaGameContainerState
+export class _GameOneContainer extends React.Component<
+    IGameOneContainerProps,
+    IGameOneContainerState
 > {
     constructor(props) {
         super(props);
@@ -42,25 +45,31 @@ export class GameOneContainer extends React.Component<
         this._nextLevel = this._nextLevel.bind(this);
     }
 
-    _nextLevel(reset?: boolean) {
+    _nextLevel(options: { reset?: boolean; correct: boolean }) {
         this.setState({ revealAnswers: true }, () => {
             setTimeout(() => this.setState({ reset: true }), 2000);
         });
+
+        this.props.submitAnswer(options.correct);
         setTimeout(
             () =>
                 this.setState({
                     revealAnswers: false,
                     reset: false,
-                    currentLevel: reset ? 0 : 1 + this.state.currentLevel
+                    currentLevel: options.reset
+                        ? 0
+                        : 1 + this.state.currentLevel
                 }),
             4000
         );
     }
 
-    _endGame() {
+    _endGame(correct: boolean) {
         this.setState({ revealAnswers: true }, () => {
             setTimeout(() => this.setState({ reset: true }), 2000);
         });
+
+        this.props.submitAnswer(correct);
 
         setTimeout(() => {
             this.setState({ ...initState }, () => {
@@ -71,13 +80,13 @@ export class GameOneContainer extends React.Component<
         }, 3000);
     }
 
-    _buttonOnPress(callBack) {
+    _buttonOnPress(correct) {
         const { currentLevel, levels } = this.state;
 
         if (currentLevel < levels.length - 1) {
-            this._nextLevel();
+            this._nextLevel({ correct });
         } else {
-            this._endGame();
+            this._endGame(correct);
             // this._nextLevel(false);
         }
     }
@@ -91,7 +100,7 @@ export class GameOneContainer extends React.Component<
                         text={answer.text}
                         revealed={this.state.revealAnswers}
                         correct={answer.correct}
-                        onPress={this._buttonOnPress}
+                        onPress={() => this._buttonOnPress(answer.correct)}
                         reset={this.state.reset}
                         delay={i * 300}
                         key={this.state.reset ? Math.random() : i}
@@ -122,6 +131,23 @@ export class GameOneContainer extends React.Component<
         );
     }
 }
+
+const mapStateToProps = (store: IReducers) => {
+    return {};
+};
+
+interface IGameOneDispatchProps {
+    submitAnswer: any;
+}
+const mapDispatchToProps = {
+    submitAnswer: gameOneSubmitAnswer
+};
+
+export const GameOneContainer: any = connect<
+    {},
+    IGameOneDispatchProps,
+    IGameOneContainerProps
+>(mapStateToProps, mapDispatchToProps)(_GameOneContainer);
 
 // define your styles
 const styles = StyleSheet.create({
