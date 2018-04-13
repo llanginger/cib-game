@@ -1,4 +1,4 @@
-import { IGameTwoLevel } from "./index";
+import { IGameTwoLevel } from "../GameTwo/logic/index";
 export const getImage: (
     revealAnswer: boolean,
     level: IGameTwoLevel

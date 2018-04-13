@@ -1,5 +1,4 @@
 import { IPayloadAction } from "../../interfaces/IPayloadAction";
-import { ICardGameLevel } from "../reducers/index";
 
 export interface ISetProfilePicturePayload {
     profilePicture: string;

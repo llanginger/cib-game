@@ -61,9 +61,9 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     textContainer: {
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center"
+        // flexDirection: "column"
+        // justifyContent: "space-between",
+        // alignItems: "center"
     },
     scoreTitle: {
         fontFamily: "Rockwell",
@@ -77,14 +77,12 @@ const styles = StyleSheet.create({
         // marginBottom: -8,
     },
     score: {
-        textAlignVertical: "center",
+        // textAlignVertical: "center",
         fontFamily: "Rockwell",
         fontWeight: "100",
         fontSize: 30,
-        // lineHeight: 42,
-
+        lineHeight: 42,
         textAlign: "justify",
-        marginBottom: 5,
         height: 30
     },
     image: {

@@ -66,7 +66,6 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
     }
 
     _hideSandwichBoard() {
-        console.log("Sandwich board hide animtion start");
         this.bounceOutValue.setValue(0);
         Animated.timing(this.bounceOutValue, {
             toValue: 1,
@@ -78,13 +77,11 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 
     componentWillReceiveProps(nextProps: ISandwichBoardProps) {
         if (!nextProps.showPopup) {
-            console.log("Next props Popup: ", nextProps);
             this._hideSandwichBoard();
         }
     }
 
     render() {
-        console.log("Sandwichboard props: ", this.props);
         const { colors, text } = this.props;
 
         const bounceInScale = this.bounceInValue.interpolate({

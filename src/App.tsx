@@ -31,6 +31,7 @@ Navigation.startSingleScreenApp({
         screen: screenObjects.HOME_SCREEN.screen
     },
     drawer: {
+        disableOpenGesture: true,
         left: {
             screen: screenObjects.DRAWER_SCREEN.screen
         },

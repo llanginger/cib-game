@@ -1,36 +1,42 @@
 //import liraries
-import * as React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { IReducers } from "../../redux/store"
-import { connect } from "react-redux"
+import * as React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import { IReducers } from "../../redux/store";
+import { connect } from "react-redux";
 
 //Interface
 interface IRobotScoreCounterProps {
-    image: any
-    score: number
+    image: any;
+    score: number;
 }
 
-const ScoreTitle = (props) => {
-    return <Text style={styles.scoreTitle}>SCORE</Text>
-}
+const ScoreTitle = props => {
+    return <Text style={styles.scoreTitle}>SCORE</Text>;
+};
 
 const Score = (props: { score: string }) => {
-    return <Text style={styles.score}>{props.score}</Text>
-}
+    return <Text style={styles.score}>{props.score}</Text>;
+};
 
 const lolLeftPad = (number, targetLength: number) => {
-    let output: string = number += ""
+    let output: string = (number += "");
     while (output.length < targetLength) {
-        output = '0' + output;
+        output = "0" + output;
     }
-    return output
-}
+    return output;
+};
 
 // create a component
-const _RobotScoreCounter: React.StatelessComponent<IRobotScoreCounterProps> = (props: IRobotScoreCounterProps) => {
+const _RobotScoreCounter: React.StatelessComponent<IRobotScoreCounterProps> = (
+    props: IRobotScoreCounterProps
+) => {
     return (
         <View style={styles.container}>
-            <Image style={styles.image} source={props.image} resizeMode="contain" />
+            <Image
+                style={styles.image}
+                source={props.image}
+                resizeMode="contain"
+            />
             <View style={styles.textContainer}>
                 <ScoreTitle />
                 <Score score={`${lolLeftPad(props.score, 4)}`} />
@@ -42,10 +48,10 @@ const _RobotScoreCounter: React.StatelessComponent<IRobotScoreCounterProps> = (p
 const mapStateToProps = (state: IReducers) => {
     return {
         score: state.laiaScoreReducer.score
-    }
-}
+    };
+};
 
-export const RobotScoreCounter = connect(mapStateToProps)(_RobotScoreCounter)
+export const RobotScoreCounter = connect(mapStateToProps)(_RobotScoreCounter);
 // define your styles
 const styles = StyleSheet.create({
     container: {
@@ -57,7 +63,7 @@ const styles = StyleSheet.create({
     textContainer: {
         flexDirection: "column",
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: "center"
     },
     scoreTitle: {
         fontFamily: "Rockwell",
@@ -67,19 +73,18 @@ const styles = StyleSheet.create({
         height: 30,
         lineHeight: 35,
         textAlignVertical: "center",
-        textAlign: "justify",
+        textAlign: "justify"
         // marginBottom: -8,
-
     },
     score: {
-        textAlignVertical: "center",
+        // textAlignVertical: "center",
         fontFamily: "Rockwell",
         fontSize: 31,
-        lineHeight: 40,
-
         textAlign: "justify",
-        paddingBottom: -40,
-        height: 35
+        height: 35,
+        marginBottom: -8,
+        borderColor: "red",
+        borderWidth: 1
     },
     image: {
         height: 55

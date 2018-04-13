@@ -4,38 +4,117 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { robotFaces } from "./robotImages";
 import { robotGameChooseFace } from "../../redux/actions/index";
 import { connect } from "react-redux";
+import Interactable from "react-native-interactable";
 //Interface
+
+interface snapPoint {
+    x: number;
+    y: number;
+    damping?: number;
+    tension?: number;
+    id?: string;
+}
 interface IRobotFacesProps {
     chooseFace: any;
 }
 
+interface IRobotFacesState {
+    snapPoints: snapPoint[];
+}
+
 // create a component
-const _RobotFaces: React.StatelessComponent<IRobotFacesProps> = (
-    props: IRobotFacesProps
-) => {
-    const makeFaceButtons = () => {
+class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            snapPoints: [{ x: 0, y: 0 }]
+        };
+        this._makeFaceButtons = this._makeFaceButtons.bind(this);
+        this._onLayout = this._onLayout.bind(this);
+        this._onDrag = this._onDrag.bind(this);
+        this._getCustomCoordinates = this._getCustomCoordinates.bind(this);
+    }
+
+    // _generateSnapPoint(e) {
+
+    // }
+
+    // TODO: Do math to figure out the offset needed so that each head can use "head" as a snapPoint
+    _onLayout(e) {
+        // const newSnapPoint = {
+        //     x: e.nativeEvent.layout.x,
+        //     y: e.nativeEvent.layout.y
+        // };
+        // console.log("Type of x: ", typeof e.nativeEvent.layout.x);
+        // this.setState(
+        //     { snapPoints: [...this.state.snapPoints, newSnapPoint] },
+        //     () => console.log("Robot face snapPoints: ", this.state)
+        // );
+
+        console.log("Head location: ", e.nativeEvent.layout);
+    }
+
+    _onDrag(e) {
+        console.log("Dragging: ", e.nativeEvent);
+    }
+
+    _getCustomCoordinates(i: number) {
+        if (i < 3) {
+            if (i === 0) {
+                return { x: 131.5, y: -361.5, id: `Snap point ${i}` };
+            } else if (i === 1) {
+                return { x: 0, y: -361.5, id: `Snap point ${i}` };
+            } else {
+                return { x: -131.5, y: -361.5, id: `Snap point ${i}` };
+            }
+        } else {
+            if (i === 3) {
+                return { x: 131.5, y: -433.5, id: `Snap point ${i}` };
+            } else if (i === 4) {
+                return { x: 0, y: -433.5, id: `Snap point ${i}` };
+            } else {
+                return { x: -131.5, y: -433.5, id: `Snap point ${i}` };
+            }
+        }
+    }
+
+    _makeFaceButtons() {
         return robotFaces.map((face, i) => {
             return (
-                <TouchableOpacity
-                    onPress={() =>
-                        props.chooseFace({
-                            emotion: face.emotion
-                        })
-                    }
+                <Interactable.View
                     key={i}
                     style={styles.faceContainer}
+                    onLayout={this._onLayout}
+                    snapPoints={[
+                        ...this.state.snapPoints,
+                        this._getCustomCoordinates(i)
+                    ]}
+                    onDrag={this._onDrag}
                 >
-                    <Image
-                        style={styles.faceImage}
-                        source={face.source}
-                        resizeMode="contain"
-                    />
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() =>
+                            this.props.chooseFace({
+                                emotion: face.emotion
+                            })
+                        }
+                    >
+                        <Image
+                            style={styles.faceImage}
+                            source={face.source}
+                            resizeMode="contain"
+                        />
+                    </TouchableOpacity>
+                </Interactable.View>
             );
         });
-    };
-    return <View style={styles.container}>{makeFaceButtons()}</View>;
-};
+    }
+
+    render() {
+        console.log("State before makefancybuttons: ", this.state);
+        return <View style={styles.container}>{this._makeFaceButtons()}</View>;
+    }
+}
 
 const mapDispatchToProps = {
     chooseFace: robotGameChooseFace
@@ -62,7 +141,9 @@ const styles = StyleSheet.create({
     faceContainer: {
         flexBasis: "30%",
         padding: 0,
-        marginVertical: 10
+        marginVertical: 10,
+        borderColor: "red",
+        borderWidth: 1
     },
     faceImage: {
         height: 50,

@@ -39,15 +39,18 @@ export class _GameTwoContainer extends React.Component<
     constructor(props) {
         super(props);
 
-        this.state = {
-            ...initState
-        };
+        // this.state = {
+        //     ...initState
+        // };
         this._buttonOnPress = this._buttonOnPress.bind(this);
         this._makeButtons = this._makeButtons.bind(this);
         this._endGame = this._endGame.bind(this);
         this._nextLevel = this._nextLevel.bind(this);
     }
 
+    componentWillMount() {
+        this.setState({ ...initState });
+    }
     _nextLevel(options: { reset?: boolean; correct: boolean }) {
         // Show answer and queue up out animation
         this.setState({ revealAnswers: true }, () => {
@@ -118,6 +121,7 @@ export class _GameTwoContainer extends React.Component<
 
     render() {
         const { revealAnswers, levels, currentLevel } = this.state;
+        console.log("Game 2 state: ", this.state);
         return (
             <View style={styles.container}>
                 <GameImage

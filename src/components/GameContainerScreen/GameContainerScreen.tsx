@@ -18,7 +18,6 @@ import { IReducers } from "../../redux/store";
 // import { ImageCard } from "../../sharedComponents/ImageCard/ImageCard";
 import { ScoreContainer } from "../ScoreCounter/ScoreContainer";
 import DeviceInfo from "react-native-device-info";
-import { initAction } from "../../redux/actions/index";
 // Text game section
 
 import { GameOneContainer } from "../GameOne/GameOneContainer";
@@ -123,7 +122,8 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
                     menuPress={this._menuPress}
                     containerProps={{ alignSelf: "flex-start" }}
                 />
-                {this._getGameContainer()}
+                {/* {this._getGameContainer()} */}
+                <GameFourContainer navigator={this.props.navigator} />
                 {/* <Popup /> */}
                 {/* <BirdAnimation /> */}
             </View>
