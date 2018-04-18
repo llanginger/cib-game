@@ -25,7 +25,7 @@ const _Robot: React.StatelessComponent<IRobotProps> = (props: IRobotProps) => {
                 source={getRobot(currentEmotion, intensity)}
                 resizeMode="contain"
             />
-            <RobotFace image={getRobotFace(currentEmotion)} />
+            {/* <RobotFace image={getRobotFace(currentEmotion)} /> */}
         </View>
     );
 };
