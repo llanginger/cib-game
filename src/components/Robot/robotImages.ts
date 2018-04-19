@@ -41,14 +41,27 @@ export const robots: IRobots = {
         require("../../images/laia/robot-game/robot/robot-2_levels-blue_1x.png"),
         require("../../images/laia/robot-game/robot/robot-full-blue_1x.png")
     ],
-    grey: [
-        require("../../images/laia/robot-game/robot/robot-empty_1x.png")
-    ]
+    grey: [require("../../images/laia/robot-game/robot/robot-empty_1x.png")]
 };
+export type IRobotEmotion =
+    | "calm"
+    | "disgust"
+    | "fear"
+    | "happy"
+    | "rage"
+    | "sad";
 
+export const robotEmotions: IRobotEmotion[] = [
+    "calm",
+    "disgust",
+    "fear",
+    "happy",
+    "rage",
+    "sad"
+];
 export interface IRobotFace {
     source: number;
-    emotion: "calm" | "disgust" | "fear" | "happy" | "rage" | "sad";
+    emotion: IRobotEmotion;
     intensity: 0 | 1 | 2;
 }
 

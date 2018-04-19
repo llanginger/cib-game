@@ -3,7 +3,7 @@ import * as React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { robots, robotFaces, IRobotFace, IRobot } from "./robotImages";
 import { IReducers } from "../../redux/store";
-import { IRobotEmotion } from "../../redux/reducers/index";
+import { IRobotEmotion } from "./robotImages";
 import { getRobot, getRobotFace } from "./logic/index";
 import { connect } from "react-redux";
 import { RobotFace } from "./RobotFace";
@@ -19,13 +19,12 @@ const _Robot: React.StatelessComponent<IRobotProps> = (props: IRobotProps) => {
 
     return (
         <View style={styles.imageContainer}>
-            <Text style={styles.levelTitle}> WORD HERE</Text>
+            {/* <Text style={styles.levelTitle}> WORD HERE</Text> */}
             <Image
                 style={styles.image}
                 source={getRobot(currentEmotion, intensity)}
                 resizeMode="contain"
             />
-            {/* <RobotFace image={getRobotFace(currentEmotion)} /> */}
         </View>
     );
 };
@@ -42,7 +41,8 @@ export const Robot = connect(mapStateToProps)(_Robot);
 // define your styles
 const styles = StyleSheet.create({
     imageContainer: {
-        height: 400,
+        // height: 420,
+        flex: 3,
         width: "100%",
         backgroundColor: "white",
         paddingVertical: 20

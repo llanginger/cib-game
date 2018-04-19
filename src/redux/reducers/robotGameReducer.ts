@@ -1,11 +1,4 @@
-export type IRobotEmotion =
-    | "calm"
-    | "disgust"
-    | "fear"
-    | "happy"
-    | "rage"
-    | "sad"
-    | "empty";
+import { IRobotEmotion } from "../../components/Robot/robotImages";
 
 export interface IRobotGameReducer {
     currentEmotion: IRobotEmotion;
@@ -27,6 +20,11 @@ export const robotGameReducer = (
                 ...state,
                 currentEmotion: action.payload.emotion,
                 intensity: state.intensity < 2 ? 1 + state.intensity : 0
+            };
+        case "NEW_ROBOT_FACE":
+            return {
+                ...state,
+                currentEmotion: action.payload.emotion
             };
         default:
             return state;

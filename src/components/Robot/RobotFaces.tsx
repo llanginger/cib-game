@@ -1,8 +1,11 @@
 //import liraries
 import * as React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { robotFaces } from "./robotImages";
-import { robotGameChooseFace } from "../../redux/actions/index";
+import { robotFaces, IRobotEmotion, IRobot } from "./robotImages";
+import {
+    robotGameChooseFace,
+    robotGameNewFace
+} from "../../redux/actions/index";
 import { connect } from "react-redux";
 import Interactable from "react-native-interactable";
 import { InteractableRobotFace } from "./InteractableRobotFace";
@@ -17,10 +20,13 @@ interface snapPoint {
 }
 interface IRobotFacesProps {
     chooseFace: any;
+    newFace: (oldValue: IRobotEmotion) => any;
+    currentEmotion: IRobotEmotion;
 }
 
 interface IRobotFacesState {
     snapPoints: snapPoint[];
+    reset: boolean;
 }
 
 // create a component
@@ -31,10 +37,10 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
         super(props);
 
         this.state = {
-            snapPoints: [{ x: 0, y: 0, id: "init" }]
+            snapPoints: [{ x: 0, y: 0, id: "init" }],
+            reset: false
         };
         this._makeFaceButtons = this._makeFaceButtons.bind(this);
-        this._onLayout = this._onLayout.bind(this);
         this._onDrag = this._onDrag.bind(this);
         this._getCustomCoordinates = this._getCustomCoordinates.bind(this);
     }
@@ -44,40 +50,46 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
     // }
 
     // TODO: Do math to figure out the offset needed so that each head can use "head" as a snapPoint
-    _onLayout(e) {
-        // const newSnapPoint = {
-        //     x: e.nativeEvent.layout.x,
-        //     y: e.nativeEvent.layout.y
-        // };
-        // console.log("Type of x: ", typeof e.nativeEvent.layout.x);
-        // this.setState(
-        //     { snapPoints: [...this.state.snapPoints, newSnapPoint] },
-        //     () => console.log("Robot face snapPoints: ", this.state)
-        // );
-
-        console.log("Head location: ", e.nativeEvent.layout);
-    }
 
     _onDrag(e) {
         console.log("Dragging: ", e.nativeEvent);
+        if (
+            e.nativeEvent.state === "end" &&
+            e.nativeEvent.targetSnapPointId !== "init"
+        ) {
+            setTimeout(
+                () =>
+                    this.setState({ reset: true }, () => {
+                        this.setState({ reset: false }, () =>
+                            this.props.newFace(this.props.currentEmotion)
+                        );
+                    }),
+                1500
+            );
+            // setTimeout(() => this.setState({ reset: false }), 501);
+        }
     }
 
-    _getCustomCoordinates(i: number) {
+    _getCustomCoordinates(i: number, emotion: IRobotEmotion) {
+        if (emotion !== this.props.currentEmotion) {
+            return {};
+        }
+
         if (i < 3) {
             if (i === 0) {
-                return { x: 136.5, y: -361.5, id: `Snap point ${i}` };
+                return { x: 136.5, y: -400.5, id: `Snap point ${i}` };
             } else if (i === 1) {
-                return { x: 10, y: -361.5, id: `Snap point ${i}` };
+                return { x: 10, y: -400.5, id: `Snap point ${i}` };
             } else {
-                return { x: -121.5, y: -361.5, id: `Snap point ${i}` };
+                return { x: -121.5, y: -400.5, id: `Snap point ${i}` };
             }
         } else {
             if (i === 3) {
-                return { x: 136.5, y: -433.5, id: `Snap point ${i}` };
+                return { x: 136.5, y: -472.5, id: `Snap point ${i}` };
             } else if (i === 4) {
-                return { x: 10, y: -433.5, id: `Snap point ${i}` };
+                return { x: 10, y: -472.5, id: `Snap point ${i}` };
             } else {
-                return { x: -121.5, y: -433.5, id: `Snap point ${i}` };
+                return { x: -121.5, y: -472.5, id: `Snap point ${i}` };
             }
         }
     }
@@ -87,61 +99,35 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
             return (
                 <InteractableRobotFace
                     key={i}
-                    onLayout={this._onLayout}
                     snapPoints={[
                         ...this.state.snapPoints,
-                        this._getCustomCoordinates(i)
+                        this._getCustomCoordinates(i, face.emotion)
                     ]}
+                    reset={this.state.reset}
                     onDrag={this._onDrag}
                     onPress={() => console.log("Pressed a face")}
                     emotion={face.emotion}
                     image={face.source}
                 />
-
-                // <Interactable.View
-                //     key={i}
-
-                //     style={styles.faceContainer}
-                //     onLayout={this._onLayout}
-                //     snapPoints={[
-                //         ...this.state.snapPoints,
-                //         this._getCustomCoordinates(i)
-                //     ]}
-                //     onDrag={this._onDrag}
-                // >
-                //     <TouchableOpacity
-                //         onPress={() =>
-                //             this.props.chooseFace({
-                //                 emotion: face.emotion
-                //             })
-                //         }
-                //     >
-                //         <Image
-                //             style={styles.faceImage}
-                //             source={face.source}
-                //             resizeMode="contain"
-                //         />
-                //     </TouchableOpacity>
-                // </Interactable.View>
             );
         });
     }
 
     render() {
-        console.log("State before makefancybuttons: ", this.state);
         return <View style={styles.container}>{this._makeFaceButtons()}</View>;
     }
 }
 
 const mapDispatchToProps = {
-    chooseFace: robotGameChooseFace
+    chooseFace: robotGameChooseFace,
+    newFace: robotGameNewFace
 };
 
 const mapStateToProps = () => {
     return {};
 };
 
-export const RobotFaces = connect(mapStateToProps, mapDispatchToProps)(
+export const RobotFaces: any = connect(mapStateToProps, mapDispatchToProps)(
     _RobotFaces
 );
 // define your styles
@@ -154,14 +140,5 @@ const styles = StyleSheet.create({
         backgroundColor: "#e4f5f9",
         flexDirection: "row",
         flexWrap: "wrap"
-    },
-    faceContainer: {
-        flexBasis: "30%",
-        padding: 0,
-        marginVertical: 10
-    },
-    faceImage: {
-        height: 50,
-        alignSelf: "center"
     }
 });
