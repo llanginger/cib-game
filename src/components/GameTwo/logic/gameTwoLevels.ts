@@ -46,8 +46,8 @@ export const gameTwoLevels: IGameTwoLevel[] = [
         image_after: require("../../../images/laia/game-two/marta-disgust.png"),
         answers: [
             { text: "Joyous", correct: false },
-            { text: "Calm", correct: true },
-            { text: "Disgusted", correct: false }
+            { text: "Calm", correct: false },
+            { text: "Disgusted", correct: true }
         ]
     }
 ];

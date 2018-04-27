@@ -1,5 +1,5 @@
 import { robotFaces, IRobotFace } from "../robotImages";
-import { IRobotEmotion } from "../../../redux/reducers/index";
+import { IRobotEmotion } from "../robotImages";
 
 export const getRobotFace: (currentEmotion: IRobotEmotion) => number = (
     currentEmotion: IRobotEmotion

@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
         color: "white",
         fontFamily: appStyles.font,
         fontSize: 24,
+        padding: 20,
+        marginBottom: -10,
         fontWeight: "400",
         // lineHeight: 30,
         // marginTop: 10,

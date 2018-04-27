@@ -24,6 +24,7 @@ import { GameOneContainer } from "../GameOne/GameOneContainer";
 import { GameTwoContainer } from "../GameTwo/GameTwoContainer";
 import { GameThreeContainer } from "../GameThree/GameThreeContainer";
 import { GameFourContainer } from "../GameFour/GameFourContainer";
+import { GameFiveContainer } from "../GameFive/GameFiveContainer";
 
 import { screenObjects } from "../../navigation/screenObjects";
 import { Ready } from "../Ready/Ready";
@@ -107,8 +108,9 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
             return <GameThreeContainer navigator={this.props.navigator} />;
         } else if (gameType === 3) {
             return <GameFourContainer navigator={this.props.navigator} />;
-        }
-        {
+        } else if (gameType === 4) {
+            return <GameFiveContainer navigator={this.props.navigator} />;
+        } else {
             return <GameOneContainer navigator={this.props.navigator} />;
         }
     }
@@ -122,8 +124,8 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
                     menuPress={this._menuPress}
                     containerProps={{ alignSelf: "flex-start" }}
                 />
-                {/* {this._getGameContainer()} */}
-                <GameFourContainer navigator={this.props.navigator} />
+                {this._getGameContainer()}
+                {/* <GameFiveContainer navigator={this.props.navigator} /> */}
                 {/* <Popup /> */}
                 {/* <BirdAnimation /> */}
             </View>

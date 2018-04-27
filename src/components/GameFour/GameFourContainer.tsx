@@ -53,7 +53,9 @@ const mapStateToProps = (store: IReducers) => {
     };
 };
 
-export const GameFourContainer = connect(mapStateToProps)(_GameFourContainer);
+export const GameFourContainer: any = connect(mapStateToProps)(
+    _GameFourContainer
+);
 
 // define your styles
 const styles = StyleSheet.create({

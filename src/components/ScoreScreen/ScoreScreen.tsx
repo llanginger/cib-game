@@ -65,7 +65,7 @@ export class _ScoreScreen extends React.Component<
     _onPress() {
         const { currentLevelType, getNextLevelType, navigator } = this.props;
         ding.play();
-        const nextLevel = currentLevelType < 5 ? 1 + currentLevelType : 0;
+        const nextLevel = currentLevelType < 6 ? 1 + currentLevelType : 0;
         getNextLevelType({ nextLevel });
         setTimeout(() => navigator.dismissAllModals(), 1000);
     }

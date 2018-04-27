@@ -39,6 +39,8 @@ const styles = StyleSheet.create({
         color: "white",
         fontFamily: appStyles.font,
         fontSize: 24,
+        marginBottom: -10,
+        padding: 10,
         fontWeight: "400",
         backgroundColor: "transparent"
     }

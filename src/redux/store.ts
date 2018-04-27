@@ -19,7 +19,9 @@ import {
     gameLevelTypeReducer,
     IGameLevelTypeReducer,
     readyScreenReducer,
-    IReadyScreenReducer
+    IReadyScreenReducer,
+    emojiGameReducer,
+    IEmojiGameReducer
 } from "./reducers/index";
 import logger from "redux-logger";
 export * from "./reducers/index";
@@ -35,6 +37,7 @@ export interface IReducers {
     robotGameReducer: IRobotGameReducer;
     gameLevelTypeReducer: IGameLevelTypeReducer;
     readyScreenReducer: IReadyScreenReducer;
+    emojiGameReducer: IEmojiGameReducer;
 }
 
 const reducers = combineReducers({
@@ -47,7 +50,8 @@ const reducers = combineReducers({
     laiaScoreReducer,
     robotGameReducer,
     gameLevelTypeReducer,
-    readyScreenReducer
+    readyScreenReducer,
+    emojiGameReducer
 });
 
 export const store = createStore(reducers, applyMiddleware(logger));

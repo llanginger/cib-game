@@ -8,7 +8,7 @@ import {
 } from "../../redux/actions/index";
 import { connect } from "react-redux";
 import Interactable from "react-native-interactable";
-import { InteractableRobotFace } from "./InteractableRobotFace";
+import { InteractableItem } from "../Interactable/InteractableItem";
 //Interface
 
 interface snapPoint {
@@ -97,16 +97,16 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
     _makeFaceButtons() {
         return robotFaces.map((face, i) => {
             return (
-                <InteractableRobotFace
+                <InteractableItem
                     key={i}
                     snapPoints={[
                         ...this.state.snapPoints,
                         this._getCustomCoordinates(i, face.emotion)
                     ]}
+                    onSnap={() => console.log("Snapped")}
                     reset={this.state.reset}
                     onDrag={this._onDrag}
                     onPress={() => console.log("Pressed a face")}
-                    emotion={face.emotion}
                     image={face.source}
                 />
             );

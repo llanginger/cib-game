@@ -8,3 +8,4 @@ export * from "./laiaScoreReducer";
 export * from "./robotGameReducer";
 export * from "./gameLevelTypeReducer";
 export * from "./readyScreenReducer";
+export * from "./emojiGameReducer";

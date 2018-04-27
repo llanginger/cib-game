@@ -1,4 +1,4 @@
-import { IRobotEmotion } from "../../../redux/reducers/index";
+import { IRobotEmotion } from "../robotImages";
 import { robots } from "../robotImages";
 
 export const getRobot: (

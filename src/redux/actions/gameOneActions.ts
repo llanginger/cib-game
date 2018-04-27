@@ -1,5 +1,5 @@
 import { IPayloadAction } from "../../interfaces/IPayloadAction";
-import { IRobotEmotion } from "../reducers/index";
+import { IRobotEmotion } from "../../components/Robot/robotImages";
 
 interface IGameOneSubmitAction {
     correct: boolean;
