@@ -1,7 +1,7 @@
 //import liraries
 import * as React from "react";
 import { View, Text, StyleSheet, Animated, Easing } from "react-native";
-import LottieView from "lottie-react-native";
+// import LottieView from "lottie-react-native";
 
 //Interfaces
 interface IPopupStarProps {
@@ -68,7 +68,7 @@ export class PopupAnimation extends React.Component<
         console.log("PopupStar state: ", this.state);
         return (
             <Animated.View style={styles.container}>
-                <LottieView
+                {/* <LottieView
                     style={[
                         styles.animation,
                         {
@@ -83,7 +83,7 @@ export class PopupAnimation extends React.Component<
                     ]}
                     source={require("../../images/lottie/like.json")}
                     progress={this.animationProgress}
-                />
+                /> */}
             </Animated.View>
         );
     }

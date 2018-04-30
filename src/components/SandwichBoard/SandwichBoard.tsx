@@ -60,8 +60,7 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
         this.bounceInValue.setValue(0);
         Animated.spring(this.bounceInValue, {
             toValue: 1,
-            friction: 5,
-            damping: 0
+            friction: 5
         }).start(() => this.setState({ bounceDirection: "out" }));
     }
 

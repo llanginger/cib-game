@@ -8,7 +8,7 @@ import {
     Easing,
     TouchableOpacity
 } from "react-native";
-import LottieView from "lottie-react-native";
+// import LottieView from "lottie-react-native";
 
 //Interfaces
 interface ISampleAnimationProps {}
@@ -50,12 +50,12 @@ export class SampleAnimation extends React.Component<
                 >
                     <Text>Start Animation</Text>
                 </TouchableOpacity>
-                <LottieView
+                {/* <LottieView
                     loop={true}
                     style={{ height: "100%", width: "100%" }}
                     source={require("../../images/lottie/newAnimation.json")}
                     progress={this.animationProgress}
-                />
+                /> */}
                 {/* <LottieView
                     loop={true}
                     style={{ height: "100%", width: "100%" }}
