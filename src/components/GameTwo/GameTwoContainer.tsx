@@ -51,6 +51,7 @@ export class _GameTwoContainer extends React.Component<
     componentWillMount() {
         this.setState({ ...initState });
     }
+
     _nextLevel(options: { reset?: boolean; correct: boolean }) {
         // Show answer and queue up out animation
         this.setState({ revealAnswers: true }, () => {

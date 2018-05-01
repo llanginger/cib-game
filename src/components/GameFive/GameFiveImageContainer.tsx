@@ -1,11 +1,12 @@
 //import liraries
 import * as React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { appStyles } from "../../styles/styles";
 import { IEmojiLevel } from "./emojiLevels";
 import { IReducers } from "../../redux/store";
 import { connect } from "react-redux";
 import { GameFiveImage } from "./GameFiveImage";
+import { ImageFlipper } from "../ImageFlipper/ImageFlipper";
 //Interface
 
 interface IGameFiveImageContainerProps {
@@ -20,12 +21,13 @@ const _GameFiveImageContainer: React.StatelessComponent<
     return (
         <View style={styles.imageContainer}>
             <Text style={styles.levelTitle}>{currentLevel.title}</Text>
-            <GameFiveImage
-                image={{
-                    imageFrame1: currentLevel.imageFrame1,
-                    imageFrame2: currentLevel.imageFrame2
-                }}
+            <ImageFlipper
+                source={[currentLevel.imageFrame1, currentLevel.imageFrame2]}
                 startAnimation={props.startAnimation}
+                imageStyle={{
+                    height: "70%",
+                    width: "100%"
+                }}
             />
         </View>
     );

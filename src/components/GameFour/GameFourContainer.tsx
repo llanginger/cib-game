@@ -9,17 +9,23 @@ import { RobotFaces } from "../Robot/RobotFaces";
 import { SampleAnimation } from "./SampleAnimation";
 import { RobotGameWord } from "../Robot/RobotGameWord";
 import { IRobotEmotion } from "../Robot/robotImages";
+import { screenObjects } from "../../navigation/screenObjects";
 
 //Interfaces
 interface IRobotGameContainerProps {
     dispatch?: any;
     navigator: any;
     currentEmotion: IRobotEmotion;
+    triggerEndGame: boolean;
 }
 
-interface IRobotGameContainerState {}
+interface IRobotGameContainerState {
+    triggeredEndGame: boolean;
+}
 
-const initState: IRobotGameContainerState = {};
+const initState: IRobotGameContainerState = {
+    triggeredEndGame: false
+};
 export class _GameFourContainer extends React.Component<
     IRobotGameContainerProps,
     any
@@ -30,6 +36,22 @@ export class _GameFourContainer extends React.Component<
         this.state = {
             ...initState
         };
+        this._endGame = this._endGame.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps: IRobotGameContainerProps) {
+        if (nextProps.triggerEndGame && !this.state.triggeredEndGame) {
+            console.log("--==END ROBOT GAME==--");
+            this.setState({ triggeredEndGame: true }, this._endGame);
+        }
+    }
+
+    _endGame() {
+        setTimeout(() => {
+            this.props.navigator.showModal({
+                screen: screenObjects.SCORE_SCREEN.screen
+            });
+        }, 3000);
     }
 
     render() {
@@ -49,7 +71,8 @@ export class _GameFourContainer extends React.Component<
 
 const mapStateToProps = (store: IReducers) => {
     return {
-        currentEmotion: store.robotGameReducer.currentEmotion
+        currentEmotion: store.robotGameReducer.currentEmotion,
+        triggerEndGame: store.robotGameReducer.level > 2 ? true : false
     };
 };
 

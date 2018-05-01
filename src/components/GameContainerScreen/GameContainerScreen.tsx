@@ -35,6 +35,7 @@ import { Popup } from "../Popup/Popup";
 import { BlurView } from "../BlurView/BlurView";
 
 import { BirdAnimation } from "../BirdAnimation/BirdAnimation";
+import RNRestart from "react-native-restart";
 
 interface ICardGameMainScreenProps {
     navigator?: any;
@@ -124,8 +125,14 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
                     menuPress={this._menuPress}
                     containerProps={{ alignSelf: "flex-start" }}
                 />
-                {this._getGameContainer()}
-                {/* <GameFiveContainer navigator={this.props.navigator} /> */}
+                {/* {this._getGameContainer()} */}
+                <GameFourContainer navigator={this.props.navigator} />
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => RNRestart.Restart()}
+                >
+                    <Text style={styles.buttonText}>RESTART</Text>
+                </TouchableOpacity>
                 {/* <Popup /> */}
                 {/* <BirdAnimation /> */}
             </View>
@@ -147,5 +154,21 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "white"
+    },
+    button: {
+        position: "absolute",
+        top: 70,
+        right: 20,
+        width: 65,
+        height: 65,
+        borderRadius: 50,
+        backgroundColor: "palevioletred",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    buttonText: {
+        textAlign: "center",
+        color: "white",
+        fontSize: 14
     }
 });

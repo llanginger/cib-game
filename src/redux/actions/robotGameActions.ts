@@ -3,6 +3,7 @@ import {
     IRobotEmotion,
     robotEmotions
 } from "../../components/Robot/robotImages";
+import { IRobotAnswerType } from "../../components/Robot/robotImages_new";
 import { Action } from "redux";
 import * as _ from "lodash";
 
@@ -37,5 +38,14 @@ export const robotGameNewFace: (oldValue: IRobotEmotion) => Action = (
         payload: {
             emotion: getNewValue(oldValue)
         }
+    };
+};
+
+export const robotGameStartAnimation: (
+    answerType: IRobotAnswerType
+) => IPayloadAction<IRobotAnswerType> = (answerType: IRobotAnswerType) => {
+    return {
+        type: "START_ROBOT_ANIMATION",
+        payload: answerType
     };
 };

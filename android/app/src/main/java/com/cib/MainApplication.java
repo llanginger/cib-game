@@ -3,6 +3,7 @@ package com.cib;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.wix.interactable.Interactable;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.zmxv.RNSound.RNSoundPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeRestartPackage(),
             new Interactable(),
             new BlurViewPackage(),
             new RNSoundPackage(),

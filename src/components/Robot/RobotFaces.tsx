@@ -4,8 +4,10 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { robotFaces, IRobotEmotion, IRobot } from "./robotImages";
 import {
     robotGameChooseFace,
-    robotGameNewFace
+    robotGameNewFace,
+    robotGameStartAnimation
 } from "../../redux/actions/index";
+import { IRobotAnswerType } from "./robotImages_new";
 import { connect } from "react-redux";
 import Interactable from "react-native-interactable";
 import { InteractableItem } from "../Interactable/InteractableItem";
@@ -20,8 +22,9 @@ interface snapPoint {
 }
 interface IRobotFacesProps {
     chooseFace: any;
-    newFace: (oldValue: IRobotEmotion) => any;
+    robotGameNewFace: (oldValue: IRobotEmotion) => any;
     currentEmotion: IRobotEmotion;
+    robotGameStartAnimation: (answerType: IRobotAnswerType) => void;
 }
 
 interface IRobotFacesState {
@@ -53,20 +56,32 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
 
     _onDrag(e) {
         console.log("Dragging: ", e.nativeEvent);
-        if (
-            e.nativeEvent.state === "end" &&
-            e.nativeEvent.targetSnapPointId !== "init"
-        ) {
+        if (e.nativeEvent.state === "end") {
+            if (e.nativeEvent.targetSnapPointId !== "init") {
+                setTimeout(
+                    () =>
+                        this.setState({ reset: true }, () => {
+                            this.setState({ reset: false }, () =>
+                                this.props.robotGameStartAnimation("correct")
+                            );
+                        }),
+                    500
+                );
+            } else {
+                setTimeout(
+                    () =>
+                        this.setState({ reset: true }, () => {
+                            this.setState({ reset: false }, () =>
+                                this.props.robotGameStartAnimation("incorrect")
+                            );
+                        }),
+                    500
+                );
+            }
             setTimeout(
-                () =>
-                    this.setState({ reset: true }, () => {
-                        this.setState({ reset: false }, () =>
-                            this.props.newFace(this.props.currentEmotion)
-                        );
-                    }),
-                1500
+                () => this.props.robotGameNewFace(this.props.currentEmotion),
+                2500
             );
-            // setTimeout(() => this.setState({ reset: false }), 501);
         }
     }
 
@@ -120,7 +135,8 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
 
 const mapDispatchToProps = {
     chooseFace: robotGameChooseFace,
-    newFace: robotGameNewFace
+    robotGameNewFace,
+    robotGameStartAnimation
 };
 
 const mapStateToProps = () => {

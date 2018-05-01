@@ -4,26 +4,37 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { robots, robotFaces, IRobotFace, IRobot } from "./robotImages";
 import { IReducers } from "../../redux/store";
 import { IRobotEmotion } from "./robotImages";
-import { getRobot, getRobotFace } from "./logic/index";
+import { getRobot, getRobot_new, getRobotFace } from "./logic/index";
 import { connect } from "react-redux";
 import { RobotFace } from "./RobotFace";
+import { IRobotAnswerType } from "./robotImages_new";
+import { ImageFlipper } from "../ImageFlipper/ImageFlipper";
 //Interface
 
 interface IRobotProps {
     currentEmotion: IRobotEmotion;
     intensity: 0 | 1 | 2;
+    robotAnswerType: IRobotAnswerType;
+    startAnimation: boolean;
 }
 
+// TODO: modify getRobot so that it has separate "correct" | "incorrect" | "neutral" versions of robot.
+
 const _Robot: React.StatelessComponent<IRobotProps> = (props: IRobotProps) => {
-    const { currentEmotion, intensity } = props;
+    const {
+        currentEmotion,
+        intensity,
+        robotAnswerType,
+        startAnimation
+    } = props;
 
     return (
         <View style={styles.imageContainer}>
             {/* <Text style={styles.levelTitle}> WORD HERE</Text> */}
-            <Image
-                style={styles.image}
-                source={getRobot(currentEmotion, intensity)}
-                resizeMode="contain"
+            <ImageFlipper
+                imageStyle={styles.image}
+                source={getRobot_new(currentEmotion, robotAnswerType)}
+                startAnimation={startAnimation}
             />
         </View>
     );
@@ -32,6 +43,8 @@ const _Robot: React.StatelessComponent<IRobotProps> = (props: IRobotProps) => {
 const mapStateToProps = (state: IReducers) => {
     return {
         currentEmotion: state.robotGameReducer.currentEmotion,
+        robotAnswerType: state.robotGameReducer.robotAnswerType,
+        startAnimation: state.robotGameReducer.startAnimation,
         intensity: state.robotGameReducer.intensity
     };
 };
