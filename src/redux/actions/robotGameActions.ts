@@ -42,8 +42,8 @@ export const robotGameNewFace: (oldValue: IRobotEmotion) => Action = (
 };
 
 export const robotGameStartAnimation: (
-    answerType: IRobotAnswerType
-) => IPayloadAction<IRobotAnswerType> = (answerType: IRobotAnswerType) => {
+    answerType: boolean
+) => IPayloadAction<boolean> = (answerType: boolean) => {
     return {
         type: "START_ROBOT_ANIMATION",
         payload: answerType

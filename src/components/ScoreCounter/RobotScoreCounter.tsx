@@ -47,7 +47,7 @@ const _RobotScoreCounter: React.StatelessComponent<IRobotScoreCounterProps> = (
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        score: state.laiaScoreReducer.score
+        score: state.scoreReducer.score
     };
 };
 

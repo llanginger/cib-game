@@ -8,7 +8,7 @@ import {
     ViewStyle
 } from "react-native";
 import * as Animatable from "react-native-animatable";
-import { gameOneSubmitAnswer } from "../../redux/actions/index";
+import { submitAnswer } from "../../redux/actions/index";
 import { appStyles } from "../../styles/styles";
 
 import { connect } from "react-redux";
@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 interface IButtonProps {
     text: string;
     correct: boolean;
-    reset: boolean;
+    startAnimation: boolean;
     animationInType: any;
     animationOutType: any;
     delay?: number;
@@ -33,7 +33,7 @@ export const _Button: React.StatelessComponent<IButtonProps> = (
     const {
         viewProps = {},
         revealed,
-        reset,
+        startAnimation,
         correct,
         animationOutType,
         animationInType,
@@ -72,7 +72,7 @@ export const _Button: React.StatelessComponent<IButtonProps> = (
             style={styles.container}
         >
             <Animatable.View
-                animation={reset ? animationOutType : animationInType}
+                animation={startAnimation ? animationOutType : animationInType}
                 duration={250}
                 delay={delay}
                 style={{ width: "80%" }}

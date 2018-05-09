@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 import { DrawerItem } from "./DrawerItem";
 import { DrawerHeader } from "./DrawerHeader";
+import { ResetButton } from "../ResetButton";
 
 const menuColors = ["#ff9933", "#663366"];
 
@@ -29,6 +30,7 @@ export class DrawerScreen extends React.Component<any, any> {
                     navTo="AccountScreen"
                     backgroundColor="#339900"
                 />
+                <ResetButton />
             </View>
         );
     }

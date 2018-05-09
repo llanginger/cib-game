@@ -32,7 +32,8 @@ export const robotGameReducer = (
             return {
                 ...state,
                 startAnimation: true,
-                robotAnswerType: action.payload
+                robotAnswerType:
+                    action.payload === true ? "correct" : "incorrect"
             };
         case "NEW_ROBOT_FACE":
             return {

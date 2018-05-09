@@ -25,6 +25,8 @@ import { GameTwoContainer } from "../GameTwo/GameTwoContainer";
 import { GameThreeContainer } from "../GameThree/GameThreeContainer";
 import { GameFourContainer } from "../GameFour/GameFourContainer";
 import { GameFiveContainer } from "../GameFive/GameFiveContainer";
+import { GameSevenContainer } from "../GameSeven/GameSevenContainer";
+import { ThumbsupGameContainer } from "../ThumbsupGame/ThumbsupGameContainer";
 
 import { screenObjects } from "../../navigation/screenObjects";
 import { Ready } from "../Ready/Ready";
@@ -35,11 +37,10 @@ import { Popup } from "../Popup/Popup";
 import { BlurView } from "../BlurView/BlurView";
 
 import { BirdAnimation } from "../BirdAnimation/BirdAnimation";
-import RNRestart from "react-native-restart";
 
 interface ICardGameMainScreenProps {
     navigator?: any;
-    gameType: 0 | 1 | 2 | 3 | 4 | 5;
+    gameType: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
     dispatch?: any;
 }
 
@@ -47,6 +48,8 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
     static navigatorStyle = {
         navBarTextColor: "red",
         drawUnderNavBar: true,
+        navBarBackgroundColor: "red",
+        navBarHidden: true,
         navBarTranslucent: true,
         navBarTransparent: true
     };
@@ -111,6 +114,10 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
             return <GameFourContainer navigator={this.props.navigator} />;
         } else if (gameType === 4) {
             return <GameFiveContainer navigator={this.props.navigator} />;
+        } else if (gameType === 5) {
+            return <ThumbsupGameContainer navigator={this.props.navigator} />;
+        } else if (gameType === 6) {
+            return <GameSevenContainer navigator={this.props.navigator} />;
         } else {
             return <GameOneContainer navigator={this.props.navigator} />;
         }
@@ -121,18 +128,13 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
         return (
             <View style={styles.container}>
                 <Ready />
+
                 <ScoreContainer
                     menuPress={this._menuPress}
                     containerProps={{ alignSelf: "flex-start" }}
                 />
-                {/* {this._getGameContainer()} */}
-                <GameFourContainer navigator={this.props.navigator} />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => RNRestart.Restart()}
-                >
-                    <Text style={styles.buttonText}>RESTART</Text>
-                </TouchableOpacity>
+                {this._getGameContainer()}
+                {/* <GameFourContainer navigator={this.props.navigator} /> */}
                 {/* <Popup /> */}
                 {/* <BirdAnimation /> */}
             </View>
@@ -142,7 +144,7 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        gameType: state.gameLevelTypeReducer.gameLevelType
+        gameType: state.gameLevelReducer.gameLevelType
     };
 };
 
@@ -154,21 +156,5 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "white"
-    },
-    button: {
-        position: "absolute",
-        top: 70,
-        right: 20,
-        width: 65,
-        height: 65,
-        borderRadius: 50,
-        backgroundColor: "palevioletred",
-        alignItems: "center",
-        justifyContent: "center"
-    },
-    buttonText: {
-        textAlign: "center",
-        color: "white",
-        fontSize: 14
     }
 });

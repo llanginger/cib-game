@@ -13,18 +13,18 @@ export type gameThreeAnswersSpanish =
     | "Tranquilidad";
 
 export type gameThreeAnswersEnglish =
-    | "Ecstatic"
-    | "Furious"
-    | "Disgusted"
-    | "Terrified"
+    | "Despair"
+    | "Annoyed"
     | "Cheerful"
-    | "Irritated"
-    | "Gloomy"
-    | "Scared"
-    | "Serene"
-    | "Anguished"
+    | "Furious"
     | "Repulsed"
-    | "Tranquil";
+    | "Disgusted"
+    | "Serene"
+    | "Scared"
+    | "Terrified"
+    | "Tranquil"
+    | "Gloomy"
+    | "Joyful";
 
 export interface IGameThreeLevel {
     characterName: string;
@@ -40,15 +40,15 @@ export const gameThreeLevels: IGameThreeLevel[] = [
         image_after: require("../../../images/laia/game-three/desconsuelo-frog.png"),
         answers: [
             {
-                text: "Anguished",
+                text: "Despair",
                 correct: true
             },
             {
-                text: "Cheerful",
+                text: "Serene",
                 correct: false
             },
             {
-                text: "Irritated",
+                text: "Annoyed",
                 correct: false
             }
         ]
@@ -63,11 +63,11 @@ export const gameThreeLevels: IGameThreeLevel[] = [
                 correct: false
             },
             {
-                text: "Disgusted",
+                text: "Gloomy",
                 correct: false
             },
             {
-                text: "Ecstatic",
+                text: "Joyful",
                 correct: true
             }
         ]
@@ -78,7 +78,7 @@ export const gameThreeLevels: IGameThreeLevel[] = [
         image_after: require("../../../images/laia/game-three/repulsion-giraffe.png"),
         answers: [
             {
-                text: "Ecstatic",
+                text: "Scared",
                 correct: false
             },
             {
@@ -86,7 +86,7 @@ export const gameThreeLevels: IGameThreeLevel[] = [
                 correct: true
             },
             {
-                text: "Gloomy",
+                text: "Serene",
                 correct: false
             }
         ]
@@ -105,7 +105,7 @@ export const gameThreeLevels: IGameThreeLevel[] = [
                 correct: false
             },
             {
-                text: "Terrified",
+                text: "Cheerful",
                 correct: false
             }
         ]
@@ -116,11 +116,11 @@ export const gameThreeLevels: IGameThreeLevel[] = [
         image_after: require("../../../images/laia/game-three/furia-elephant.png"),
         answers: [
             {
-                text: "Gloomy",
+                text: "Tranquil",
                 correct: false
             },
             {
-                text: "Serene",
+                text: "Joyful",
                 correct: false
             },
             {
@@ -135,7 +135,7 @@ export const gameThreeLevels: IGameThreeLevel[] = [
         image_after: require("../../../images/laia/game-three/tranquilidad-koala.png"),
         answers: [
             {
-                text: "Repulsed",
+                text: "Scared",
                 correct: false
             },
             {
@@ -143,8 +143,123 @@ export const gameThreeLevels: IGameThreeLevel[] = [
                 correct: true
             },
             {
+                text: "Furious",
+                correct: false
+            }
+        ]
+    },
+    ////////////////////////////////////////////////////////////////////////////////////////
+    {
+        characterName: "Frog",
+        image_before: require("../../../images/laia/game-three/grima-frog-grey.png"),
+        image_after: require("../../../images/laia/game-three/grima-frog.png"),
+        answers: [
+            {
+                text: "Serene",
+                correct: false
+            },
+            {
+                text: "Repulsed",
+                correct: true
+            },
+            {
+                text: "Joyful",
+                correct: false
+            }
+        ]
+    },
+    {
+        characterName: "Parrot",
+        image_before: require("../../../images/laia/game-three/terror-parrot-grey.png"),
+        image_after: require("../../../images/laia/game-three/terror-parrot.png"),
+        answers: [
+            {
+                text: "Serene",
+                correct: false
+            },
+            {
+                text: "Terrified",
+                correct: true
+            },
+            {
+                text: "Despair",
+                correct: false
+            }
+        ]
+    },
+    {
+        characterName: "Giraffe",
+        image_before: require("../../../images/laia/game-three/serenidad-giraffe-grey.png"),
+        image_after: require("../../../images/laia/game-three/serenidad-giraffe.png"),
+        answers: [
+            {
                 text: "Terrified",
                 correct: false
+            },
+            {
+                text: "Repulsed",
+                correct: false
+            },
+            {
+                text: "Serene",
+                correct: true
+            }
+        ]
+    },
+    {
+        characterName: "Chameleon",
+        image_before: require("../../../images/laia/game-three/felicidad-chameleon-grey.png"),
+        image_after: require("../../../images/laia/game-three/felicidad-chameleon.png"),
+        answers: [
+            {
+                text: "Cheerful",
+                correct: true
+            },
+            {
+                text: "Annoyed",
+                correct: false
+            },
+            {
+                text: "Despair",
+                correct: false
+            }
+        ]
+    },
+    {
+        characterName: "Elephant",
+        image_before: require("../../../images/laia/game-three/susto-elephant-grey.png"),
+        image_after: require("../../../images/laia/game-three/susto-elephant.png"),
+        answers: [
+            {
+                text: "Cheerful",
+                correct: false
+            },
+            {
+                text: "Scared",
+                correct: true
+            },
+            {
+                text: "Tranquil",
+                correct: false
+            }
+        ]
+    },
+    {
+        characterName: "Koala",
+        image_before: require("../../../images/laia/game-three/enojo-koala-grey.png"),
+        image_after: require("../../../images/laia/game-three/enojo-koala.png"),
+        answers: [
+            {
+                text: "Scared",
+                correct: false
+            },
+            {
+                text: "Cheerful",
+                correct: false
+            },
+            {
+                text: "Annoyed",
+                correct: true
             }
         ]
     }

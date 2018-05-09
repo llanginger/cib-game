@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         justifyContent: "center",
         lineHeight: 33,
+        color: "#60b8ff",
         fontFamily: appStyles.font,
         fontSize: 24,
         height: 24

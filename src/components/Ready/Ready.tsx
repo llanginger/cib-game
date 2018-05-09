@@ -5,7 +5,7 @@ import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
 import { screenObjects } from "../../navigation/screenObjects";
 import { SandwichBoard } from "../SandwichBoard/SandwichBoard";
-import { gameOneSubmitAnswer } from "../../redux/actions/index";
+import { submitAnswer } from "../../redux/actions/index";
 import { appStyles } from "../../styles/styles";
 import { IReducers } from "../../redux/store";
 
@@ -17,7 +17,7 @@ interface IReadyProps {
 }
 
 interface IReadyState {
-    buttonReset: boolean;
+    startAnimation: boolean;
     show: boolean;
 }
 
@@ -30,7 +30,7 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
 
         this.opacityValue = new Animated.Value(0);
 
-        this.state = { buttonReset: false, show: true };
+        this.state = { startAnimation: false, show: true };
         this._buttonOnPress = this._buttonOnPress.bind(this);
         this._fadeOut = this._fadeOut.bind(this);
     }
@@ -43,7 +43,7 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
         console.log("");
         if (nextProps.readyScreenReset && !this.state.show) {
             console.log("Should be showing ready screen");
-            this.setState({ show: true, buttonReset: false }, () =>
+            this.setState({ show: true, startAnimation: false }, () =>
                 this.opacityValue.setValue(0)
             );
         }
@@ -61,7 +61,7 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
 
     _buttonOnPress() {
         this.props.dispatch({ type: "HIDE_SANDWICHBOARD" });
-        setTimeout(() => this.setState({ buttonReset: true }), 300);
+        setTimeout(() => this.setState({ startAnimation: true }), 300);
         this._fadeOut();
     }
 
@@ -74,7 +74,7 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
             <AnimatedButton
                 text="Ready!"
                 correct={false}
-                reset={this.state.buttonReset}
+                startAnimation={this.state.startAnimation}
                 revealed={false}
                 animationInType="fadeInUp"
                 animationOutType="fadeOutLeft"
@@ -95,7 +95,7 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        sandwichText: state.gameLevelTypeReducer.gameTitle,
+        sandwichText: state.gameLevelReducer.gameTitle,
         readyScreenReset: state.readyScreenReducer.resetReadyScreen
     };
 };

@@ -24,7 +24,7 @@ interface IRobotFacesProps {
     chooseFace: any;
     robotGameNewFace: (oldValue: IRobotEmotion) => any;
     currentEmotion: IRobotEmotion;
-    robotGameStartAnimation: (answerType: IRobotAnswerType) => void;
+    robotGameStartAnimation: (answerType: boolean) => void;
 }
 
 interface IRobotFacesState {
@@ -62,7 +62,7 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
                     () =>
                         this.setState({ reset: true }, () => {
                             this.setState({ reset: false }, () =>
-                                this.props.robotGameStartAnimation("correct")
+                                this.props.robotGameStartAnimation(true)
                             );
                         }),
                     500
@@ -72,7 +72,7 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
                     () =>
                         this.setState({ reset: true }, () => {
                             this.setState({ reset: false }, () =>
-                                this.props.robotGameStartAnimation("incorrect")
+                                this.props.robotGameStartAnimation(false)
                             );
                         }),
                     500

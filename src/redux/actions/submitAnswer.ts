@@ -5,7 +5,7 @@ interface IGameOneSubmitAction {
     correct: boolean;
 }
 
-export const gameOneSubmitAnswer: (
+export const submitAnswer: (
     payload: IGameOneSubmitAction
 ) => IPayloadAction<IGameOneSubmitAction> = (payload: IGameOneSubmitAction) => {
     return {

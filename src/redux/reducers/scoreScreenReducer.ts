@@ -4,7 +4,7 @@ export interface IReadyScreenReducer {
 
 const initState: IReadyScreenReducer = { resetReadyScreen: false };
 
-export const readyScreenReducer = (
+export const scoreScreenReducer = (
     state: IReadyScreenReducer = initState,
     action
 ) => {

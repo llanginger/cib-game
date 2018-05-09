@@ -18,11 +18,10 @@ import {
 } from "react-native";
 import { appStyles } from "../../styles/styles";
 import { connect } from "react-redux";
-import { IReducers, IColorsReducer } from "../../redux/store";
+import { IReducers } from "../../redux/store";
 import { PopupAnimation } from "./PopupAnimation";
 
 interface ISandwichBoardProps {
-    colors?: IColorsReducer;
     dispatch?: any;
     correctAnswer?: boolean;
     popupText?: string;
@@ -30,7 +29,6 @@ interface ISandwichBoardProps {
 }
 
 interface ISandwichBoardStateProps {
-    colors?: IColorsReducer;
     correctAnswer: boolean;
     showSandwichBoard: boolean;
 }
@@ -104,7 +102,7 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
     }
 
     render() {
-        const { colors, correctAnswer, popupText } = this.props;
+        const { correctAnswer, popupText } = this.props;
 
         const fadeInAmount = this.fadeInValue.interpolate({
             inputRange: [0, 1],
@@ -148,10 +146,9 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        colors: state.colorsReducer,
         showSandwichBoard: state.sandiwchBoardReducer.showPopup,
         correctAnswer: state.sandiwchBoardReducer.correct,
-        popupText: state.laiaScoreReducer.resultMessage
+        popupText: state.scoreReducer.resultMessage
     };
 };
 

@@ -78,7 +78,7 @@ export class LoginScreen extends React.Component<
     _login() {
         console.log("Login attempt");
         this.props.navigator.resetTo({
-            screen: screenObjects.HOME_SCREEN.screen
+            screen: screenObjects.GAME_CONTAINER_SCREEN.screen
         });
     }
 

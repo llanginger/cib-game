@@ -12,7 +12,7 @@ export interface INavigationObject {
 
 export interface IScreenObjects {
     LOGIN_SCREEN: INavigationObject;
-    HOME_SCREEN: INavigationObject;
+    GAME_CONTAINER_SCREEN: INavigationObject;
     DRAWER_SCREEN: INavigationObject;
     SKILL_RECAP_SCREEN: INavigationObject;
     SCORE_SCREEN: INavigationObject;
@@ -27,8 +27,8 @@ export const screenObjects: IScreenObjects = {
         title: "Login",
         label: "Login"
     },
-    HOME_SCREEN: {
-        screen: "HomeScreen",
+    GAME_CONTAINER_SCREEN: {
+        screen: "GameContainerScreen",
         title: "",
         label: ""
     },

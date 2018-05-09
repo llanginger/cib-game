@@ -35,12 +35,8 @@ export const _ScoreContainer = (props: IScoreContainerProps) => {
 
     return (
         <View style={[styles.container, props.containerProps]}>
-            <MenuButton menuPress={props.menuPress} />
-            {/* <ScoreCounters
-                hotImage={hotImage}
-                coolImage={coolImage}
-                score={props.score}
-            /> */}
+            <MenuButton onPress={props.menuPress} />
+
             <StarScoreCounter image={star} />
         </View>
     );
@@ -48,14 +44,12 @@ export const _ScoreContainer = (props: IScoreContainerProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 25,
+        marginTop: 35,
         height: 40,
         width: "100%",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between"
-        // borderColor: "orange",
-        // borderWidth: 1
     },
     scoreContainer: {
         flexDirection: "row"

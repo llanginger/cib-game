@@ -1,6 +1,6 @@
 //import liraries
 import * as React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Button } from "react-native";
 import { IReducers } from "../../redux/store";
 import { connect } from "react-redux";
 
@@ -9,10 +9,6 @@ interface IStarScoreCounterProps {
     image: any;
     score: number;
 }
-
-const ScoreTitle = props => {
-    return <Text style={styles.scoreTitle}>SCORE</Text>;
-};
 
 const Score = (props: { score: string }) => {
     return <Text style={styles.score}>{props.score}</Text>;
@@ -33,7 +29,6 @@ const _StarScoreCounter: React.StatelessComponent<IStarScoreCounterProps> = (
     return (
         <View style={styles.container}>
             <View style={styles.textContainer}>
-                {/* <ScoreTitle /> */}
                 <Score score={`${lolLeftPad(props.score, 4)}`} />
             </View>
             <Image
@@ -47,7 +42,7 @@ const _StarScoreCounter: React.StatelessComponent<IStarScoreCounterProps> = (
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        score: state.laiaScoreReducer.score
+        score: state.scoreReducer.score
     };
 };
 
@@ -60,32 +55,19 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginRight: 10
     },
-    textContainer: {
-        // flexDirection: "column"
-        // justifyContent: "space-between",
-        // alignItems: "center"
-    },
-    scoreTitle: {
-        fontFamily: "Rockwell",
-        color: "#7cd7cf",
-        fontWeight: "100",
-        fontSize: 20,
-        height: 30,
-        lineHeight: 35,
-        textAlignVertical: "center",
-        textAlign: "justify"
-        // marginBottom: -8,
-    },
+    textContainer: {},
     score: {
         // textAlignVertical: "center",
         fontFamily: "Rockwell",
         fontWeight: "100",
+        color: "#54546a",
         fontSize: 30,
         lineHeight: 42,
         textAlign: "justify",
         height: 30
     },
     image: {
-        height: 30
+        height: 27,
+        width: 29
     }
 });

@@ -17,17 +17,15 @@ import {
     ImageBackground
 } from "react-native";
 import { connect } from "react-redux";
-import { IReducers, IColorsReducer } from "../../redux/store";
+import { IReducers } from "../../redux/store";
 
 interface ISandwichBoardProps {
-    colors?: IColorsReducer;
     text: string;
     dispatch?: any;
     showPopup?: boolean;
 }
 
 interface ISandwichBoardStateProps {
-    colors?: IColorsReducer;
     showPopup: boolean;
 }
 
@@ -81,7 +79,7 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
     }
 
     render() {
-        const { colors, text } = this.props;
+        const { text } = this.props;
 
         const bounceInScale = this.bounceInValue.interpolate({
             inputRange: [0, 1],
@@ -127,7 +125,6 @@ class _SandwichBoard extends Component<ISandwichBoardProps, any> {
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        colors: state.colorsReducer,
         showPopup: state.sandiwchBoardReducer.showPopup
     };
 };

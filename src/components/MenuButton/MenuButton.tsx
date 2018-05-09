@@ -15,7 +15,7 @@ import { Navigation } from "react-native-navigation";
 //Interface
 interface IUserAvatarProps {
     character?: string;
-    menuPress?: any;
+    onPress?: any;
     viewStyleProps?: ViewStyle;
     imageStyleProps?: ImageStyle;
 }
@@ -27,9 +27,7 @@ const _MenuButton = (props: IUserAvatarProps) => {
     return (
         <TouchableOpacity
             style={[styles.container, props.viewStyleProps]}
-            // onPress={props.menuPress}
-            onPress={() => console.log("Menu button pressed")}
-            disabled={false}
+            onPress={props.onPress}
             hitSlop={{
                 top: slopAmount,
                 left: slopAmount,
@@ -57,8 +55,6 @@ const styles = StyleSheet.create({
     image: {
         width: 40,
         height: 40
-        // borderColor: "yellow",
-        // borderWidth: 1
     }
 });
 

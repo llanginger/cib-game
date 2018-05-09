@@ -10,13 +10,13 @@ import { getNextLevelType } from "../../redux/actions/index";
 import Sound from "react-native-sound";
 
 //Interfaces
-interface ILaiaScoreScreenProps {
+interface IScoreScreenProps {
     navigator: any;
     currentLevelType: 0 | 1 | 2 | 3 | 4 | 5;
     getNextLevelType: any;
 }
 
-interface ILaiaScoreScreenState {}
+interface IScoreScreenState {}
 
 // create a component
 
@@ -30,8 +30,8 @@ const ding = new Sound("bell.mp3", Sound.MAIN_BUNDLE, err => {
 });
 
 export class _ScoreScreen extends React.Component<
-    ILaiaScoreScreenProps,
-    ILaiaScoreScreenState
+    IScoreScreenProps,
+    IScoreScreenState
 > {
     static navigatorStyle = {
         navBarTextColor: "red",
@@ -83,7 +83,7 @@ export class _ScoreScreen extends React.Component<
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        currentLevelType: state.gameLevelTypeReducer.gameLevelType
+        currentLevelType: state.gameLevelReducer.gameLevelType
     };
 };
 

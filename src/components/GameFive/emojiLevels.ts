@@ -8,51 +8,51 @@ export const emojiLevels: IEmojiLevel[] = [
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/ball-frame1.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/ball-frame2.png"),
-        title: "Ball"
+        title: "My team lost..."
     },
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/broccoli-frame1.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/broccoli-frame2.png"),
-        title: "Broccoli"
+        title: "Veggies for lunch..."
     },
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/castle-frame1.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/castle-frame2.png"),
-        title: "Castle"
+        title: "We're going to the beach..."
     },
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/clock-frame2.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/clock-frame2.png"),
-        title: "Clock"
+        title: "Time for school..."
     },
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/console-frame1.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/console-frame2.png"),
-        title: "Console"
+        title: "Time to play..."
     },
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/fantasma-frame1.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/fantasma-frame2.png"),
-        title: "Ghost"
+        title: "Ghost stories..."
     },
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/guitar-frame1.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/guitar-frame2.png"),
-        title: "Guitar"
+        title: "Concert today..."
     },
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/manzana-frame1.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/manzana-frame2.png"),
-        title: "Apple"
+        title: "Look what I found..."
     },
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/mop-frame1.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/mop-frame2.png"),
-        title: "Mop"
+        title: "Clean up time..."
     },
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/paint-frame1.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/paint-frame2.png"),
-        title: "Paint"
+        title: "Time to get creative..."
     }
 ];

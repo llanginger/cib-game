@@ -37,7 +37,7 @@ export const GameImage: React.StatelessComponent<IGameImageProps> = (
 // define your styles
 const styles = StyleSheet.create({
     imageContainer: {
-        height: 300,
+        height: 375,
         width: "100%"
         // paddingVertical: 10
     },

@@ -81,24 +81,31 @@ export const robots_new: IRobots_new = {
     },
     neutral: {
         grey: [
+            require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png"),
             require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png")
         ],
         red: [
+            require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png"),
             require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png")
         ],
         pink: [
+            require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png"),
             require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png")
         ],
         green: [
+            require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png"),
             require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png")
         ],
         yellow: [
+            require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png"),
             require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png")
         ],
         purple: [
+            require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png"),
             require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png")
         ],
         blue: [
+            require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png"),
             require("../../images/laia/robot-game/robot/robot-body/robot-neutral.png")
         ]
     }

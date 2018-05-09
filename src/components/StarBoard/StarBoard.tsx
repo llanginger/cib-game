@@ -52,7 +52,7 @@ const _StarBoard: React.StatelessComponent<IStarBoardProps> = (
 
 const mapStateToProps = (state: IReducers) => {
     return {
-        score: state.laiaScoreReducer.score
+        score: state.scoreReducer.score
     };
 };
 

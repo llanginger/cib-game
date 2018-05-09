@@ -52,6 +52,7 @@
 		B83A540C207BDEC400F7E0E6 /* Rockwell-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B83A5408207BDEB600F7E0E6 /* Rockwell-BoldItalic.ttf */; };
 		B83A540D207BDEC400F7E0E6 /* Rockwell-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B83A540A207BDEB600F7E0E6 /* Rockwell-Italic.ttf */; };
 		B83A540E207BDEC400F7E0E6 /* Rockwell.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B83A5407207BDEB600F7E0E6 /* Rockwell.ttf */; };
+		B8F73E0E209CCEB100C51FA0 /* Annie-Use-Your-Telescope-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8F73DDE209CCEB100C51FA0 /* Annie-Use-Your-Telescope-regular.ttf */; };
 		BB9B2F391E794F038D973A06 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E897CF37BB94AB58A783868 /* MaterialCommunityIcons.ttf */; };
 		BF33CFBA4AEE47E5BAD5516F /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C20CFA064A2846E18E233621 /* Zocial.ttf */; };
 		C9F251111F881B280065DB75 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F2510F1F881A770065DB75 /* libReactNativeNavigation.a */; };
@@ -473,6 +474,7 @@
 		B83A5408207BDEB600F7E0E6 /* Rockwell-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rockwell-BoldItalic.ttf"; path = "../assets/fonts/Rockwell-BoldItalic.ttf"; sourceTree = "<group>"; };
 		B83A5409207BDEB600F7E0E6 /* Rockwell-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rockwell-Bold.ttf"; path = "../assets/fonts/Rockwell-Bold.ttf"; sourceTree = "<group>"; };
 		B83A540A207BDEB600F7E0E6 /* Rockwell-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rockwell-Italic.ttf"; path = "../assets/fonts/Rockwell-Italic.ttf"; sourceTree = "<group>"; };
+		B8F73DDE209CCEB100C51FA0 /* Annie-Use-Your-Telescope-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Annie-Use-Your-Telescope-regular.ttf"; path = "../assets/fonts/Annie-Use-Your-Telescope-regular.ttf"; sourceTree = "<group>"; };
 		BEB0FAD007B1441ABDA1878E /* libRNSound.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSound.a; sourceTree = "<group>"; };
 		BF6D695A0A2D4461BE2071EB /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		C20CFA064A2846E18E233621 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
@@ -845,6 +847,7 @@
 		EA61174B555247549073CCBF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B8F73DDE209CCEB100C51FA0 /* Annie-Use-Your-Telescope-regular.ttf */,
 				8A2D9B244C214C87A9F84EF4 /* Entypo.ttf */,
 				CAB662686D7647A68C74C6F1 /* EvilIcons.ttf */,
 				B83A5409207BDEB600F7E0E6 /* Rockwell-Bold.ttf */,
@@ -1426,6 +1429,7 @@
 			files = (
 				B83A540B207BDEC400F7E0E6 /* Rockwell-Bold.ttf in Resources */,
 				B83A540C207BDEC400F7E0E6 /* Rockwell-BoldItalic.ttf in Resources */,
+				B8F73E0E209CCEB100C51FA0 /* Annie-Use-Your-Telescope-regular.ttf in Resources */,
 				B83A540D207BDEC400F7E0E6 /* Rockwell-Italic.ttf in Resources */,
 				B83A540E207BDEC400F7E0E6 /* Rockwell.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,

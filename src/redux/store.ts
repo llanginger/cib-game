@@ -1,24 +1,20 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import {
-    scoreReducer,
-    IScoreReducer,
     userReducer,
     IUserReducer,
     deviceTypeReducer,
     IDeviceTypeReducer,
-    colorsReducer,
-    IColorsReducer,
     sandiwchBoardReducer,
     ISandwichBoardReducer,
     userPreferencesReducer,
     IUserPreferencesReducer,
-    laiaScoreReducer,
-    ILaiaScoreReducer,
+    scoreReducer,
+    IScoreReducer,
     robotGameReducer,
     IRobotGameReducer,
-    gameLevelTypeReducer,
+    gameLevelReducer,
     IGameLevelTypeReducer,
-    readyScreenReducer,
+    scoreScreenReducer,
     IReadyScreenReducer,
     emojiGameReducer,
     IEmojiGameReducer
@@ -27,30 +23,26 @@ import logger from "redux-logger";
 export * from "./reducers/index";
 
 export interface IReducers {
-    scoreReducer: IScoreReducer;
     userReducer: IUserReducer;
     deviceTypeReducer: IDeviceTypeReducer;
     sandiwchBoardReducer: ISandwichBoardReducer;
-    colorsReducer: IColorsReducer;
     userPreferencesReducer: IUserPreferencesReducer;
-    laiaScoreReducer: ILaiaScoreReducer;
+    scoreReducer: IScoreReducer;
     robotGameReducer: IRobotGameReducer;
-    gameLevelTypeReducer: IGameLevelTypeReducer;
+    gameLevelReducer: IGameLevelTypeReducer;
     readyScreenReducer: IReadyScreenReducer;
     emojiGameReducer: IEmojiGameReducer;
 }
 
 const reducers = combineReducers({
-    scoreReducer,
     userReducer,
     deviceTypeReducer,
-    colorsReducer,
     sandiwchBoardReducer,
     userPreferencesReducer,
-    laiaScoreReducer,
+    scoreReducer,
     robotGameReducer,
-    gameLevelTypeReducer,
-    readyScreenReducer,
+    gameLevelReducer,
+    readyScreenReducer: scoreScreenReducer,
     emojiGameReducer
 });
 

@@ -1,5 +1,5 @@
 export interface IGameLevelTypeReducer {
-    gameLevelType: 0 | 1 | 2 | 3 | 4 | 5;
+    gameLevelType: 0 | 1 | 2 | 3 | 4 | 5 | 6;
     gameTitle: string;
 }
 
@@ -9,15 +9,17 @@ const levelTitles: string[] = [
     "Game Three",
     "Game Four",
     "Game Five",
-    "Game Six"
+    "Game Six",
+    "Game Seven"
 ];
 
+const initlevelType = 6;
 const initState: IGameLevelTypeReducer = {
-    gameLevelType: 0,
-    gameTitle: levelTitles[0]
+    gameLevelType: initlevelType,
+    gameTitle: levelTitles[initlevelType]
 };
 
-export const gameLevelTypeReducer = (
+export const gameLevelReducer = (
     state: IGameLevelTypeReducer = initState,
     action
 ) => {

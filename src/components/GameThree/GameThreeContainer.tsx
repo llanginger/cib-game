@@ -1,12 +1,12 @@
 //import liraries
 import * as React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { GameImage } from "../GameOneImage/GameOneImage";
+import { GameImage } from "../GameImage/GameImage";
 import { AnimatedButton } from "../AnimatedButton/AnimatedButton";
 import { connect } from "react-redux";
 import { gameThreeLevels, IGameThreeLevel } from "./logic/index";
 import { getImage } from "../utility/getImage";
-import { gameOneSubmitAnswer } from "../../redux/actions/index";
+import { submitAnswer } from "../../redux/actions/index";
 import { IReducers } from "../../redux/store";
 import { screenObjects } from "../../navigation/screenObjects";
 
@@ -20,7 +20,7 @@ interface IGameThreeContainerProps {
 interface IGameThreeContainerState {
     tutorialShown: boolean;
     revealAnswers: boolean;
-    reset: boolean;
+    startAnimation: boolean;
     levels: IGameThreeLevel[];
     currentLevel: number;
 }
@@ -28,7 +28,7 @@ interface IGameThreeContainerState {
 const initState: IGameThreeContainerState = {
     tutorialShown: false,
     revealAnswers: false,
-    reset: false,
+    startAnimation: false,
     levels: gameThreeLevels,
     currentLevel: 0
 };
@@ -51,7 +51,7 @@ export class _GameThreeContainer extends React.Component<
     _nextLevel(options: { reset?: boolean; correct: boolean }) {
         // Show answer and queue up out animation
         this.setState({ revealAnswers: true }, () => {
-            setTimeout(() => this.setState({ reset: true }), 2000);
+            setTimeout(() => this.setState({ startAnimation: true }), 2000);
         });
         this.props.submitAnswer(options.correct);
 
@@ -60,7 +60,7 @@ export class _GameThreeContainer extends React.Component<
             () =>
                 this.setState({
                     revealAnswers: false,
-                    reset: false,
+                    startAnimation: false,
                     currentLevel: options.reset
                         ? 0
                         : 1 + this.state.currentLevel
@@ -71,7 +71,7 @@ export class _GameThreeContainer extends React.Component<
 
     _endGame(correct: boolean) {
         this.setState({ revealAnswers: true }, () => {
-            setTimeout(() => this.setState({ reset: true }), 2000);
+            setTimeout(() => this.setState({ startAnimation: true }), 2000);
         });
 
         this.props.submitAnswer(correct);
@@ -105,9 +105,9 @@ export class _GameThreeContainer extends React.Component<
                         revealed={this.state.revealAnswers}
                         correct={answer.correct}
                         onPress={() => this._buttonOnPress(answer.correct)}
-                        reset={this.state.reset}
+                        startAnimation={this.state.startAnimation}
                         delay={i * 300}
-                        key={this.state.reset ? Math.random() : i}
+                        key={this.state.startAnimation ? Math.random() : i}
                         animationInType="fadeInUp"
                         animationOutType="fadeOutLeft"
                     />
@@ -124,7 +124,7 @@ export class _GameThreeContainer extends React.Component<
                     color={this.state.revealAnswers}
                     source={getImage(revealAnswers, levels[currentLevel])}
                     reveal={this.state.revealAnswers}
-                    reset={this.state.reset}
+                    reset={this.state.startAnimation}
                 />
                 <View style={styles.buttonContainer}>
                     {this._makeButtons()}
@@ -142,7 +142,7 @@ interface IGameThreeDispatchProps {
     submitAnswer: any;
 }
 const mapDispatchToProps = {
-    submitAnswer: gameOneSubmitAnswer
+    submitAnswer: submitAnswer
 };
 
 export const GameThreeContainer: any = connect<

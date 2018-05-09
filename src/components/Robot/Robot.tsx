@@ -35,6 +35,7 @@ const _Robot: React.StatelessComponent<IRobotProps> = (props: IRobotProps) => {
                 imageStyle={styles.image}
                 source={getRobot_new(currentEmotion, robotAnswerType)}
                 startAnimation={startAnimation}
+                loop={false}
             />
         </View>
     );

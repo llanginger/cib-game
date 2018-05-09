@@ -24,6 +24,7 @@ const _GameFiveImageContainer: React.StatelessComponent<
             <ImageFlipper
                 source={[currentLevel.imageFrame1, currentLevel.imageFrame2]}
                 startAnimation={props.startAnimation}
+                loop={false}
                 imageStyle={{
                     height: "70%",
                     width: "100%"

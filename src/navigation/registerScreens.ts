@@ -17,7 +17,7 @@ export const registerScreens = (store, Provider) => {
         Provider
     );
     Navigation.registerComponent(
-        "HomeScreen",
+        "GameContainerScreen",
         () => GameContainerScreen,
         store,
         Provider

@@ -15,35 +15,36 @@ interface IImageFlipperProps {
     source: number[];
     startAnimation: boolean;
     imageStyle: ImageStyle;
+    frameDuration?: number;
+    loop: boolean;
 }
 
 interface IImageFlipperState {
+    animationValue: Animated.Value;
     startAnimation: boolean;
+    stopAnimation: boolean;
     numberOfAnimatedFrames: number;
     currentAnimatedFrame: number;
     frameDuration: number;
 }
 
-const initState: IImageFlipperState = {
-    startAnimation: false,
-    numberOfAnimatedFrames: 1,
-    currentAnimatedFrame: 0,
-    frameDuration: 200
-};
-
 export class ImageFlipper extends React.Component<
     IImageFlipperProps,
     IImageFlipperState
 > {
-    private animationValue: Animated.Value;
+    // private animationValue: Animated.Value;
 
     constructor(props) {
         super(props);
 
-        this.animationValue = new Animated.Value(0);
+        const { frameDuration = 200 } = this.props;
         this.state = {
-            ...initState,
-            numberOfAnimatedFrames: this.props.source.length
+            startAnimation: false,
+            stopAnimation: false,
+            animationValue: new Animated.Value(0),
+            currentAnimatedFrame: 0,
+            frameDuration,
+            numberOfAnimatedFrames: this.props.source.length - 1
         };
 
         this._animate = this._animate.bind(this);
@@ -52,13 +53,20 @@ export class ImageFlipper extends React.Component<
 
     componentWillReceiveProps(nextProps: IImageFlipperProps) {
         if (nextProps.startAnimation && !this.state.startAnimation) {
-            this.setState({ startAnimation: true }, this._animate);
+            this.setState(
+                { startAnimation: true, stopAnimation: false },
+                this._animate
+            );
         } else return;
     }
 
+    // public _stopAnimation() {
+    //     Animated.timing(this.animationValue).stop()
+    // }
+
     public _animate() {
-        this.animationValue.setValue(0);
-        Animated.timing(this.animationValue, {
+        this.state.animationValue.setValue(0);
+        Animated.timing(this.state.animationValue, {
             toValue: 1,
             duration: this.state.frameDuration,
             easing: Easing.linear
@@ -66,7 +74,7 @@ export class ImageFlipper extends React.Component<
             console.log("Frame " + this.state.currentAnimatedFrame);
             if (
                 this.state.currentAnimatedFrame <
-                this.state.numberOfAnimatedFrames
+                this.props.source.length - 1
             ) {
                 this.setState(
                     {
@@ -77,13 +85,23 @@ export class ImageFlipper extends React.Component<
                 );
             } else {
                 console.log("Last frame");
-                this.setState(
-                    {
-                        startAnimation: false,
-                        currentAnimatedFrame: 0
-                    },
-                    () => this.animationValue.setValue(0)
-                );
+
+                if (this.props.loop && this.props.startAnimation) {
+                    this.setState(
+                        {
+                            currentAnimatedFrame: 0
+                        },
+                        this._animate
+                    );
+                } else {
+                    this.setState(
+                        {
+                            startAnimation: false,
+                            currentAnimatedFrame: 0
+                        },
+                        () => this.state.animationValue.setValue(0)
+                    );
+                }
             }
         });
     }
