@@ -42,11 +42,9 @@ const styles = StyleSheet.create({
         color: "white",
         fontFamily: appStyles.font,
         fontSize: 24,
-        padding: 20,
-        marginBottom: -10,
+        lineHeight: 29,
+        height: 24,
         fontWeight: "400",
-        // lineHeight: 30,
-        // marginTop: 10,
         backgroundColor: "transparent"
     }
 });
