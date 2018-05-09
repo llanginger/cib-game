@@ -3,6 +3,7 @@ export interface IGameSevenLevel {
     images: number[];
     loop: boolean;
     answers: { text: string; correct: boolean }[];
+    delay?: number;
 }
 
 export const gameSevenLevels: IGameSevenLevel[] = [
@@ -17,6 +18,16 @@ export const gameSevenLevels: IGameSevenLevel[] = [
             { text: "Arrogant", correct: true },
             { text: "Arrogant", correct: true }
         ],
+        loop: false
+    },
+    {
+        titleText: "Disappointed", // Animate 1 frame on load
+        images: [
+            require("../../images/laia/game-7/disappointed-frame1.png"),
+            require("../../images/laia/game-7/disappointed-frame2.png")
+        ],
+        answers: [{ text: "Disappointed", correct: true }],
+        delay: 1000,
         loop: false
     },
     {
@@ -37,15 +48,6 @@ export const gameSevenLevels: IGameSevenLevel[] = [
         ],
         answers: [{ text: "Delighted", correct: true }],
         loop: true
-    },
-    {
-        titleText: "Disappointed", // Animate 1 frame on load
-        images: [
-            require("../../images/laia/game-7/disappointed-frame1.png"),
-            require("../../images/laia/game-7/disappointed-frame2.png")
-        ],
-        answers: [{ text: "Disappointed", correct: true }],
-        loop: false
     },
     {
         titleText: "Frustrated", // Animate 1 frame on load

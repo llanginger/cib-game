@@ -73,6 +73,7 @@ export class _GameSevenContainer extends React.Component<
                 this.setState({
                     revealAnswers: false,
                     startButtonAnimation: false,
+                    startFlipperAnimation: true,
                     currentLevel: options.reset
                         ? 0
                         : 1 + this.state.currentLevel
@@ -80,7 +81,7 @@ export class _GameSevenContainer extends React.Component<
             4000
         );
 
-        setTimeout(() => this.setState({ startFlipperAnimation: true }), 5000);
+        // setTimeout(() => this.setState({ startFlipperAnimation: true }), 4001);
     }
 
     _endGame(correct: boolean) {
@@ -160,6 +161,9 @@ export class _GameSevenContainer extends React.Component<
                         source={gameSevenLevels[this.state.currentLevel].images}
                         loop={gameSevenLevels[this.state.currentLevel].loop}
                         startAnimation={this.state.startFlipperAnimation}
+                        delay={
+                            gameSevenLevels[this.state.currentLevel].delay | 200
+                        }
                         imageStyle={{
                             height: "100%",
                             width: "100%",

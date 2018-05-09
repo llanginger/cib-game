@@ -17,6 +17,7 @@ interface IImageFlipperProps {
     imageStyle: ImageStyle;
     frameDuration?: number;
     loop: boolean;
+    delay?: number;
 }
 
 interface IImageFlipperState {
@@ -54,7 +55,11 @@ export class ImageFlipper extends React.Component<
     componentWillReceiveProps(nextProps: IImageFlipperProps) {
         if (nextProps.startAnimation && !this.state.startAnimation) {
             this.setState(
-                { startAnimation: true, stopAnimation: false },
+                {
+                    startAnimation: true,
+                    stopAnimation: false,
+                    currentAnimatedFrame: 0
+                },
                 this._animate
             );
         } else return;
@@ -65,9 +70,12 @@ export class ImageFlipper extends React.Component<
     // }
 
     public _animate() {
+        const { delay = 0 } = this.props;
+        console.log("Animation starting");
         this.state.animationValue.setValue(0);
         Animated.timing(this.state.animationValue, {
             toValue: 1,
+            delay,
             duration: this.state.frameDuration,
             easing: Easing.linear
         }).start(() => {
@@ -97,7 +105,7 @@ export class ImageFlipper extends React.Component<
                     this.setState(
                         {
                             startAnimation: false,
-                            currentAnimatedFrame: 0
+                            currentAnimatedFrame: 1
                         },
                         () => this.state.animationValue.setValue(0)
                     );
