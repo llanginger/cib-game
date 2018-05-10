@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "white",
-        fontFamily: appStyles.font,
+        fontFamily: appStyles.rockwellFont,
         fontSize: 24,
         marginBottom: -10,
         padding: 10,

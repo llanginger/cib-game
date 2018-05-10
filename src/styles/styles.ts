@@ -46,16 +46,19 @@ const shadow: IShadowStyles = {
     shadowOpacity: 0.3
 };
 
-export type IFont = string;
+export type IRockwellFont = string;
+export type IHandDrawnFont = "Annie Use Your Telescope";
 export interface IAppStyles {
     colors: IColors;
     shadow: IShadowStyles;
     buttonBorder: IButtonBorder;
-    font: IFont;
+    rockwellFont: IRockwellFont;
+    handDrawnFont: IHandDrawnFont;
 }
 export const appStyles: IAppStyles = {
     colors,
     shadow,
     buttonBorder,
-    font: "Rockwell"
+    rockwellFont: "Rockwell",
+    handDrawnFont: "Annie Use Your Telescope"
 };

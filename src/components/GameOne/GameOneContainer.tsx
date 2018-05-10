@@ -27,7 +27,7 @@ const initState: IGameOneContainerState = {
     revealAnswers: false,
     startAnimation: false,
     levels: gameOneLevels,
-    currentLevel: 0
+    currentLevel: 5
 };
 export class _GameOneContainer extends React.Component<
     IGameOneContainerProps,
@@ -123,6 +123,7 @@ export class _GameOneContainer extends React.Component<
                     reveal={this.state.revealAnswers}
                     reset={this.state.startAnimation}
                     circlePortrait
+                    imageStyle={{ width: "70%" }}
                 />
                 <View style={styles.buttonContainer}>
                     {this._makeButtons()}

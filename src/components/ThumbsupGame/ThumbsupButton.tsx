@@ -6,19 +6,18 @@ import { appStyles } from "../../styles/styles";
 interface IThumbsupButtonProps {
     source: number;
     onPress: any;
+    color: string;
 }
 
 // create a component
 export const ThumbsupButton: React.StatelessComponent<IThumbsupButtonProps> = (
     props: IThumbsupButtonProps
 ) => {
+    const { color, onPress, source } = props;
     return (
-        <TouchableOpacity onPress={props.onPress} style={styles.container}>
-            <Image
-                style={styles.image}
-                source={props.source}
-                resizeMode="contain"
-            />
+        <TouchableOpacity onPress={onPress} style={styles.container}>
+            <Image style={styles.image} source={source} resizeMode="contain" />
+            <Text style={[styles.text, { color }]}>Helpful</Text>
         </TouchableOpacity>
     );
 };
@@ -26,10 +25,15 @@ export const ThumbsupButton: React.StatelessComponent<IThumbsupButtonProps> = (
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        ...appStyles.shadow
+        // ...appStyles.shadow
     },
     image: {
         height: 100,
         width: 100
+    },
+    text: {
+        fontFamily: appStyles.handDrawnFont,
+        fontSize: 30,
+        textAlign: "center"
     }
 });

@@ -29,15 +29,15 @@ const _MenuButton = (props: IUserAvatarProps) => {
         console.log("USer avatar image props: ", props.character);
         switch (props.character) {
             case "girlCurlyBrownHair":
-                return require("../../images/GirlCurly.png");
+                return require("../../images/avatars/GirlCurly.png");
             case "boyShortBrownHair":
-                return require("../../images/BoyShortBrownHair.png");
+                return require("../../images/avatars/BoyShortBrownHair.png");
             case "boyMessyBrownHair":
-                return require("../../images/BoyMessyBrownHair.png");
+                return require("../../images/avatars/BoyMessyBrownHair.png");
             case "girlLongBlondeHair":
-                return require("../../images/GirlBlonde.png");
+                return require("../../images/avatars/GirlBlonde.png");
             default:
-                return require("../../images/GirlCurly.png");
+                return require("../../images/avatars/GirlCurly.png");
         }
     };
     return (

@@ -1,6 +1,7 @@
 //import liraries
 import * as React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
+import { appStyles } from "../../styles/styles";
 
 //Interface
 interface IThumbsupBubbleProps {
@@ -29,12 +30,12 @@ export const ThumbsupBubble: React.StatelessComponent<IThumbsupBubbleProps> = (
 const styles = StyleSheet.create({
     image: {
         width: "85%",
-        height: 260,
+        height: 240,
         alignSelf: "center"
     },
     imageContainer: {
-        marginBottom: 40,
-        marginTop: 20
+        marginBottom: 10
+        // marginTop: 20
     },
     imageTextContainer: {
         position: "absolute",
@@ -44,13 +45,12 @@ const styles = StyleSheet.create({
         bottom: 0,
         justifyContent: "center",
         alignItems: "center",
-        paddingHorizontal: "15%",
-        paddingBottom: 10
+        paddingHorizontal: "15%"
     },
     text: {
-        fontSize: 26,
+        fontSize: 40,
         color: "#54546a",
-        textAlign: "center"
-        // fontFamily: "Annie-Use-Your-Telescope"
+        textAlign: "center",
+        fontFamily: "Annie Use Your Telescope"
     }
 });

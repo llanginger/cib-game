@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         lineHeight: 33,
         color: "#60b8ff",
-        fontFamily: appStyles.font,
+        fontFamily: appStyles.rockwellFont,
         fontSize: 24,
         height: 24
     }

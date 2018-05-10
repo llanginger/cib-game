@@ -13,7 +13,7 @@ export const DrawerHeader: React.StatelessComponent<IDrawerHeaderProps> = (
         <View style={styles.logoContainer}>
             <Image
                 style={styles.logo}
-                source={require("../../images/cibLogo.png")}
+                source={require("../../images/logo/cibLogo.png")}
                 resizeMode="contain"
             />
         </View>

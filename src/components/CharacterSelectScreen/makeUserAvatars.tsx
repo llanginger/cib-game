@@ -24,19 +24,19 @@ interface IAvatarImagePaths {
 const imagePaths: IAvatarImagePaths[] = [
     {
         name: "girlCurlyBrownHair",
-        url: require("../../images/GirlCurly.png")
+        url: require("../../images/avatars/GirlCurly.png")
     },
     {
         name: "boyShortBrownHair",
-        url: require("../../images/BoyShortBrownHair.png")
+        url: require("../../images/avatars/BoyShortBrownHair.png")
     },
     {
         name: "boyMessyBrownHair",
-        url: require("../../images/BoyMessyBrownHair.png")
+        url: require("../../images/avatars/BoyMessyBrownHair.png")
     },
     {
         name: "girlLongBlondeHair",
-        url: require("../../images/GirlBlonde.png")
+        url: require("../../images/avatars/GirlBlonde.png")
     }
 ];
 

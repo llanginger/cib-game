@@ -13,7 +13,7 @@ const levelTitles: string[] = [
     "Game Seven"
 ];
 
-const initlevelType = 6;
+const initlevelType = 5;
 const initState: IGameLevelTypeReducer = {
     gameLevelType: initlevelType,
     gameTitle: levelTitles[initlevelType]

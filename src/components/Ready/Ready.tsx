@@ -24,6 +24,7 @@ interface IReadyState {
 // create a component
 class _Ready extends React.Component<IReadyProps, IReadyState> {
     private opacityValue: Animated.Value;
+    private _buttonKey: number;
 
     constructor(props) {
         super(props);
@@ -33,6 +34,7 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
         this.state = { startAnimation: false, show: true };
         this._buttonOnPress = this._buttonOnPress.bind(this);
         this._fadeOut = this._fadeOut.bind(this);
+        this._buttonKey = Math.random();
     }
 
     componentDidMount() {
@@ -56,7 +58,7 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
             duration: 1000,
             delay: 1500,
             easing: Easing.linear
-        }).start(() => this.setState({ show: false }));
+        }).start(() => this.setState({ show: false, startAnimation: false }));
     }
 
     _buttonOnPress() {
@@ -70,24 +72,21 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
             inputRange: [0, 1],
             outputRange: [1, 0]
         });
-        const ReadyButton = () => (
-            <AnimatedButton
-                text="Ready!"
-                correct={false}
-                startAnimation={this.state.startAnimation}
-                revealed={false}
-                animationInType="fadeInUp"
-                animationOutType="fadeOutLeft"
-                delay={0}
-                onPress={this._buttonOnPress}
-            />
-        );
         return this.state.show ? (
             <Animated.View
                 style={[styles.container, { opacity: opacityStyleValue }]}
             >
                 <SandwichBoard text={this.props.sandwichText} />
-                <ReadyButton />
+                <AnimatedButton
+                    text="Ready!"
+                    correct={false}
+                    startAnimation={this.state.startAnimation}
+                    revealed={false}
+                    animationInType="fadeInUp"
+                    animationOutType="fadeOutLeft"
+                    delay={0}
+                    onPress={this._buttonOnPress}
+                />
             </Animated.View>
         ) : null;
     }

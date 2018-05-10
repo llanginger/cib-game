@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "white",
-        fontFamily: appStyles.font,
+        fontFamily: appStyles.rockwellFont,
         fontSize: 24,
         lineHeight: 29,
         height: 24,

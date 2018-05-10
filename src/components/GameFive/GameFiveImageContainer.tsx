@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     levelTitle: {
         textAlign: "center",
         padding: 10,
-        fontFamily: appStyles.font,
+        fontFamily: appStyles.rockwellFont,
         color: "#60b8ff",
         fontSize: 30,
         borderRadius: 5,

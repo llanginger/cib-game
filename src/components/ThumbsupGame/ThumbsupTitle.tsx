@@ -30,21 +30,21 @@ const styles = StyleSheet.create({
     },
     titleText: {
         color: "#b6b7b7",
-        fontSize: 30,
+        fontSize: 26,
         lineHeight: 35,
         height: 25,
-        fontFamily: appStyles.font,
-        marginBottom: 30,
-        marginLeft: 10,
-        marginTop: 40
+        fontFamily: appStyles.rockwellFont,
+        marginBottom: 20,
+        marginLeft: 40,
+        marginTop: 20
     },
     emotionText: {
         textAlign: "center",
-        fontFamily: appStyles.font,
+        fontFamily: appStyles.rockwellFont,
         color: appStyles.colors.blue,
         fontSize: 40,
         lineHeight: 45,
         height: 40,
-        marginBottom: 0
+        marginBottom: 20
     }
 });

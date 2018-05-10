@@ -1,6 +1,6 @@
 //import liraries
 import * as React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, ImageStyle } from "react-native";
 import * as Animatable from "react-native-animatable";
 
 //Interface
@@ -10,12 +10,14 @@ interface IGameImageProps {
     reveal: boolean;
     reset: boolean;
     circlePortrait?: boolean;
+    imageStyle?: ImageStyle;
 }
 
 // create a component
 export const GameImage: React.StatelessComponent<IGameImageProps> = (
     props: IGameImageProps
 ) => {
+    const { imageStyle = {} } = props;
     return (
         <Animatable.View
             animation={props.reset ? "fadeOut" : "fadeIn"}
@@ -26,7 +28,7 @@ export const GameImage: React.StatelessComponent<IGameImageProps> = (
             ]}
         >
             <Image
-                style={styles.image}
+                style={[styles.image, imageStyle]}
                 source={props.source}
                 resizeMode="contain"
             />

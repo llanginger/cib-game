@@ -27,8 +27,6 @@ interface IScoreContainerProps {
 }
 
 export const _ScoreContainer = (props: IScoreContainerProps) => {
-    const hotImage = require("../../images/hot.png");
-    const coolImage = require("../../images/cool.png");
     const robot = require("../../images/laia/robot.png");
     const star = require("../../images/laia/icons/score-star.png");
     const { containerProps = {} } = props;
@@ -36,7 +34,6 @@ export const _ScoreContainer = (props: IScoreContainerProps) => {
     return (
         <View style={[styles.container, props.containerProps]}>
             <MenuButton onPress={props.menuPress} />
-
             <StarScoreCounter image={star} />
         </View>
     );
