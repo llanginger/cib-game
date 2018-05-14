@@ -19,6 +19,7 @@ export interface IScreenObjects {
     ACCOUNT_SCREEN: INavigationObject;
     SKILLCARD_MODAL: INavigationObject;
     CHARACTER_SELECT_SCREEN: INavigationObject;
+    SET_LEVEL_SCREEN: INavigationObject;
 }
 
 export const screenObjects: IScreenObjects = {
@@ -58,5 +59,9 @@ export const screenObjects: IScreenObjects = {
     CHARACTER_SELECT_SCREEN: {
         screen: "CharacterSelectScreen",
         title: "Select Character"
+    },
+    SET_LEVEL_SCREEN: {
+        screen: "SetLevelScreen",
+        title: "Change Level"
     }
 };

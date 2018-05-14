@@ -125,14 +125,14 @@ export class _ThumbsupGameContainer extends React.Component<
                 <ThumbsupBubble text={bubbleText} />
                 <View style={styles.buttonContainer}>
                     <ThumbsupButton
-                        source={require("../../images/laia/hand-game/red-button.png")}
-                        onPress={() => this._buttonOnPress(false)}
-                        color="#b7535b"
-                    />
-                    <ThumbsupButton
                         source={require("../../images/laia/hand-game/blue-button.png")}
                         onPress={() => this._buttonOnPress(true)}
                         color="#4097b0"
+                    />
+                    <ThumbsupButton
+                        source={require("../../images/laia/hand-game/red-button.png")}
+                        onPress={() => this._buttonOnPress(false)}
+                        color="#b7535b"
                     />
                 </View>
             </View>
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flex: 1,
         flexDirection: "row",
-        // paddingHorizontal: 20,
+        paddingHorizontal: 20,
         // paddingVertical: 30,
         justifyContent: "space-around",
         alignItems: "center",

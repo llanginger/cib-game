@@ -4,6 +4,8 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { DrawerItem } from "./DrawerItem";
 import { DrawerHeader } from "./DrawerHeader";
 import { ResetButton } from "../ResetButton";
+import { screenObjects } from "../../navigation/screenObjects";
+import { appStyles } from "../../styles/styles";
 
 const menuColors = ["#ff9933", "#663366"];
 
@@ -15,7 +17,7 @@ export class DrawerScreen extends React.Component<any, any> {
                 <DrawerItem
                     navigator={this.props.navigator}
                     text="Protagonistas"
-                    navTo="CharacterSelectScreen"
+                    navTo={screenObjects.CHARACTER_SELECT_SCREEN.screen}
                     backgroundColor="#cc0066"
                 />
                 <DrawerItem
@@ -29,6 +31,12 @@ export class DrawerScreen extends React.Component<any, any> {
                     text="Mi Cuenta"
                     navTo="AccountScreen"
                     backgroundColor="#339900"
+                />
+                <DrawerItem
+                    navigator={this.props.navigator}
+                    text="Change Level"
+                    navTo={screenObjects.SET_LEVEL_SCREEN.screen}
+                    backgroundColor={appStyles.colors.blue}
                 />
                 <ResetButton />
             </View>

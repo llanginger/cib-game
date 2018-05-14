@@ -19,6 +19,10 @@ export const emojiGameReducer = (
     action
 ) => {
     switch (action.type) {
+        case "SET_LEVEL_TO":
+            return {
+                ...initState
+            };
         case "START_EMOJI_ANIMATION":
             return {
                 ...state,

@@ -8,6 +8,7 @@ import { LoginScreen } from "../components/LoginScreen/LoginScreen";
 import { SkillCardModalScreen } from "../components/SkillCardModalScreen/SkillCardModalScreen";
 import { AccountScreen } from "../components/AccountScreen/AccountScreen";
 import { ScoreScreen } from "../components/ScoreScreen/ScoreScreen";
+import { SetLevel } from "../components/DrawerScreen/SetLevel";
 
 export const registerScreens = (store, Provider) => {
     Navigation.registerComponent(
@@ -55,6 +56,12 @@ export const registerScreens = (store, Provider) => {
     Navigation.registerComponent(
         "CharacterSelectScreen",
         () => CharacterSelectScreen,
+        store,
+        Provider
+    );
+    Navigation.registerComponent(
+        "SetLevelScreen",
+        () => SetLevel,
         store,
         Provider
     );

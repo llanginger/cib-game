@@ -27,7 +27,7 @@ const initState: IGameOneContainerState = {
     revealAnswers: false,
     startAnimation: false,
     levels: gameOneLevels,
-    currentLevel: 5
+    currentLevel: 0
 };
 export class _GameOneContainer extends React.Component<
     IGameOneContainerProps,

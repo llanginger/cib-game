@@ -13,7 +13,7 @@ const levelTitles: string[] = [
     "Game Seven"
 ];
 
-const initlevelType = 5;
+const initlevelType = 0;
 const initState: IGameLevelTypeReducer = {
     gameLevelType: initlevelType,
     gameTitle: levelTitles[initlevelType]
@@ -25,6 +25,7 @@ export const gameLevelReducer = (
 ) => {
     switch (action.type) {
         case "CHANGE_GAME_LEVEL_TYPE":
+        case "SET_LEVEL_TO":
             return {
                 ...state,
                 gameLevelType: action.payload.nextLevel,

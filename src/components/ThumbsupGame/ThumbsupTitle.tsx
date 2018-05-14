@@ -17,7 +17,7 @@ export const ThumbsupTitle: React.StatelessComponent<IThumbsupTitleProps> = (
     return (
         <View style={styles.titleContainer}>
             <Text style={styles.titleText}>{titleText}</Text>
-            <Text style={styles.emotionText}>{emotionText} </Text>
+            <Text style={styles.emotionText}>{emotionText.toUpperCase()} </Text>
         </View>
     );
 };
@@ -45,6 +45,6 @@ const styles = StyleSheet.create({
         fontSize: 40,
         lineHeight: 45,
         height: 40,
-        marginBottom: 20
+        marginBottom: 15
     }
 });

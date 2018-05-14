@@ -22,6 +22,10 @@ export const robotGameReducer = (
     action
 ) => {
     switch (action.type) {
+        case "SET_LEVEL_TO":
+            return {
+                ...initState
+            };
         case "CHOOSE_FACE":
             return {
                 ...state,
