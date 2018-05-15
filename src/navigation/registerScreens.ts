@@ -9,6 +9,7 @@ import { SkillCardModalScreen } from "../components/SkillCardModalScreen/SkillCa
 import { AccountScreen } from "../components/AccountScreen/AccountScreen";
 import { ScoreScreen } from "../components/ScoreScreen/ScoreScreen";
 import { SetLevel } from "../components/DrawerScreen/SetLevel";
+import { MenuScreen } from "../components/MenuScreen/MenuScreen";
 
 export const registerScreens = (store, Provider) => {
     Navigation.registerComponent(
@@ -17,6 +18,13 @@ export const registerScreens = (store, Provider) => {
         store,
         Provider
     );
+    Navigation.registerComponent(
+        "MenuScreen",
+        () => MenuScreen,
+        store,
+        Provider
+    );
+
     Navigation.registerComponent(
         "GameContainerScreen",
         () => GameContainerScreen,
