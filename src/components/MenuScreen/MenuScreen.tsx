@@ -8,6 +8,9 @@ import {
     Image,
     StatusBar
 } from "react-native";
+import { screenObjects } from "../../navigation/screenObjects";
+import { appStyles } from "../../styles/styles";
+import { TwoFrameTouchable } from "../TwoFrameTouchable/TwoFrameTouchable";
 
 //Interfaces
 interface IMenuScreenProps {
@@ -51,23 +54,90 @@ export class MenuScreen extends React.Component<
     }
 
     render() {
+        const { push, resetTo } = this.props.navigator;
         return (
             <View style={styles.container}>
                 <StatusBar hidden={true} />
-                <Image
-                    style={styles.window}
-                    source={require("../../images/laia/menu/window-frame1.png")}
-                    resizeMode="contain"
+                <TwoFrameTouchable
+                    sources={[
+                        require("../../images/laia/menu/window-frame1.png"),
+                        require("../../images/laia/menu/window-frame2.png")
+                    ]}
+                    text="Games"
+                    textStyle={{ fontSize: 24, left: 50, top: 110 }}
+                    containerStyle={styles.window}
+                    onPress={() =>
+                        this.props.navigator.push({
+                            screen: "GameContainerScreen"
+                        })
+                    }
                 />
-                <Image
-                    style={styles.roomBackground}
-                    source={require("../../images/laia/menu/room.png")}
-                    resizeMode="cover"
+                <View pointerEvents="none">
+                    <Image
+                        style={styles.roomBackground}
+                        source={require("../../images/laia/menu/room.png")}
+                        resizeMode="cover"
+                    />
+                </View>
+                <TwoFrameTouchable
+                    onPress={() => console.log("Pressed the thing!")}
+                    text="Journal"
+                    textStyle={{}}
+                    sources={[
+                        require("../../images/laia/menu/journal-frame1.png"),
+                        require("../../images/laia/menu/journal-frame2.png")
+                    ]}
+                    containerStyle={styles.journal}
                 />
-                <Image
-                    style={styles.journal}
-                    source={require("../../images/laia/menu/journal-frame1.png")}
-                    resizeMode="contain"
+                <TwoFrameTouchable
+                    sources={[
+                        require("../../images/laia/menu/panda-frame1.png"),
+                        require("../../images/laia/menu/panda-frame2.png")
+                    ]}
+                    text="Chill Out"
+                    textStyle={{ top: -20, left: 0 }}
+                    containerStyle={styles.panda}
+                    onPress={() => console.log("Pressed the thing!")}
+                />
+                <TwoFrameTouchable
+                    onPress={() => console.log("Pressed the thing!")}
+                    sources={[
+                        require("../../images/laia/menu/magnifyingGlasse-frame1.png"),
+                        require("../../images/laia/menu/magnifyingGlasse-frame2.png")
+                    ]}
+                    text="Memory"
+                    textStyle={{ bottom: 20, right: 0 }}
+                    containerStyle={styles.magnifyingGlass}
+                />
+                <TwoFrameTouchable
+                    onPress={() => console.log("Pressed the thing!")}
+                    sources={[
+                        require("../../images/laia/menu/pencil-frame1.png"),
+                        require("../../images/laia/menu/pencil-frame2.png")
+                    ]}
+                    text="Notes"
+                    textStyle={{ top: 20 }}
+                    containerStyle={styles.pencil}
+                />
+                <TwoFrameTouchable
+                    onPress={() => console.log("Pressed the thing!")}
+                    sources={[
+                        require("../../images/laia/menu/banner-frame1.png"),
+                        require("../../images/laia/menu/banner-frame2.png")
+                    ]}
+                    text="Word Play"
+                    textStyle={{ left: 80, top: 170, fontSize: 20 }}
+                    containerStyle={styles.banner}
+                />
+                <TwoFrameTouchable
+                    onPress={() => console.log("Pressed the thing!")}
+                    sources={[
+                        require("../../images/laia/menu/picture-frame1.png"),
+                        require("../../images/laia/menu/picture-frame2.png")
+                    ]}
+                    text="Me"
+                    textStyle={{ bottom: -20 }}
+                    containerStyle={styles.picture}
                 />
             </View>
         );
@@ -75,11 +145,18 @@ export class MenuScreen extends React.Component<
 }
 const windowDims = 200;
 const journalDims = 230;
+const pandaDims = 140;
+const magnifyingGlassDims = 120;
+const pencilDims = 110;
+const bannerDims = 400;
+const pictureDims = 90;
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        height: "100%",
-        width: "100%"
+        height: "101%",
+        marginTop: -1,
+        width: "100%",
+        position: "relative"
         // flex: 1
     },
     roomBackground: {
@@ -99,5 +176,40 @@ const styles = StyleSheet.create({
         right: 15,
         height: journalDims,
         width: journalDims
+    },
+    panda: {
+        position: "absolute",
+        bottom: 230,
+        left: 15,
+        height: pandaDims,
+        width: pandaDims
+    },
+    magnifyingGlass: {
+        position: "absolute",
+        bottom: 125,
+        left: 50,
+        height: magnifyingGlassDims,
+        width: magnifyingGlassDims
+    },
+    pencil: {
+        position: "absolute",
+        bottom: 163,
+        right: 45,
+        height: pencilDims,
+        width: pencilDims
+    },
+    banner: {
+        position: "absolute",
+        bottom: 395,
+        right: -190,
+        height: bannerDims,
+        width: bannerDims
+    },
+    picture: {
+        position: "absolute",
+        bottom: 385,
+        left: 120,
+        height: pictureDims,
+        width: pictureDims
     }
 });

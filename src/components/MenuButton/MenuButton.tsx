@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
-import { Navigation } from "react-native-navigation";
 
 //Interface
 interface IUserAvatarProps {
