@@ -68,7 +68,9 @@ export class MenuScreen extends React.Component<
                     containerStyle={styles.window}
                     onPress={() =>
                         this.props.navigator.push({
-                            screen: "GameContainerScreen"
+                            screen: "GameMap",
+                            animated: true,
+                            animationType: "fade"
                         })
                     }
                 />

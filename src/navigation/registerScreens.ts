@@ -10,6 +10,7 @@ import { AccountScreen } from "../components/AccountScreen/AccountScreen";
 import { ScoreScreen } from "../components/ScoreScreen/ScoreScreen";
 import { SetLevel } from "../components/DrawerScreen/SetLevel";
 import { MenuScreen } from "../components/MenuScreen/MenuScreen";
+import { GameMap } from "../components/GameMap/GameMap";
 
 export const registerScreens = (store, Provider) => {
     Navigation.registerComponent(
@@ -73,4 +74,5 @@ export const registerScreens = (store, Provider) => {
         store,
         Provider
     );
+    Navigation.registerComponent("GameMap", () => GameMap, store, Provider);
 };

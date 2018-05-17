@@ -21,6 +21,7 @@ export interface IScreenObjects {
     CHARACTER_SELECT_SCREEN: INavigationObject;
     SET_LEVEL_SCREEN: INavigationObject;
     MENU_SCREEN: INavigationObject;
+    GAME_MAP: INavigationObject;
 }
 
 export const screenObjects: IScreenObjects = {
@@ -68,5 +69,9 @@ export const screenObjects: IScreenObjects = {
     MENU_SCREEN: {
         screen: "MenuScreen",
         title: "Menu"
+    },
+    GAME_MAP: {
+        screen: "GameMap",
+        title: "Map"
     }
 };

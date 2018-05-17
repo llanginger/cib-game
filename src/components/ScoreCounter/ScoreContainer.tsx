@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
     StyleSheet,
     View,
+    ViewStyle,
     Text,
     TouchableHighlight,
     TouchableOpacity,
@@ -22,7 +23,7 @@ interface IScoreContainerProps {
     children?: any;
     score?: IScoreReducer;
     dispatch?: any;
-    containerProps?: {};
+    containerProps?: ViewStyle;
     menuPress?: any;
 }
 

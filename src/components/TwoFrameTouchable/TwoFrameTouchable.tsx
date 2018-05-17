@@ -71,6 +71,8 @@ export class TwoFrameTouchable extends React.Component<
             text,
             textStyle
         } = this.props;
+
+        const { top, bottom, left, right, fontSize } = textStyle;
         return (
             <View
                 pointerEvents="box-none"
@@ -86,19 +88,24 @@ export class TwoFrameTouchable extends React.Component<
                 >
                     {this._getImage()}
                 </TouchableWithoutFeedback>
-                <Text
-                    style={[
-                        styles.text,
-                        {
-                            ...textStyle,
-                            lineHeight: textStyle.fontSize
-                                ? textStyle.fontSize + 5
-                                : 25
-                        }
-                    ]}
+                <View
+                    pointerEvents="none"
+                    style={[styles.textContainer, { top, left, right, bottom }]}
                 >
-                    {text}
-                </Text>
+                    <Text
+                        style={[
+                            styles.text,
+                            {
+                                fontSize,
+                                lineHeight: textStyle.fontSize
+                                    ? textStyle.fontSize + 5
+                                    : 25
+                            }
+                        ]}
+                    >
+                        {text}
+                    </Text>
+                </View>
             </View>
         );
     }
@@ -116,9 +123,11 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     text: {
-        position: "absolute",
         color: "#4e4f4d",
         fontFamily: appStyles.rockwellFont,
         fontSize: 16
+    },
+    textContainer: {
+        position: "absolute"
     }
 });
