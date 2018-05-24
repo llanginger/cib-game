@@ -97,7 +97,7 @@ export class MenuScreen extends React.Component<
                         require("../../images/laia/menu/panda-frame2.png")
                     ]}
                     text="Chill Out"
-                    textStyle={{ top: -20, left: 0 }}
+                    textStyle={{ top: -5, left: 0 }}
                     containerStyle={styles.panda}
                     onPress={() => console.log("Pressed the thing!")}
                 />
@@ -118,7 +118,7 @@ export class MenuScreen extends React.Component<
                         require("../../images/laia/menu/pencil-frame2.png")
                     ]}
                     text="Notes"
-                    textStyle={{ top: 20 }}
+                    textStyle={{ top: 15 }}
                     containerStyle={styles.pencil}
                 />
                 <TwoFrameTouchable

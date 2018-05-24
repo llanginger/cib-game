@@ -94,10 +94,6 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
 
     _menuPress() {
         console.log("Something");
-        // this.props.navigator.toggleDrawer({
-        //     side: "left", // the side of the drawer since you can have two, 'left' / 'right'
-        //     animated: true // does the toggle have transition animation or does it happen immediately (optional)
-        // });
         this.props.navigator.resetTo({
             screen: screenObjects.MENU_SCREEN.screen
         });
@@ -131,7 +127,6 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
         return (
             <View style={styles.container}>
                 <Ready />
-
                 <ScoreContainer
                     menuPress={this._menuPress}
                     containerProps={{ alignSelf: "flex-start" }}
