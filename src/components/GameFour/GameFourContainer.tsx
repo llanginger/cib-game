@@ -72,7 +72,8 @@ export class _GameFourContainer extends React.Component<
 const mapStateToProps = (store: IReducers) => {
     return {
         currentEmotion: store.robotGameReducer.currentEmotion,
-        triggerEndGame: store.robotGameReducer.level > 2 ? true : false
+        // triggerEndGame: store.robotGameReducer.level > 2 ? true : false
+        triggerEndGame: false
     };
 };
 

@@ -35,7 +35,7 @@ const _MenuButton = (props: IUserAvatarProps) => {
             }}
         >
             <Image
-                source={require("../../images/laia/icons/menu-icon.png")}
+                source={require("../../images/laia/icons/home-button.png")}
                 resizeMode="contain"
                 style={[styles.image, props.imageStyleProps]}
             />

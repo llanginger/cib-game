@@ -41,8 +41,12 @@ export class TwoFrameTouchable extends React.Component<
     };
 
     _onPressOut = () => {
-        this.setState({ pressIn: false }, () =>
-            setTimeout(this.props.onPress, 300)
+        setTimeout(
+            () =>
+                this.setState({ pressIn: false }, () =>
+                    setTimeout(this.props.onPress, 300)
+                ),
+            300
         );
     };
 

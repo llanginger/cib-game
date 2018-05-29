@@ -87,6 +87,7 @@ export class _ThumbsupGameContainer extends React.Component<
 
         setTimeout(() => {
             this.setState({ ...initState }, () => {
+                this.props.navigator.resetTo({ screen: "GameMap" });
                 this.props.navigator.showModal({
                     screen: screenObjects.SCORE_SCREEN.screen
                 });

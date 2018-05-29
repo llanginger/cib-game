@@ -4,3 +4,6 @@ Game three: "12 new words"
 game four: "12 words advanced" / robot
 
 Board comes in as instructions
+
+Change shadow color to blue
+make images smaller

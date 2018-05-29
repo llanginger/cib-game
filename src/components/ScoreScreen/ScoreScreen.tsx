@@ -67,15 +67,21 @@ export class _ScoreScreen extends React.Component<
         ding.play();
         const nextLevel = currentLevelType < 6 ? 1 + currentLevelType : 0;
         getNextLevelType({ nextLevel });
-        setTimeout(() => navigator.dismissAllModals(), 1000);
+
+        setTimeout(() => {
+            navigator.dismissAllModals();
+            // navigator.resetTo({ screen: "GameMap" });
+        }, 1000);
+        // setTimeout(() => {
+        //     // navigator.dismissAllModals();
+        //     navigator.resetTo({ screen: "GameMap" });
+        // }, 1100);
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <ScoreScreenTitle text="Great Job!" />
-                <StarBoard />
-                <StaticButton text="Continue" onPress={this._onPress} />
+                <StarBoard onPress={this._onPress} />
             </View>
         );
     }

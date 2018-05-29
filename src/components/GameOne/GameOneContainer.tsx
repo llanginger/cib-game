@@ -118,9 +118,7 @@ export class _GameOneContainer extends React.Component<
         return (
             <View style={styles.container}>
                 <GameImage
-                    color={this.state.revealAnswers}
                     source={getImage(revealAnswers, levels[currentLevel])}
-                    reveal={this.state.revealAnswers}
                     reset={this.state.startAnimation}
                     circlePortrait
                     imageStyle={{ width: "70%" }}

@@ -1,16 +1,22 @@
 //import liraries
 import * as React from "react";
-import { View, Text, StyleSheet, Image, ImageStyle } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image,
+    ImageStyle,
+    ViewStyle
+} from "react-native";
 import * as Animatable from "react-native-animatable";
 
 //Interface
 interface IGameImageProps {
-    color: boolean;
     source: number;
-    reveal: boolean;
     reset: boolean;
     circlePortrait?: boolean;
     imageStyle?: ImageStyle;
+    viewStyle?: ViewStyle;
 }
 
 // create a component
@@ -24,7 +30,10 @@ export const GameImage: React.StatelessComponent<IGameImageProps> = (
             duration={1000}
             style={[
                 styles.imageContainer,
-                { paddingVertical: props.circlePortrait ? 10 : 0 }
+                {
+                    paddingVertical: props.circlePortrait ? 10 : 0,
+                    ...props.viewStyle
+                }
             ]}
         >
             <Image
@@ -40,13 +49,15 @@ export const GameImage: React.StatelessComponent<IGameImageProps> = (
 const styles = StyleSheet.create({
     imageContainer: {
         height: 375,
-        width: "100%"
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center"
         // paddingVertical: 10
     },
     image: {
         // flex: 1,
-        height: "100%",
-        width: "100%",
+        height: "80%",
+        width: "80%",
         alignSelf: "center"
     }
 });

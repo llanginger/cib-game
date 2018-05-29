@@ -22,6 +22,7 @@ export interface IScreenObjects {
     SET_LEVEL_SCREEN: INavigationObject;
     MENU_SCREEN: INavigationObject;
     GAME_MAP: INavigationObject;
+    PANDA_ACTIVITY: INavigationObject;
 }
 
 export const screenObjects: IScreenObjects = {
@@ -73,5 +74,9 @@ export const screenObjects: IScreenObjects = {
     GAME_MAP: {
         screen: "GameMap",
         title: "Map"
+    },
+    PANDA_ACTIVITY: {
+        screen: "PandaActivity",
+        title: "Panda"
     }
 };

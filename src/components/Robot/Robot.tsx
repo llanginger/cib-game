@@ -20,6 +20,7 @@ interface IRobotProps {
 
 // TODO: modify getRobot so that it has separate "correct" | "incorrect" | "neutral" versions of robot.
 
+// TODO In the morning: Make individual versions of each robot frame with the right emotion colors
 const _Robot: React.StatelessComponent<IRobotProps> = (props: IRobotProps) => {
     const {
         currentEmotion,
@@ -58,6 +59,8 @@ const styles = StyleSheet.create({
         // height: 420,
         flex: 3,
         width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
         backgroundColor: "white",
         paddingVertical: 20
     },
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
         overflow: "hidden"
     },
     image: {
-        height: "100%",
-        width: "100%"
+        height: "90%",
+        width: "90%"
     }
 });

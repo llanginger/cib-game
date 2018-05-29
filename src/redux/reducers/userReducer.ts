@@ -3,6 +3,7 @@ export interface IUserReducer {
     currentProfilePicture: string;
     selectedCharacterIndex: number;
     currentProfilePictureUrl: number; // Defunct
+    completedLevels: 0 | 1 | 2 | 3 | 4 | 5;
 }
 
 const initState: IUserReducer = {
@@ -10,11 +11,16 @@ const initState: IUserReducer = {
     selectedCharacterIndex: 0,
     currentProfilePicture: "girlCurlyBrownHair",
     currentProfilePictureUrl: 5,
-
+    completedLevels: 4
 };
 
 export const userReducer = (state: IUserReducer = initState, action) => {
     switch (action.type) {
+        case "SET_LEVEL_TO":
+            return {
+                ...state,
+                completedLevels: action.payload.nextLevel
+            };
         case "SET_USERNAME":
             return {
                 ...state,
@@ -25,13 +31,13 @@ export const userReducer = (state: IUserReducer = initState, action) => {
                 ...state,
                 currentProfilePicture: action.payload.profilePicture,
                 selectedCharacterIndex: action.payload.selectedCharacterIndex,
-                currentProfilePictureUrl: action.payload.profilePictureUrl,
-            }
+                currentProfilePictureUrl: action.payload.profilePictureUrl
+            };
         case "CHOOSE_AVATAR":
             return {
                 ...state,
                 currentProfilePicture: action.payload.avatar
-            }
+            };
         default:
             return state;
     }

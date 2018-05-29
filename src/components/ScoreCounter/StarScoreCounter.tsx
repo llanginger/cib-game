@@ -3,23 +3,15 @@ import * as React from "react";
 import { View, Text, StyleSheet, Image, Button } from "react-native";
 import { IReducers } from "../../redux/store";
 import { connect } from "react-redux";
+import { lolLeftPad } from "../lolLeftPad";
 
 //Interface
 interface IStarScoreCounterProps {
-    image: any;
     score: number;
 }
 
 const Score = (props: { score: string }) => {
     return <Text style={styles.score}>{props.score}</Text>;
-};
-
-const lolLeftPad = (number, targetLength: number) => {
-    let output: string = (number += "");
-    while (output.length < targetLength) {
-        output = "0" + output;
-    }
-    return output;
 };
 
 // create a component
@@ -33,7 +25,7 @@ const _StarScoreCounter: React.StatelessComponent<IStarScoreCounterProps> = (
             </View>
             <Image
                 style={styles.image}
-                source={props.image}
+                source={require("../../images/laia/icons/score-star.png")}
                 resizeMode="contain"
             />
         </View>

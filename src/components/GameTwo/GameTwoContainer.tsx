@@ -126,9 +126,7 @@ export class _GameTwoContainer extends React.Component<
         return (
             <View style={styles.container}>
                 <GameImage
-                    color={this.state.revealAnswers}
                     source={getImage(revealAnswers, levels[currentLevel])}
-                    reveal={this.state.revealAnswers}
                     reset={this.state.startAnimation}
                 />
                 <View style={styles.buttonContainer}>

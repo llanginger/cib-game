@@ -1,6 +1,13 @@
 //import liraries
 import * as React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image,
+    TouchableOpacity,
+    Dimensions
+} from "react-native";
 import { robotFaces, IRobotEmotion, IRobot } from "./robotImages";
 import {
     robotGameChooseFace,
@@ -32,6 +39,9 @@ interface IRobotFacesState {
     reset: boolean;
 }
 
+const windowDimensions = Dimensions.get("window");
+const windowHeight = windowDimensions.height;
+const windowWidth = windowDimensions.width;
 // create a component
 class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
     private interactableFaces: any[];
@@ -65,7 +75,7 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
                                 this.props.robotGameStartAnimation(true)
                             );
                         }),
-                    500
+                    1500
                 );
             } else {
                 setTimeout(
@@ -75,12 +85,12 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
                                 this.props.robotGameStartAnimation(false)
                             );
                         }),
-                    500
+                    1500
                 );
             }
             setTimeout(
                 () => this.props.robotGameNewFace(this.props.currentEmotion),
-                2500
+                4000
             );
         }
     }
@@ -89,22 +99,45 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
         if (emotion !== this.props.currentEmotion) {
             return {};
         }
-
         if (i < 3) {
             if (i === 0) {
-                return { x: 136.5, y: -400.5, id: `Snap point ${i}` };
+                return {
+                    x: windowWidth / 2.9,
+                    y: -(windowHeight / 1.76),
+                    id: `Snap point ${i}`
+                };
             } else if (i === 1) {
-                return { x: 10, y: -400.5, id: `Snap point ${i}` };
+                return {
+                    x: 0,
+                    y: -(windowHeight / 1.76),
+                    id: `Snap point ${i}`
+                };
             } else {
-                return { x: -121.5, y: -400.5, id: `Snap point ${i}` };
+                return {
+                    x: -(windowWidth / 2.9),
+                    y: -(windowHeight / 1.76),
+                    id: `Snap point ${i}`
+                };
             }
         } else {
             if (i === 3) {
-                return { x: 136.5, y: -472.5, id: `Snap point ${i}` };
+                return {
+                    x: windowWidth / 2.9,
+                    y: -(windowHeight / 1.5),
+                    id: `Snap point ${i}`
+                };
             } else if (i === 4) {
-                return { x: 10, y: -472.5, id: `Snap point ${i}` };
+                return {
+                    x: 0,
+                    y: -(windowHeight / 1.5),
+                    id: `Snap point ${i}`
+                };
             } else {
-                return { x: -121.5, y: -472.5, id: `Snap point ${i}` };
+                return {
+                    x: -(windowWidth / 2.9),
+                    y: -(windowHeight / 1.5),
+                    id: `Snap point ${i}`
+                };
             }
         }
     }
@@ -118,6 +151,7 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
                         ...this.state.snapPoints,
                         this._getCustomCoordinates(i, face.emotion)
                     ]}
+                    animate={face.emotion === this.props.currentEmotion}
                     onSnap={() => console.log("Snapped")}
                     reset={this.state.reset}
                     onDrag={this._onDrag}
@@ -129,6 +163,7 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
     }
 
     render() {
+        console.log("Window: ", windowDimensions);
         return <View style={styles.container}>{this._makeFaceButtons()}</View>;
     }
 }

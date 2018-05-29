@@ -20,6 +20,7 @@ import { RobotScoreCounter } from "./RobotScoreCounter";
 import { StarScoreCounter } from "./StarScoreCounter";
 
 interface IScoreContainerProps {
+    hideScore?: boolean;
     children?: any;
     score?: IScoreReducer;
     dispatch?: any;
@@ -29,13 +30,12 @@ interface IScoreContainerProps {
 
 export const _ScoreContainer = (props: IScoreContainerProps) => {
     const robot = require("../../images/laia/robot.png");
-    const star = require("../../images/laia/icons/score-star.png");
     const { containerProps = {} } = props;
 
     return (
         <View style={[styles.container, props.containerProps]}>
             <MenuButton onPress={props.menuPress} />
-            <StarScoreCounter image={star} />
+            {props.hideScore ? null : <StarScoreCounter />}
         </View>
     );
 };
@@ -67,6 +67,7 @@ interface IScoreContainerReduxProps {
 
 interface IScoreContainerParentProps {
     containerProps?: {};
+    hideScore?: boolean;
     menuPress: any;
 }
 

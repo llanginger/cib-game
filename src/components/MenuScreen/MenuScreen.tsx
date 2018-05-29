@@ -99,7 +99,13 @@ export class MenuScreen extends React.Component<
                     text="Chill Out"
                     textStyle={{ top: -5, left: 0 }}
                     containerStyle={styles.panda}
-                    onPress={() => console.log("Pressed the thing!")}
+                    onPress={() =>
+                        this.props.navigator.push({
+                            screen: "PandaActivity",
+                            animated: true,
+                            animationType: "fade"
+                        })
+                    }
                 />
                 <TwoFrameTouchable
                     onPress={() => console.log("Pressed the thing!")}

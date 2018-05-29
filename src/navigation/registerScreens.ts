@@ -12,6 +12,8 @@ import { SetLevel } from "../components/DrawerScreen/SetLevel";
 import { MenuScreen } from "../components/MenuScreen/MenuScreen";
 import { GameMap } from "../components/GameMap/GameMap";
 
+import { PandaActivity } from "../components/PandaActivity/PandaActivity";
+
 export const registerScreens = (store, Provider) => {
     Navigation.registerComponent(
         "LoginScreen",
@@ -75,4 +77,10 @@ export const registerScreens = (store, Provider) => {
         Provider
     );
     Navigation.registerComponent("GameMap", () => GameMap, store, Provider);
+    Navigation.registerComponent(
+        "PandaActivity",
+        () => PandaActivity,
+        store,
+        Provider
+    );
 };

@@ -1,3 +1,5 @@
+import { ViewStyle } from "react-native";
+
 export interface IColors {
     lightBackground: string;
     blue: string;
@@ -40,17 +42,17 @@ const colors: IColors = {
 };
 
 const shadow: IShadowStyles = {
-    shadowColor: "rgb(24, 23, 22)",
+    shadowColor: "#1976D2",
     shadowOffset: { width: 0, height: 5 },
     shadowRadius: 5,
-    shadowOpacity: 0.3
+    shadowOpacity: 0.2
 };
 
 export type IRockwellFont = string;
 export type IHandDrawnFont = "Annie Use Your Telescope";
 export interface IAppStyles {
     colors: IColors;
-    shadow: IShadowStyles;
+    shadow: ViewStyle;
     buttonBorder: IButtonBorder;
     rockwellFont: IRockwellFont;
     handDrawnFont: IHandDrawnFont;

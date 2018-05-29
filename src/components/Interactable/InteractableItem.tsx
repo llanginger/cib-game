@@ -12,6 +12,7 @@ import {
 import { connect } from "react-redux";
 import Interactable from "react-native-interactable";
 import { IRobotEmotion } from "../Robot/robotImages";
+import * as Animatable from "react-native-animatable";
 
 //Interfaces
 interface IInteractableItemProps {
@@ -24,11 +25,13 @@ interface IInteractableItemProps {
     image: number;
     viewStyle?: ViewStyle;
     imageStyle?: ImageStyle;
+    animate?: boolean;
 }
 
 interface IInteractableItemState {
     snapPoints: any[];
     reset: boolean;
+    animateOut: boolean;
 }
 
 // create a component
@@ -42,9 +45,14 @@ export class InteractableItem extends React.Component<
     constructor(props) {
         super(props);
 
-        this.state = { snapPoints: [{ x: 0, y: 0, id: "init" }], reset: false };
+        this.state = {
+            snapPoints: [{ x: 0, y: 0, id: "init" }],
+            reset: false,
+            animateOut: false
+        };
 
         this._reset = this._reset.bind(this);
+        this._onDrag = this._onDrag.bind(this);
     }
 
     componentDidMount() {
@@ -59,8 +67,20 @@ export class InteractableItem extends React.Component<
 
     _reset() {
         const { onReset = () => console.log("No reset prop") } = this.props;
-        this.faceRef.snapTo(this.state.snapPoints[0]);
-        this.setState({ reset: false }, onReset);
+        setTimeout(() => {
+            this.faceRef.snapTo(this.state.snapPoints[0]);
+            this.setState({ reset: false }, onReset);
+        }, 1500);
+        setTimeout(() => {
+            this.setState({ animateOut: false });
+        }, 1750);
+    }
+
+    _onDrag(e) {
+        console.log("E: ", e.nativeEvent);
+        if (this.props.animate && e.nativeEvent.index === 1) {
+            this.setState({ animateOut: true });
+        }
     }
 
     render() {
@@ -85,16 +105,21 @@ export class InteractableItem extends React.Component<
                 ref={el => (this.faceRef = el)}
                 style={viewStyles}
                 snapPoints={snapPoints}
-                onSnap={onSnap}
+                onSnap={this._onDrag}
                 onDrag={onDrag}
             >
-                <TouchableOpacity onPress={this._reset}>
-                    <Image
-                        style={[styles.image, imageStyle]}
-                        source={image}
-                        resizeMode="contain"
-                    />
-                </TouchableOpacity>
+                <Animatable.View
+                    animation={this.state.animateOut ? "fadeOut" : "fadeIn"}
+                    delay={300}
+                >
+                    <TouchableOpacity onPress={this._reset}>
+                        <Image
+                            style={[styles.image, imageStyle]}
+                            source={image}
+                            resizeMode="contain"
+                        />
+                    </TouchableOpacity>
+                </Animatable.View>
             </Interactable.View>
         );
     }

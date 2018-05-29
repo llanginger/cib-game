@@ -62,7 +62,9 @@ export class _SetLevel extends React.Component<ISetLevelProps, ISetLevelState> {
                             type: "SET_LEVEL_TO",
                             payload: { nextLevel: i }
                         });
-                        this.props.navigator.dismissAllModals();
+                        this.props.navigator.push({
+                            screen: "GameContainerScreen"
+                        });
                     }}
                     style={styles.button}
                 >
