@@ -128,6 +128,9 @@ export class _GameTwoContainer extends React.Component<
                 <GameImage
                     source={getImage(revealAnswers, levels[currentLevel])}
                     reset={this.state.startAnimation}
+                    viewStyle={{
+                        justifyContent: "flex-end"
+                    }}
                 />
                 <View style={styles.buttonContainer}>
                     {this._makeButtons()}

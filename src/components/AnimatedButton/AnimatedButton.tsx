@@ -26,64 +26,98 @@ interface IButtonProps {
     viewProps?: ViewStyle;
 }
 
-// create a component
-export const _Button: React.StatelessComponent<IButtonProps> = (
-    props: IButtonProps
-) => {
-    const {
-        viewProps = {},
-        revealed,
-        startAnimation,
-        correct,
-        animationOutType,
-        animationInType,
-        text,
-        delay = 0,
-        onPress
-    } = props;
+interface IButtonState {
+    color: string;
+}
 
-    const buttonColor = () => {
-        if (!revealed) {
+// create a component
+export class _Button extends React.Component<IButtonProps, IButtonState> {
+    constructor(props) {
+        super(props);
+
+        this.state = { color: appStyles.colors.blue };
+    }
+    _onPress = () => {
+        if (this.props.correct) {
+            this.setState(
+                {
+                    color: appStyles.colors.green
+                },
+                () => this.props.onPress()
+            );
+        } else {
+            this.setState(
+                {
+                    color: appStyles.colors.red
+                },
+                () =>
+                    setTimeout(
+                        () => this.setState({ color: appStyles.colors.blue }),
+                        1000
+                    )
+            );
+        }
+    };
+
+    _buttonColor = () => {
+        if (!this.props.revealed) {
             return appStyles.colors.blue;
-        } else if (correct) {
+        } else if (this.props.correct) {
             return appStyles.colors.green;
         } else {
             return appStyles.colors.grey;
         }
     };
 
-    const getText = () => {
-        if (props.preText && !props.revealed) {
-            return props.preText;
-        } else {
-            return text;
-        }
-    };
-    const viewStyles = [
-        styles.button,
-        { backgroundColor: buttonColor() },
-        viewProps
-    ];
+    render() {
+        const {
+            viewProps = {},
+            revealed,
+            startAnimation,
+            correct,
+            animationOutType,
+            animationInType,
+            preText,
+            text,
+            delay = 0
+        } = this.props;
 
-    return (
-        <TouchableOpacity
-            onPress={onPress}
-            disabled={revealed}
-            style={styles.container}
-        >
-            <Animatable.View
-                animation={startAnimation ? animationOutType : animationInType}
-                duration={250}
-                delay={delay}
-                style={{ width: "80%" }}
+        const getText = () => {
+            if (preText && !revealed) {
+                return preText;
+            } else {
+                return text;
+            }
+        };
+
+        const viewStyles = [
+            styles.button,
+            { backgroundColor: this.state.color },
+            viewProps
+        ];
+
+        return (
+            <TouchableOpacity
+                onPress={this._onPress}
+                disabled={revealed}
+                style={styles.container}
             >
-                <View style={viewStyles}>
-                    <Text style={styles.text}>{getText()}</Text>
-                </View>
-            </Animatable.View>
-        </TouchableOpacity>
-    );
-};
+                <Animatable.View
+                    animation={
+                        startAnimation ? animationOutType : animationInType
+                    }
+                    duration={250}
+                    delay={delay}
+                    style={{ width: "80%" }}
+                >
+                    <View style={viewStyles}>
+                        <Text style={styles.text}>{getText()}</Text>
+                    </View>
+                </Animatable.View>
+            </TouchableOpacity>
+        );
+    }
+}
 
 const mapStateToProps = () => {
     return {};
@@ -91,7 +125,7 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = {};
 
-export const AnimatedButton = connect(mapStateToProps, mapDispatchToProps)(
+export const AnimatedButton: any = connect(mapStateToProps, mapDispatchToProps)(
     _Button
 );
 

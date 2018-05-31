@@ -79,7 +79,7 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
                 <SandwichBoard text={this.props.sandwichText} />
                 <AnimatedButton
                     text="Ready!"
-                    correct={false}
+                    correct={true}
                     startAnimation={this.state.startAnimation}
                     revealed={false}
                     animationInType="fadeInUp"

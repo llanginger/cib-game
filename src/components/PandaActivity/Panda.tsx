@@ -49,27 +49,27 @@ export class Panda extends React.Component<IPandaProps, IPandaState> {
         };
     }
 
-    public _animate = () => {
-        const {
-            fadeAnimation,
-            frameCount,
-            currentFrame,
-            currentPanda
-        } = this.state;
-        fadeAnimation.setValue(0);
-        Animated.timing(fadeAnimation, {
-            toValue: 1,
-            duration: 2000
-        }).start(() => {
-            if (currentFrame <= frameCount - 1) {
-                this.setState({ currentFrame: currentFrame + 1 }, () =>
-                    this._animate()
-                );
-            } else {
-                this._getNextFrame();
-            }
-        });
-    };
+    // public _animate = () => {
+    //     const {
+    //         fadeAnimation,
+    //         frameCount,
+    //         currentFrame,
+    //         currentPanda
+    //     } = this.state;
+    //     fadeAnimation.setValue(0);
+    //     Animated.timing(fadeAnimation, {
+    //         toValue: 1,
+    //         duration: 2000
+    //     }).start(() => {
+    //         if (currentFrame <= frameCount - 1) {
+    //             this.setState({ currentFrame: currentFrame + 1 }, () =>
+    //                 this._animate()
+    //             );
+    //         } else {
+    //             this._getNextFrame();
+    //         }
+    //     });
+    // };
 
     public _getNextFrame = () => {
         const {
@@ -85,22 +85,19 @@ export class Panda extends React.Component<IPandaProps, IPandaState> {
         }).start(() => {
             this.setState(
                 {
-                    currentPanda: this.state.currentPanda === 2 ? 3 : 2
+                    currentPanda: this.state.currentPanda + 1
                 },
                 () => {
                     fadeAnimation.setValue(0.5);
                     Animated.timing(fadeAnimation, {
                         toValue: 1,
                         duration: 1000
-                    }).start(() =>
-                        this.setState({
-                            currentPanda: this.state.currentPanda === 3 ? 2 : 3
-                        })
-                    );
+                    }).start();
                 }
             );
         });
     };
+
     render() {
         const { imageStyle = {}, source } = this.props;
         const { pandaImages, currentPanda } = this.state;

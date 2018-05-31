@@ -11,7 +11,10 @@ import { IEmojiLevel } from "./emojiLevels";
 import { connect } from "react-redux";
 import Interactable from "react-native-interactable";
 import { InteractableItem } from "../Interactable/InteractableItem";
-import { animateEmoji, newEmoji } from "../../redux/actions/index";
+import {
+    animateEmojiGameImageAction,
+    newEmojiAction
+} from "../../redux/actions/index";
 import { IReducers } from "../../redux/store";
 //Interface
 
@@ -25,8 +28,8 @@ interface snapPoint {
 interface IEmojiContainerProps {
     currentEmotion: IRobotEmotion;
     currentEmoji: IEmojiLevel;
-    animateEmoji;
-    newEmoji;
+    animateEmojiGameImageAction;
+    newEmojiAction;
     lastLevel: boolean;
 }
 
@@ -68,25 +71,25 @@ class _EmojiContainer extends React.Component<
             e.nativeEvent.state === "end" &&
             e.nativeEvent.targetSnapPointId !== "init"
         ) {
-            this.props.animateEmoji();
-            if (this.props.lastLevel) {
-                setTimeout(
-                    () =>
-                        this.setState({ reset: true }, () => {
-                            this.setState({ reset: false }, () => {});
-                        }),
-                    1500
-                );
-            } else {
+            this.props.animateEmojiGameImageAction();
+            if (!this.props.lastLevel) {
                 setTimeout(
                     () =>
                         this.setState({ reset: true }, () => {
                             this.setState({ reset: false }, () => {
                                 console.log("Fadein: ", fadeIn);
-                                this.props.newEmoji(fadeIn ? 1000 : 0);
+                                this.props.newEmojiAction(fadeIn ? 1000 : 500);
                             });
                         }),
-                    1500
+                    2000
+                );
+            } else {
+                setTimeout(
+                    () =>
+                        this.setState({ reset: true }, () => {
+                            this.setState({ reset: false }, () => {});
+                        }),
+                    2000
                 );
             }
             // setTimeout(() => this.setState({ reset: false }), 501);
@@ -141,8 +144,8 @@ class _EmojiContainer extends React.Component<
 }
 
 const mapDispatchToProps = {
-    animateEmoji,
-    newEmoji
+    animateEmojiGameImageAction,
+    newEmojiAction
 };
 
 const mapStateToProps = (store: IReducers) => {

@@ -54,7 +54,7 @@ export class FadeInImage extends React.Component<
         animationValue.setValue(0);
         Animated.timing(animationValue, {
             toValue: 1,
-            duration: 1000
+            duration: 1500
         }).start();
     };
 
