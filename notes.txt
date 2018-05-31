@@ -6,4 +6,13 @@ game four: "12 words advanced" / robot
 Board comes in as instructions
 
 Change shadow color to blue
-make images smaller
+make images smaller - make sure they're stuck to the blue area (Add logic to gameimage so that the image can stick to the blue or float)
+
+Game 2; crop images so that all are centered
+Game 3; ensure all images are appropriately cropped
+
+Emoji game - Drag emoji - emoji stays on the drag circle while the animation happens and then both fade away to new page reset
+Make images smaller
+Custom animation for ghost - starts with nothing, ghost fades in on emoji selection
+Guitar - frames reversed
+Apple - make smaller

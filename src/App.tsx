@@ -28,7 +28,7 @@ registerScreens(store, Provider);
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: screenObjects.PANDA_ACTIVITY.screen
+        screen: screenObjects.MENU_SCREEN.screen
     },
     drawer: {
         disableOpenGesture: true,

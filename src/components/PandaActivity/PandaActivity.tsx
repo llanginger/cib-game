@@ -6,6 +6,7 @@ import { screenObjects } from "../../navigation/screenObjects";
 import { IReducers } from "../../redux/store";
 import { appStyles } from "../../styles/styles";
 import { ScoreContainer } from "../ScoreCounter/ScoreContainer";
+import { Panda } from "./Panda";
 //Interfaces
 interface IPandaActivityProps {
     navigator?: any;
@@ -28,6 +29,12 @@ const pandaImages = [
     require("../../images/laia/panda/panda-smile_no-bubble.png")
 ];
 
+const pandaThoughts: string[] = [
+    "Calm Down with Panda",
+    "Place your hand on your tummy",
+    "Slowly breathe in"
+];
+
 export class PandaActivity extends React.Component<
     IPandaActivityProps,
     IPandaActivityState
@@ -40,6 +47,8 @@ export class PandaActivity extends React.Component<
         navBarTranslucent: true,
         navBarTransparent: true
     };
+
+    public pandaRef;
 
     constructor(props) {
         super(props);
@@ -97,19 +106,14 @@ export class PandaActivity extends React.Component<
                         right: 0
                     }}
                 />
-                <GameImage
+                <Panda
+                    ref={e => (this.pandaRef = e)}
                     source={this._getPanda()}
-                    reset={false}
-                    viewStyle={{
-                        flex: 1,
-                        position: "absolute",
-                        bottom: 120
-                    }}
                     imageStyle={{ width: "100%", height: "100%" }}
                 />
                 <View style={styles.button}>
                     <TouchableOpacity
-                        onPress={this._nextPanda}
+                        onPress={() => this.pandaRef._getNextFrame()}
                         style={styles.buttonContainer}
                     >
                         <Text style={styles.buttonText}>Breathe</Text>

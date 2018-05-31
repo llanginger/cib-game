@@ -22,6 +22,8 @@ import {
 import logger from "redux-logger";
 export * from "./reducers/index";
 
+import { delayMiddleWare } from "./middleWare/delay";
+
 export interface IReducers {
     userReducer: IUserReducer;
     deviceTypeReducer: IDeviceTypeReducer;
@@ -46,4 +48,7 @@ const reducers = combineReducers({
     emojiGameReducer
 });
 
-export const store = createStore(reducers, applyMiddleware(logger));
+export const store = createStore(
+    reducers,
+    applyMiddleware(logger, delayMiddleWare)
+);

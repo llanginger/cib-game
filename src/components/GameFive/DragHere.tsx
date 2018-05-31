@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 //Interface
 interface IDragHereProps {}
 
-const circleDim: number = 95;
+const circleDim: number = 75;
 // create a component
 export const DragHere: React.StatelessComponent<IDragHereProps> = (
     props: IDragHereProps
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: circleDim,
         height: circleDim,
-        bottom: 220,
-        right: 50,
+        bottom: 230,
+        right: 60,
         justifyContent: "center",
         alignItems: "center"
     },

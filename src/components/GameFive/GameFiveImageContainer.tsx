@@ -7,6 +7,7 @@ import { IReducers } from "../../redux/store";
 import { connect } from "react-redux";
 import { GameFiveImage } from "./GameFiveImage";
 import { ImageFlipper } from "../ImageFlipper/ImageFlipper";
+import { FadeInImage } from "../FadeInImage/FadeInImage";
 //Interface
 
 interface IGameFiveImageContainerProps {
@@ -21,15 +22,34 @@ const _GameFiveImageContainer: React.StatelessComponent<
     return (
         <View style={styles.imageContainer}>
             <Text style={styles.levelTitle}>{currentLevel.title}</Text>
-            <ImageFlipper
-                source={[currentLevel.imageFrame1, currentLevel.imageFrame2]}
-                startAnimation={props.startAnimation}
-                loop={false}
-                imageStyle={{
-                    height: "70%",
-                    width: "100%"
-                }}
-            />
+            {currentLevel.fadeIn ? (
+                <FadeInImage
+                    source={currentLevel.imageFrame1}
+                    startAnimation={props.startAnimation}
+                    imageStyle={{
+                        height: "50%",
+                        width: "100%",
+                        marginBottom: 80,
+                        marginTop: 20
+                    }}
+                />
+            ) : (
+                <ImageFlipper
+                    source={[
+                        currentLevel.imageFrame1,
+                        currentLevel.imageFrame2
+                    ]}
+                    startAnimation={props.startAnimation}
+                    returnToStart={false}
+                    loop={false}
+                    imageStyle={{
+                        height: "50%",
+                        width: "100%",
+                        marginBottom: 80,
+                        marginTop: 20
+                    }}
+                />
+            )}
         </View>
     );
 };
@@ -58,10 +78,6 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end"
 
         // paddingVertical: 20
-    },
-    image: {
-        height: "70%",
-        width: "100%"
     },
     levelTitle: {
         textAlign: "center",

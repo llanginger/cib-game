@@ -52,7 +52,7 @@ export class InteractableItem extends React.Component<
         };
 
         this._reset = this._reset.bind(this);
-        this._onDrag = this._onDrag.bind(this);
+        this._onSnap = this._onSnap.bind(this);
     }
 
     componentDidMount() {
@@ -70,13 +70,13 @@ export class InteractableItem extends React.Component<
         setTimeout(() => {
             this.faceRef.snapTo(this.state.snapPoints[0]);
             this.setState({ reset: false }, onReset);
-        }, 1500);
+        }, 0);
         setTimeout(() => {
             this.setState({ animateOut: false });
-        }, 1750);
+        }, 0);
     }
 
-    _onDrag(e) {
+    _onSnap(e) {
         console.log("E: ", e.nativeEvent);
         if (this.props.animate && e.nativeEvent.index === 1) {
             this.setState({ animateOut: true });
@@ -105,7 +105,7 @@ export class InteractableItem extends React.Component<
                 ref={el => (this.faceRef = el)}
                 style={viewStyles}
                 snapPoints={snapPoints}
-                onSnap={this._onDrag}
+                onSnap={this._onSnap}
                 onDrag={onDrag}
             >
                 <Animatable.View

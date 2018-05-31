@@ -2,6 +2,7 @@ export interface IEmojiLevel {
     imageFrame1: number;
     imageFrame2: number;
     title: string;
+    fadeIn?: boolean;
 }
 
 export const emojiLevels: IEmojiLevel[] = [
@@ -9,6 +10,12 @@ export const emojiLevels: IEmojiLevel[] = [
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/ball-frame1.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/ball-frame2.png"),
         title: "My team lost..."
+    },
+    {
+        imageFrame1: require("../../images/laia/emoji-game/animation-frames/fantasma-frame1.png"),
+        imageFrame2: require("../../images/laia/emoji-game/animation-frames/fantasma-frame2.png"),
+        title: "Ghost stories...",
+        fadeIn: true
     },
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/broccoli-frame1.png"),
@@ -29,11 +36,6 @@ export const emojiLevels: IEmojiLevel[] = [
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/console-frame1.png"),
         imageFrame2: require("../../images/laia/emoji-game/animation-frames/console-frame2.png"),
         title: "Time to play..."
-    },
-    {
-        imageFrame1: require("../../images/laia/emoji-game/animation-frames/fantasma-frame1.png"),
-        imageFrame2: require("../../images/laia/emoji-game/animation-frames/fantasma-frame2.png"),
-        title: "Ghost stories..."
     },
     {
         imageFrame1: require("../../images/laia/emoji-game/animation-frames/guitar-frame1.png"),

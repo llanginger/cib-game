@@ -42,7 +42,7 @@ export const _ScoreContainer = (props: IScoreContainerProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 35,
+        marginTop: 15,
         height: 40,
         width: "100%",
         flexDirection: "row",

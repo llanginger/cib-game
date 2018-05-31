@@ -7,6 +7,7 @@ import {
     robotGameChooseFace,
     robotGameNewFace
 } from "../../redux/actions/index";
+import { IEmojiLevel } from "./emojiLevels";
 import { connect } from "react-redux";
 import Interactable from "react-native-interactable";
 import { InteractableItem } from "../Interactable/InteractableItem";
@@ -23,6 +24,7 @@ interface snapPoint {
 }
 interface IEmojiContainerProps {
     currentEmotion: IRobotEmotion;
+    currentEmoji: IEmojiLevel;
     animateEmoji;
     newEmoji;
     lastLevel: boolean;
@@ -59,7 +61,9 @@ class _EmojiContainer extends React.Component<
     // TODO: Do math to figure out the offset needed so that each head can use "head" as a snapPoint
 
     _onDrag(e) {
+        const { fadeIn } = this.props.currentEmoji;
         console.log("Dragging: ", e.nativeEvent);
+        console.log("Dragging: ", this.props.currentEmoji);
         if (
             e.nativeEvent.state === "end" &&
             e.nativeEvent.targetSnapPointId !== "init"
@@ -78,7 +82,8 @@ class _EmojiContainer extends React.Component<
                     () =>
                         this.setState({ reset: true }, () => {
                             this.setState({ reset: false }, () => {
-                                this.props.newEmoji();
+                                console.log("Fadein: ", fadeIn);
+                                this.props.newEmoji(fadeIn ? 1000 : 0);
                             });
                         }),
                     1500
@@ -144,7 +149,11 @@ const mapStateToProps = (store: IReducers) => {
     return {
         lastLevel:
             store.emojiGameReducer.currentLevel >
-            store.emojiGameReducer.emojiLevels.length - 2
+            store.emojiGameReducer.emojiLevels.length - 2,
+        currentEmoji:
+            store.emojiGameReducer.emojiLevels[
+                store.emojiGameReducer.currentLevel
+            ]
     };
 };
 

@@ -7,8 +7,9 @@ export const animateEmoji: () => Action = () => {
     };
 };
 
-export const newEmoji: () => Action = () => {
+export const newEmoji: (delay?: number) => Action = (delay: number = 0) => {
     return {
-        type: "NEW_EMOJI_LEVEL"
+        type: "NEW_EMOJI_LEVEL",
+        delay
     };
 };

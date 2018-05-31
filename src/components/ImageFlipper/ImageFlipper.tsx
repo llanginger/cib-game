@@ -1,3 +1,5 @@
+// TODO: Add ability to set frame number, fix frame duration bug
+
 //import liraries
 import * as React from "react";
 import {
@@ -14,6 +16,7 @@ import {
 interface IImageFlipperProps {
     source: number[];
     startAnimation: boolean;
+    returnToStart?: boolean;
     imageStyle: ImageStyle;
     frameDuration?: number;
     loop: boolean;
@@ -53,6 +56,9 @@ export class ImageFlipper extends React.Component<
     }
 
     componentWillReceiveProps(nextProps: IImageFlipperProps) {
+        if (nextProps.source !== this.props.source) {
+            this.setState({ currentAnimatedFrame: 0 });
+        }
         if (nextProps.startAnimation && !this.state.startAnimation) {
             this.setState(
                 {
@@ -70,7 +76,7 @@ export class ImageFlipper extends React.Component<
     // }
 
     public _animate() {
-        const { delay = 0 } = this.props;
+        const { delay = 0, returnToStart = false } = this.props;
         console.log("Animation starting");
         this.state.animationValue.setValue(0);
         Animated.timing(this.state.animationValue, {
@@ -105,7 +111,7 @@ export class ImageFlipper extends React.Component<
                     this.setState(
                         {
                             startAnimation: false,
-                            currentAnimatedFrame: 1
+                            currentAnimatedFrame: returnToStart ? 0 : 1
                         },
                         () => this.state.animationValue.setValue(0)
                     );
