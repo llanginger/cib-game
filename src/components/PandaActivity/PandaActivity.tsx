@@ -7,6 +7,8 @@ import { IReducers } from "../../redux/store";
 import { appStyles } from "../../styles/styles";
 import { ScoreContainer } from "../ScoreCounter/ScoreContainer";
 import { Panda } from "./Panda";
+
+import { PandaButtons } from "./PandaButtons";
 //Interfaces
 interface IPandaActivityProps {
     navigator?: any;
@@ -111,13 +113,14 @@ export class PandaActivity extends React.Component<
                     source={this._getPanda()}
                     imageStyle={{ width: "100%", height: "100%" }}
                 />
-                <View style={styles.button}>
-                    <TouchableOpacity
+                <View style={styles.blueArea}>
+                    {/* <TouchableOpacity
                         onPress={() => this.pandaRef._getNextFrame()}
                         style={styles.buttonContainer}
                     >
                         <Text style={styles.buttonText}>Breathe</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+                    <PandaButtons />
                 </View>
                 <View style={styles.titleTextContainer}>
                     <Text style={styles.titleText}>
@@ -136,7 +139,7 @@ const styles = StyleSheet.create({
         flexDirection: "column-reverse",
         justifyContent: "space-between"
     },
-    button: {
+    blueArea: {
         height: "30%",
         paddingHorizontal: 60,
         paddingVertical: 20,
