@@ -3,7 +3,9 @@ import { View, StyleSheet } from "react-native";
 
 import { PandaButton } from "./PandaButton";
 
-interface IPandaButtonsProps {}
+interface IPandaButtonsProps {
+    currentPanda: number;
+}
 
 export const PandaButtons = (props: IPandaButtonsProps) => {
     return (

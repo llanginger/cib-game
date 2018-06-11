@@ -7,6 +7,7 @@ import { IReducers } from "../../redux/store";
 import { appStyles } from "../../styles/styles";
 import { ScoreContainer } from "../ScoreCounter/ScoreContainer";
 import { Panda } from "./Panda";
+import * as Animatable from "react-native-animatable";
 
 import { PandaButtons } from "./PandaButtons";
 //Interfaces
@@ -18,6 +19,8 @@ interface IPandaActivityProps {
 interface IPandaActivityState {
     pandaImages: number[];
     currentPanda: number;
+    showStartButton: boolean;
+    showBubbleButtons: boolean;
 }
 
 // create a component
@@ -57,7 +60,9 @@ export class PandaActivity extends React.Component<
 
         this.state = {
             pandaImages,
-            currentPanda: 0
+            currentPanda: 0,
+            showStartButton: true,
+            showBubbleButtons: false
         };
 
         this.props.navigator.setOnNavigatorEvent(
@@ -95,6 +100,36 @@ export class PandaActivity extends React.Component<
         });
     };
 
+    _swapButtons = () => {
+        this.setState({ showStartButton: false }, () => {
+            console.log("state after first swapButtons setState: ", this.state);
+            setTimeout(() => this.setState({ showBubbleButtons: true }), 1000);
+        });
+    };
+
+    _chooseButtons = () => {
+        const { showStartButton, showBubbleButtons } = this.state;
+        return !showBubbleButtons ? (
+            <Animatable.View
+                animation={showStartButton ? "" : "fadeOutLeft"}
+                duration={250}
+                style={styles.buttonContainer}
+            >
+                <TouchableOpacity
+                    // onPress={() => this.pandaRef._getNextFrame()}
+                    onPress={this._swapButtons}
+                    style={{}}
+                >
+                    <Text style={styles.buttonText}>Breathe</Text>
+                </TouchableOpacity>
+            </Animatable.View>
+        ) : (
+            <Animatable.View animation="fadeInUpBig" duration={250}>
+                <PandaButtons currentPanda={this.state.currentPanda} />
+            </Animatable.View>
+        );
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -113,15 +148,7 @@ export class PandaActivity extends React.Component<
                     source={this._getPanda()}
                     imageStyle={{ width: "100%", height: "100%" }}
                 />
-                <View style={styles.blueArea}>
-                    {/* <TouchableOpacity
-                        onPress={() => this.pandaRef._getNextFrame()}
-                        style={styles.buttonContainer}
-                    >
-                        <Text style={styles.buttonText}>Breathe</Text>
-                    </TouchableOpacity> */}
-                    <PandaButtons />
-                </View>
+                <View style={styles.blueArea}>{this._chooseButtons()}</View>
                 <View style={styles.titleTextContainer}>
                     <Text style={styles.titleText}>
                         Place your hand on your tummy...
