@@ -43,7 +43,7 @@ export class Panda extends React.Component<IPandaProps, IPandaState> {
         this.state = {
             fadeAnimation: new Animated.Value(0),
             pandaImages,
-            currentPanda: 2,
+            currentPanda: 0,
             frameCount: 1,
             currentFrame: 0
         };
@@ -71,7 +71,8 @@ export class Panda extends React.Component<IPandaProps, IPandaState> {
     //     });
     // };
 
-    public _getNextFrame = () => {
+    public _getNextFrame = callback => {
+        console.log("Callback: ", callback);
         const {
             fadeAnimation,
             frameCount,
@@ -92,7 +93,7 @@ export class Panda extends React.Component<IPandaProps, IPandaState> {
                     Animated.timing(fadeAnimation, {
                         toValue: 1,
                         duration: 1000
-                    }).start();
+                    }).start(callback());
                 }
             );
         });
@@ -112,7 +113,7 @@ export class Panda extends React.Component<IPandaProps, IPandaState> {
             >
                 <Image
                     style={[styles.image, imageStyle]}
-                    source={pandaImages[currentPanda]}
+                    source={this.props.source}
                     resizeMode="contain"
                 />
             </Animated.View>
@@ -134,8 +135,8 @@ const styles = StyleSheet.create({
     },
     image: {
         // flex: 1,
-        height: "80%",
-        width: "80%",
+        height: "100%",
+        width: "100%",
         alignSelf: "center"
     }
 });

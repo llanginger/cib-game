@@ -16,7 +16,13 @@ interface IPandaActivityProps {
     dispatch?: any;
 }
 
+interface IPandaLevel {
+    source: number;
+    text: string;
+    activeButton: number;
+}
 interface IPandaActivityState {
+    pandaLevels: IPandaLevel[];
     pandaImages: number[];
     currentPanda: number;
     showStartButton: boolean;
@@ -25,6 +31,38 @@ interface IPandaActivityState {
 
 // create a component
 
+const pandaLevels: IPandaLevel[] = [
+    {
+        source: require("../../images/laia/panda/panda-1.png"),
+        text: "Learn to calm down",
+        activeButton: 0
+    },
+    {
+        source: require("../../images/laia/panda/panda-2.png"),
+        text: "Place your hand on your tummy...",
+        activeButton: 0
+    },
+    {
+        source: require("../../images/laia/panda/panda-3.png"),
+        text: "Slowly breath in...",
+        activeButton: 1
+    },
+    {
+        source: require("../../images/laia/panda/panda-4.png"),
+        text: "Slowly breath out...",
+        activeButton: 1
+    },
+    {
+        source: require("../../images/laia/panda/panda-neutral.png"),
+        text: "One more time!",
+        activeButton: 2
+    },
+    {
+        source: require("../../images/laia/panda/panda-smile_no-bubble.png"),
+        text: "I feel better now!",
+        activeButton: 3
+    }
+];
 const pandaImages = [
     require("../../images/laia/panda/panda-1.png"),
     require("../../images/laia/panda/panda-2.png"),
@@ -60,6 +98,7 @@ export class PandaActivity extends React.Component<
 
         this.state = {
             pandaImages,
+            pandaLevels,
             currentPanda: 0,
             showStartButton: true,
             showBubbleButtons: false
@@ -68,6 +107,7 @@ export class PandaActivity extends React.Component<
         this.props.navigator.setOnNavigatorEvent(
             this.onNavigatorEvent.bind(this)
         );
+        this._onBubbleButtonPress = this._onBubbleButtonPress.bind(this);
     }
 
     onNavigatorEvent(event) {
@@ -81,8 +121,12 @@ export class PandaActivity extends React.Component<
         }
     }
 
-    _getPanda: () => number = () => {
-        return this.state.pandaImages[this.state.currentPanda];
+    _getPandaImage: () => number = () => {
+        return this.state.pandaLevels[this.state.currentPanda].source;
+    };
+
+    _getPandaText: () => string = () => {
+        return this.state.pandaLevels[this.state.currentPanda].text;
     };
 
     _nextPanda: () => void = () => {
@@ -103,9 +147,20 @@ export class PandaActivity extends React.Component<
     _swapButtons = () => {
         this.setState({ showStartButton: false }, () => {
             console.log("state after first swapButtons setState: ", this.state);
-            setTimeout(() => this.setState({ showBubbleButtons: true }), 1000);
+            setTimeout(
+                () =>
+                    this.setState({
+                        showBubbleButtons: true,
+                        currentPanda: this.state.currentPanda + 1
+                    }),
+                1000
+            );
         });
     };
+
+    _onBubbleButtonPress() {
+        this.pandaRef._getNextFrame(this._nextPanda);
+    }
 
     _chooseButtons = () => {
         const { showStartButton, showBubbleButtons } = this.state;
@@ -115,17 +170,19 @@ export class PandaActivity extends React.Component<
                 duration={250}
                 style={styles.buttonContainer}
             >
-                <TouchableOpacity
-                    // onPress={() => this.pandaRef._getNextFrame()}
-                    onPress={this._swapButtons}
-                    style={{}}
-                >
-                    <Text style={styles.buttonText}>Breathe</Text>
+                <TouchableOpacity onPress={this._swapButtons} style={{}}>
+                    <Text style={styles.buttonText}>Begin</Text>
                 </TouchableOpacity>
             </Animatable.View>
         ) : (
             <Animatable.View animation="fadeInUpBig" duration={250}>
-                <PandaButtons currentPanda={this.state.currentPanda} />
+                <PandaButtons
+                    onPress={this._onBubbleButtonPress}
+                    activeButton={
+                        this.state.pandaLevels[this.state.currentPanda]
+                            .activeButton
+                    }
+                />
             </Animatable.View>
         );
     };
@@ -145,14 +202,11 @@ export class PandaActivity extends React.Component<
                 />
                 <Panda
                     ref={e => (this.pandaRef = e)}
-                    source={this._getPanda()}
-                    imageStyle={{ width: "100%", height: "100%" }}
+                    source={this._getPandaImage()}
                 />
                 <View style={styles.blueArea}>{this._chooseButtons()}</View>
                 <View style={styles.titleTextContainer}>
-                    <Text style={styles.titleText}>
-                        Place your hand on your tummy...
-                    </Text>
+                    <Text style={styles.titleText}>{this._getPandaText()}</Text>
                 </View>
             </View>
         );

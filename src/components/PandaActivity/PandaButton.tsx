@@ -3,7 +3,7 @@ import { View, TouchableOpacity, StyleSheet, Image, Text } from "react-native";
 
 interface IPandaButtonProps {
     text: string;
-    onPress: Function;
+    onPress: any;
     buttonState: "blue" | "empty" | "grey";
 }
 
@@ -20,7 +20,7 @@ export const PandaButton = (props: IPandaButtonProps) => {
     };
     return (
         <TouchableOpacity
-            onPress={() => console.log("Panda button pressed")}
+            onPress={props.onPress}
             style={styles.container}
             disabled={props.buttonState !== "blue"}
         >
