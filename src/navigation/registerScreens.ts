@@ -11,6 +11,7 @@ import { ScoreScreen } from "../components/ScoreScreen/ScoreScreen";
 import { SetLevel } from "../components/DrawerScreen/SetLevel";
 import { MenuScreen } from "../components/MenuScreen/MenuScreen";
 import { GameMap } from "../components/GameMap/GameMap";
+import { FruitActivity } from "../components/FruitActivity/FruitActivity";
 
 import { PandaActivity } from "../components/PandaActivity/PandaActivity";
 
@@ -18,6 +19,12 @@ export const registerScreens = (store, Provider) => {
     Navigation.registerComponent(
         "LoginScreen",
         () => LoginScreen,
+        store,
+        Provider
+    );
+    Navigation.registerComponent(
+        "FruitActivity",
+        () => FruitActivity,
         store,
         Provider
     );

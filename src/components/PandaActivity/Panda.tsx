@@ -49,30 +49,7 @@ export class Panda extends React.Component<IPandaProps, IPandaState> {
         };
     }
 
-    // public _animate = () => {
-    //     const {
-    //         fadeAnimation,
-    //         frameCount,
-    //         currentFrame,
-    //         currentPanda
-    //     } = this.state;
-    //     fadeAnimation.setValue(0);
-    //     Animated.timing(fadeAnimation, {
-    //         toValue: 1,
-    //         duration: 2000
-    //     }).start(() => {
-    //         if (currentFrame <= frameCount - 1) {
-    //             this.setState({ currentFrame: currentFrame + 1 }, () =>
-    //                 this._animate()
-    //             );
-    //         } else {
-    //             this._getNextFrame();
-    //         }
-    //     });
-    // };
-
     public _getNextFrame = callback => {
-        console.log("Callback: ", callback);
         const {
             fadeAnimation,
             frameCount,

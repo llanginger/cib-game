@@ -3,13 +3,13 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+// import React, { Component } from "react";
+// import { Platform, StyleSheet, Text, View } from "react-native";
 import { Navigation } from "react-native-navigation";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { CharacterSelectScreen } from "./components/CharacterSelectScreen/CharacterSelectScreen";
-import { SkillRecapScreen } from "./components/SkillRecapScreen/SkillRecapScreen";
-import { DrawerScreen } from "./components/DrawerScreen/DrawerScreen";
+// import Icon from "react-native-vector-icons/FontAwesome";
+// import { CharacterSelectScreen } from "./components/CharacterSelectScreen/CharacterSelectScreen";
+// import { SkillRecapScreen } from "./components/SkillRecapScreen/SkillRecapScreen";
+// import { DrawerScreen } from "./components/DrawerScreen/DrawerScreen";
 import { Provider } from "react-redux";
 import { store, IReducers } from "./redux/store";
 
@@ -17,8 +17,8 @@ import { screenObjects } from "./navigation/screenObjects";
 
 // Duo Prototype section
 
-import { GameContainerScreen } from "./components/GameContainerScreen/GameContainerScreen";
-import { AnimationTest } from "./components/AnimationTest";
+// import { GameContainerScreen } from "./components/GameContainerScreen/GameContainerScreen";
+// import { AnimationTest } from "./components/AnimationTest";
 
 // Screen section
 
@@ -28,7 +28,7 @@ registerScreens(store, Provider);
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: screenObjects.MENU_SCREEN.screen
+        screen: "FruitActivity"
     },
     drawer: {
         disableOpenGesture: true,

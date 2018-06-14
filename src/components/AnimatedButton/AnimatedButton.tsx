@@ -8,7 +8,6 @@ import {
     ViewStyle
 } from "react-native";
 import * as Animatable from "react-native-animatable";
-import { submitAnswer } from "../../redux/actions/index";
 import { appStyles } from "../../styles/styles";
 
 import { connect } from "react-redux";

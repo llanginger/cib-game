@@ -34,6 +34,7 @@ export const _ScoreContainer = (props: IScoreContainerProps) => {
 
     return (
         <View style={[styles.container, props.containerProps]}>
+            <StatusBar hidden />
             <MenuButton onPress={props.menuPress} />
             {props.hideScore ? null : <StarScoreCounter />}
         </View>

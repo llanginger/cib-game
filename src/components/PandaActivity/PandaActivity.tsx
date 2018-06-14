@@ -1,15 +1,15 @@
 import * as React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { GameImage } from "../GameImage/GameImage";
-import { connect } from "react-redux";
-import { screenObjects } from "../../navigation/screenObjects";
-import { IReducers } from "../../redux/store";
+
 import { appStyles } from "../../styles/styles";
 import { ScoreContainer } from "../ScoreCounter/ScoreContainer";
 import { Panda } from "./Panda";
 import * as Animatable from "react-native-animatable";
 
 import { PandaButtons } from "./PandaButtons";
+import { PandaTitle } from "./PandaTitle";
+
+import { PandaMeter } from "./PandaMeter";
 //Interfaces
 interface IPandaActivityProps {
     navigator?: any;
@@ -20,6 +20,7 @@ interface IPandaLevel {
     source: number;
     text: string;
     activeButton: number;
+    intensity: 0 | 1 | 2 | 3;
 }
 interface IPandaActivityState {
     pandaLevels: IPandaLevel[];
@@ -27,49 +28,74 @@ interface IPandaActivityState {
     currentPanda: number;
     showStartButton: boolean;
     showBubbleButtons: boolean;
+    showEndButtons: boolean;
 }
 
 // create a component
 
 const pandaLevels: IPandaLevel[] = [
     {
-        source: require("../../images/laia/panda/panda-1.png"),
+        source: require("../../images/laia/panda/pandas/panda-1.png"),
         text: "Learn to calm down",
-        activeButton: 0
+        activeButton: 0,
+        intensity: 3
     },
     {
-        source: require("../../images/laia/panda/panda-2.png"),
+        source: require("../../images/laia/panda/pandas/panda-2.png"),
         text: "Place your hand on your tummy...",
-        activeButton: 0
+        activeButton: 0,
+        intensity: 3
     },
     {
-        source: require("../../images/laia/panda/panda-3.png"),
+        source: require("../../images/laia/panda/pandas/panda-3.png"),
         text: "Slowly breath in...",
-        activeButton: 1
+        activeButton: 1,
+        intensity: 3
     },
     {
-        source: require("../../images/laia/panda/panda-4.png"),
+        source: require("../../images/laia/panda/pandas/panda-4.png"),
         text: "Slowly breath out...",
-        activeButton: 1
+        activeButton: 1,
+        intensity: 2
     },
     {
-        source: require("../../images/laia/panda/panda-neutral.png"),
+        source: require("../../images/laia/panda/pandas/panda-neutral.png"),
         text: "One more time!",
-        activeButton: 2
+        activeButton: 1,
+        intensity: 2
     },
     {
-        source: require("../../images/laia/panda/panda-smile_no-bubble.png"),
+        source: require("../../images/laia/panda/pandas/panda-3.png"),
+        text: "Slowly breath in...",
+        activeButton: 1,
+        intensity: 2
+    },
+    {
+        source: require("../../images/laia/panda/pandas/panda-4.png"),
+        text: "Slowly breath out...",
+        activeButton: 1,
+        intensity: 1
+    },
+    {
+        source: require("../../images/laia/panda/pandas/panda-neutral.png"),
+        text: "Much better!!",
+        activeButton: 2,
+        intensity: 1
+    },
+    {
+        source: require("../../images/laia/panda/pandas/panda-smile_no-bubble.png"),
         text: "I feel better now!",
-        activeButton: 3
+        activeButton: 3,
+        intensity: 0
     }
 ];
 const pandaImages = [
-    require("../../images/laia/panda/panda-1.png"),
-    require("../../images/laia/panda/panda-2.png"),
-    require("../../images/laia/panda/panda-3.png"),
-    require("../../images/laia/panda/panda-4.png"),
-    require("../../images/laia/panda/panda-neutral.png"),
-    require("../../images/laia/panda/panda-smile_no-bubble.png")
+    require("../../images/laia/panda/pandas/panda-1.png"),
+    require("../../images/laia/panda/pandas/panda-2.png"),
+    require("../../images/laia/panda/pandas/panda-3.png"),
+    require("../../images/laia/panda/pandas/panda-4.png"),
+    require("../../images/laia/panda/pandas/panda-neutral.png"),
+    require("../../images/laia/panda/pandas/panda-smile_no-bubble.png")
 ];
 
 const pandaThoughts: string[] = [
@@ -101,7 +127,8 @@ export class PandaActivity extends React.Component<
             pandaLevels,
             currentPanda: 0,
             showStartButton: true,
-            showBubbleButtons: false
+            showBubbleButtons: false,
+            showEndButtons: false
         };
 
         this.props.navigator.setOnNavigatorEvent(
@@ -129,18 +156,30 @@ export class PandaActivity extends React.Component<
         return this.state.pandaLevels[this.state.currentPanda].text;
     };
 
+    _getPandaIntensity: () => 0 | 1 | 2 | 3 = () => {
+        return this.state.pandaLevels[this.state.currentPanda].intensity;
+    };
+
     _nextPanda: () => void = () => {
-        this.setState({
-            currentPanda:
-                this.state.currentPanda < this.state.pandaImages.length - 1
-                    ? this.state.currentPanda + 1
-                    : 0
-        });
+        const { currentPanda, pandaLevels } = this.state;
+
+        if (currentPanda < pandaLevels.length - 2) {
+            console.log("Next panda");
+            this.setState({
+                currentPanda: currentPanda + 1
+            });
+        } else {
+            console.log("Show end buttons");
+            this.setState({
+                currentPanda: currentPanda + 1,
+                showEndButtons: true
+            });
+        }
     };
 
     _menuPress = () => {
         this.props.navigator.resetTo({
-            screen: screenObjects.MENU_SCREEN.screen
+            screen: "MenuScreen"
         });
     };
 
@@ -150,8 +189,7 @@ export class PandaActivity extends React.Component<
             setTimeout(
                 () =>
                     this.setState({
-                        showBubbleButtons: true,
-                        currentPanda: this.state.currentPanda + 1
+                        showBubbleButtons: true
                     }),
                 1000
             );
@@ -163,28 +201,71 @@ export class PandaActivity extends React.Component<
     }
 
     _chooseButtons = () => {
-        const { showStartButton, showBubbleButtons } = this.state;
-        return !showBubbleButtons ? (
-            <Animatable.View
-                animation={showStartButton ? "" : "fadeOutLeft"}
-                duration={250}
-                style={styles.buttonContainer}
-            >
-                <TouchableOpacity onPress={this._swapButtons} style={{}}>
-                    <Text style={styles.buttonText}>Begin</Text>
-                </TouchableOpacity>
-            </Animatable.View>
-        ) : (
-            <Animatable.View animation="fadeInUpBig" duration={250}>
-                <PandaButtons
-                    onPress={this._onBubbleButtonPress}
-                    activeButton={
-                        this.state.pandaLevels[this.state.currentPanda]
-                            .activeButton
-                    }
-                />
-            </Animatable.View>
-        );
+        const {
+            showStartButton,
+            showBubbleButtons,
+            showEndButtons
+        } = this.state;
+
+        if (!showBubbleButtons && !showEndButtons) {
+            return (
+                <Animatable.View
+                    animation={showStartButton ? "" : "fadeOutLeft"}
+                    duration={250}
+                    style={styles.buttonContainer}
+                >
+                    <TouchableOpacity onPress={this._swapButtons} style={{}}>
+                        <Text style={styles.buttonText}>Begin</Text>
+                    </TouchableOpacity>
+                </Animatable.View>
+            );
+        } else if (showBubbleButtons && !showEndButtons) {
+            return (
+                <Animatable.View animation="fadeInUpBig" duration={250}>
+                    <PandaButtons
+                        onPress={this._onBubbleButtonPress}
+                        activeButton={
+                            this.state.pandaLevels[this.state.currentPanda]
+                                .activeButton
+                        }
+                    />
+                </Animatable.View>
+            );
+        } else {
+            return (
+                <View
+                    style={{
+                        flexDirection: "row",
+                        justifyContent: "space-around"
+                    }}
+                >
+                    <Animatable.View
+                        animation="fadeInUpBig"
+                        duration={250}
+                        style={[styles.buttonContainer, { width: "45%" }]}
+                    >
+                        <TouchableOpacity
+                            onPress={this._swapButtons}
+                            style={{}}
+                        >
+                            <Text style={styles.buttonText}>Again</Text>
+                        </TouchableOpacity>
+                    </Animatable.View>
+                    <Animatable.View
+                        animation="fadeInUpBig"
+                        duration={250}
+                        style={[styles.buttonContainer, { width: "45%" }]}
+                    >
+                        <TouchableOpacity
+                            onPress={this._swapButtons}
+                            style={{}}
+                        >
+                            <Text style={styles.buttonText}>End</Text>
+                        </TouchableOpacity>
+                    </Animatable.View>
+                </View>
+            );
+        }
     };
 
     render() {
@@ -205,9 +286,10 @@ export class PandaActivity extends React.Component<
                     source={this._getPandaImage()}
                 />
                 <View style={styles.blueArea}>{this._chooseButtons()}</View>
-                <View style={styles.titleTextContainer}>
-                    <Text style={styles.titleText}>{this._getPandaText()}</Text>
-                </View>
+                <PandaTitle title={this._getPandaText()} />
+                {this.state.showBubbleButtons ? (
+                    <PandaMeter intensity={this._getPandaIntensity()} />
+                ) : null}
             </View>
         );
     }
@@ -231,6 +313,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         height: 50,
         width: "100%",
+        marginHorizontal: 10,
         backgroundColor: "#60b8ff",
         borderRadius: 10,
         borderColor: "#333",
