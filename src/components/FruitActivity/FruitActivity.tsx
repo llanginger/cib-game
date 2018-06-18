@@ -45,10 +45,9 @@ export class FruitActivity extends React.Component<
     };
 
     _onTabPress = (tabOnTop: IFruit) => {
-        this.setState({ tabOnTop }, () =>
-            console.log("New state: ", this.state)
-        );
+        this.setState({ tabOnTop });
     };
+
     render() {
         return (
             <View style={styles.container}>
@@ -63,7 +62,7 @@ export class FruitActivity extends React.Component<
                     }}
                 />
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>HELLO</Text>
+                    <Text style={styles.title}>Make a Happy Face</Text>
                 </View>
                 <BigFruit />
                 <FruitTab

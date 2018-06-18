@@ -9,7 +9,6 @@ import {
 } from "../../redux/actions/index";
 import { IEmojiLevel } from "./emojiLevels";
 import { connect } from "react-redux";
-import Interactable from "react-native-interactable";
 import { InteractableItem } from "../Interactable/InteractableItem";
 import {
     animateEmojiGameImageAction,

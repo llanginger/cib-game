@@ -9,6 +9,7 @@ import {
     TouchableOpacity
 } from "react-native";
 import { IFruit } from "./FruitActivity";
+import { TabContents } from "./TabContents";
 //Interface
 interface IFruitTabProps {
     tabOnTop: IFruit;
@@ -17,7 +18,8 @@ interface IFruitTabProps {
 
 interface IFruitTab {
     source: number;
-    contentSource: number;
+    contentSource: number[];
+    oldContentSource: number;
     name: IFruit;
 }
 
@@ -25,17 +27,38 @@ const fruitTabs: IFruitTab[] = [
     {
         source: require("../../images/laia/fruit-activity/tabs/faces-tab.png"),
         name: "faces",
-        contentSource: require("../../images/laia/fruit-activity/tabs/faces.png")
+        contentSource: [
+            require("../../images/laia/fruit-activity/faces/face-1.png"),
+            require("../../images/laia/fruit-activity/faces/face-2.png"),
+            require("../../images/laia/fruit-activity/faces/face-3.png")
+        ],
+        oldContentSource: require("../../images/laia/fruit-activity/tabs/faces.png")
     },
     {
         source: require("../../images/laia/fruit-activity/tabs/eyes-tab.png"),
         name: "eyes",
-        contentSource: require("../../images/laia/fruit-activity/tabs/eyes.png")
+        contentSource: [
+            require("../../images/laia/fruit-activity/eyes/eyes-1.png"),
+            require("../../images/laia/fruit-activity/eyes/eyes-2.png"),
+            require("../../images/laia/fruit-activity/eyes/eyes-3.png"),
+            require("../../images/laia/fruit-activity/eyes/eyes-4.png"),
+            require("../../images/laia/fruit-activity/eyes/eyes-5.png"),
+            require("../../images/laia/fruit-activity/eyes/eyes-6.png")
+        ],
+        oldContentSource: require("../../images/laia/fruit-activity/tabs/eyes.png")
     },
     {
         source: require("../../images/laia/fruit-activity/tabs/mouths-tab.png"),
         name: "mouths",
-        contentSource: require("../../images/laia/fruit-activity/tabs/mouths.png")
+        contentSource: [
+            require("../../images/laia/fruit-activity/mouths/mouths-1.png"),
+            require("../../images/laia/fruit-activity/mouths/mouths-2.png"),
+            require("../../images/laia/fruit-activity/mouths/mouths-3.png"),
+            require("../../images/laia/fruit-activity/mouths/mouths-4.png"),
+            require("../../images/laia/fruit-activity/mouths/mouths-5.png"),
+            require("../../images/laia/fruit-activity/mouths/mouths-6.png")
+        ],
+        oldContentSource: require("../../images/laia/fruit-activity/tabs/mouths.png")
     }
 ];
 
@@ -68,11 +91,14 @@ export const FruitTab: React.StatelessComponent<IFruitTabProps> = (
                         source={tab.source}
                         resizeMode="stretch"
                     />
-                    <Image
+                    {/* <Image
                         style={styles.tabContent}
-                        source={tab.contentSource}
+                        source={tab.oldContentSource}
                         resizeMode="stretch"
-                    />
+                    /> */}
+                    {tab.name === props.tabOnTop ? (
+                        <TabContents contents={tab.contentSource} />
+                    ) : null}
                 </View>
             );
         });
