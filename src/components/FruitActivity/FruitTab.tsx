@@ -97,7 +97,10 @@ export const FruitTab: React.StatelessComponent<IFruitTabProps> = (
                         resizeMode="stretch"
                     /> */}
                     {tab.name === props.tabOnTop ? (
-                        <TabContents contents={tab.contentSource} />
+                        <TabContents
+                            contents={tab.contentSource}
+                            tabType={tab.name}
+                        />
                     ) : null}
                 </View>
             );

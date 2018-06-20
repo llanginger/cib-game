@@ -12,7 +12,7 @@ export const BigFruit: React.StatelessComponent<IBigFruitProps> = (
     return (
         <View style={styles.container}>
             <Image
-                source={require("../../images/laia/fruit-activity/fruit/apple.png")}
+                source={require("../../images/laia/fruit-activity/fruit/banana.png")}
                 resizeMode="contain"
                 style={styles.fruit}
             />

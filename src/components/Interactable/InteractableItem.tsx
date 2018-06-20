@@ -34,6 +34,14 @@ interface IInteractableItemState {
     animateOut: boolean;
 }
 
+export interface ISnapPoint {
+    x: number;
+    y: number;
+    damping?: number;
+    tension?: number;
+    id?: string;
+}
+
 // create a component
 
 export class InteractableItem extends React.Component<

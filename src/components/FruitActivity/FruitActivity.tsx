@@ -4,6 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { ScoreContainer } from "../ScoreCounter/ScoreContainer";
 import { BigFruit } from "./BigFruit";
 import { FruitTab } from "./FruitTab";
+import { appStyles } from "../../styles/styles";
 
 //Interfaces
 interface IFruitActivityProps {
@@ -52,7 +53,7 @@ export class FruitActivity extends React.Component<
         return (
             <View style={styles.container}>
                 <ScoreContainer
-                    hideScore
+                    // hideScore
                     menuPress={this._menuPress}
                     containerProps={{
                         position: "absolute",
@@ -62,7 +63,10 @@ export class FruitActivity extends React.Component<
                     }}
                 />
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Make a Happy Face</Text>
+                    <Text style={styles.title}>
+                        A <Text style={styles.titleHighlight}>Happy</Text>{" "}
+                        Face...
+                    </Text>
                 </View>
                 <BigFruit />
                 <FruitTab
@@ -94,7 +98,16 @@ const styles = StyleSheet.create({
         marginTop: 75
     },
     title: {
+        fontFamily: appStyles.rockwellFont,
         textAlign: "center",
-        fontSize: 24
+        fontSize: 24,
+        lineHeight: 30
+    },
+    titleHighlight: {
+        fontFamily: appStyles.rockwellFont,
+        textAlign: "center",
+        fontSize: 24,
+        lineHeight: 30,
+        color: "#60b8ff"
     }
 });

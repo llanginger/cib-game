@@ -9,7 +9,7 @@ import {
 } from "../../redux/actions/index";
 import { IEmojiLevel } from "./emojiLevels";
 import { connect } from "react-redux";
-import { InteractableItem } from "../Interactable/InteractableItem";
+import { InteractableItem, ISnapPoint } from "../Interactable/InteractableItem";
 import {
     animateEmojiGameImageAction,
     newEmojiAction
@@ -17,13 +17,6 @@ import {
 import { IReducers } from "../../redux/store";
 //Interface
 
-interface snapPoint {
-    x: number;
-    y: number;
-    damping?: number;
-    tension?: number;
-    id?: string;
-}
 interface IEmojiContainerProps {
     currentEmotion: IRobotEmotion;
     currentEmoji: IEmojiLevel;
@@ -33,7 +26,7 @@ interface IEmojiContainerProps {
 }
 
 interface IEmojiContainerState {
-    snapPoints: snapPoint[];
+    snapPoints: ISnapPoint[];
     reset: boolean;
 }
 
@@ -95,7 +88,7 @@ class _EmojiContainer extends React.Component<
         }
     }
 
-    _getCustomCoordinates(i: number, emotion: IRobotEmotion) {
+    _getCustomCoordinates(i: number) {
         if (i < 3) {
             if (i === 0) {
                 return { x: 214.5, y: -112.5, id: `Snap point ${i}` };
@@ -124,7 +117,7 @@ class _EmojiContainer extends React.Component<
                     onSnap={() => console.log("Snap")}
                     snapPoints={[
                         ...this.state.snapPoints,
-                        this._getCustomCoordinates(i, emoji.emotion)
+                        this._getCustomCoordinates(i)
                     ]}
                     reset={this.state.reset}
                     onReset={() => console.log("On reset")}
