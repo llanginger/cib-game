@@ -68,6 +68,7 @@ export class InteractableItem extends React.Component<
     }
 
     componentWillReceiveProps(nextProps: IInteractableItemProps) {
+        console.log("Receiving: ", nextProps);
         if (nextProps.reset && !this.state.reset) {
             this.setState({ reset: true }, () => this._reset());
         }

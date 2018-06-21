@@ -10,17 +10,21 @@ import {
 } from "react-native";
 import { IFruit } from "./FruitActivity";
 import { TabContents } from "./TabContents";
+import { EyesTab } from "./EyesTab";
+import { MouthsTab } from "./MouthsTab";
+import { FacesTab } from "./FacesTab";
 //Interface
 interface IFruitTabProps {
     tabOnTop: IFruit;
     onTabPress: any;
 }
 
-interface IFruitTab {
+export interface IFruitTab {
     source: number;
     contentSource: number[];
-    oldContentSource: number;
     name: IFruit;
+    key?: number;
+    component?: any;
 }
 
 const fruitTabs: IFruitTab[] = [
@@ -32,7 +36,8 @@ const fruitTabs: IFruitTab[] = [
             require("../../images/laia/fruit-activity/faces/face-2.png"),
             require("../../images/laia/fruit-activity/faces/face-3.png")
         ],
-        oldContentSource: require("../../images/laia/fruit-activity/tabs/faces.png")
+        key: 1,
+        component: <FacesTab />
     },
     {
         source: require("../../images/laia/fruit-activity/tabs/eyes-tab.png"),
@@ -45,7 +50,8 @@ const fruitTabs: IFruitTab[] = [
             require("../../images/laia/fruit-activity/eyes/eyes-5.png"),
             require("../../images/laia/fruit-activity/eyes/eyes-6.png")
         ],
-        oldContentSource: require("../../images/laia/fruit-activity/tabs/eyes.png")
+        key: 2,
+        component: <EyesTab />
     },
     {
         source: require("../../images/laia/fruit-activity/tabs/mouths-tab.png"),
@@ -58,7 +64,8 @@ const fruitTabs: IFruitTab[] = [
             require("../../images/laia/fruit-activity/mouths/mouths-5.png"),
             require("../../images/laia/fruit-activity/mouths/mouths-6.png")
         ],
-        oldContentSource: require("../../images/laia/fruit-activity/tabs/mouths.png")
+        key: 3,
+        component: <MouthsTab />
     }
 ];
 
@@ -68,9 +75,9 @@ export const FruitTab: React.StatelessComponent<IFruitTabProps> = (
 ) => {
     const switchTab: (tabOnTop: IFruit) => IFruitTab[] = (tabOnTop: IFruit) => {
         const newTopTab = fruitTabs.filter(fruit => fruit.name === tabOnTop);
-        // console.log("New top tab: ", newTopTab);
+
         const oldTabs = fruitTabs.filter(fruit => fruit.name !== tabOnTop);
-        // console.log("Old tabs: ", oldTabs);
+
         const newTabbies = newTopTab.concat(oldTabs).reverse();
         // console.log("New tabbies: ", newTabbies);
 
@@ -85,23 +92,13 @@ export const FruitTab: React.StatelessComponent<IFruitTabProps> = (
         return switchTab(props.tabOnTop).map((tab, i) => {
             console.log("Switch tab tab: ", tab);
             return (
-                <View style={styles.tab} key={i}>
+                <View style={styles.tab} key={tab.key}>
                     <Image
                         style={styles.tab}
                         source={tab.source}
                         resizeMode="stretch"
                     />
-                    {/* <Image
-                        style={styles.tabContent}
-                        source={tab.oldContentSource}
-                        resizeMode="stretch"
-                    /> */}
-                    {tab.name === props.tabOnTop ? (
-                        <TabContents
-                            contents={tab.contentSource}
-                            tabType={tab.name}
-                        />
-                    ) : null}
+                    {tab.component}
                 </View>
             );
         });
