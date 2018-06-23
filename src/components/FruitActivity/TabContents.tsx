@@ -2,12 +2,12 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { InteractableItem, ISnapPoint } from "../Interactable/InteractableItem";
-import { IFruit } from "./FruitActivity";
+import { IFruitTabName } from "./FruitActivity";
 
 //Interfaces
 interface IFruitContentsProps {
     contents: number[];
-    tabType: IFruit;
+    tabType: IFruitTabName;
 }
 
 interface IFruitContentsState {
@@ -42,7 +42,7 @@ export class TabContents extends React.Component<
         }
     };
 
-    _getCustomCoordinates = (i: number, type: IFruit) => {
+    _getCustomCoordinates = (i: number, type: IFruitTabName) => {
         console.log("tab type: ", type);
         const yModifier: () => number = () => {
             switch (type) {

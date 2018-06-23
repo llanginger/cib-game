@@ -8,23 +8,30 @@ import {
     TouchableWithoutFeedback,
     TouchableOpacity
 } from "react-native";
-import { IFruit } from "./FruitActivity";
+import { IFruitTabName } from "./FruitActivity";
 import { TabContents } from "./TabContents";
 import { EyesTab } from "./EyesTab";
 import { MouthsTab } from "./MouthsTab";
 import { FacesTab } from "./FacesTab";
 //Interface
 interface IFruitTabProps {
-    tabOnTop: IFruit;
+    tabOnTop: IFruitTabName;
     onTabPress: any;
+    onChooseFruit: any;
+    currentFruit: "apple" | "banana" | "pear";
 }
 
 export interface IFruitTab {
     source: number;
     contentSource: number[];
-    name: IFruit;
+    name: IFruitTabName;
     key?: number;
     component?: any;
+}
+
+interface IFruitTabState {
+    currentFruit: "apple" | "banana" | "pear";
+    tabs: IFruitTab[];
 }
 
 const fruitTabs: IFruitTab[] = [
@@ -36,8 +43,7 @@ const fruitTabs: IFruitTab[] = [
             require("../../images/laia/fruit-activity/faces/face-2.png"),
             require("../../images/laia/fruit-activity/faces/face-3.png")
         ],
-        key: 1,
-        component: <FacesTab />
+        key: 1
     },
     {
         source: require("../../images/laia/fruit-activity/tabs/eyes-tab.png"),
@@ -50,8 +56,7 @@ const fruitTabs: IFruitTab[] = [
             require("../../images/laia/fruit-activity/eyes/eyes-5.png"),
             require("../../images/laia/fruit-activity/eyes/eyes-6.png")
         ],
-        key: 2,
-        component: <EyesTab />
+        key: 2
     },
     {
         source: require("../../images/laia/fruit-activity/tabs/mouths-tab.png"),
@@ -64,16 +69,60 @@ const fruitTabs: IFruitTab[] = [
             require("../../images/laia/fruit-activity/mouths/mouths-5.png"),
             require("../../images/laia/fruit-activity/mouths/mouths-6.png")
         ],
-        key: 3,
-        component: <MouthsTab />
+        key: 3
     }
 ];
 
 // create a component
-export const FruitTab: React.StatelessComponent<IFruitTabProps> = (
-    props: IFruitTabProps
-) => {
-    const switchTab: (tabOnTop: IFruit) => IFruitTab[] = (tabOnTop: IFruit) => {
+export class FruitTab extends React.Component<IFruitTabProps, IFruitTabState> {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            currentFruit: "apple",
+            tabs: [
+                {
+                    source: require("../../images/laia/fruit-activity/tabs/faces-tab.png"),
+                    name: "faces",
+                    contentSource: [
+                        require("../../images/laia/fruit-activity/faces/face-1.png"),
+                        require("../../images/laia/fruit-activity/faces/face-2.png"),
+                        require("../../images/laia/fruit-activity/faces/face-3.png")
+                    ],
+                    key: 1
+                },
+                {
+                    source: require("../../images/laia/fruit-activity/tabs/eyes-tab.png"),
+                    name: "eyes",
+                    contentSource: [
+                        require("../../images/laia/fruit-activity/eyes/eyes-1.png"),
+                        require("../../images/laia/fruit-activity/eyes/eyes-2.png"),
+                        require("../../images/laia/fruit-activity/eyes/eyes-3.png"),
+                        require("../../images/laia/fruit-activity/eyes/eyes-4.png"),
+                        require("../../images/laia/fruit-activity/eyes/eyes-5.png"),
+                        require("../../images/laia/fruit-activity/eyes/eyes-6.png")
+                    ],
+                    key: 2
+                },
+                {
+                    source: require("../../images/laia/fruit-activity/tabs/mouths-tab.png"),
+                    name: "mouths",
+                    contentSource: [
+                        require("../../images/laia/fruit-activity/mouths/mouths-1.png"),
+                        require("../../images/laia/fruit-activity/mouths/mouths-2.png"),
+                        require("../../images/laia/fruit-activity/mouths/mouths-3.png"),
+                        require("../../images/laia/fruit-activity/mouths/mouths-4.png"),
+                        require("../../images/laia/fruit-activity/mouths/mouths-5.png"),
+                        require("../../images/laia/fruit-activity/mouths/mouths-6.png")
+                    ],
+                    key: 3
+                }
+            ]
+        };
+    }
+    _switchTab: (tabOnTop: IFruitTabName) => IFruitTab[] = (
+        tabOnTop: IFruitTabName
+    ) => {
         const newTopTab = fruitTabs.filter(fruit => fruit.name === tabOnTop);
 
         const oldTabs = fruitTabs.filter(fruit => fruit.name !== tabOnTop);
@@ -84,48 +133,62 @@ export const FruitTab: React.StatelessComponent<IFruitTabProps> = (
         return newTabbies;
     };
 
-    const getOnPress = (tabName: IFruit) => {
-        return () => props.onTabPress(tabName);
+    _chooseTabContainer: (tabName: IFruitTabName) => any = (
+        tabName: IFruitTabName
+    ) => {
+        switch (tabName) {
+            case "eyes":
+                return <EyesTab fruit={this.props.currentFruit} />;
+            case "mouths":
+                return <MouthsTab fruit={this.props.currentFruit} />;
+            case "faces":
+                return <FacesTab onChooseFruit={this.props.onChooseFruit} />;
+        }
     };
+    render() {
+        const getOnPress = (tabName: IFruitTabName) => {
+            return () => this.props.onTabPress(tabName);
+        };
 
-    const getTabs = () => {
-        return switchTab(props.tabOnTop).map((tab, i) => {
-            console.log("Switch tab tab: ", tab);
-            return (
-                <View style={styles.tab} key={tab.key}>
-                    <Image
-                        style={styles.tab}
-                        source={tab.source}
-                        resizeMode="stretch"
-                    />
-                    {tab.component}
+        const getTabs = () => {
+            return this._switchTab(this.props.tabOnTop).map((tab, i) => {
+                console.log("Switch tab tab: ", tab);
+                return (
+                    <View style={styles.tab} key={tab.key}>
+                        <Image
+                            style={styles.tab}
+                            source={tab.source}
+                            resizeMode="stretch"
+                        />
+                        {this._chooseTabContainer(tab.name)}
+                    </View>
+                );
+            });
+        };
+        return (
+            <View style={styles.container}>
+                {getTabs()}
+                <View style={styles.invisibleButtonContainer}>
+                    <TouchableWithoutFeedback
+                        onPress={() => this.props.onTabPress("faces")}
+                    >
+                        <View style={styles.invisibleButton} />
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback
+                        onPress={() => this.props.onTabPress("eyes")}
+                    >
+                        <View style={styles.invisibleButton} />
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback
+                        onPress={() => this.props.onTabPress("mouths")}
+                    >
+                        <View style={styles.invisibleButton} />
+                    </TouchableWithoutFeedback>
                 </View>
-            );
-        });
-    };
-    return (
-        <View style={styles.container}>
-            {getTabs()}
-            <View style={styles.invisibleButtonContainer}>
-                <TouchableWithoutFeedback
-                    onPress={() => props.onTabPress("faces")}
-                >
-                    <View style={styles.invisibleButton} />
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback
-                    onPress={() => props.onTabPress("eyes")}
-                >
-                    <View style={styles.invisibleButton} />
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback
-                    onPress={() => props.onTabPress("mouths")}
-                >
-                    <View style={styles.invisibleButton} />
-                </TouchableWithoutFeedback>
             </View>
-        </View>
-    );
-};
+        );
+    }
+}
 
 // define your styles
 const styles = StyleSheet.create({

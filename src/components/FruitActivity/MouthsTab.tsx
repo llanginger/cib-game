@@ -1,14 +1,13 @@
 //import liraries
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Animated } from "react-native";
 import { InteractableItem, ISnapPoint } from "../Interactable/InteractableItem";
-import { IFruit } from "./FruitActivity";
+import { IFruitTabName } from "./FruitActivity";
 import { IFruitTab } from "./FruitTab";
 
 //Interfaces
 interface IFruitContentsProps {
-    // contents: number[];
-    // tabType: IFruit;
+    fruit: "apple" | "banana" | "pear";
 }
 
 interface IMouthObject {
@@ -16,8 +15,8 @@ interface IMouthObject {
     reset: boolean;
 }
 interface IFruitContentsState {
+    fadeAnimation: Animated.Value;
     snapPoints: ISnapPoint[];
-    reset: boolean;
     currentMouth: number;
     mouths: IMouthObject[];
 }
@@ -64,13 +63,37 @@ export class MouthsTab extends React.Component<
 
         this.state = {
             snapPoints: [{ x: 0, y: 0, id: "init" }],
-            reset: false,
             currentMouth: null,
-            mouths: mouths.contentSource
+            mouths: mouths.contentSource,
+            fadeAnimation: new Animated.Value(0)
         };
     }
 
-    _reset: (draggedMouth: IMouthObject) => IMouthObject[] = (
+    componentWillReceiveProps(nextProps: IFruitContentsProps) {
+        if (nextProps.fruit !== this.props.fruit) {
+            this._fade();
+        }
+    }
+
+    _fade = () => {
+        const { fadeAnimation } = this.state;
+        fadeAnimation.setValue(0);
+        Animated.timing(fadeAnimation, {
+            toValue: 0.5,
+            duration: 500
+        }).start(() => {
+            this.setState({ mouths: this._resetAll() }, () => {
+                fadeAnimation.setValue(0.5);
+                Animated.timing(fadeAnimation, {
+                    toValue: 1,
+                    delay: 200,
+                    duration: 500
+                }).start();
+            });
+        });
+    };
+
+    _resetOthers: (draggedMouth: IMouthObject) => IMouthObject[] = (
         draggedMouth: IMouthObject
     ) => {
         return this.state.mouths.map(mouth => {
@@ -78,25 +101,24 @@ export class MouthsTab extends React.Component<
         });
     };
 
-    _clearReset: () => IMouthObject[] = () => {
+    _resetAll: () => IMouthObject[] = () => {
+        return this.state.mouths.map(mouth => {
+            return { ...mouth, reset: true };
+        });
+    };
+
+    _clearAllResets: () => IMouthObject[] = () => {
         return this.state.mouths.map(mouth => {
             return { ...mouth, reset: false };
         });
     };
 
     _onDrag = (e, mouth: IMouthObject) => {
-        console.log("Dragging: ", e.nativeEvent);
-        console.log("Mouth #: ", mouth);
-        // if (this.state.currentMouth !== mouth.source) {
-        //     this.setState({ reset: true }, () => {
-        //         this.setState({ currentMouth: mouth.source, reset: false });
-        //     });
-        // }
         this.setState(
             {
-                mouths: this._reset(mouth)
+                mouths: this._resetOthers(mouth)
             },
-            () => this.setState({ mouths: this._clearReset() })
+            () => this.setState({ mouths: this._clearAllResets() })
         );
         if (
             e.nativeEvent.state === "end" &&
@@ -108,8 +130,7 @@ export class MouthsTab extends React.Component<
         }
     };
 
-    _getCustomCoordinates = (i: number, type: IFruit) => {
-        console.log("tab type: ", type);
+    _getCustomCoordinates = (i: number, type: IFruitTabName) => {
         const yModifier: () => number = () => {
             switch (type) {
                 case "eyes":
@@ -172,32 +193,43 @@ export class MouthsTab extends React.Component<
         }
     };
 
-    _makeDraggableItems = () => {
-        console.log("Tab Contents from Parent: ", this.props);
+    _makeDraggableItems = opacity => {
         return this.state.mouths.map((mouth, i) => {
             return (
-                <InteractableItem
-                    snapPoints={[
-                        ...this.state.snapPoints,
-                        this._getCustomCoordinates(i, "mouths")
-                    ]}
+                <Animated.View
+                    style={{
+                        flexBasis: "30%",
+                        opacity
+                    }}
                     key={i}
-                    onSnap={() => console.log("Mouth onSnap")}
-                    onReset={() => console.log("Mouth onReset")}
-                    onDrag={e => this._onDrag(e, mouth)}
-                    onPress={() => console.log("Mouth onPress")}
-                    image={mouth.source}
-                    imageStyle={{ height: 60, width: 60 }}
-                    reset={mouth.reset}
-                />
+                >
+                    <InteractableItem
+                        snapPoints={[
+                            ...this.state.snapPoints,
+                            this._getCustomCoordinates(i, "mouths")
+                        ]}
+                        key={i}
+                        onSnap={() => console.log("Mouth onSnap")}
+                        onReset={() => console.log("Mouth onReset")}
+                        onDrag={e => this._onDrag(e, mouth)}
+                        onPress={() => console.log("Mouth onPress")}
+                        image={mouth.source}
+                        imageStyle={{ height: 60, width: 60 }}
+                        reset={mouth.reset}
+                    />
+                </Animated.View>
             );
         });
     };
 
     render() {
+        const animatedOpacity = this.state.fadeAnimation.interpolate({
+            inputRange: [0, 0.5, 1],
+            outputRange: [1, 0, 1]
+        });
         return (
             <View style={[styles.container, { paddingTop: 30 }]}>
-                {this._makeDraggableItems()}
+                {this._makeDraggableItems(animatedOpacity)}
             </View>
         );
     }

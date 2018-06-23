@@ -1,15 +1,6 @@
 //import liraries
 import * as React from "react";
-import {
-    View,
-    Text,
-    StyleSheet,
-    Image,
-    ImageStyle,
-    Animated,
-    Easing,
-    ViewStyle
-} from "react-native";
+import { StyleSheet, Image, ImageStyle, Animated } from "react-native";
 
 //Interfaces
 interface IPandaProps {
@@ -50,12 +41,7 @@ export class Panda extends React.Component<IPandaProps, IPandaState> {
     }
 
     public _getNextFrame = callback => {
-        const {
-            fadeAnimation,
-            frameCount,
-            currentFrame,
-            currentPanda
-        } = this.state;
+        const { fadeAnimation } = this.state;
 
         Animated.timing(fadeAnimation, {
             toValue: 0.5,
@@ -77,8 +63,7 @@ export class Panda extends React.Component<IPandaProps, IPandaState> {
     };
 
     render() {
-        const { imageStyle = {}, source } = this.props;
-        const { pandaImages, currentPanda } = this.state;
+        const { imageStyle = {} } = this.props;
 
         const animatedOpacity = this.state.fadeAnimation.interpolate({
             inputRange: [0, 0.5, 1],

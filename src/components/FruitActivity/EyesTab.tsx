@@ -1,31 +1,55 @@
 //import liraries
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Animated } from "react-native";
 import { InteractableItem, ISnapPoint } from "../Interactable/InteractableItem";
-import { IFruit } from "./FruitActivity";
+import { IFruitTabName } from "./FruitActivity";
 import { IFruitTab } from "./FruitTab";
 
 //Interfaces
 interface IFruitContentsProps {
-    // contents: number[];
-    // tabType: IFruit;
+    fruit: "apple" | "banana" | "pear";
 }
 
 interface IFruitContentsState {
+    fadeAnimation: Animated.Value;
     snapPoints: ISnapPoint[];
+    reset: boolean;
+    eyes: IMouthObject[];
+}
+
+interface IMouthObject {
+    source: number;
     reset: boolean;
 }
 
-const eyes: IFruitTab = {
+const eyes = {
     source: require("../../images/laia/fruit-activity/tabs/eyes-tab.png"),
     name: "eyes",
     contentSource: [
-        require("../../images/laia/fruit-activity/eyes/eyes-1.png"),
-        require("../../images/laia/fruit-activity/eyes/eyes-2.png"),
-        require("../../images/laia/fruit-activity/eyes/eyes-3.png"),
-        require("../../images/laia/fruit-activity/eyes/eyes-4.png"),
-        require("../../images/laia/fruit-activity/eyes/eyes-5.png"),
-        require("../../images/laia/fruit-activity/eyes/eyes-6.png")
+        {
+            source: require("../../images/laia/fruit-activity/eyes/eyes-1.png"),
+            reset: false
+        },
+        {
+            source: require("../../images/laia/fruit-activity/eyes/eyes-2.png"),
+            reset: false
+        },
+        {
+            source: require("../../images/laia/fruit-activity/eyes/eyes-3.png"),
+            reset: false
+        },
+        {
+            source: require("../../images/laia/fruit-activity/eyes/eyes-4.png"),
+            reset: false
+        },
+        {
+            source: require("../../images/laia/fruit-activity/eyes/eyes-5.png"),
+            reset: false
+        },
+        {
+            source: require("../../images/laia/fruit-activity/eyes/eyes-6.png"),
+            reset: false
+        }
     ]
 };
 // create a component
@@ -39,12 +63,63 @@ export class EyesTab extends React.Component<
 
         this.state = {
             snapPoints: [{ x: 0, y: 0, id: "init" }],
-            reset: false
+            reset: false,
+            eyes: eyes.contentSource,
+            fadeAnimation: new Animated.Value(0)
         };
     }
 
-    _onDrag = e => {
-        console.log("Dragging: ", e.nativeEvent);
+    componentWillReceiveProps(nextProps: IFruitContentsProps) {
+        if (nextProps.fruit !== this.props.fruit) {
+            this._fade();
+        }
+    }
+
+    _fade = () => {
+        const { fadeAnimation } = this.state;
+        fadeAnimation.setValue(0);
+        Animated.timing(fadeAnimation, {
+            toValue: 0.5,
+            duration: 500
+        }).start(() => {
+            this.setState({ eyes: this._resetAll() }, () => {
+                fadeAnimation.setValue(0.5);
+                Animated.timing(fadeAnimation, {
+                    toValue: 1,
+                    delay: 200,
+                    duration: 500
+                }).start();
+            });
+        });
+    };
+
+    _resetAll: () => IMouthObject[] = () => {
+        return this.state.eyes.map(mouth => {
+            return { ...mouth, reset: true };
+        });
+    };
+
+    _resetOthers: (draggedEye: IMouthObject) => IMouthObject[] = (
+        draggedMouth: IMouthObject
+    ) => {
+        return this.state.eyes.map(mouth => {
+            return { ...mouth, reset: mouth.source !== draggedMouth.source };
+        });
+    };
+
+    _clearAllResets: () => IMouthObject[] = () => {
+        return this.state.eyes.map(mouth => {
+            return { ...mouth, reset: false };
+        });
+    };
+
+    _onDrag = (e, eye: IMouthObject) => {
+        this.setState(
+            {
+                eyes: this._resetOthers(eye)
+            },
+            () => this.setState({ eyes: this._clearAllResets() })
+        );
         if (
             e.nativeEvent.state === "end" &&
             e.nativeEvent.targetSnapPointId !== "init"
@@ -55,8 +130,7 @@ export class EyesTab extends React.Component<
         }
     };
 
-    _getCustomCoordinates = (i: number, type: IFruit) => {
-        console.log("tab type: ", type);
+    _getCustomCoordinates = (i: number, type: IFruitTabName) => {
         const yModifier: () => number = () => {
             switch (type) {
                 case "eyes":
@@ -69,13 +143,14 @@ export class EyesTab extends React.Component<
         };
 
         const xModifier: () => number = () => {
-            switch (type) {
-                case "eyes":
+            switch (this.props.fruit) {
+                case "banana":
                     return 50;
                 default:
                     return 0;
             }
         };
+
         if (i < 3) {
             if (i === 0) {
                 return {
@@ -119,32 +194,43 @@ export class EyesTab extends React.Component<
         }
     };
 
-    _makeDraggableItems = () => {
-        console.log("Tab Contents from Parent: ", this.props);
-        return eyes.contentSource.map((eye, i) => {
+    _makeDraggableItems = opacity => {
+        return this.state.eyes.map((eye, i) => {
             return (
-                <InteractableItem
-                    snapPoints={[
-                        ...this.state.snapPoints,
-                        this._getCustomCoordinates(i, "eyes")
-                    ]}
+                <Animated.View
+                    style={{
+                        flexBasis: "30%",
+                        opacity
+                    }}
                     key={i}
-                    onSnap={() => console.log("Mouth onSnap")}
-                    onReset={() => console.log("Mouth onReset")}
-                    onDrag={this._onDrag}
-                    onPress={() => console.log("Mouth onPress")}
-                    image={eye}
-                    imageStyle={{ height: 60, width: 60 }}
-                    reset={false}
-                />
+                >
+                    <InteractableItem
+                        snapPoints={[
+                            ...this.state.snapPoints,
+                            this._getCustomCoordinates(i, "eyes")
+                        ]}
+                        // key={i}
+                        onSnap={() => console.log("Mouth onSnap")}
+                        onReset={() => console.log("Mouth onReset")}
+                        onDrag={e => this._onDrag(e, eye)}
+                        onPress={() => console.log("Mouth onPress")}
+                        image={eye.source}
+                        imageStyle={{ height: 60, width: 60 }}
+                        reset={eye.reset}
+                    />
+                </Animated.View>
             );
         });
     };
 
     render() {
+        const animatedOpacity = this.state.fadeAnimation.interpolate({
+            inputRange: [0, 0.5, 1],
+            outputRange: [1, 0, 1]
+        });
         return (
             <View style={[styles.container, { paddingTop: 30 }]}>
-                {this._makeDraggableItems()}
+                {this._makeDraggableItems(animatedOpacity)}
             </View>
         );
     }

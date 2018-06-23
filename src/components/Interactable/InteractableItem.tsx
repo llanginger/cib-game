@@ -68,7 +68,6 @@ export class InteractableItem extends React.Component<
     }
 
     componentWillReceiveProps(nextProps: IInteractableItemProps) {
-        console.log("Receiving: ", nextProps);
         if (nextProps.reset && !this.state.reset) {
             this.setState({ reset: true }, () => this._reset());
         }
@@ -86,7 +85,6 @@ export class InteractableItem extends React.Component<
     }
 
     _onSnap(e) {
-        console.log("E: ", e.nativeEvent);
         if (this.props.animate && e.nativeEvent.index === 1) {
             this.setState({ animateOut: true });
         }

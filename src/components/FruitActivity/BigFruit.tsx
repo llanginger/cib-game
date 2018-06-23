@@ -1,24 +1,84 @@
 //import liraries
 import * as React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Animated } from "react-native";
 
 //Interface
-interface IBigFruitProps {}
+interface IBigFruitProps {
+    currentFruit: "apple" | "pear" | "banana";
+}
+
+interface IBigFruitState {
+    fadeAnimation: Animated.Value;
+    currentFruit: "apple" | "pear" | "banana";
+}
+
+const apple = require("../../images/laia/fruit-activity/fruit/apple.png");
+const banana = require("../../images/laia/fruit-activity/fruit/banana.png");
+const pear = require("../../images/laia/fruit-activity/fruit/pear.png");
 
 // create a component
-export const BigFruit: React.StatelessComponent<IBigFruitProps> = (
-    props: IBigFruitProps
-) => {
-    return (
-        <View style={styles.container}>
-            <Image
-                source={require("../../images/laia/fruit-activity/fruit/banana.png")}
-                resizeMode="contain"
-                style={styles.fruit}
-            />
-        </View>
-    );
-};
+export class BigFruit extends React.Component<IBigFruitProps, IBigFruitState> {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            fadeAnimation: new Animated.Value(0),
+            currentFruit: this.props.currentFruit
+        };
+    }
+
+    _getNewFruit = () => {
+        const { fadeAnimation } = this.state;
+        fadeAnimation.setValue(0);
+        Animated.timing(fadeAnimation, {
+            toValue: 0.5,
+            duration: 500
+        }).start(() => {
+            this.setState({ currentFruit: this.props.currentFruit }, () => {
+                fadeAnimation.setValue(0.5);
+                Animated.timing(fadeAnimation, {
+                    toValue: 1,
+                    duration: 500
+                }).start();
+            });
+        });
+    };
+
+    componentWillReceiveProps(nextProps: IBigFruitProps) {
+        if (nextProps.currentFruit !== this.state.currentFruit) {
+            this._getNewFruit();
+        }
+    }
+
+    render() {
+        const animatedOpacity = this.state.fadeAnimation.interpolate({
+            inputRange: [0, 0.5, 1],
+            outputRange: [1, 0, 1]
+        });
+
+        const whichFruit = () => {
+            switch (this.state.currentFruit) {
+                case "apple":
+                    return apple;
+                case "banana":
+                    return banana;
+                case "pear":
+                    return pear;
+            }
+        };
+        return (
+            <Animated.View
+                style={[styles.container, { opacity: animatedOpacity }]}
+            >
+                <Image
+                    source={whichFruit()}
+                    resizeMode="contain"
+                    style={styles.fruit}
+                />
+            </Animated.View>
+        );
+    }
+}
 
 // define your styles
 const styles = StyleSheet.create({

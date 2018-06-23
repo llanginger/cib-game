@@ -12,10 +12,11 @@ interface IFruitActivityProps {
     dispatch?: any;
 }
 
-export type IFruit = "faces" | "eyes" | "mouths";
+export type IFruitTabName = "faces" | "eyes" | "mouths";
 
 interface IFruitActivityState {
-    tabOnTop: IFruit;
+    tabOnTop: IFruitTabName;
+    currentFruit: "apple" | "banana" | "pear";
 }
 
 // create a component
@@ -36,7 +37,8 @@ export class FruitActivity extends React.Component<
     constructor(props) {
         super(props);
 
-        this.state = { tabOnTop: "eyes" };
+        this.state = { tabOnTop: "eyes", currentFruit: "banana" };
+        this._onChooseFruit = this._onChooseFruit.bind(this);
     }
 
     _menuPress = () => {
@@ -45,9 +47,13 @@ export class FruitActivity extends React.Component<
         });
     };
 
-    _onTabPress = (tabOnTop: IFruit) => {
+    _onTabPress = (tabOnTop: IFruitTabName) => {
         this.setState({ tabOnTop });
     };
+
+    _onChooseFruit(fruit: "apple" | "banana" | "pear") {
+        this.setState({ currentFruit: fruit });
+    }
 
     render() {
         return (
@@ -64,14 +70,16 @@ export class FruitActivity extends React.Component<
                 />
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>
-                        A <Text style={styles.titleHighlight}>Happy</Text>{" "}
+                        A <Text style={styles.titleHighlight}>Angry</Text>{" "}
                         Face...
                     </Text>
                 </View>
-                <BigFruit />
+                <BigFruit currentFruit={this.state.currentFruit} />
                 <FruitTab
                     onTabPress={this._onTabPress}
                     tabOnTop={this.state.tabOnTop}
+                    onChooseFruit={this._onChooseFruit}
+                    currentFruit={this.state.currentFruit}
                 />
             </View>
         );
