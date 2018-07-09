@@ -27,6 +27,7 @@ import { GameFourContainer } from "../GameFour/GameFourContainer";
 import { GameFiveContainer } from "../GameFive/GameFiveContainer";
 import { GameSevenContainer } from "../GameSeven/GameSevenContainer";
 import { ThumbsupGameContainer } from "../ThumbsupGame/ThumbsupGameContainer";
+import { FruitActivity } from "../FruitActivity/FruitActivity"
 
 import { screenObjects } from "../../navigation/screenObjects";
 import { Ready } from "../Ready/Ready";
@@ -40,7 +41,7 @@ import { BirdAnimation } from "../BirdAnimation/BirdAnimation";
 
 interface ICardGameMainScreenProps {
     navigator?: any;
-    gameType: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+    gameType: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     dispatch?: any;
 }
 
@@ -117,6 +118,8 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
             return <ThumbsupGameContainer navigator={this.props.navigator} />;
         } else if (gameType === 6) {
             return <GameSevenContainer navigator={this.props.navigator} />;
+        } else if (gameType === 7) {
+            return <FruitActivity navigator={this.props.navigator} />
         } else {
             return <GameOneContainer navigator={this.props.navigator} />;
         }
@@ -132,9 +135,6 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
                     containerProps={{ alignSelf: "flex-start" }}
                 />
                 {this._getGameContainer()}
-                {/* <GameFourContainer navigator={this.props.navigator} /> */}
-                {/* <Popup /> */}
-                {/* <BirdAnimation /> */}
             </View>
         );
     }

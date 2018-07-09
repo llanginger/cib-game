@@ -6,7 +6,8 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
-    Dimensions
+    Dimensions,
+    AsyncStorage
 } from "react-native";
 import { ScoreContainer } from "../ScoreCounter/ScoreContainer";
 import { screenObjects } from "../../navigation/screenObjects";
@@ -32,7 +33,7 @@ interface IGameMapProps {
     apples: IAppleProps[];
 }
 
-interface IGameMapState {}
+interface IGameMapState { }
 
 const apple = require("../../images/laia/game-map/apple.png");
 
@@ -102,7 +103,19 @@ const applePositions: IAppleProps[] = [
                 screen: "GameContainerScreen",
                 animated: true
             })
-    }
+    },
+    {
+        position: {
+            bottom: windowHeight * 0.85,
+            left: windowWidth * 0.4
+        },
+        onPress: () =>
+            this.props.navigator.push({
+                screen: "GameContainerScreen",
+                animated: true
+            })
+    },
+
 ];
 
 // create a component
@@ -147,6 +160,25 @@ export class _GameMap extends React.Component<IGameMapProps, IGameMapState> {
             200
         );
     };
+
+    _storeData = async () => {
+        try {
+            await AsyncStorage.setItem("currentLevel", "1")
+        } catch (error) {
+            console.log("Error saving current level: ", error)
+        }
+    }
+
+    _retrieveData = async () => {
+        try {
+            const value = await AsyncStorage.getItem("currentLevel")
+            if (value !== null) {
+                console.log("Current Level: ", value)
+            }
+        } catch (error) {
+            console.log("Error retrieving current level: ", error)
+        }
+    }
 
     _goToStart = () => {
         setTimeout(

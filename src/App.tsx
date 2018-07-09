@@ -28,7 +28,7 @@ registerScreens(store, Provider);
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "FruitActivity"
+        screen: "HangmanScreen"
     },
     drawer: {
         disableOpenGesture: true,

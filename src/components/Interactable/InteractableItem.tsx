@@ -19,8 +19,8 @@ interface IInteractableItemProps {
     snapPoints: any[];
     reset: boolean;
     onDrag: any;
-    onPress: any;
-    onSnap: any;
+    onPress?: any;
+    onSnap?: any;
     onReset?: any;
     image: number;
     viewStyle?: ViewStyle;
@@ -47,7 +47,7 @@ export interface ISnapPoint {
 export class InteractableItem extends React.Component<
     IInteractableItemProps,
     IInteractableItemState
-> {
+    > {
     private faceRef;
 
     constructor(props) {

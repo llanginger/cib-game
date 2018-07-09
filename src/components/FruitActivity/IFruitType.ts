@@ -1,0 +1,1 @@
+export type IFruitType = "apple" | "pear" | "banana" | "empty";

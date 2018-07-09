@@ -4,10 +4,12 @@ import { View, Text, StyleSheet, Animated } from "react-native";
 import { InteractableItem, ISnapPoint } from "../Interactable/InteractableItem";
 import { IFruitTabName } from "./FruitActivity";
 import { IFruitTab } from "./FruitTab";
+import { IFruitType } from "./IFruitType"
 
 //Interfaces
 interface IFruitContentsProps {
-    fruit: "apple" | "banana" | "pear";
+    fruit: IFruitType
+    reset?: boolean
 }
 
 interface IFruitContentsState {
@@ -57,7 +59,7 @@ const eyes = {
 export class EyesTab extends React.Component<
     IFruitContentsProps,
     IFruitContentsState
-> {
+    > {
     constructor(props) {
         super(props);
 
@@ -70,7 +72,7 @@ export class EyesTab extends React.Component<
     }
 
     componentWillReceiveProps(nextProps: IFruitContentsProps) {
-        if (nextProps.fruit !== this.props.fruit) {
+        if (nextProps.fruit !== this.props.fruit || nextProps.reset) {
             this._fade();
         }
     }
@@ -120,14 +122,6 @@ export class EyesTab extends React.Component<
             },
             () => this.setState({ eyes: this._clearAllResets() })
         );
-        if (
-            e.nativeEvent.state === "end" &&
-            e.nativeEvent.targetSnapPointId !== "init"
-        ) {
-            console.log("E: ", e);
-        } else {
-            return null;
-        }
     };
 
     _getCustomCoordinates = (i: number, type: IFruitTabName) => {
@@ -210,10 +204,7 @@ export class EyesTab extends React.Component<
                             this._getCustomCoordinates(i, "eyes")
                         ]}
                         // key={i}
-                        onSnap={() => console.log("Mouth onSnap")}
-                        onReset={() => console.log("Mouth onReset")}
                         onDrag={e => this._onDrag(e, eye)}
-                        onPress={() => console.log("Mouth onPress")}
                         image={eye.source}
                         imageStyle={{ height: 60, width: 60 }}
                         reset={eye.reset}

@@ -1,15 +1,16 @@
 //import liraries
 import * as React from "react";
 import { View, Text, StyleSheet, Image, Animated } from "react-native";
+import { IFruitType } from "./IFruitType"
 
 //Interface
 interface IBigFruitProps {
-    currentFruit: "apple" | "pear" | "banana";
+    currentFruit: IFruitType
 }
 
 interface IBigFruitState {
     fadeAnimation: Animated.Value;
-    currentFruit: "apple" | "pear" | "banana";
+    currentFruit: IFruitType
 }
 
 const apple = require("../../images/laia/fruit-activity/fruit/apple.png");
@@ -64,6 +65,8 @@ export class BigFruit extends React.Component<IBigFruitProps, IBigFruitState> {
                     return banana;
                 case "pear":
                     return pear;
+                case "empty":
+                    return null
             }
         };
         return (

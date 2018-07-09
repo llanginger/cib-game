@@ -13,12 +13,13 @@ import { TabContents } from "./TabContents";
 import { EyesTab } from "./EyesTab";
 import { MouthsTab } from "./MouthsTab";
 import { FacesTab } from "./FacesTab";
+import { IFruitType } from "./IFruitType"
 //Interface
 interface IFruitTabProps {
     tabOnTop: IFruitTabName;
     onTabPress: any;
     onChooseFruit: any;
-    currentFruit: "apple" | "banana" | "pear";
+    currentFruit: IFruitType
 }
 
 export interface IFruitTab {
@@ -30,7 +31,7 @@ export interface IFruitTab {
 }
 
 interface IFruitTabState {
-    currentFruit: "apple" | "banana" | "pear";
+    currentFruit: IFruitType
     tabs: IFruitTab[];
 }
 
@@ -128,7 +129,7 @@ export class FruitTab extends React.Component<IFruitTabProps, IFruitTabState> {
         const oldTabs = fruitTabs.filter(fruit => fruit.name !== tabOnTop);
 
         const newTabbies = newTopTab.concat(oldTabs).reverse();
-        // console.log("New tabbies: ", newTabbies);
+
 
         return newTabbies;
     };

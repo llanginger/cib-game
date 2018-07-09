@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { InteractableItem, ISnapPoint } from "../Interactable/InteractableItem";
 import { IFruitTabName } from "./FruitActivity";
 import { IFruitTab } from "./FruitTab";
+import { IFruitType } from "./IFruitType"
 
 //Interfaces
 interface IFruitContentsProps {
@@ -13,7 +14,7 @@ interface IFruitContentsProps {
 interface IFruitContentsState {
     snapPoints: ISnapPoint[];
     reset: boolean;
-    faces: { source: number; fruit: "apple" | "banana" | "pear" }[];
+    faces: { source: number; fruit: IFruitType }[];
 }
 
 // create a component
@@ -21,7 +22,7 @@ interface IFruitContentsState {
 export class FacesTab extends React.Component<
     IFruitContentsProps,
     IFruitContentsState
-> {
+    > {
     constructor(props) {
         super(props);
 

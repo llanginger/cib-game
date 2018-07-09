@@ -4,17 +4,10 @@ import {
     View,
     Text,
     Image,
-    FlatList,
-    Dimensions,
-    TextInput,
-    TouchableHighlight,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    StatusBar,
+
     Animated,
     Easing,
-    Platform,
-    ImageBackground
+
 } from "react-native";
 import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
@@ -133,7 +126,7 @@ export const SandwichBoard = connect<
     ISandwichBoardStateProps,
     {},
     ISandwichBoardProps
->(mapStateToProps)(_SandwichBoard);
+    >(mapStateToProps)(_SandwichBoard);
 
 const styles = StyleSheet.create({
     container: {
