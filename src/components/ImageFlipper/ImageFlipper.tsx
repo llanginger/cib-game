@@ -17,7 +17,7 @@ interface IImageFlipperProps {
     source: number[];
     startAnimation: boolean;
     returnToStart?: boolean;
-    imageStyle: ImageStyle;
+    imageStyle?: ImageStyle;
     frameDuration?: number;
     loop: boolean;
     delay?: number;
@@ -35,7 +35,7 @@ interface IImageFlipperState {
 export class ImageFlipper extends React.Component<
     IImageFlipperProps,
     IImageFlipperState
-> {
+    > {
     // private animationValue: Animated.Value;
 
     constructor(props) {
@@ -111,7 +111,7 @@ export class ImageFlipper extends React.Component<
                     this.setState(
                         {
                             startAnimation: false,
-                            currentAnimatedFrame: returnToStart ? 0 : 1
+                            currentAnimatedFrame: returnToStart ? 0 : this.props.source.length - 1
                         },
                         () => this.state.animationValue.setValue(0)
                     );

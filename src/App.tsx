@@ -28,7 +28,7 @@ registerScreens(store, Provider);
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: "HangmanScreen"
+        screen: "RocketActivityScreen"
     },
     drawer: {
         disableOpenGesture: true,

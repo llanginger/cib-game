@@ -75,10 +75,14 @@ export class HangmanScreen extends React.Component<IHangmanScreenProps, IHangman
 
         console.log("indexToUpdate: ", indexToUpdate)
         const updateWord = this.state.gameWord.map(letter => {
-            return letter.selected ? { letter: newLetter, selected: false } : letter
+            return letter.selected ? { letter: newLetter, selected: false } : { ...letter, selected: false }
         })
 
-        this.setState({ gameWord: updateWord })
+        const updateSelected = updateWord.map((letter, i) => {
+            return { ...letter, selected: i === indexToUpdate + 1 }
+        })
+
+        this.setState({ gameWord: updateSelected })
     }
 
     _hangmanWordLetterOnPress = (index: number) => {

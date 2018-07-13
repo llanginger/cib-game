@@ -13,10 +13,17 @@ import { MenuScreen } from "../components/MenuScreen/MenuScreen";
 import { GameMap } from "../components/GameMap/GameMap";
 import { FruitActivity } from "../components/FruitActivity/FruitActivity";
 import { HangmanScreen } from "../components/HangmanScreen/HangmanScreen"
+import { RocketActivityScreen } from "../components/RocketActivityScreen/RocketActivityScreen"
 
 import { PandaActivity } from "../components/PandaActivity/PandaActivity";
 
 export const registerScreens = (store, Provider) => {
+    Navigation.registerComponent(
+        "RocketActivityScreen",
+        () => RocketActivityScreen,
+        store,
+        Provider
+    );
     Navigation.registerComponent(
         "HangmanScreen",
         () => HangmanScreen,
