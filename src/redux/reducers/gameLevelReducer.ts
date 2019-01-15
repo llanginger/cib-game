@@ -4,17 +4,18 @@ export interface IGameLevelTypeReducer {
 }
 
 const levelTitles: string[] = [
-    "Game One, Tutorial",
-    "Game Two",
-    "Game Three",
-    "Game Four",
-    "Game Five",
-    "Game Six",
-    "Game Seven",
+    "Tutorial",
+    "Basic Emotions",
+    "Complex Emotions",
+    "Robot Game",
+    "Emoji Game",
+    "When I feel...",
+    "Advanced Emotions",
     "Fruit Game"
 ];
 
 const initlevelType = 0;
+
 const initState: IGameLevelTypeReducer = {
     gameLevelType: initlevelType,
     gameTitle: levelTitles[initlevelType]

@@ -23,6 +23,7 @@ interface IGameTwoContainerState {
     startAnimation: boolean;
     levels: IGameTwoLevel[];
     currentLevel: number;
+    incorrectAnswersGiven: number[]
 }
 
 const initState: IGameTwoContainerState = {
@@ -30,12 +31,13 @@ const initState: IGameTwoContainerState = {
     revealAnswers: false,
     startAnimation: false,
     levels: gameTwoLevels,
-    currentLevel: 0
+    currentLevel: 0,
+    incorrectAnswersGiven: []
 };
 export class _GameTwoContainer extends React.Component<
     IGameTwoContainerProps,
     IGameTwoContainerState
-> {
+    > {
     constructor(props) {
         super(props);
 
@@ -54,7 +56,7 @@ export class _GameTwoContainer extends React.Component<
 
     _nextLevel(options: { reset?: boolean; correct: boolean }) {
         // Show answer and queue up out animation
-        this.setState({ revealAnswers: true }, () => {
+        this.setState({ revealAnswers: true, incorrectAnswersGiven: [] }, () => {
             setTimeout(() => this.setState({ startAnimation: true }), 2000);
         });
         this.props.submitAnswer(options.correct);
@@ -89,14 +91,24 @@ export class _GameTwoContainer extends React.Component<
         }, 3000);
     }
 
-    _buttonOnPress(correct) {
+    _buttonOnPress(correct: boolean, index: number) {
         const { currentLevel, levels } = this.state;
+        console.log("Correct from buttonOnPress: ", correct)
+        console.log("Index from buttonOnPress: ", index)
+        // TODO: This needs cleaning up. Should not have to pass correct to nextlevel or endgame
 
-        if (currentLevel < levels.length - 1) {
-            this._nextLevel({ correct });
+        if (!correct) {
+            this.setState({
+                incorrectAnswersGiven: [...this.state.incorrectAnswersGiven, index]
+            })
         } else {
-            this._endGame(correct);
-            // this._nextLevel(false);
+
+            if (currentLevel < levels.length - 1) {
+                this._nextLevel({ correct });
+            } else {
+                this._endGame(correct);
+                // this._nextLevel(false);
+            }
         }
     }
 
@@ -108,12 +120,14 @@ export class _GameTwoContainer extends React.Component<
                         text={answer.text}
                         revealed={this.state.revealAnswers}
                         correct={answer.correct}
-                        onPress={() => this._buttonOnPress(answer.correct)}
+                        incorrectAnswersGiven={this.state.incorrectAnswersGiven}
+                        onPress={() => this._buttonOnPress(answer.correct, i)}
                         startAnimation={this.state.startAnimation}
                         delay={i * 300}
                         key={this.state.startAnimation ? Math.random() : i}
                         animationInType="fadeInUp"
                         animationOutType="fadeOutLeft"
+                        index={i}
                     />
                 );
             }

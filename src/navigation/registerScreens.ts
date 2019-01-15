@@ -17,7 +17,15 @@ import { RocketActivityScreen } from "../components/RocketActivityScreen/RocketA
 
 import { PandaActivity } from "../components/PandaActivity/PandaActivity";
 
+import { AudioScreen } from "../components/AudioScreen/AudioScreen"
+
 export const registerScreens = (store, Provider) => {
+    Navigation.registerComponent(
+        "AudioScreen",
+        () => AudioScreen,
+        store,
+        Provider
+    );
     Navigation.registerComponent(
         "RocketActivityScreen",
         () => RocketActivityScreen,

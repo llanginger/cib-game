@@ -14,6 +14,15 @@ export interface IGameTwoLevel {
 
 export const gameTwoLevels: IGameTwoLevel[] = [
     {
+        image_before: require("../../../images/laia/game-two/jorge-rage-grey.png"),
+        image_after: require("../../../images/laia/game-two/jorge-rage.png"),
+        answers: [
+            { text: "Happy", correct: false },
+            { text: "Calm", correct: false },
+            { text: "Angry", correct: true }
+        ]
+    },
+    {
         image_before: require("../../../images/laia/game-two/marta-sad-grey.png"),
         image_after: require("../../../images/laia/game-two/marta-sad.png"),
         answers: [
@@ -69,15 +78,6 @@ export const gameTwoLevels: IGameTwoLevel[] = [
         ]
     },
     {
-        image_before: require("../../../images/laia/game-two/jorge-rage-grey.png"),
-        image_after: require("../../../images/laia/game-two/jorge-rage.png"),
-        answers: [
-            { text: "Happy", correct: false },
-            { text: "Calm", correct: false },
-            { text: "Angry", correct: true }
-        ]
-    },
-    {
         image_before: require("../../../images/laia/game-two/max-fear-grey.png"),
         image_after: require("../../../images/laia/game-two/max-fear.png"),
         answers: [
@@ -123,7 +123,7 @@ export const gameTwoLevels: IGameTwoLevel[] = [
         ]
     },
     {
-        image_before: require("../../../images/laia/game-two/nico-fear-grey.png"),
+        image_before: require("../../../images/laia/game-two/nico-fear-grey.png"), // Fix this one
         image_after: require("../../../images/laia/game-two/nico-fear.png"),
         answers: [
             { text: "Afraid", correct: true },

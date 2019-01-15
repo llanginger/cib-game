@@ -1,8 +1,7 @@
 //import liraries
 import * as React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Button, ViewStyle } from 'react-native';
 import { appStyles } from '../../styles/styles';
-import { Rocket } from "./Rocket"
 import { RocketButton } from "./RocketButton"
 import { ImageFlipper } from "../ImageFlipper/ImageFlipper"
 //Interfaces
@@ -11,19 +10,61 @@ interface IRocketActivityScreenProps {
     dispatch?: any;
 }
 
-interface IRocketActivityScreenState {
-    startAnimation: boolean
+interface IBlueAreaButton {
+    text: string, color: string
 }
 
+interface IGameAreaButton {
+    selected: boolean
+    empty: boolean
+    containerStyle: ViewStyle
+    onPress: any
+    text: string
+    color: string
+}
+interface IRocketActivityScreenState {
+    startAnimation: boolean;
+    blueAreaButtons: IBlueAreaButton[]
+    gameAreaButtons: IGameAreaButton[]
+    currentSelectedButton: number
+}
 // create a component
 
 const rocketAnimationFrames: number[] = [
     require("../../images/laia/rocket/rocket-neutral.png"),
     require("../../images/laia/rocket/rocket-frame-1.png"),
     require("../../images/laia/rocket/rocket-frame-2.png"),
+    require("../../images/laia/rocket/rocket-frame-1.png"),
+    require("../../images/laia/rocket/rocket-frame-2.png"),
+    require("../../images/laia/rocket/rocket-frame-1.png"),
+    require("../../images/laia/rocket/rocket-frame-2.png"),
+    require("../../images/laia/rocket/rocket-frame-1.png"),
+    require("../../images/laia/rocket/rocket-frame-2.png"),
     require("../../images/laia/rocket/smoke.png"),
 ]
 
+const blueAreaButtons: IBlueAreaButton[] = [
+    {
+        text: "Sad",
+        color: "#deafed"
+    },
+    {
+        text: "Cheerful",
+        color: "#b3ea87"
+    },
+    {
+        text: "Worried",
+        color: "#f5a3bc"
+    },
+    {
+        text: "Joy",
+        color: "#f5ec89"
+    },
+    {
+        text: "Scared",
+        color: "#fdac76"
+    },
+]
 
 export class RocketActivityScreen extends React.Component<IRocketActivityScreenProps, IRocketActivityScreenState> {
 
@@ -43,7 +84,37 @@ export class RocketActivityScreen extends React.Component<IRocketActivityScreenP
             this.onNavigatorEvent.bind(this)
         );
 
-        this.state = { startAnimation: false }
+        this.state = {
+            startAnimation: false,
+            blueAreaButtons,
+            currentSelectedButton: 0,
+            gameAreaButtons: [
+                {
+                    containerStyle: styles.gameAreaButton,
+                    selected: false,
+                    empty: true,
+                    onPress: () => { },
+                    text: "?",
+                    color: "#aad5f7"
+                },
+                {
+                    containerStyle: styles.gameAreaButton,
+                    selected: false,
+                    empty: true,
+                    onPress: () => { },
+                    text: "?",
+                    color: "#aad5f7"
+                },
+                {
+                    containerStyle: styles.gameAreaButton,
+                    selected: false,
+                    empty: true,
+                    onPress: () => { },
+                    text: "?",
+                    color: "#aad5f7"
+                },
+            ]
+        }
     }
 
     onNavigatorEvent(event) {
@@ -55,6 +126,61 @@ export class RocketActivityScreen extends React.Component<IRocketActivityScreenP
                 });
             }
         }
+    }
+
+    _makeBlueAreaButtons = () => {
+        return this.state.blueAreaButtons.map((button, i) => {
+            return <RocketButton
+                key={i}
+                containerStyle={i === 2 ? styles.blueAreaButtonFull : styles.blueAreaButton}
+                onPress={() => this._onBlueAreaButtonPress(button)}
+                text={button.text}
+                color={button.color}
+            />
+        })
+    }
+
+    _onBlueAreaButtonPress = (pressedButton: IBlueAreaButton) => {
+        const { currentSelectedButton, gameAreaButtons } = this.state
+        this.setState({
+            gameAreaButtons: gameAreaButtons.map((button, i) => {
+                return i === currentSelectedButton ? {
+                    ...button,
+                    selected: false,
+                    empty: false,
+                    text: pressedButton.text,
+                } : button
+            }),
+            currentSelectedButton: this.state.currentSelectedButton + 1
+        }, () => {
+            if (this.state.currentSelectedButton === 3) {
+                this.setState({ startAnimation: true })
+            }
+        })
+    }
+
+    _blueArea = () => {
+        return (
+            <View style={styles.blueArea}>
+                {this._makeBlueAreaButtons()}
+            </View>
+        )
+    }
+
+    _makeRocketButtons = () => {
+        return this.state.gameAreaButtons.map((button, i) => {
+            return (
+                <RocketButton
+                    key={i}
+                    selected={button.selected}
+                    empty={button.empty}
+                    containerStyle={button.containerStyle}
+                    onPress={button.onPress}
+                    text={button.text}
+                    color={button.color}
+                />
+            )
+        })
     }
 
 
@@ -72,13 +198,11 @@ export class RocketActivityScreen extends React.Component<IRocketActivityScreenP
                         />
                     </View>
                     <View style={styles.buttonContainer}>
-                        <RocketButton onPress={() => this.setState({ startAnimation: !this.state.startAnimation })} text="Start Animation" color="#a05cb6" />
-                        <RocketButton onPress={() => { }} text="Button text" color="#b3ea87" />
-                        <RocketButton onPress={() => { }} text="Button text" color="#f5a3bc" />
+                        {this._makeRocketButtons()}
                     </View>
                 </View>
-                <View style={styles.blueArea}>
-                </View>
+                {this._blueArea()}
+
             </View>
         );
     }
@@ -86,24 +210,40 @@ export class RocketActivityScreen extends React.Component<IRocketActivityScreenP
 
 // define your styles
 const styles = StyleSheet.create({
+    gameAreaButton: {
+        width: "80%",
+        marginVertical: 10
+
+    },
+    blueAreaButton: {
+        width: "33%"
+    },
+    blueAreaButtonFull: {
+        width: "33%",
+        marginHorizontal: "25%"
+    },
     container: {
         flex: 1
     },
     blueArea: {
         flex: 1,
-        paddingVertical: 20,
-        alignItems: "center",
-        backgroundColor: "#e4f5f9"
+        backgroundColor: "#e4f5f9",
+        flexWrap: "wrap",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        paddingBottom: 10,
+        paddingTop: 5
     },
     buttonContainer: {
         flex: 1,
-        // borderColor: "blue",
-        // borderWidth: 1,
         flexDirection: "column",
-        paddingHorizontal: 15
+        alignItems: "center",
+        paddingHorizontal: 15,
+        paddingBottom: 40
     },
     rocketArea: {
         flex: 1,
+        paddingBottom: 40
         // borderColor: "red",
         // borderWidth: 1
     },

@@ -1,0 +1,19 @@
+Genera:
+
+Update button styles
+
+Game 2:
+
+Change game level order
+Put angry boy first
+Fish needs to be higher on screen
+Off center boy, roughly #13 in current order
+Add some right / wrong sound
+
+Apple menu screen: 
+
+MAke sure apples are proper opacity
+
+Website change: Before change was primary school kids on top, lower photo was of secondary school aged kids. Change back top photo to what it was. Has teacher with beard on one side, lady teacher on right
+
+Bring up the online order thing

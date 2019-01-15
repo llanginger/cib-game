@@ -9,8 +9,10 @@ import {
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { appStyles } from "../../styles/styles";
+import Sound from "react-native-sound";
 
 import { connect } from "react-redux";
+import { gameSounds } from "../../Audio"
 //Interface
 interface IButtonProps {
     text: string;
@@ -23,11 +25,39 @@ interface IButtonProps {
     onPress: any;
     preText?: string;
     viewProps?: ViewStyle;
+    index: number
+    incorrectAnswersGiven: number[]
 }
 
 interface IButtonState {
     color: string;
 }
+
+Sound.setCategory("Playback", false)
+
+// const correctSound = new Sound("correct_1.m4a", Sound.MAIN_BUNDLE, err => {
+//     if (err) {
+//         console.error("Failed to load the sound: ", err)
+//         return
+//     }
+// })
+
+const correctSound = gameSounds.cerebrin
+
+const incorrectSound = new Sound("incorrect_1.m4a", Sound.MAIN_BUNDLE, err => {
+    if (err) {
+        console.error("Failed to load the sound: ", err)
+        return
+    }
+})
+
+const buttonColor: string[] = [
+    "#fbca6d",
+    "#58bafb",
+    "#f386a7",
+    "#D32F2F"
+]
+
 
 // create a component
 export class _Button extends React.Component<IButtonProps, IButtonState> {
@@ -37,6 +67,7 @@ export class _Button extends React.Component<IButtonProps, IButtonState> {
         this.state = { color: appStyles.colors.blue };
     }
     _onPress = () => {
+        // TODO: This does way too much. All this should be provided by the game container
         if (this.props.correct) {
             this.setState(
                 {
@@ -44,6 +75,7 @@ export class _Button extends React.Component<IButtonProps, IButtonState> {
                 },
                 () => this.props.onPress()
             );
+            correctSound.play()
         } else {
             this.setState(
                 {
@@ -51,17 +83,29 @@ export class _Button extends React.Component<IButtonProps, IButtonState> {
                 },
                 () =>
                     setTimeout(
-                        () => this.setState({ color: appStyles.colors.blue }),
+                        () => this.setState({ color: appStyles.colors.blue }, () => this.props.onPress()),
                         1000
                     )
             );
+            incorrectSound.play()
         }
     };
 
     _buttonColor = () => {
-        if (!this.props.revealed) {
-            return appStyles.colors.blue;
-        } else if (this.props.correct) {
+        const {
+            revealed,
+            index,
+            correct,
+            incorrectAnswersGiven = [-1] } = this.props
+        console.log("Incorrect answers from button: ", incorrectAnswersGiven)
+        if (!revealed) {
+            if (incorrectAnswersGiven.indexOf(index) !== -1) {
+                return buttonColor[3]
+            } else {
+
+                return buttonColor[index];
+            }
+        } else if (correct) {
             return appStyles.colors.green;
         } else {
             return appStyles.colors.grey;
@@ -91,7 +135,7 @@ export class _Button extends React.Component<IButtonProps, IButtonState> {
 
         const viewStyles = [
             styles.button,
-            { backgroundColor: this.state.color },
+            { backgroundColor: this._buttonColor() },
             viewProps
         ];
 
@@ -137,12 +181,12 @@ const styles = StyleSheet.create({
     },
     button: {
         width: "100%",
-        height: 45,
-        ...appStyles.shadow,
-        borderColor: "#776c79",
-        borderStyle: "solid",
-        borderWidth: 2,
-        borderRadius: 10,
+        height: 55,
+        // ...appStyles.shadow,
+        // borderColor: "#776c79",
+        // borderStyle: "solid",
+        // borderWidth: 2,
+        borderRadius: 25,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#3a86dc",

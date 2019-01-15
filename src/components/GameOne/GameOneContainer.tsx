@@ -1,3 +1,4 @@
+// * "TUTORIAL"
 //import liraries
 import * as React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
@@ -32,7 +33,7 @@ const initState: IGameOneContainerState = {
 export class _GameOneContainer extends React.Component<
     IGameOneContainerProps,
     IGameOneContainerState
-> {
+    > {
     constructor(props) {
         super(props);
 
@@ -106,6 +107,7 @@ export class _GameOneContainer extends React.Component<
                         key={this.state.startAnimation ? Math.random() : i}
                         animationInType="fadeInUp"
                         animationOutType="fadeOutLeft"
+                        index={i}
                     />
                 );
             }

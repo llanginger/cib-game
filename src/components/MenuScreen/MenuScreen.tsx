@@ -17,14 +17,14 @@ interface IMenuScreenProps {
     navigator?: any;
 }
 
-interface IMenuScreenState {}
+interface IMenuScreenState { }
 
 // create a component
 
 export class MenuScreen extends React.Component<
     IMenuScreenProps,
     IMenuScreenState
-> {
+    > {
     static navigatorStyle = {
         navBarTextColor: "red",
         drawUnderNavBar: true,
@@ -82,8 +82,14 @@ export class MenuScreen extends React.Component<
                     />
                 </View>
                 <TwoFrameTouchable
-                    onPress={() => console.log("Pressed the thing!")}
-                    text="Journal"
+                    onPress={() =>
+                        this.props.navigator.push({
+                            screen: "AudioScreen",
+                            animated: true,
+                            animationType: "fade"
+                        })
+                    }
+                    text="Journal (AUDIO SCREEN)"
                     textStyle={{}}
                     sources={[
                         require("../../images/laia/menu/journal-frame1.png"),
