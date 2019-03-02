@@ -15,6 +15,7 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
 
+import { WellDone } from "../Popups"
 // import { ImageCard } from "../../sharedComponents/ImageCard/ImageCard";
 import { ScoreContainer } from "../ScoreCounter/ScoreContainer";
 import DeviceInfo from "react-native-device-info";
@@ -33,7 +34,7 @@ import { screenObjects } from "../../navigation/screenObjects";
 import { Ready } from "../Ready/Ready";
 
 import { SandwichBoard } from "../SandwichBoard/SandwichBoard";
-import { Popup } from "../Popup/Popup";
+import { SandwichBoardPopup } from "../Popup/Popup";
 
 import { BlurView } from "../BlurView/BlurView";
 
@@ -135,6 +136,7 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
                     containerProps={{ alignSelf: "flex-start" }}
                 />
                 {this._getGameContainer()}
+                <WellDone />
             </View>
         );
     }

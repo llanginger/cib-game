@@ -25,7 +25,7 @@ interface IButtonProps {
     onPress: any;
     preText?: string;
     viewProps?: ViewStyle;
-    index: number
+    index: number // * This currently determines if button has color.
     incorrectAnswersGiven: number[]
 }
 
@@ -52,9 +52,9 @@ const incorrectSound = new Sound("incorrect_1.m4a", Sound.MAIN_BUNDLE, err => {
 })
 
 const buttonColor: string[] = [
-    "#fbca6d",
     "#58bafb",
-    "#f386a7",
+    "#58bafb",
+    "#58bafb",
     "#D32F2F"
 ]
 

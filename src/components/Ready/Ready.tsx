@@ -79,12 +79,13 @@ class _Ready extends React.Component<IReadyProps, IReadyState> {
                 <SandwichBoard text={this.props.sandwichText} />
                 <AnimatedButton
                     text="Ready!"
-                    correct={true}
+                    correct={true} // * Currently necessary for button to show color. Fix this in AnimatedButton
                     startAnimation={this.state.startAnimation}
                     revealed={false}
                     animationInType="fadeInUp"
                     animationOutType="fadeOutLeft"
                     delay={0}
+                    index={0}
                     onPress={this._buttonOnPress}
                 />
             </Animated.View>

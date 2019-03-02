@@ -1,3 +1,5 @@
+//  TODO This might be unused at this point
+
 import React, { Component } from "react";
 import {
     StyleSheet,
@@ -152,7 +154,7 @@ const mapStateToProps = (state: IReducers) => {
     };
 };
 
-export const Popup = connect<ISandwichBoardStateProps, {}, ISandwichBoardProps>(
+export const SandwichBoardPopup = connect<ISandwichBoardStateProps, {}, ISandwichBoardProps>(
     mapStateToProps
 )(_SandwichBoard);
 
