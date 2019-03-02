@@ -5,7 +5,9 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    Image
+    Image,
+    Animated,
+    Easing
 } from 'react-native';
 import styles from "./styles"
 import * as Animatable from "react-native-animatable";
@@ -30,7 +32,11 @@ export class WellDone extends React.Component<IWellDoneProps, IWellDoneState> {
     private animatableViewTwo: any
 
 
-    state = { animationStarted: false }
+    state = {
+        animationStarted: false,
+        popupOneAnimation: new Animated.Value(0),
+        popupTwoAnimation: new Animated.Value(0),
+    }
 
 
     _shouldAnimateOut = (animation: "one" | "two") => {
@@ -88,7 +94,7 @@ export class WellDone extends React.Component<IWellDoneProps, IWellDoneState> {
 
             this.animatableViewTwo.transitionTo({
                 transform: [
-                    { translateX: -300 },
+                    { translateX: 300 },
                     { translateY: 100 },
                     { scale: 0.5 },
                 ]
