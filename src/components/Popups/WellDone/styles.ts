@@ -65,6 +65,25 @@ export default StyleSheet.create({
         shadowRadius: 10,
         paddingBottom: -10
     },
+
+    contentContainerThree: {
+        position: "absolute",
+        height: CONTAINER_DIMS,
+        width: CONTAINER_DIMS,
+        alignSelf: "center",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    popupThreeImageContainer: {
+        flexDirection: "row"
+    },
+    popupThreeImage: {
+        height: 60,
+        width: 60,
+        marginBottom: 20,
+        marginHorizontal: 30,
+
+    },
     popupText: {
         fontSize: 26,
         fontFamily: appStyles.rockwellFont,
