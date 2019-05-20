@@ -29,7 +29,7 @@ const initState: IRobotGameContainerState = {
 export class _GameFourContainer extends React.Component<
     IRobotGameContainerProps,
     any
-> {
+    > {
     constructor(props) {
         super(props);
 
@@ -77,7 +77,7 @@ const mapStateToProps = (store: IReducers) => {
     };
 };
 
-export const GameFourContainer: any = connect(mapStateToProps)(
+export const GameContainerRobotGame: any = connect(mapStateToProps)(
     _GameFourContainer
 );
 

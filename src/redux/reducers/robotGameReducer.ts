@@ -3,6 +3,7 @@ import { IRobotAnswerType } from "../../components/Robot/robotImages_new";
 
 export interface IRobotGameReducer {
     currentEmotion: IRobotEmotion;
+    clickedEmotion: IRobotEmotion
     intensity: 0 | 1 | 2;
     startAnimation: boolean;
     robotAnswerType: IRobotAnswerType;
@@ -11,6 +12,7 @@ export interface IRobotGameReducer {
 
 const initState: IRobotGameReducer = {
     currentEmotion: "rage",
+    clickedEmotion: "rage",
     intensity: 2,
     startAnimation: false,
     robotAnswerType: "neutral",
@@ -36,8 +38,9 @@ export const robotGameReducer = (
             return {
                 ...state,
                 startAnimation: true,
+                clickedEmotion: action.payload.clickedEmotion,
                 robotAnswerType:
-                    action.payload === true ? "correct" : "incorrect"
+                    action.payload.correct === true ? "correct" : "incorrect"
             };
         case "NEW_ROBOT_FACE":
             return {

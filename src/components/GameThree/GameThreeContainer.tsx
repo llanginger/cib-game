@@ -35,7 +35,7 @@ const initState: IGameThreeContainerState = {
 export class _GameThreeContainer extends React.Component<
     IGameThreeContainerProps,
     IGameThreeContainerState
-> {
+    > {
     constructor(props) {
         super(props);
 
@@ -143,7 +143,7 @@ const mapDispatchToProps = {
     submitAnswer: submitAnswer
 };
 
-export const GameThreeContainer: any = connect<
+export const GameContainerComplexEmotions: any = connect<
     {},
     IGameThreeDispatchProps,
     IGameThreeContainerProps

@@ -12,7 +12,7 @@ export const scoreReducer = (state: IScoreReducer = initState, action) => {
     switch (action.type) {
         case "GAME-ONE_SUBMIT_ANSWER":
         case "START_ROBOT_ANIMATION":
-            if (action.payload) {
+            if (action.payload.correct) {
                 return {
                     score: (state.score += 10),
                     resultMessage: "Great job!"

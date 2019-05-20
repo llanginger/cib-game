@@ -31,7 +31,7 @@ interface IRobotFacesProps {
     chooseFace: any;
     robotGameNewFace: (oldValue: IRobotEmotion) => any;
     currentEmotion: IRobotEmotion;
-    robotGameStartAnimation: (answerType: boolean) => void;
+    robotGameStartAnimation: ({ answerType: boolean, clickedEmotion: IRobotEmotion }) => void;
 }
 
 interface IRobotFacesState {
@@ -72,7 +72,7 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
                     () =>
                         this.setState({ reset: true }, () => {
                             this.setState({ reset: false }, () =>
-                                this.props.robotGameStartAnimation(true)
+                                this.props.robotGameStartAnimation({ answerType: true, clickedEmotion: this.props.currentEmotion })
                             );
                         }),
                     1500
@@ -82,17 +82,41 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
                     () =>
                         this.setState({ reset: true }, () => {
                             this.setState({ reset: false }, () =>
-                                this.props.robotGameStartAnimation(false)
+                                this.props.robotGameStartAnimation({ answerType: false, clickedEmotion: this.props.currentEmotion })
                             );
                         }),
                     1500
                 );
             }
-            setTimeout(
-                () => this.props.robotGameNewFace(this.props.currentEmotion),
-                4000
-            );
+            this._nextGame()
         }
+    }
+
+    _onPress = (emotion: IRobotEmotion) => {
+        console.log("TCL: _onPress -> emotion", emotion)
+
+        console.log("TCL: _onPress -> currentEmotion", this.props.currentEmotion)
+        if (emotion === this.props.currentEmotion) {
+            this.setState({ reset: true }, () => {
+                this.setState({ reset: false }, () =>
+                    this.props.robotGameStartAnimation({ answerType: true, clickedEmotion: emotion })
+                );
+            })
+        } else {
+            this.setState({ reset: true }, () => {
+                this.setState({ reset: false }, () =>
+                    this.props.robotGameStartAnimation({ answerType: false, clickedEmotion: emotion })
+                );
+            })
+        }
+        this._nextGame()
+    }
+
+    _nextGame = () => {
+        setTimeout(
+            () => this.props.robotGameNewFace(this.props.currentEmotion),
+            4000
+        );
     }
 
     _getCustomCoordinates(i: number, emotion: IRobotEmotion) {
@@ -155,7 +179,7 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
                     onSnap={() => console.log("Snapped")}
                     reset={this.state.reset}
                     onDrag={this._onDrag}
-                    onPress={() => console.log("Pressed a face")}
+                    onPress={() => this._onPress(face.emotion)}
                     image={face.source}
                 />
             );
@@ -163,7 +187,7 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
     }
 
     render() {
-        console.log("Window: ", windowDimensions);
+        // console.log("Window: ", windowDimensions);
         return <View style={styles.container}>{this._makeFaceButtons()}</View>;
     }
 }

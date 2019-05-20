@@ -16,11 +16,11 @@ export const robotGameChooseFace: (
 ) => IPayloadAction<IRobotGameChooseFaceAction> = (
     payload: IRobotGameChooseFaceAction
 ) => {
-    return {
-        type: "CHOOSE_FACE",
-        payload
+        return {
+            type: "CHOOSE_FACE",
+            payload
+        };
     };
-};
 
 const getNewValue = (oldValue: IRobotEmotion) => {
     let newValue = _.sample(robotEmotions);
@@ -41,11 +41,19 @@ export const robotGameNewFace: (oldValue: IRobotEmotion) => Action = (
     };
 };
 
-export const robotGameStartAnimation: (
-    answerType: boolean
-) => IPayloadAction<boolean> = (answerType: boolean) => {
-    return {
-        type: "START_ROBOT_ANIMATION",
-        payload: answerType
+
+export const robotGameStartAnimation: ({
+    answerType: boolean,
+    clickedEmotion: IRobotEmotion
+}) => IPayloadAction<any> = ({
+    answerType,
+    clickedEmotion
+}) => {
+        return {
+            type: "START_ROBOT_ANIMATION",
+            payload: {
+                correct: answerType,
+                clickedEmotion
+            }
+        };
     };
-};

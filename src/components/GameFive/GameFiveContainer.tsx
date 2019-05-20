@@ -17,13 +17,13 @@ interface IGameFiveContainerProps {
     currentEmotion: IRobotEmotion;
 }
 
-interface IGameFiveContainerState {}
+interface IGameFiveContainerState { }
 
 const initState: IGameFiveContainerState = {};
 export class _GameFiveContainer extends React.Component<
     IGameFiveContainerProps,
     any
-> {
+    > {
     constructor(props) {
         super(props);
 
@@ -47,7 +47,7 @@ const mapStateToProps = (store: IReducers) => {
     return {};
 };
 
-export const GameFiveContainer: any = connect(mapStateToProps)(
+export const GameContainerEmojiGame: any = connect(mapStateToProps)(
     _GameFiveContainer
 );
 

@@ -144,7 +144,7 @@ const mapDispatchToProps = {
     submitAnswer: submitAnswer
 };
 
-export const GameOneContainer: any = connect<
+export const GameContainerTutorial: any = connect<
     {},
     IGameOneDispatchProps,
     IGameOneContainerProps

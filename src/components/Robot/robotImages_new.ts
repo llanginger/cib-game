@@ -110,3 +110,7 @@ export const robots_new: IRobots_new = {
         ]
     }
 };
+
+export const robots_2019: IRobots_new = {
+
+}

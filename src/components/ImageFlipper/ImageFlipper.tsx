@@ -77,7 +77,7 @@ export class ImageFlipper extends React.Component<
 
     public _animate() {
         const { delay = 0, returnToStart = false } = this.props;
-        console.log("Animation starting");
+        // console.log("Animation starting");
         this.state.animationValue.setValue(0);
         Animated.timing(this.state.animationValue, {
             toValue: 1,
@@ -85,7 +85,7 @@ export class ImageFlipper extends React.Component<
             duration: this.state.frameDuration,
             easing: Easing.linear
         }).start(() => {
-            console.log("Frame " + this.state.currentAnimatedFrame);
+            // console.log("Frame " + this.state.currentAnimatedFrame);
             if (
                 this.state.currentAnimatedFrame <
                 this.props.source.length - 1
@@ -98,7 +98,7 @@ export class ImageFlipper extends React.Component<
                     this._animate
                 );
             } else {
-                console.log("Last frame");
+                // console.log("Last frame");
 
                 if (this.props.loop && this.props.startAnimation) {
                     this.setState(
@@ -121,8 +121,8 @@ export class ImageFlipper extends React.Component<
     }
 
     _chooseFrame() {
-        console.log("Image flipper props: ", this.props);
-        console.log("Image flipper state: ", this.state);
+        // console.log("Image flipper props: ", this.props);
+        // console.log("Image flipper state: ", this.state);
         return (
             <Image
                 source={this.props.source[this.state.currentAnimatedFrame]}

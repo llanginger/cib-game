@@ -66,8 +66,9 @@ export class _Button extends React.Component<IButtonProps, IButtonState> {
 
         this.state = { color: appStyles.colors.blue };
     }
+
+    // TODO: This does way too much. All this should be provided by the game container
     _onPress = () => {
-        // TODO: This does way too much. All this should be provided by the game container
         if (this.props.correct) {
             this.setState(
                 {
@@ -91,6 +92,8 @@ export class _Button extends React.Component<IButtonProps, IButtonState> {
         }
     };
 
+    // TODO: This needs to be cleaned up
+    // * Make this draw from state again so that the _onPress function ^ can do most of the heavy lifting
     _buttonColor = () => {
         const {
             revealed,
@@ -103,7 +106,7 @@ export class _Button extends React.Component<IButtonProps, IButtonState> {
                 return buttonColor[3]
             } else {
 
-                return buttonColor[index];
+                return buttonColor[0]; // TODO: This needs to be stripped out
             }
         } else if (correct) {
             return appStyles.colors.green;

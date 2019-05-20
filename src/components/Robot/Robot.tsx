@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { robots, robotFaces, IRobotFace, IRobot } from "./robotImages";
 import { IReducers } from "../../redux/store";
 import { IRobotEmotion } from "./robotImages";
-import { getRobot, getRobot_new, getRobotFace } from "./logic/index";
+import { getRobot, getRobotFace } from "./logic/index";
 import { connect } from "react-redux";
 import { RobotFace } from "./RobotFace";
 import { IRobotAnswerType } from "./robotImages_new";
@@ -13,6 +13,7 @@ import { ImageFlipper } from "../ImageFlipper/ImageFlipper";
 
 interface IRobotProps {
     currentEmotion: IRobotEmotion;
+    clickedEmotion: IRobotEmotion
     intensity: 0 | 1 | 2;
     robotAnswerType: IRobotAnswerType;
     startAnimation: boolean;
@@ -24,6 +25,7 @@ interface IRobotProps {
 const _Robot: React.StatelessComponent<IRobotProps> = (props: IRobotProps) => {
     const {
         currentEmotion,
+        clickedEmotion,
         intensity,
         robotAnswerType,
         startAnimation
@@ -34,7 +36,7 @@ const _Robot: React.StatelessComponent<IRobotProps> = (props: IRobotProps) => {
             {/* <Text style={styles.levelTitle}> WORD HERE</Text> */}
             <ImageFlipper
                 imageStyle={styles.image}
-                source={getRobot_new(currentEmotion, robotAnswerType)}
+                source={getRobot(clickedEmotion, currentEmotion, robotAnswerType)}
                 startAnimation={startAnimation}
                 loop={false}
             />
@@ -45,6 +47,7 @@ const _Robot: React.StatelessComponent<IRobotProps> = (props: IRobotProps) => {
 const mapStateToProps = (state: IReducers) => {
     return {
         currentEmotion: state.robotGameReducer.currentEmotion,
+        clickedEmotion: state.robotGameReducer.clickedEmotion,
         robotAnswerType: state.robotGameReducer.robotAnswerType,
         startAnimation: state.robotGameReducer.startAnimation,
         intensity: state.robotGameReducer.intensity

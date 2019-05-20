@@ -119,7 +119,7 @@ export class InteractableItem extends React.Component<
                     animation={this.state.animateOut ? "fadeOut" : "fadeIn"}
                     delay={300}
                 >
-                    <TouchableOpacity onPress={this._reset}>
+                    <TouchableOpacity onPress={this.props.onPress || this._reset}>
                         <Image
                             style={[styles.image, imageStyle]}
                             source={image}

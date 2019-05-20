@@ -38,7 +38,7 @@ const initState: IGameSevenContainerState = {
 export class _GameSevenContainer extends React.Component<
     IGameSevenContainerProps,
     IGameSevenContainerState
-> {
+    > {
     private imageFlipper;
     constructor(props) {
         super(props);
@@ -190,7 +190,7 @@ const mapDispatchToProps = {
     submitAnswer: submitAnswer
 };
 
-export const GameSevenContainer: any = connect<
+export const GameContainerAdvancedEmotions: any = connect<
     {},
     IGameSevenDispatchProps,
     IGameSevenContainerProps

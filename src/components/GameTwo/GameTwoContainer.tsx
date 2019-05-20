@@ -165,7 +165,7 @@ const mapDispatchToProps = {
     submitAnswer: submitAnswer
 };
 
-export const GameTwoContainer: any = connect<
+export const GameContainerBasicEmotions: any = connect<
     {},
     IGameTwoDispatchProps,
     IGameTwoContainerProps

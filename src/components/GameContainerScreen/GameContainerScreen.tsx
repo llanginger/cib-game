@@ -15,20 +15,20 @@ import {
 import { connect } from "react-redux";
 import { IReducers } from "../../redux/store";
 
-import { WellDone } from "../Popups"
+import { WellDone } from "../Popups";
 // import { ImageCard } from "../../sharedComponents/ImageCard/ImageCard";
 import { ScoreContainer } from "../ScoreCounter/ScoreContainer";
 import DeviceInfo from "react-native-device-info";
 // Text game section
 
-import { GameOneContainer } from "../GameOne/GameOneContainer";
-import { GameTwoContainer } from "../GameTwo/GameTwoContainer";
-import { GameThreeContainer } from "../GameThree/GameThreeContainer";
-import { GameFourContainer } from "../GameFour/GameFourContainer";
-import { GameFiveContainer } from "../GameFive/GameFiveContainer";
-import { GameSevenContainer } from "../GameSeven/GameSevenContainer";
+import { GameContainerTutorial } from "../GameOne/GameOneContainer";
+import { GameContainerBasicEmotions } from "../GameTwo/GameTwoContainer";
+import { GameContainerComplexEmotions } from "../GameThree/GameThreeContainer";
+import { GameContainerRobotGame } from "../GameFour/GameFourContainer";
+import { GameContainerEmojiGame } from "../GameFive/GameFiveContainer";
+import { GameContainerAdvancedEmotions } from "../GameSeven/GameSevenContainer";
 import { ThumbsupGameContainer } from "../ThumbsupGame/ThumbsupGameContainer";
-import { FruitActivity } from "../FruitActivity/FruitActivity"
+import { FruitActivity } from "../FruitActivity/FruitActivity";
 
 import { screenObjects } from "../../navigation/screenObjects";
 import { Ready } from "../Ready/Ready";
@@ -106,23 +106,33 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
         const { gameType } = this.props;
 
         if (gameType === 0) {
-            return <GameOneContainer navigator={this.props.navigator} />;
+            return <GameContainerTutorial navigator={this.props.navigator} />;
         } else if (gameType === 1) {
-            return <GameTwoContainer navigator={this.props.navigator} />;
+            return (
+                <GameContainerBasicEmotions navigator={this.props.navigator} />
+            );
         } else if (gameType === 2) {
-            return <GameThreeContainer navigator={this.props.navigator} />;
+            return <FruitActivity navigator={this.props.navigator} />;
         } else if (gameType === 3) {
-            return <GameFourContainer navigator={this.props.navigator} />;
+            return (
+                <GameContainerComplexEmotions
+                    navigator={this.props.navigator}
+                />
+            );
         } else if (gameType === 4) {
-            return <GameFiveContainer navigator={this.props.navigator} />;
+            return <GameContainerRobotGame navigator={this.props.navigator} />;
         } else if (gameType === 5) {
-            return <ThumbsupGameContainer navigator={this.props.navigator} />;
+            return <GameContainerEmojiGame navigator={this.props.navigator} />;
         } else if (gameType === 6) {
-            return <GameSevenContainer navigator={this.props.navigator} />;
+            return <ThumbsupGameContainer navigator={this.props.navigator} />;
         } else if (gameType === 7) {
-            return <FruitActivity navigator={this.props.navigator} />
+            return (
+                <GameContainerAdvancedEmotions
+                    navigator={this.props.navigator}
+                />
+            );
         } else {
-            return <GameOneContainer navigator={this.props.navigator} />;
+            return <GameContainerTutorial navigator={this.props.navigator} />;
         }
     }
 
@@ -136,7 +146,7 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
                     containerProps={{ alignSelf: "flex-start" }}
                 />
                 {this._getGameContainer()}
-                <WellDone />
+                {/* <WellDone onPress={() => { }} /> */}
             </View>
         );
     }
