@@ -5,8 +5,8 @@
     "scripts": {
         "start": "node node_modules/react-native/local-cli/cli.js start",
         "reset": "react-native start --reset-cache",
-        "ios": "npm run build && concurrently -r 'npm run watch' 'react-native run-ios --simulator=\"iPhone 8\"'",
-        "ios_x": "npm run build && concurrently -r 'npm run watch' 'react-native run-ios --simulator=\"iPhone X\"'",
+        "ios": "react-native run-ios --simulator=\"iPhone 8\"",
+        "ios_x": "react-native run-ios --simulator=\"iPhone X\"",
         "watch": "npm run build -- -w",
         "test": "jest",
         "tsc": "tsc",

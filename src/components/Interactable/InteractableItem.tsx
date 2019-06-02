@@ -5,6 +5,7 @@ import {
     ViewStyle,
     Text,
     StyleSheet,
+    Animated,
     Image,
     ImageStyle,
     TouchableOpacity
@@ -18,12 +19,14 @@ import * as Animatable from "react-native-animatable";
 interface IInteractableItemProps {
     snapPoints: any[];
     reset: boolean;
+    dragEnabled?: boolean
     onDrag: any;
     onPress?: any;
     onSnap?: any;
     onReset?: any;
     image: number;
     viewStyle?: ViewStyle;
+    animatedStyle?: any
     imageStyle?: ImageStyle;
     animate?: boolean;
 }
@@ -95,6 +98,8 @@ export class InteractableItem extends React.Component<
             onDrag,
             snapPoints,
             image,
+            dragEnabled = true,
+            animatedStyle = {},
             onPress,
             onSnap,
             viewStyle = {},
@@ -109,6 +114,7 @@ export class InteractableItem extends React.Component<
         };
         return (
             <Interactable.View
+                dragEnabled={dragEnabled}
                 ref={el => (this.faceRef = el)}
                 style={viewStyles}
                 snapPoints={snapPoints}
@@ -119,13 +125,17 @@ export class InteractableItem extends React.Component<
                     animation={this.state.animateOut ? "fadeOut" : "fadeIn"}
                     delay={300}
                 >
-                    <TouchableOpacity onPress={this.props.onPress || this._reset}>
-                        <Image
-                            style={[styles.image, imageStyle]}
-                            source={image}
-                            resizeMode="contain"
-                        />
-                    </TouchableOpacity>
+                    <Animated.View // * Added this component to avoid layout issues using it as a container in other files. Pretty janky but shouldn't get in the way
+                        style={animatedStyle}
+                    >
+                        <TouchableOpacity onPress={this.props.onPress || this._reset}>
+                            <Image
+                                style={[styles.image, imageStyle]}
+                                source={image}
+                                resizeMode="contain"
+                            />
+                        </TouchableOpacity>
+                    </Animated.View>
                 </Animatable.View>
             </Interactable.View>
         );

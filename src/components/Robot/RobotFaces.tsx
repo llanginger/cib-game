@@ -6,6 +6,8 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
+    Animated,
+    Easing,
     Dimensions
 } from "react-native";
 import { robotFaces, IRobotEmotion, IRobot } from "./robotImages";
@@ -37,6 +39,8 @@ interface IRobotFacesProps {
 interface IRobotFacesState {
     snapPoints: snapPoint[];
     reset: boolean;
+    pressedButton: IRobotEmotion | null
+    buttonOpacity: Animated.Value
 }
 
 const windowDimensions = Dimensions.get("window");
@@ -51,7 +55,9 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
 
         this.state = {
             snapPoints: [{ x: 0, y: 0, id: "init" }],
-            reset: false
+            reset: false,
+            pressedButton: null,
+            buttonOpacity: new Animated.Value(0)
         };
         this._makeFaceButtons = this._makeFaceButtons.bind(this);
         this._onDrag = this._onDrag.bind(this);
@@ -96,6 +102,7 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
         console.log("TCL: _onPress -> emotion", emotion)
 
         console.log("TCL: _onPress -> currentEmotion", this.props.currentEmotion)
+        this.setState({ pressedButton: emotion }, () => this._fadeOut())
         if (emotion === this.props.currentEmotion) {
             this.setState({ reset: true }, () => {
                 this.setState({ reset: false }, () =>
@@ -114,9 +121,39 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
 
     _nextGame = () => {
         setTimeout(
-            () => this.props.robotGameNewFace(this.props.currentEmotion),
+            () => {
+                this._fadeIn()
+                // this.setState({ pressedButton: null })
+                this.props.robotGameNewFace(this.props.currentEmotion)
+            },
             4000
         );
+    }
+
+    _fadeOut = () => {
+        const { buttonOpacity } = this.state
+        buttonOpacity.setValue(0)
+        Animated.timing(
+            buttonOpacity,
+            {
+                toValue: 1,
+                duration: 100,
+                easing: Easing.linear
+            }
+        ).start()
+    }
+
+    _fadeIn = () => {
+        const { buttonOpacity } = this.state
+        buttonOpacity.setValue(1)
+        Animated.timing(
+            buttonOpacity,
+            {
+                toValue: 2,
+                duration: 100,
+                easing: Easing.linear
+            }
+        ).start()
     }
 
     _getCustomCoordinates(i: number, emotion: IRobotEmotion) {
@@ -167,10 +204,19 @@ class _RobotFaces extends React.Component<IRobotFacesProps, IRobotFacesState> {
     }
 
     _makeFaceButtons() {
+        const { pressedButton, buttonOpacity } = this.state
+        const opacity = buttonOpacity.interpolate({
+            inputRange: [0, 1, 2],
+            outputRange: [1, 0, 1]
+        })
         return robotFaces.map((face, i) => {
             return (
                 <InteractableItem
                     key={i}
+                    animatedStyle={{
+                        opacity: face.emotion === pressedButton ? opacity : 1
+                    }}
+                    dragEnabled={false}
                     snapPoints={[
                         ...this.state.snapPoints,
                         this._getCustomCoordinates(i, face.emotion)
