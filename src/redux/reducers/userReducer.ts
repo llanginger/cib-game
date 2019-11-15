@@ -11,7 +11,7 @@ const initState: IUserReducer = {
     selectedCharacterIndex: 0,
     currentProfilePicture: "girlCurlyBrownHair",
     currentProfilePictureUrl: 5,
-    completedLevels: 4
+    completedLevels: 1
 };
 
 export const userReducer = (state: IUserReducer = initState, action) => {

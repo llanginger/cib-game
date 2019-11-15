@@ -141,10 +141,10 @@ class _GameContainerScreen extends Component<ICardGameMainScreenProps, any> {
         return (
             <View style={styles.container}>
                 <Ready />
-                <ScoreContainer
+                {/* <ScoreContainer
                     menuPress={this._menuPress}
                     containerProps={{ alignSelf: "flex-start" }}
-                />
+                /> */}
                 {this._getGameContainer()}
                 {/* <WellDone onPress={() => { }} /> */}
             </View>

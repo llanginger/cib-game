@@ -16,7 +16,7 @@ interface IPopupStarState {
 export class PopupAnimation extends React.Component<
     IPopupStarProps,
     IPopupStarState
-> {
+    > {
     private animationProgress;
 
     constructor(props) {
